@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/mihxil/i18n-regions.svg?)](https://travis-ci.org/mihxil/i18n-regions)
+[![Maven Central](https://img.shields.io/maven-central/v/org.meeuw/i18n-regions.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22org.meeuw%22)
+
 Geographical regions
 --------------------
 
