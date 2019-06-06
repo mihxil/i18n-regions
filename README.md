@@ -38,6 +38,16 @@ E.g.
         assertThat(cshh.getName()).isEqualTo("Czechoslovakia");
     }
 
+    @Test
+    public void getCountrySubDivision() {
+
+        Region utrecht = Utils.getByCode("NL:UT");
+        assertThat(utrecht).isNotNull();
+        assertThat(utrecht).isInstanceOf(CountrySubDivision.class);
+        assertThat(utrecht.getISOCode()).isEqualTo("NL:UT");
+        assertThat(utrecht.getName()).isEqualTo("Utrecht");
+    }
+
 
     @Test
     public void values() {
