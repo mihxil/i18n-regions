@@ -48,3 +48,8 @@ E.g.
 
     }
 ```
+
+Persistence
+-----------
+`org.meeuw.i18n.persistence.RegionToStringConverter` is meant to arrange persistence of `Region` objects to the database. We want to iso code to be used as a string value.
+
