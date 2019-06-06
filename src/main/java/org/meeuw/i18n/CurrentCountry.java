@@ -1,7 +1,6 @@
 package org.meeuw.i18n;
 
 import java.util.Locale;
-import java.util.Optional;
 
 import com.neovisionaries.i18n.CountryCode;
 
@@ -18,7 +17,7 @@ public class CurrentCountry implements Country {
 
     @Override
     public String getISOCode() {
-        return code.getName();
+        return code.getAlpha2();
     }
 
     @Override
@@ -26,11 +25,20 @@ public class CurrentCountry implements Country {
         return code.toLocale();
 
     }
+
+    @Override
+    public String getName() {
+        return code.getName();
+
+    }
+
     public CountryCode getCode() {
         return code;
     }
 
-    public static Optional<CurrentCountry> getByCode(String code) {
-        return Optional.of(CountryCode.getByCode(code)).map(CurrentCountry::new);
+    @Override
+    public String toString() {
+        return code.toString();
     }
+
 }

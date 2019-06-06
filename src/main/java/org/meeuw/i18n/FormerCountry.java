@@ -1,7 +1,6 @@
 package org.meeuw.i18n;
 
 import java.util.Locale;
-import java.util.Optional;
 
 /**
  * @author Michiel Meeuwissen
@@ -16,7 +15,7 @@ public class FormerCountry implements Country {
 
     @Override
     public String getISOCode() {
-        return code.getName();
+        return code.getISO3166_3_Code();
     }
 
     @Override
@@ -24,12 +23,15 @@ public class FormerCountry implements Country {
         return code.toLocale();
     }
 
+    @Override
+    public String getName() {
+        return code.getName();
+
+    }
+
     public FormerlyAssignedCountryCode getCode() {
         return code;
     }
 
 
-    public static Optional<FormerCountry> getByCode(String code) {
-        return Optional.of(FormerlyAssignedCountryCode.getByCode(code)).map(FormerCountry::new);
-    }
 }

@@ -16,6 +16,8 @@ public interface Region {
 
 	Type getType();
 
+	String getName();
+
 	enum Type {
 		/**
 		 * A country or former country

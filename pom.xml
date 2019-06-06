@@ -35,8 +35,6 @@
   <properties>
     <nv-i18n.version>1.25</nv-i18n.version>
     <junit.version>4.12</junit.version>
-    <mockito.version>2.22.0</mockito.version>
-    <groovy.version>2.5.2</groovy.version>
   </properties>
 
   <scm>
@@ -56,7 +54,7 @@
       </dependency>
       <dependency>
         <groupId>org.meeuw</groupId>
-        <artifactId>i18n-formally-assigned</artifactId>
+        <artifactId>i18n-formerly-assigned</artifactId>
         <version>0.1-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -77,9 +75,9 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-      <version>${mockito.version}</version>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.12.2</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -87,24 +85,18 @@
       <artifactId>nv-i18n</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.codehaus.groovy</groupId>
-      <artifactId>groovy-xml</artifactId>
-      <version>${groovy.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>25.1-jre</version>
-    </dependency>
-    <dependency>
       <groupId>org.meeuw</groupId>
       <artifactId>i18n-formerly-assigned</artifactId>
-      <version>0.1-SNAPSHOT</version>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>be.olsson</groupId>
       <artifactId>i18n-subdivisions</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.persistence</groupId>
+      <artifactId>javax.persistence-api</artifactId>
+      <version>2.2</version>
+      <optional>true</optional>
     </dependency>
   </dependencies>
 
@@ -112,24 +104,6 @@
   <build>
     <defaultGoal>install</defaultGoal>
     <plugins>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>build-helper-maven-plugin</artifactId>
-        <version>3.0.0</version>
-        <executions>
-          <execution>
-            <phase>generate-sources</phase>
-          <goals>
-            <goal>add-source</goal>
-          </goals>
-          <configuration>
-            <sources>
-              <source>${project.build.directory}/generated-sources</source>
-            </sources>
-          </configuration>
-        </execution>
-        </executions>
-      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -159,45 +133,6 @@
           <branchName>${project.version}</branchName>
           <tagNameFormat>@{project.version}</tagNameFormat>
         </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.gmaven</groupId>
-        <artifactId>groovy-maven-plugin</artifactId>
-        <version>2.1</version>
-        <executions>
-          <execution>
-            <phase>generate-resources</phase>
-            <goals>
-              <goal>execute</goal>
-            </goals>
-            <configuration>
-              <scriptpath>
-                <element>${basedir}/src/main/script</element>
-              </scriptpath>
-              <source>${project.basedir}/src/main/script/CreateFormerlyAssignedCountryCodes.groovy</source>
-              <properties>
-                <path>${project.build.directory}/generated-sources</path>
-              </properties>
-            </configuration>
-          </execution>
-        </executions>
-        <dependencies>
-          <dependency>
-            <groupId>com.github.olivergondza</groupId>
-            <artifactId>maven-jdk-tools-wrapper</artifactId>
-            <version>0.1</version>
-          </dependency>
-          <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy</artifactId>
-            <version>${groovy.version}</version>
-          </dependency>
-           <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-xml</artifactId>
-            <version>${groovy.version}</version>
-          </dependency>
-        </dependencies>
       </plugin>
     </plugins>
   </build>

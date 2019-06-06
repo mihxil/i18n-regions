@@ -9,12 +9,13 @@ import java.util.Optional;
 public interface Country extends Region {
 
     static Optional<? extends Country> getByCode(String code) {
-        Optional<CurrentCountry> byCode = CurrentCountry.getByCode(code);
+      /*  Optional<CurrentCountry> byCode = ServiceLoader.load(RegionProvider.class);
         if (byCode.isPresent()) {
             return byCode;
         } else {
             return FormerCountry.getByCode(code);
-        }
+        }*/
+      return null;
     }
 
     @Override

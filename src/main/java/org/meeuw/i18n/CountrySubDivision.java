@@ -17,7 +17,7 @@ public class CountrySubDivision implements Region {
 
     @Override
     public String getISOCode() {
-        return code.getName();
+        return code.getCode();
     }
 
     @Override
@@ -29,6 +29,12 @@ public class CountrySubDivision implements Region {
     @Override
     public Type getType() {
         return Type.REGION;
+    }
+
+    @Override
+    public String getName() {
+        return code.getName();
+
     }
 
     public CountryCodeSubdivision getCode() {
