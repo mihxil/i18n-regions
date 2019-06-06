@@ -10,11 +10,22 @@ import java.util.Locale;
  */
 public interface Region {
 
+	/**
+	 * The <a href="https://en.wikipedia.org/wiki/ISO_3166>ISO 3166</a> code for the region
+	 */
 	String getISOCode();
 
+	/**
+	 * The locale associated with the region.
+	 */
 	Locale toLocale();
 
+
 	Type getType();
+
+	/**
+	 * The official name (in english) of the region
+	 */
 
 	String getName();
 
