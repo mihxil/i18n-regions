@@ -1,6 +1,7 @@
 package org.meeuw.i18n;
 
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * @author Michiel Meeuwissen
@@ -9,4 +10,6 @@ import java.util.Optional;
 public interface RegionProvider<T extends Region> {
 
     Optional<T> getByCode(String code);
+
+    Stream<T> values();
 }

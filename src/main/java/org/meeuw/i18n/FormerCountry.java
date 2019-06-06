@@ -33,5 +33,9 @@ public class FormerCountry implements Country {
         return code;
     }
 
+    @Override
+    public String toString() {
+        return code.toString();
+    }
 
 }

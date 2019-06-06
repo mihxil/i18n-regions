@@ -30,4 +30,14 @@ public class UtilsTest {
         assertThat(cshh.getISOCode()).isEqualTo("CSHH");
         assertThat(cshh.getName()).isEqualTo("Czechoslovakia");
     }
+
+
+    @Test
+    public void values() {
+
+        Utils.values().forEach(r -> {
+            System.out.println(r + " : " + r.getName());
+        });
+
+    }
 }

@@ -1,6 +1,7 @@
 package org.meeuw.i18n;
 
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * @author Michiel Meeuwissen
@@ -10,6 +11,13 @@ public class CountrySubDivisionProvider implements RegionProvider<CountrySubDivi
 
     @Override
     public Optional<CountrySubDivision> getByCode(String code) {
-        return Optional.empty();
+        throw new UnsupportedOperationException("TODO");
+    }
+
+    @Override
+    public Stream<CountrySubDivision> values() {
+        // TODO
+        return Stream.empty();
+
     }
 }
