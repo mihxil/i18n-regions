@@ -51,5 +51,5 @@ E.g.
 
 Persistence
 -----------
-`org.meeuw.i18n.persistence.RegionToStringConverter` is meant to arrange persistence of `Region` objects to the database. We want to iso code to be used as a string value.
+`org.meeuw.i18n.persistence.RegionToStringConverter` is meant to arrange persistence of `Region` objects to the database. We want the iso code to be used as simple strings in a database column or so.
 
