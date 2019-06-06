@@ -16,7 +16,7 @@ public class CountrySubDivision implements Region {
     }
 
     @Override
-    public String getName() {
+    public String getISOCode() {
         return code.getName();
     }
 

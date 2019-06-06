@@ -2,16 +2,15 @@ package org.meeuw.i18n;
 
 import java.util.Locale;
 
-import com.neovisionaries.i18n.CountryCode;
-
 /**
- * The region interface is implemented by {@link CountryCode}, but other implementations could exist also.
+ * The region interface represents a certain geographical region. E.g. a {@link Country}
  *
  * @author Michiel Meeuwissen
  * @since 0.1
  */
 public interface Region {
-	String getName();
+
+	String getISOCode();
 
 	Locale toLocale();
 

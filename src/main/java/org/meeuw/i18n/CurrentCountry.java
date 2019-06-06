@@ -17,7 +17,7 @@ public class CurrentCountry implements Country {
     }
 
     @Override
-    public String getName() {
+    public String getISOCode() {
         return code.getName();
     }
 

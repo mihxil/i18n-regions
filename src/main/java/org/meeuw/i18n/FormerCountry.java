@@ -15,16 +15,14 @@ public class FormerCountry implements Country {
     }
 
     @Override
-    public String getName() {
+    public String getISOCode() {
         return code.getName();
     }
 
     @Override
     public Locale toLocale() {
         return code.toLocale();
-
     }
-
 
     public FormerlyAssignedCountryCode getCode() {
         return code;
