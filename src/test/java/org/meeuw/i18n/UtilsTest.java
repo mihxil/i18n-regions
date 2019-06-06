@@ -31,12 +31,22 @@ public class UtilsTest {
         assertThat(cshh.getName()).isEqualTo("Czechoslovakia");
     }
 
+    @Test
+    public void getCountrySubDivision() {
+
+        Region utrecht = Utils.getByCode("NL:UT");
+        assertThat(utrecht).isNotNull();
+        assertThat(utrecht).isInstanceOf(CountrySubDivision.class);
+        assertThat(utrecht.getISOCode()).isEqualTo("NL:UT");
+        assertThat(utrecht.getName()).isEqualTo("Utrecht");
+    }
+
 
     @Test
     public void values() {
 
         Utils.values().forEach(r -> {
-            System.out.println(r + " : " + r.getName());
+            System.out.println(r.getISOCode()  + " : " + r.getName());
         });
 
     }
