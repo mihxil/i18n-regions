@@ -27,8 +27,8 @@ public class Regions {
         return Optional.empty();
 
     }
-    public static <T extends Region> Optional<T> getByCode(String s) {
-        return (Optional<T>) getByCode(s, Region.class);
+    public static Optional<Region> getByCode(String s) {
+        return getByCode(s, Region.class);
     }
 
     public static Stream<? extends Region> values() {

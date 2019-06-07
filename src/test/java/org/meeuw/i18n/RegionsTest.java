@@ -11,6 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
+@SuppressWarnings("OptionalGetWithoutIsPresent")
 public class RegionsTest {
 
     @Test
@@ -21,7 +22,12 @@ public class RegionsTest {
         assertThat(nl.get()).isInstanceOf(CurrentCountry.class);
         assertThat(nl.get().getISOCode()).isEqualTo("NL");
         assertThat(nl.get().getName()).isEqualTo("Netherlands");
+    }
 
+    @Test
+    public void getCurrentByCodeAsCountry() {
+        Optional<CurrentCountry> nl = Regions.getByCode("NL", CurrentCountry.class);
+        assertThat(nl.get().getISO3166_3_Code()).isEqualTo("NLD");
     }
     @Test
     public void getFormerByCode() {
@@ -31,6 +37,11 @@ public class RegionsTest {
         assertThat(cshh).isInstanceOf(FormerCountry.class);
         assertThat(cshh.getISOCode()).isEqualTo("CSHH");
         assertThat(cshh.getName()).isEqualTo("Czechoslovakia");
+    }
+    @Test
+    public void getFormerByCodeAsCountry() {
+        Optional<Country> nl = Regions.getByCode("CSHH", Country.class);
+        assertThat(nl.get().getISO3166_3_Code()).isEqualTo("CSHH");
     }
 
     @Test
