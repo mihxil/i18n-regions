@@ -1,5 +1,6 @@
 package org.meeuw.i18n;
 
+import java.io.Serializable;
 import java.util.Locale;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Locale;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-public interface Region {
+public interface Region extends Serializable {
 
 	/**
 	 * The <a href="https://en.wikipedia.org/wiki/ISO_3166>ISO 3166</a> code for the region

@@ -7,6 +7,8 @@ import java.util.Locale;
  * @since 0.1
  */
 public class FormerCountry implements Country {
+    private static final long serialVersionUID = 0L;
+
     private final FormerlyAssignedCountryCode code;
 
     public FormerCountry(FormerlyAssignedCountryCode code) {
@@ -38,4 +40,8 @@ public class FormerCountry implements Country {
         return code.toString();
     }
 
+    @Override
+    public String getISO3166_3_Code() {
+        return code.getISO3166_3_Code();
+    }
 }

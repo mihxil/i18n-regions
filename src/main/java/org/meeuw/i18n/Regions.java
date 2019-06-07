@@ -5,36 +5,30 @@ import java.util.function.Consumer;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-import com.neovisionaries.i18n.CountryCode;
-
 /**
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-public class Utils {
+public class Regions {
 
-    public static CountryCode _getByCode(String s) {
-        CountryCode code = CountryCode.getByCode(s);
-        if (code == null) {
-            return VehicleRegistrationCode.valueOf(s).getCode();
-        } else {
-            return code;
-        }
-
-    }
-
-    public static <T extends Region> T getByCode(String s) {
+    public static <T extends Region> Optional<T> getByCode(String s, Class<T> clazz) {
         ServiceLoader<RegionProvider> loader = ServiceLoader.load(RegionProvider.class);
         Iterator<RegionProvider> iterator = loader.iterator();
         while(iterator.hasNext()) {
             RegionProvider<T> provider = iterator.next();
-            Optional<T> byCode = provider.getByCode(s);
+            Optional<? extends Region> byCode = provider.getByCode(s);
             if (byCode.isPresent()) {
-                return byCode.get();
+                if (clazz.isInstance(byCode.get())) {
+                    return (Optional<T>) byCode;
+                }
             }
 
         }
-        return null;
+        return Optional.empty();
+
+    }
+    public static <T extends Region> Optional<T> getByCode(String s) {
+        return (Optional<T>) getByCode(s, Region.class);
     }
 
     public static Stream<? extends Region> values() {

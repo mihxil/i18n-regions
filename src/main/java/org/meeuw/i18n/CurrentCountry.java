@@ -9,6 +9,8 @@ import com.neovisionaries.i18n.CountryCode;
  * @since 0.1
  */
 public class CurrentCountry implements Country {
+    private static final long serialVersionUID = 0L;
+
     private final CountryCode code;
 
     public CurrentCountry(CountryCode code) {
@@ -41,4 +43,9 @@ public class CurrentCountry implements Country {
         return code.toString();
     }
 
+    @Override
+    public String getISO3166_3_Code() {
+        return code.getAlpha3();
+
+    }
 }

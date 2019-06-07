@@ -9,6 +9,8 @@ import java.util.Locale;
  * @since 0.1
  */
 public class CountrySubDivision implements Region {
+    private static final long serialVersionUID = 0L;
+
     private final CountryCodeSubdivision code;
 
     public CountrySubDivision(CountryCodeSubdivision code) {
@@ -28,7 +30,9 @@ public class CountrySubDivision implements Region {
 
     @Override
     public Type getType() {
-        return Type.REGION;
+        // TODO,
+        //return Type.valueOf(code.getType().name());
+        return Type.SUBDIVISION;
     }
 
     @Override
