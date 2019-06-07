@@ -1,8 +1,12 @@
 package org.meeuw.i18n;
 
+import java.time.Year;
 import java.util.Locale;
 
 import javax.annotation.Nonnull;
+
+import com.google.common.collect.Range;
+import com.neovisionaries.i18n.CountryCode;
 
 /**
  * @author Michiel Meeuwissen
@@ -37,13 +41,42 @@ public class FormerCountry implements Country {
         return code;
     }
 
+    public Range<Year> getValidity() {
+        return code.getValidity();
+    }
+
+
     @Override
     public String toString() {
         return code.toString();
     }
 
+
     @Override
-    public String getISO3166_3_Code() {
-        return code.getISO3166_3_Code();
+    public String getAlpha2() {
+        return code.name().substring(0, 2);
     }
+    @Override
+    public String getAlpha3() {
+        return null;
+    }
+
+    @Override
+    public int getNumeric() {
+        return code.getFormerCodes().stream().filter(c -> {
+            try {
+                Integer.parseInt(c);
+                return true;
+            } catch(NumberFormatException nfe) {
+                return false;
+            }
+        }).map(Integer::parseInt).findFirst().orElse(-1);
+    }
+
+    @Override
+    public CountryCode.Assignment getAssignment() {
+        return null;
+
+    }
+
 }

@@ -24,6 +24,24 @@ public class CurrentCountry implements Country {
         return code.getAlpha2();
     }
 
+
+    @Override
+    public String getAlpha2() {
+        return code.getAlpha2();
+
+    }
+
+    @Override
+    public String getAlpha3() {
+        return code.getAlpha3();
+    }
+
+    @Override
+    public int getNumeric() {
+        return code.getNumeric();
+
+    }
+
     @Override
     public Locale toLocale() {
         return code.toLocale();
@@ -45,9 +63,10 @@ public class CurrentCountry implements Country {
         return code.toString();
     }
 
+
     @Override
-    public String getISO3166_3_Code() {
-        return code.getAlpha3();
+    public CountryCode.Assignment getAssignment() {
+        return code.getAssignment();
 
     }
 }
