@@ -21,27 +21,37 @@ E.g.
     @Test
     public void getCurrentByCode() {
 
-        Region nl = Utils.getByCode("NL");
-        assertThat(nl).isNotNull();
-        assertThat(nl).isInstanceOf(CurrentCountry.class);
-        assertThat(nl.getISOCode()).isEqualTo("NL");
-        assertThat(nl.getName()).isEqualTo("Netherlands");
+        Optional<Region> nl = Regions.getByCode("NL");
+        assertThat(nl).isPresent();
+        assertThat(nl.get()).isInstanceOf(CurrentCountry.class);
+        assertThat(nl.get().getISOCode()).isEqualTo("NL");
+        assertThat(nl.get().getName()).isEqualTo("Netherlands");
+    }
 
+    @Test
+    public void getCurrentByCodeAsCountry() {
+        Optional<CurrentCountry> nl = Regions.getByCode("NL", CurrentCountry.class);
+        assertThat(nl.get().getISO3166_3_Code()).isEqualTo("NLD");
     }
     @Test
     public void getFormerByCode() {
 
-        Region cshh = Utils.getByCode("CSHH");
+        Region cshh = Regions.getByCode("CSHH").orElse(null);
         assertThat(cshh).isNotNull();
         assertThat(cshh).isInstanceOf(FormerCountry.class);
         assertThat(cshh.getISOCode()).isEqualTo("CSHH");
         assertThat(cshh.getName()).isEqualTo("Czechoslovakia");
     }
+    @Test
+    public void getFormerByCodeAsCountry() {
+        Optional<Country> nl = Regions.getByCode("CSHH", Country.class);
+        assertThat(nl.get().getISO3166_3_Code()).isEqualTo("CSHH");
+    }
 
     @Test
     public void getCountrySubDivision() {
 
-        Region utrecht = Utils.getByCode("NL:UT");
+        Region utrecht = Regions.getByCode("NL:UT").orElse(null);
         assertThat(utrecht).isNotNull();
         assertThat(utrecht).isInstanceOf(CountrySubDivision.class);
         assertThat(utrecht.getISOCode()).isEqualTo("NL:UT");
@@ -52,8 +62,8 @@ E.g.
     @Test
     public void values() {
 
-        Utils.values().forEach(r -> {
-            System.out.println(r + " : " + r.getName());
+        Regions.values().forEach(r -> {
+            System.out.println(r.getISOCode()  + " : " + r.getName());
         });
 
     }
