@@ -35,6 +35,8 @@
   <properties>
     <nv-i18n.version>1.25</nv-i18n.version>
     <junit.version>4.12</junit.version>
+    <i18n-subdivisions.version>0.2</i18n-subdivisions.version>
+    <i18n-formerly-assigned.version>0.1.0</i18n-formerly-assigned.version>
   </properties>
 
   <scm>
@@ -55,12 +57,12 @@
       <dependency>
         <groupId>org.meeuw.i18n</groupId>
         <artifactId>i18n-formerly-assigned</artifactId>
-        <version>0.1-SNAPSHOT</version>
+        <version>${i18n-formerly-assigned.version}</version>
       </dependency>
       <dependency>
         <groupId>be.olsson</groupId>
         <artifactId>i18n-subdivisions</artifactId>
-        <version>0.2</version>
+        <version>${i18n-subdivisions.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
