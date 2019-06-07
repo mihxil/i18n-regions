@@ -2,6 +2,7 @@ package org.meeuw.i18n;
 
 import java.io.Serializable;
 import java.util.Locale;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 /**
@@ -32,7 +33,11 @@ public interface Region extends Serializable {
 	String getName();
 
 	default String getName(Locale locale) {
-		return ResourceBundle.getBundle("/CountryCode", locale).getString(getISOCode());
+		try {
+			return ResourceBundle.getBundle("/CountryCode", locale).getString(getISOCode());
+		} catch (MissingResourceException mse){
+			return getName();
+		}
 	}
 
 	enum Type {

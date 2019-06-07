@@ -1,5 +1,6 @@
 package org.meeuw.i18n;
 
+import java.util.Locale;
 import java.util.Optional;
 
 import org.junit.Ignore;
@@ -23,8 +24,7 @@ public class RegionsTest {
         assertThat(nl.get()).isInstanceOf(CurrentCountry.class);
         assertThat(nl.get().getISOCode()).isEqualTo("NL");
         assertThat(nl.get().getName()).isEqualTo("Netherlands");
-        // TODO
-        // assertThat(nl.get().getName(new Locale("nl"))).isEqualTo("Netherlands");
+        assertThat(nl.get().getName(new Locale("nl"))).isEqualTo("Nederland");
 
     }
 

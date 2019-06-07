@@ -49,6 +49,15 @@ public class CurrentCountry implements Country {
     }
 
     @Override
+    public String getName(Locale locale) {
+        if (code.getAssignment() == CountryCode.Assignment.OFFICIALLY_ASSIGNED) {
+            return code.toLocale().getDisplayCountry(locale);
+        } else {
+            return Country.super.getName(locale);
+        }
+    }
+
+    @Override
     public String getName() {
         return code.getName();
     }
