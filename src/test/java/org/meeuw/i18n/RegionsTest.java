@@ -74,6 +74,17 @@ public class RegionsTest {
 
 
     @Test
+    public void getCountryZZ() {
+
+        Region undefined = Regions.getByCode("ZZ").orElse(null);
+        assertThat(undefined).isNotNull();
+        assertThat(undefined).isInstanceOf(UserAssignedCountry.class);
+        assertThat(undefined.getISOCode()).isEqualTo("ZZ");
+        assertThat(undefined.getName()).isEqualTo("Unknown or Invalid Territory");
+    }
+
+
+    @Test
     public void values() {
 
         Regions.values().forEach(r -> {

@@ -8,6 +8,8 @@ import javax.annotation.Nonnull;
 import com.google.common.collect.Range;
 import com.neovisionaries.i18n.CountryCode;
 
+import static com.neovisionaries.i18n.CountryCode.Assignment.TRANSITIONALLY_RESERVED;
+
 /**
  * @author Michiel Meeuwissen
  * @since 0.1
@@ -82,7 +84,7 @@ public class FormerCountry implements Country {
 
     @Override
     public CountryCode.Assignment getAssignment() {
-        return null;
+        return TRANSITIONALLY_RESERVED;
 
     }
 

@@ -51,6 +51,13 @@ public interface Region extends Serializable {
 		COUNTRY,
 
 		/**
+		 * Continents
+		 */
+		CONTINENT,
+
+
+
+		/**
 		 * A subdivision of a country, of which the type is otherwise unknown
 		 */
 		SUBDIVISION,
