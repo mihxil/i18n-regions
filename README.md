@@ -1,8 +1,9 @@
 [![Build Status](https://travis-ci.org/mihxil/i18n-regions.svg?)](https://travis-ci.org/mihxil/i18n-regions)
 [![Maven Central](https://img.shields.io/maven-central/v/org.meeuw.i18n/i18n-regions.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22org.meeuw.i18n%22)
 [![snapshots](https://img.shields.io/nexus/s/https/oss.sonatype.org/org.meeuw.i18n/i18n-regions.svg)](https://oss.sonatype.org/content/repositories/staging/org/meeuw/i18n/)
+[![javadoc](http://www.javadoc.io/badge/org.meeuw.i18n/i18n-regions.svg?color=blue)](http://www.javadoc.io/doc/org.meeuw.i18n/i18n-regions)
 
-Geographical regions
+geographical regions
 --------------------
 
 The central interface of this module is `org.meeuw.i18n.Region`, which represents some geographical region.
