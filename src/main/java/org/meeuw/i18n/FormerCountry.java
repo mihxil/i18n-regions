@@ -2,6 +2,8 @@ package org.meeuw.i18n;
 
 import java.time.Year;
 import java.util.Locale;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 import javax.annotation.Nonnull;
 
@@ -39,11 +41,12 @@ public class FormerCountry implements Country {
     }
     @Override
     public String getName(Locale locale) {
-        CountryCode currentCountry = CountryCode.valueOf(getAlpha2());
-
-        return new CurrentCountry(currentCountry).getName(locale);
-
-
+        try {
+			return ResourceBundle.getBundle("CountryCode", locale).getString(getISOCode());
+		} catch (MissingResourceException mse){
+            CountryCode currentCountry = CountryCode.valueOf(getAlpha2());
+            return new CurrentCountry(currentCountry).getName(locale);
+		}
     }
 
     public FormerlyAssignedCountryCode getCode() {

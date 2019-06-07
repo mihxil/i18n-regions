@@ -34,7 +34,7 @@ public interface Region extends Serializable {
 
 	default String getName(Locale locale) {
 		try {
-			return ResourceBundle.getBundle("/CountryCode", locale).getString(getISOCode());
+			return ResourceBundle.getBundle("CountryCode", locale).getString(getISOCode());
 		} catch (MissingResourceException mse){
 			return getName();
 		}

@@ -49,4 +49,8 @@ public class UserAssignedCountry extends UserAssigned implements Country {
         return number;
 
     }
+    @Override
+    public String toString() {
+        return getISOCode();
+    }
 }

@@ -1,6 +1,8 @@
 package org.meeuw.i18n;
 
 import java.util.Locale;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 import javax.annotation.Nonnull;
 
@@ -50,10 +52,14 @@ public class CurrentCountry implements Country {
 
     @Override
     public String getName(Locale locale) {
-        if (code.getAssignment() == CountryCode.Assignment.OFFICIALLY_ASSIGNED) {
-            return code.toLocale().getDisplayCountry(locale);
-        } else {
-            return Country.super.getName(locale);
+        try {
+			return ResourceBundle.getBundle("CountryCode", locale).getString(getISOCode());
+        } catch (MissingResourceException mse){
+            if (code.getAssignment() == CountryCode.Assignment.OFFICIALLY_ASSIGNED) {
+                return code.toLocale().getDisplayCountry(locale);
+            } else {
+                return code.getName();
+            }
         }
     }
 

@@ -25,7 +25,8 @@ public class RegionsTest {
         assertThat(nl.get().getISOCode()).isEqualTo("NL");
         assertThat(nl.get().getName()).isEqualTo("Netherlands");
         assertThat(nl.get().getName(Locale.GERMAN)).isEqualTo("Niederlande");
-        assertThat(nl.get().toLocale()).isEqualTo(new Locale("nl", "NL"));
+        assertThat(nl.get().toLocale()).isEqualTo(new Locale("", "NL"));
+        assertThat(nl.get().getName(new Locale("nl"))).isEqualTo("Nederland");
     }
 
     @Test
@@ -35,13 +36,12 @@ public class RegionsTest {
     }
     @Test
     public void getFormerByCode() {
-
         Region cshh = Regions.getByCode("CSHH").orElse(null);
         assertThat(cshh).isNotNull();
         assertThat(cshh).isInstanceOf(FormerCountry.class);
         assertThat(cshh.getISOCode()).isEqualTo("CSHH");
         assertThat(cshh.getName()).isEqualTo("Czechoslovakia");
-        assertThat(cshh.getName(new Locale("nl"))).isEqualTo("Czechoslovakia");
+        assertThat(cshh.getName(new Locale("nl"))).isEqualTo("Tsjechoslowakije");
 
     }
     @Test
@@ -81,6 +81,8 @@ public class RegionsTest {
         assertThat(undefined).isInstanceOf(UserAssignedCountry.class);
         assertThat(undefined.getISOCode()).isEqualTo("ZZ");
         assertThat(undefined.getName()).isEqualTo("Unknown or Invalid Territory");
+        assertThat(undefined.getName(new Locale("nl"))).isEqualTo("Onbekend of ongeldig gebied");
+
     }
 
 
