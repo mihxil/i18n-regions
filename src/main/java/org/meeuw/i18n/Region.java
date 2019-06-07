@@ -40,6 +40,10 @@ public interface Region extends Serializable {
 		}
 	}
 
+
+	default String getLocalName() {
+		return getName(toLocale());
+	}
 	enum Type {
 		/**
 		 * A country or former country

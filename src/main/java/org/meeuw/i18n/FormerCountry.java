@@ -34,6 +34,13 @@ public class FormerCountry implements Country {
     @Override
     public String getName() {
         return code.getName();
+    }
+    @Override
+    public String getName(Locale locale) {
+        CountryCode currentCountry = CountryCode.valueOf(getAlpha2());
+
+        return new CurrentCountry(currentCountry).getName(locale);
+
 
     }
 

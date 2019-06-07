@@ -24,8 +24,8 @@ public class RegionsTest {
         assertThat(nl.get()).isInstanceOf(CurrentCountry.class);
         assertThat(nl.get().getISOCode()).isEqualTo("NL");
         assertThat(nl.get().getName()).isEqualTo("Netherlands");
-        assertThat(nl.get().getName(new Locale("nl"))).isEqualTo("Nederland");
-
+        assertThat(nl.get().getName(Locale.GERMAN)).isEqualTo("Niederlande");
+        assertThat(nl.get().toLocale()).isEqualTo(new Locale("nl", "NL"));
     }
 
     @Test
@@ -41,6 +41,8 @@ public class RegionsTest {
         assertThat(cshh).isInstanceOf(FormerCountry.class);
         assertThat(cshh.getISOCode()).isEqualTo("CSHH");
         assertThat(cshh.getName()).isEqualTo("Czechoslovakia");
+        assertThat(cshh.getName(new Locale("nl"))).isEqualTo("Czechoslovakia");
+
     }
     @Test
     public void getFormerByCodeAsCountry() {
