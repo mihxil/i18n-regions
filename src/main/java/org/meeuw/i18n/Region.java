@@ -2,6 +2,7 @@ package org.meeuw.i18n;
 
 import java.io.Serializable;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * The region interface represents a certain geographical region. E.g. a {@link Country}
@@ -29,6 +30,10 @@ public interface Region extends Serializable {
 	 */
 
 	String getName();
+
+	default String getName(Locale locale) {
+		return ResourceBundle.getBundle("/CountryCode", locale).getString(getISOCode());
+	}
 
 	enum Type {
 		/**

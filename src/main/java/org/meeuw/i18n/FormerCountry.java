@@ -2,6 +2,8 @@ package org.meeuw.i18n;
 
 import java.util.Locale;
 
+import javax.annotation.Nonnull;
+
 /**
  * @author Michiel Meeuwissen
  * @since 0.1
@@ -11,7 +13,7 @@ public class FormerCountry implements Country {
 
     private final FormerlyAssignedCountryCode code;
 
-    public FormerCountry(FormerlyAssignedCountryCode code) {
+    public FormerCountry(@Nonnull FormerlyAssignedCountryCode code) {
         this.code = code;
     }
 

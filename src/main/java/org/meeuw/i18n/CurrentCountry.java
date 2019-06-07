@@ -2,6 +2,8 @@ package org.meeuw.i18n;
 
 import java.util.Locale;
 
+import javax.annotation.Nonnull;
+
 import com.neovisionaries.i18n.CountryCode;
 
 /**
@@ -13,7 +15,7 @@ public class CurrentCountry implements Country {
 
     private final CountryCode code;
 
-    public CurrentCountry(CountryCode code) {
+    public CurrentCountry(@Nonnull CountryCode code) {
         this.code = code;
     }
 
@@ -31,8 +33,8 @@ public class CurrentCountry implements Country {
     @Override
     public String getName() {
         return code.getName();
-
     }
+
 
     public CountryCode getCode() {
         return code;

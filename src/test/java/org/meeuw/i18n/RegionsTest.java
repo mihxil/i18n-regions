@@ -1,5 +1,6 @@
 package org.meeuw.i18n;
 
+import java.util.Locale;
 import java.util.Optional;
 
 import org.junit.Test;
@@ -22,6 +23,8 @@ public class RegionsTest {
         assertThat(nl.get()).isInstanceOf(CurrentCountry.class);
         assertThat(nl.get().getISOCode()).isEqualTo("NL");
         assertThat(nl.get().getName()).isEqualTo("Netherlands");
+        assertThat(nl.get().getName(new Locale("nl"))).isEqualTo("Netherlands");
+
     }
 
     @Test
@@ -45,13 +48,23 @@ public class RegionsTest {
     }
 
     @Test
-    public void getCountrySubDivision() {
+    public void getCountrySubDivisionUtrecht() {
 
-        Region utrecht = Regions.getByCode("NL:UT").orElse(null);
+        Region utrecht = Regions.getByCode("NL-UT").orElse(null);
         assertThat(utrecht).isNotNull();
         assertThat(utrecht).isInstanceOf(CountrySubDivision.class);
-        assertThat(utrecht.getISOCode()).isEqualTo("NL:UT");
+        assertThat(utrecht.getISOCode()).isEqualTo("NL-UT");
         assertThat(utrecht.getName()).isEqualTo("Utrecht");
+    }
+
+    @Test
+    public void getCountrySubDivisionGreatBritain() {
+
+        Region gbn = Regions.getByCode("GB-GBN").orElse(null);
+        assertThat(gbn).isNotNull();
+        assertThat(gbn).isInstanceOf(CountrySubDivision.class);
+        assertThat(gbn.getISOCode()).isEqualTo("NL-UT");
+        assertThat(gbn.getName()).isEqualTo("Utrecht");
     }
 
 

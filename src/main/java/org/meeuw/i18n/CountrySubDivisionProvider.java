@@ -18,12 +18,15 @@ public class CountrySubDivisionProvider implements RegionProvider<CountrySubDivi
 
     @Override
     public Optional<CountrySubDivision> getByCode(String code) {
-        String[] countryAndSubDiversion = code.split(":", 2);
+        String[] countryAndSubDiversion = code.split("-", 2);
         if (countryAndSubDiversion.length < 2) {
             return Optional.empty();
         } else {
             CountryCode countryCode = CountryCode.getByAlpha2Code(countryAndSubDiversion[0]);
             CountryCodeSubdivision subdivision = SubdivisionFactory.getSubdivision(countryCode, countryAndSubDiversion[1]);
+            if (subdivision == null){
+                return Optional.empty();
+            }
             return Optional.of(new CountrySubDivision(subdivision));
 
         }

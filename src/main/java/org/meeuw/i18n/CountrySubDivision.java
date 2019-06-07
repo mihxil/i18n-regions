@@ -4,6 +4,8 @@ import be.olsson.i18n.subdivision.CountryCodeSubdivision;
 
 import java.util.Locale;
 
+import javax.annotation.Nonnull;
+
 /**
  * @author Michiel Meeuwissen
  * @since 0.1
@@ -13,13 +15,13 @@ public class CountrySubDivision implements Region {
 
     private final CountryCodeSubdivision code;
 
-    public CountrySubDivision(CountryCodeSubdivision code) {
+    public CountrySubDivision(@Nonnull CountryCodeSubdivision code) {
         this.code = code;
     }
 
     @Override
     public String getISOCode() {
-        return code.getCountryCode().getAlpha2() + ":" + code.getCode();
+        return code.getCountryCode().getAlpha2() + "-" + code.getCode();
     }
 
     @Override
