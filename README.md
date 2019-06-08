@@ -30,7 +30,7 @@ By default we provide services backed by `com.neovisionaries.i18n.CountryCode` (
 
 Some utilities to deal with all this are provided in `org.meeuw.i18n.Utils`.
 
-E.g.  (taken from [test case](blob/master/src/test/java/org/meeuw/i18n/RegionsTest.java))
+E.g.  (taken from [test case](/mihxil/i18n-regions/blob/master/src/test/java/org/meeuw/i18n/RegionsTest.java))
 ```java
 
 
