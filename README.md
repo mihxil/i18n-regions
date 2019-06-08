@@ -4,8 +4,23 @@
 [![javadoc](http://www.javadoc.io/badge/org.meeuw.i18n/i18n-regions.svg?color=blue)](http://www.javadoc.io/doc/org.meeuw.i18n/i18n-regions)
 
 geographical regions
---------------------
+=============
 
+introduction
+---
+This project was started to be able to make better use of CountryCode's from (https://github.com/TakahikoKawasaki/nv-i18n).
+
+Using CountryCode as a value in your application has several drawbacks:
+
+1. It is not extendible. If you need a value not in that enum, your stuck.
+2. It does not contain 'former countries', so e.g. the birth country of a person, or the country of a Movie cannot be stored as a 'CountryCode'.
+3. It's only applicable to countries, no other regions.
+
+I decided to wrap 'CountryCode' in a class 'CurrentCountry', which implements a 'Region' interface, which makes it possible to make other implementation of 'Region' to, which makes it possible to address all the above issues, if you choose to use 'Region' in stead of 'CountryCode' as the type of your variable.
+
+
+implementation
+---
 The central interface of this module is `org.meeuw.i18n.Region`, which represents some geographical region.
 
 
@@ -72,5 +87,14 @@ E.g.
 
 Persistence
 -----------
-`org.meeuw.i18n.persistence.RegionToStringConverter` is meant to arrange persistence of `Region` objects to the database. We want the iso code to be used as simple strings in a database column or so.
+`org.meeuw.i18n.persistence.RegionToStringConverter` is meant to arrange JPA persistence of `Region` objects to the database. We want the iso code to be used as simple strings in a database column or so.
+
+This will also deal gracefully with codes which gets unassigned, because `Regions#getByCode` will also fall back to formerly assigned codes.
+
+TODO
+----
+- The persistence solution is not yet well tested
+- We may add validators, to give the possibility to limit the possible values of a `Region` typed variable
+- We may add implementations of  JAXB/Jackon-adapters to arrange proper xml/json bindings of member of type `Region`
+
 
