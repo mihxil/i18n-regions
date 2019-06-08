@@ -29,6 +29,11 @@ public class UserAssignedProvider implements RegionProvider<UserAssigned> {
     }
 
 
+    @Override
+    public boolean canProvide(Class<? extends Region> clazz) {
+        return clazz.isAssignableFrom(UserAssigned.class) || clazz.isAssignableFrom(UserAssignedCountry.class);
+
+    }
 
     @Override
     public Optional<UserAssigned> getByCode(String code) {

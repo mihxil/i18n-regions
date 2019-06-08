@@ -19,7 +19,7 @@ public class RegionsTest {
     @Test
     public void getCurrentByCode() {
 
-        Optional<Region> nl = Regions.getByCode("NL");
+        Optional<Country> nl = Regions.getByCode("NL", Country.class);
         assertThat(nl).isPresent();
         assertThat(nl.get()).isInstanceOf(CurrentCountry.class);
         assertThat(nl.get().getISOCode()).isEqualTo("NL");

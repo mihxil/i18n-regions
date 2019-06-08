@@ -9,6 +9,8 @@ import java.util.stream.Stream;
  */
 public interface RegionProvider<T extends Region> {
 
+    boolean canProvide(Class<? extends Region> clazz);
+
     Optional<T> getByCode(String code);
 
     Stream<T> values();

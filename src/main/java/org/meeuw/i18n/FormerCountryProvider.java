@@ -11,6 +11,13 @@ import java.util.stream.Stream;
 public class FormerCountryProvider implements RegionProvider<FormerCountry> {
 
     @Override
+    public boolean canProvide(Class<? extends Region> clazz) {
+        return clazz.isAssignableFrom(FormerCountry.class);
+
+    }
+
+
+    @Override
     public Optional<FormerCountry> getByCode(String code) {
         return Optional.ofNullable(FormerlyAssignedCountryCode.getByCode(code)).map(FormerCountry::new);
     }

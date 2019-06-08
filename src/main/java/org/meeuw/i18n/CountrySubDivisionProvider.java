@@ -17,6 +17,13 @@ import com.neovisionaries.i18n.CountryCode;
 public class CountrySubDivisionProvider implements RegionProvider<CountrySubDivision> {
 
     @Override
+    public boolean canProvide(Class<? extends Region> clazz) {
+        return clazz.isAssignableFrom(CountrySubDivision.class);
+
+    }
+
+
+    @Override
     public Optional<CountrySubDivision> getByCode(String code) {
         String[] countryAndSubDiversion = code.split("-", 2);
         if (countryAndSubDiversion.length < 2) {

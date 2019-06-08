@@ -13,6 +13,12 @@ import com.neovisionaries.i18n.CountryCode;
 public class CurrentCountryProvider implements RegionProvider<CurrentCountry> {
 
     @Override
+    public boolean canProvide(Class<? extends Region> clazz) {
+        return clazz.isAssignableFrom(CurrentCountry.class);
+
+    }
+
+    @Override
     public Optional<CurrentCountry> getByCode(String code) {
         return Optional.ofNullable(CountryCode.getByCode(code)).map(CurrentCountry::new);
     }

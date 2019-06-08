@@ -16,10 +16,12 @@ public class Regions {
         Iterator<RegionProvider> iterator = loader.iterator();
         while(iterator.hasNext()) {
             RegionProvider<T> provider = iterator.next();
-            Optional<? extends Region> byCode = provider.getByCode(s);
-            if (byCode.isPresent()) {
-                if (clazz.isInstance(byCode.get())) {
-                    return (Optional<T>) byCode;
+            if (provider.canProvide(clazz)) {
+                Optional<? extends Region> byCode = provider.getByCode(s);
+                if (byCode.isPresent()) {
+                    if (clazz.isInstance(byCode.get())) {
+                        return (Optional<T>) byCode;
+                    }
                 }
             }
 
