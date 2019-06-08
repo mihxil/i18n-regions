@@ -87,6 +87,18 @@ public class RegionsTest {
 
 
     @Test
+    public void getFormerCountryCS() {
+
+        Region cshh = Regions.getByCode("CS", FormerCountry.class).orElse(null);
+        assertThat(cshh).isNotNull();
+        assertThat(cshh).isInstanceOf(FormerCountry.class);
+        // It should find the most country most recently assigned to 'CS'.
+        // That's Serbia and Montenegro, not Czechoslovakia.
+        assertThat(cshh.getISOCode()).isEqualTo("CSXX");
+        assertThat(cshh.getName()).isEqualTo("Serbia and Montenegro");
+    }
+
+    @Test
     public void values() {
 
         Regions.values().forEach(r -> {

@@ -36,7 +36,7 @@
     <nv-i18n.version>1.25</nv-i18n.version>
     <junit.version>4.12</junit.version>
     <i18n-subdivisions.version>0.2</i18n-subdivisions.version>
-    <i18n-formerly-assigned.version>0.1.0</i18n-formerly-assigned.version>
+    <i18n-formerly-assigned.version>0.2-SNAPSHOT</i18n-formerly-assigned.version>
   </properties>
 
   <scm>
@@ -111,8 +111,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.0</version>
         <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
+          <source>8</source>
+          <target>8</target>
         </configuration>
       </plugin>
       <plugin>
