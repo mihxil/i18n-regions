@@ -32,7 +32,7 @@ By default we provide services backed by `com.neovisionaries.i18n.CountryCode` (
 
 Some utilities to deal with all this are provided in `org.meeuw.i18n.Regions`.
 
-Example code useage can be seen in the [test cases for the Regions utility](src/test/java/org/meeuw/i18n/RegionsTest.java))
+Example code useage can be seen in the [test cases for the Regions utility](src/test/java/org/meeuw/i18n/RegionsTest.java)
  
 
 Persistence
