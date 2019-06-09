@@ -2,7 +2,7 @@
 [![Maven Central](https://img.shields.io/maven-central/v/org.meeuw.i18n/i18n-regions.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22org.meeuw.i18n%22)
 [![snapshots](https://img.shields.io/nexus/s/https/oss.sonatype.org/org.meeuw.i18n/i18n-regions.svg)](https://oss.sonatype.org/content/repositories/staging/org/meeuw/i18n/)
 [![javadoc](http://www.javadoc.io/badge/org.meeuw.i18n/i18n-regions.svg?color=blue)](http://www.javadoc.io/doc/org.meeuw.i18n/i18n-regions)
-[![codecov](https://codecov.io/gh/mihxil/i18-regions/branch/master/graph/badge.svg)](https://codecov.io/gh/mihxil/i18-regions)
+[![codecov](https://codecov.io/gh/mihxil/i18n-regions/branch/master/graph/badge.svg)](https://codecov.io/gh/mihxil/i18n-regions)
 
 
 geographical regions
@@ -23,12 +23,12 @@ I decided to wrap `CountryCode` in a class `CurrentCountry`, which implements a 
 
 implementation
 ---
-The central interface of this module is `org.meeuw.i18n.Region`, which represents some geographical region.
+The central interface of this module is [`org.meeuw.i18n.Region`](src/main/java/org/meeuw/i18n/Region.java), which represents some geographical region.
 
 
-Instances are created by services implementing `org.meeuw.i18n.RegionProvider` (registered via META-INF/services).
+Instances are created by services implementing [`org.meeuw.i18n.RegionProvider`](src/main/java/org/meeuw/i18n/RegionProvider.java) (registered via META-INF/services).
 
-By default we provide services backed by `com.neovisionaries.i18n.CountryCode` (for current countries), by `org.meeuw.i18n.FormerlyAssignedCountryCode` (for former countries) and by `be.olsson.i18n.subdivision.CountryCodeSubdivision` (for subdivisions of countries), by `org.meeuw.i18n.UserAssignedCountry` (for some common user assigned country codes)
+By default we provide services backed by `com.neovisionaries.i18n.CountryCode` (for current countries), by `org.meeuw.i18n.FormerlyAssignedCountryCode` (for former countries) and by `be.olsson.i18n.subdivision.CountryCodeSubdivision` (for subdivisions of countries). We also provide [`org.meeuw.i18n.UserAssignedCountry`](src/main/java/org/meeuw/i18n/UserAssignedCountry.java) (for some common user assigned country codes)
 
 Some utilities to deal with all this are provided in `org.meeuw.i18n.Regions`.
 
@@ -37,7 +37,7 @@ Example code useage can be seen in the [test cases for the Regions utility](src/
 
 Persistence
 -----------
-`org.meeuw.i18n.persistence.RegionToStringConverter` is meant to arrange JPA persistence of `Region` objects to the database. We want the iso code to be used as simple strings in a database column or so.
+[`org.meeuw.i18n.persistence.RegionToStringConverter`](src/main/java/org/meeuw/i18n/persistence/.RegionToStringConverter`.java)) is meant to arrange JPA persistence of `Region` objects to the database. We want the iso code to be used as simple strings in a database column or so.
 
 This will also deal gracefully with codes which gets unassigned, because `Regions#getByCode` will also fall back to formerly assigned codes.
 
