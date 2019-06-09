@@ -28,64 +28,12 @@ The central interface of this module is `org.meeuw.i18n.Region`, which represent
 
 Instances are created by services implementing `org.meeuw.i18n.RegionProvider` (registered via META-INF/services).
 
-By default we provide services backed by `com.neovisionaries.i18n.CountryCode` (for current countries), by `org.meeuw.i18n.FormerlyAssignedCountryCode` (for former countries) and by `be.olsson.i18n.subdivision.CountryCodeSubdivision` (for subdivisions of countries)
+By default we provide services backed by `com.neovisionaries.i18n.CountryCode` (for current countries), by `org.meeuw.i18n.FormerlyAssignedCountryCode` (for former countries) and by `be.olsson.i18n.subdivision.CountryCodeSubdivision` (for subdivisions of countries), by `org.meeuw.i18n.UserAssignedCountry` (for some common user assigned country codes)
 
-Some utilities to deal with all this are provided in `org.meeuw.i18n.Utils`.
+Some utilities to deal with all this are provided in `org.meeuw.i18n.Regions`.
 
-E.g.  (taken from [test case](src/test/java/org/meeuw/i18n/RegionsTest.java))
-```java
-
-
-    @Test
-    public void getCurrentByCode() {
-
-        Optional<Region> nl = Regions.getByCode("NL");
-        assertThat(nl).isPresent();
-        assertThat(nl.get()).isInstanceOf(CurrentCountry.class);
-        assertThat(nl.get().getISOCode()).isEqualTo("NL");
-        assertThat(nl.get().getName()).isEqualTo("Netherlands");
-    }
-
-    @Test
-    public void getCurrentByCodeAsCountry() {
-        Optional<CurrentCountry> nl = Regions.getByCode("NL", CurrentCountry.class);
-        assertThat(nl.get().getISO3166_3_Code()).isEqualTo("NLD");
-    }
-    @Test
-    public void getFormerByCode() {
-
-        Region cshh = Regions.getByCode("CSHH").orElse(null);
-        assertThat(cshh).isNotNull();
-        assertThat(cshh).isInstanceOf(FormerCountry.class);
-        assertThat(cshh.getISOCode()).isEqualTo("CSHH");
-        assertThat(cshh.getName()).isEqualTo("Czechoslovakia");
-    }
-    @Test
-    public void getFormerByCodeAsCountry() {
-        Optional<Country> nl = Regions.getByCode("CSHH", Country.class);
-        assertThat(nl.get().getISO3166_3_Code()).isEqualTo("CSHH");
-    }
-
-    @Test
-    public void getCountrySubDivision() {
-
-        Region utrecht = Regions.getByCode("NL:UT").orElse(null);
-        assertThat(utrecht).isNotNull();
-        assertThat(utrecht).isInstanceOf(CountrySubDivision.class);
-        assertThat(utrecht.getISOCode()).isEqualTo("NL:UT");
-        assertThat(utrecht.getName()).isEqualTo("Utrecht");
-    }
-
-
-    @Test
-    public void values() {
-
-        Regions.values().forEach(r -> {
-            System.out.println(r.getISOCode()  + " : " + r.getName());
-        });
-
-    }
-```
+Example code useage can be seen in the [test cases for the Regions utility](src/test/java/org/meeuw/i18n/RegionsTest.java))
+ 
 
 Persistence
 -----------
