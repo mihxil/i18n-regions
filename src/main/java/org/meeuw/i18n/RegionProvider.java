@@ -1,6 +1,7 @@
 package org.meeuw.i18n;
 
 import java.util.Optional;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 /**
@@ -9,7 +10,10 @@ import java.util.stream.Stream;
  */
 public interface RegionProvider<T extends Region> {
 
+    Pattern ALL = Pattern.compile(".*");
+
     boolean canProvide(Class<? extends Region> clazz);
+
 
     Optional<T> getByCode(String code);
 

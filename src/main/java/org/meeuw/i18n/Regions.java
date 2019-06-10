@@ -73,8 +73,13 @@ public class Regions {
         return StreamSupport.stream(spliterator, false);
     }
 
-    public static Stream<? extends Region> getByType(Region.Type... types) {
+    public static Stream<? extends Region> values(Region.Type... types) {
         Set<Region.Type> set = new HashSet<>(Arrays.asList(types));
         return values().filter(r -> set.contains(r.getType()));
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T extends Region> Stream<T> values(Class<T> type) {
+        return (Stream<T>) values().filter(type::isInstance);
     }
 }

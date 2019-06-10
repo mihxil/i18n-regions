@@ -20,7 +20,7 @@ public class CountrySubDivision implements Region {
     }
 
     @Override
-    public String getISOCode() {
+    public String getCode() {
         return code.getCountryCode().getAlpha2() + "-" + code.getCode();
     }
 
@@ -43,7 +43,7 @@ public class CountrySubDivision implements Region {
 
     }
 
-    public CountryCodeSubdivision getCode() {
+    public CountryCodeSubdivision getCountryCodeSubdivision() {
         return code;
     }
 
@@ -52,4 +52,18 @@ public class CountrySubDivision implements Region {
         return code.toString();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CountrySubDivision that = (CountrySubDivision) o;
+
+        return code != null ? code.equals(that.code) : that.code == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return code != null ? code.hashCode() : 0;
+    }
 }

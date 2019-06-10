@@ -20,7 +20,7 @@ public class RegionToStringConverter implements AttributeConverter<Region, Strin
 
     @Override
     public String convertToDatabaseColumn(Region region) {
-        return region == null ? null : region.getISOCode();
+        return region == null ? null : region.getCode();
     }
 
     @Override

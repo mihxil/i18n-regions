@@ -10,9 +10,8 @@ import javax.annotation.Nonnull;
 import com.google.common.collect.Range;
 import com.neovisionaries.i18n.CountryCode;
 
-import static com.neovisionaries.i18n.CountryCode.Assignment.TRANSITIONALLY_RESERVED;
-
 /**
+ * Represents a 'former code', of which the code is defined by the enums of {@link FormerlyAssignedCountryCode}.
  * @author Michiel Meeuwissen
  * @since 0.1
  */
@@ -26,7 +25,7 @@ public class FormerCountry implements Country {
     }
 
     @Override
-    public String getISOCode() {
+    public String getCode() {
         return code.getISO3166_3_Code();
     }
 
@@ -42,21 +41,20 @@ public class FormerCountry implements Country {
     @Override
     public String getName(Locale locale) {
         try {
-			return ResourceBundle.getBundle("CountryCode", locale).getString(getISOCode());
-		} catch (MissingResourceException mse){
+            return ResourceBundle.getBundle("CountryCode", locale).getString(this.getCode());
+        } catch (MissingResourceException mse){
             CountryCode currentCountry = CountryCode.valueOf(getAlpha2());
             return new CurrentCountry(currentCountry).getName(locale);
-		}
+        }
     }
 
-    public FormerlyAssignedCountryCode getCode() {
+    public FormerlyAssignedCountryCode getCountryCode() {
         return code;
     }
 
     public Range<Year> getValidity() {
         return code.getValidity();
     }
-
 
     @Override
     public String toString() {
@@ -83,12 +81,6 @@ public class FormerCountry implements Country {
                 return false;
             }
         }).map(Integer::parseInt).findFirst().orElse(-1);
-    }
-
-    @Override
-    public CountryCode.Assignment getAssignment() {
-        return TRANSITIONALLY_RESERVED;
-
     }
 
 }

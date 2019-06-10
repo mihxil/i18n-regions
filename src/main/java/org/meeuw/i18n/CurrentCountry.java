@@ -9,6 +9,8 @@ import javax.annotation.Nonnull;
 import com.neovisionaries.i18n.CountryCode;
 
 /**
+ * Represents a country of which the code is one of the enum values of {@link CountryCode}.
+ *
  * @author Michiel Meeuwissen
  * @since 0.1
  */
@@ -22,7 +24,7 @@ public class CurrentCountry implements Country {
     }
 
     @Override
-    public String getISOCode() {
+    public String getCode() {
         return code.getAlpha2();
     }
 
@@ -53,7 +55,7 @@ public class CurrentCountry implements Country {
     @Override
     public String getName(Locale locale) {
         try {
-			return ResourceBundle.getBundle("CountryCode", locale).getString(getISOCode());
+            return ResourceBundle.getBundle("CountryCode", locale).getString(this.getCode());
         } catch (MissingResourceException mse){
             if (code.getAssignment() == CountryCode.Assignment.OFFICIALLY_ASSIGNED) {
                 return code.toLocale().getDisplayCountry(locale);
@@ -69,7 +71,7 @@ public class CurrentCountry implements Country {
     }
 
 
-    public CountryCode getCode() {
+    public CountryCode getCountryCode() {
         return code;
     }
 
@@ -78,10 +80,23 @@ public class CurrentCountry implements Country {
         return code.toString();
     }
 
-
-    @Override
     public CountryCode.Assignment getAssignment() {
         return code.getAssignment();
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CurrentCountry that = (CurrentCountry) o;
+
+        return code == that.code;
+    }
+
+    @Override
+    public int hashCode() {
+        return code != null ? code.hashCode() : 0;
     }
 }
