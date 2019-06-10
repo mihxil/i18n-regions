@@ -15,7 +15,7 @@ This project was started to be able to make better use of `CountryCode`'s from [
 Using `CountryCode` as a value in your application has several drawbacks:
 
 1. It is not extensible. If you need a value not in that enum, you're stuck.
-2. It does not contain 'former countries', so e.g. the birth country of a person, or the country of a Movie cannot be stored as a 'CountryCode'.
+2. It does not contain 'former countries', so e.g. the birth country of a person, or the country of a movie cannot be stored as a 'CountryCode'.
 3. It's only applicable to countries, no other regions.
 
 I decided to wrap `CountryCode` in a class `CurrentCountry`, which implements a `Region` interface, which makes it possible to make other implementation of `Region` too, and to address all the above issues if you choose to use `Region` in stead of `CountryCode` as the type of your variable.
