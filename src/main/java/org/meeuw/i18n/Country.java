@@ -16,6 +16,14 @@ public interface Country extends Region {
     Predicate<Region> IS_FORMER = c -> c instanceof FormerCountry;
     Predicate<Region> IS_USER = c -> c instanceof UserAssignedCountry;
 
+    static CurrentCountry of(CountryCode code) {
+        return new CurrentCountry(code);
+    }
+    static FormerCountry of(FormerlyAssignedCountryCode code) {
+        return new FormerCountry(code);
+    }
+
+
     static Optional<Country> getByCode(String code) {
         return Regions.getByCode(code, Country.class);
     }

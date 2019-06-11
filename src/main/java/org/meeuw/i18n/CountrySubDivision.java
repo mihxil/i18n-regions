@@ -1,10 +1,13 @@
 package org.meeuw.i18n;
 
 import be.olsson.i18n.subdivision.CountryCodeSubdivision;
+import be.olsson.i18n.subdivision.SubdivisionFactory;
 
 import java.util.Locale;
 
 import javax.annotation.Nonnull;
+
+import com.neovisionaries.i18n.CountryCode;
 
 /**
  * @author Michiel Meeuwissen
@@ -14,6 +17,10 @@ public class CountrySubDivision implements Region {
     private static final long serialVersionUID = 0L;
 
     private final CountryCodeSubdivision code;
+
+    public static CountrySubDivision of(CountryCode countryCode, String code) {
+        return new CountrySubDivision(SubdivisionFactory.getSubdivision(CountryCode.GB, "GBN"));
+    }
 
     public CountrySubDivision(@Nonnull CountryCodeSubdivision code) {
         this.code = code;

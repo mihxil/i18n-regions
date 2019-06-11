@@ -44,7 +44,7 @@ public class FormerCountry implements Country {
             return ResourceBundle.getBundle("CountryCode", locale).getString(this.getCode());
         } catch (MissingResourceException mse){
             CountryCode currentCountry = CountryCode.valueOf(getAlpha2());
-            return new CurrentCountry(currentCountry).getName(locale);
+            return Country.of(currentCountry).getName(locale);
         }
     }
 
