@@ -6,6 +6,7 @@ package org.meeuw.i18n;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
+@SuppressWarnings("unused")
 public class UserAssignedCountry extends UserAssigned implements Country {
 
     public static UserAssignedCountry XZ =
