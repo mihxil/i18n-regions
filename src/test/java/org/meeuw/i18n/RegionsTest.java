@@ -110,7 +110,7 @@ public class RegionsTest {
     public void values() {
 
         Regions.values().forEach(r -> {
-            System.out.println(r.getCode()  + " : " + r.getName());
+            System.out.println(r.getClass().getSimpleName() + ":" + r.getCode()  + " : " + r.getName());
         });
 
     }
