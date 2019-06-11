@@ -33,7 +33,7 @@ public class RegionValidator implements ConstraintValidator<ValidRegion, Region>
             }
         }
         if ((annotation.predicates() & ValidRegion.USER_ASSIGNED) != 0) {
-            if (Country.IS_USER.test(region)) {
+            if (Country.IS_USER_ASSIGNED.test(region)) {
                 return true;
             }
         }
