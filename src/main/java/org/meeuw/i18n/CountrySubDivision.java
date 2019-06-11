@@ -4,6 +4,7 @@ import be.olsson.i18n.subdivision.CountryCodeSubdivision;
 import be.olsson.i18n.subdivision.SubdivisionFactory;
 
 import java.util.Locale;
+import java.util.Optional;
 
 import javax.annotation.Nonnull;
 
@@ -18,8 +19,8 @@ public class CountrySubDivision implements Region {
 
     private final CountryCodeSubdivision code;
 
-    public static CountrySubDivision of(CountryCode countryCode, String code) {
-        return new CountrySubDivision(SubdivisionFactory.getSubdivision(CountryCode.GB, "GBN"));
+    public static Optional<CountrySubDivision> of(@Nonnull CountryCode countryCode, @Nonnull String code) {
+        return Optional.ofNullable(SubdivisionFactory.getSubdivision(countryCode, code)).map(CountrySubDivision::new);
     }
 
     public CountrySubDivision(@Nonnull CountryCodeSubdivision code) {
