@@ -46,9 +46,9 @@ public class RegionsTest {
     }
     @Test
     public void getFormerByCodeAsCountry() {
-        Optional<Country> nl = Regions.getByCode("CSHH", Country.class);
-        assertThat(nl.get().getCode()).isEqualTo("CSHH");
-        assertThat(nl.get().getAlpha2()).isEqualTo("CS");
+        Optional<Country> cshh = Regions.getByCode("CSHH", Country.class);
+        assertThat(cshh.get().getCode()).isEqualTo("CSHH");
+        assertThat(((FormerCountry) cshh.get()).getFormerCodes().get(0)).isEqualTo("CS");
     }
 
     @Test

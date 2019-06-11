@@ -34,9 +34,6 @@ public interface Country extends Region {
         return Type.COUNTRY;
     }
 
-    String getAlpha2();
-    String getAlpha3();
-
     int getNumeric();
 
 }

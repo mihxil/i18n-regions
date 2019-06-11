@@ -15,7 +15,7 @@ import org.meeuw.i18n.Regions;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-@Converter
+@Converter(autoApply = true)
 public class RegionToStringConverter implements AttributeConverter<Region, String> {
 
     @Override

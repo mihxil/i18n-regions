@@ -28,14 +28,10 @@ public class CurrentCountry implements Country {
         return code.getAlpha2();
     }
 
-
-    @Override
     public String getAlpha2() {
         return code.getAlpha2();
-
     }
 
-    @Override
     public String getAlpha3() {
         return code.getAlpha3();
     }

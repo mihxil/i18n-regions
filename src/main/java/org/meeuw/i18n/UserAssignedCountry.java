@@ -33,13 +33,10 @@ public class UserAssignedCountry extends UserAssigned implements Country {
         this.number = number;
     }
 
-    @Override
     public String getAlpha2() {
         return code;
-
     }
 
-    @Override
     public String getAlpha3() {
         return alpha3;
 

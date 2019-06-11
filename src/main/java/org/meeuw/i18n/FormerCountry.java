@@ -1,14 +1,12 @@
 package org.meeuw.i18n;
 
 import java.time.Year;
+import java.util.List;
 import java.util.Locale;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
 
 import javax.annotation.Nonnull;
 
 import com.google.common.collect.Range;
-import com.neovisionaries.i18n.CountryCode;
 
 /**
  * Represents a 'former code', of which the code is defined by the enums of {@link FormerlyAssignedCountryCode}.
@@ -29,6 +27,10 @@ public class FormerCountry implements Country {
         return code.getISO3166_3_Code();
     }
 
+    public List<String> getFormerCodes() {
+        return code.getFormerCodes();
+    }
+
     @Override
     public Locale toLocale() {
         return code.toLocale();
@@ -37,15 +39,6 @@ public class FormerCountry implements Country {
     @Override
     public String getName() {
         return code.getName();
-    }
-    @Override
-    public String getName(Locale locale) {
-        try {
-            return ResourceBundle.getBundle("CountryCode", locale).getString(this.getCode());
-        } catch (MissingResourceException mse){
-            CountryCode currentCountry = CountryCode.valueOf(getAlpha2());
-            return Country.of(currentCountry).getName(locale);
-        }
     }
 
     public FormerlyAssignedCountryCode getCountryCode() {
@@ -61,15 +54,6 @@ public class FormerCountry implements Country {
         return code.toString();
     }
 
-
-    @Override
-    public String getAlpha2() {
-        return code.name().substring(0, 2);
-    }
-    @Override
-    public String getAlpha3() {
-        return null;
-    }
 
     @Override
     public int getNumeric() {

@@ -18,6 +18,8 @@ import org.meeuw.i18n.bind.jaxb.Code;
 @XmlJavaTypeAdapter(Code.class)
 public interface Region extends Serializable {
 
+    static final String BUNDLE = "Regions";
+
     /**
      * The code for the region. For countries: <a href="https://en.wikipedia.org/wiki/ISO_3166>ISO 3166</a>.
      */
@@ -39,7 +41,7 @@ public interface Region extends Serializable {
 
     default String getName(Locale locale) {
         try {
-            return ResourceBundle.getBundle("Regions", locale).getString(getCode());
+            return ResourceBundle.getBundle(BUNDLE, locale).getString(getCode());
         } catch (MissingResourceException mse){
             return getName();
         }
