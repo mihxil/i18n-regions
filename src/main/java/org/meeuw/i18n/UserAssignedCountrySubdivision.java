@@ -1,6 +1,9 @@
 package org.meeuw.i18n;
 
-import java.util.Locale;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.annotation.Nonnull;
 
@@ -12,6 +15,32 @@ import com.neovisionaries.i18n.CountryCode;
  */
 public class UserAssignedCountrySubdivision implements Region {
     private static final long serialVersionUID = 0L;
+
+    private static final Map<CountryCode, Map<String, UserAssignedCountrySubdivision>> CACHE = new ConcurrentHashMap<>();
+
+
+    public static  Map<String, UserAssignedCountrySubdivision> ofCountry(@Nonnull CountryCode countryCode) {
+        return CACHE.computeIfAbsent(countryCode, (cc) -> {
+            Map<String, UserAssignedCountrySubdivision> value = new LinkedHashMap<>();
+            Properties properties = new Properties();
+            InputStream inputStream = UserAssignedCountrySubdivision.class.getResourceAsStream("/subdivisions." + cc.getAlpha2() + ".properties");
+            if (inputStream != null) {
+                try {
+                    properties.load(inputStream);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            properties.forEach((k, v) -> {
+                value.put((String) k , new UserAssignedCountrySubdivision(cc, (String) k, (String) v));
+            });
+            return Collections.unmodifiableMap(value);
+            });
+    }
+    public static Optional<UserAssignedCountrySubdivision> of(@Nonnull CountryCode countryCode, String code) {
+        return Optional.ofNullable(ofCountry(countryCode).get(code));
+    }
+
 
     private final CountryCode countryCode;
     private final String code;

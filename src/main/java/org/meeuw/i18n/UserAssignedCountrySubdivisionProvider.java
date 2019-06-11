@@ -1,14 +1,15 @@
 package org.meeuw.i18n;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Collection;
+import java.util.Optional;
+import java.util.Spliterator;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 import com.neovisionaries.i18n.CountryCode;
+
+import static org.meeuw.i18n.UserAssignedCountrySubdivision.ofCountry;
 
 /**
  * Defines subdivisions of countries via property files /subdivisions.&lt;alpha2 code of country&gt;.properties
@@ -18,7 +19,6 @@ import com.neovisionaries.i18n.CountryCode;
  */
 public class UserAssignedCountrySubdivisionProvider implements RegionProvider<UserAssignedCountrySubdivision> {
 
-    private final Map<CountryCode, Map<String, UserAssignedCountrySubdivision>> cache = new ConcurrentHashMap<>();
 
     @Override
     public boolean canProvide(Class<? extends Region> clazz) {
@@ -38,24 +38,6 @@ public class UserAssignedCountrySubdivisionProvider implements RegionProvider<Us
         }
     }
 
-    protected Map<String, UserAssignedCountrySubdivision> ofCountry(CountryCode countryCode) {
-        return cache.computeIfAbsent(countryCode, (cc) -> {
-            Map<String, UserAssignedCountrySubdivision> value = new LinkedHashMap<>();
-            Properties properties = new Properties();
-            InputStream inputStream = getClass().getResourceAsStream("/subdivisions." + cc.getAlpha2() + ".properties");
-            if (inputStream != null) {
-                try {
-                    properties.load(inputStream);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-            properties.forEach((k, v) -> {
-                value.put((String) k , new UserAssignedCountrySubdivision(cc, (String) k, (String) v));
-            });
-            return Collections.unmodifiableMap(value);
-            });
-    }
 
     @Override
     public Stream<UserAssignedCountrySubdivision> values() {
