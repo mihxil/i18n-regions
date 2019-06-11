@@ -14,17 +14,17 @@ import com.neovisionaries.i18n.CountryCode;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-public class CountrySubDivisionProvider implements RegionProvider<CountrySubDivision> {
+public class CountrySubdivisionProvider implements RegionProvider<CountrySubdivision> {
 
     @Override
     public boolean canProvide(Class<? extends Region> clazz) {
-        return clazz.isAssignableFrom(CountrySubDivision.class);
+        return clazz.isAssignableFrom(CountrySubdivision.class);
 
     }
 
 
     @Override
-    public Optional<CountrySubDivision> getByCode(String code) {
+    public Optional<CountrySubdivision> getByCode(String code) {
         String[] countryAndSubDiversion = code.split("-", 2);
         if (countryAndSubDiversion.length < 2) {
             return Optional.empty();
@@ -34,13 +34,13 @@ public class CountrySubDivisionProvider implements RegionProvider<CountrySubDivi
             if (subdivision == null){
                 return Optional.empty();
             }
-            return Optional.of(new CountrySubDivision(subdivision));
+            return Optional.of(new CountrySubdivision(subdivision));
 
         }
     }
 
     @Override
-    public Stream<CountrySubDivision> values() {
+    public Stream<CountrySubdivision> values() {
         Spliterator<CountryCodeSubdivision> spliterator = new Spliterator<CountryCodeSubdivision>() {
             private int countryCode = 0;
             private Spliterator<CountryCodeSubdivision> spliterator;
@@ -76,6 +76,6 @@ public class CountrySubDivisionProvider implements RegionProvider<CountrySubDivi
 
             }
         };
-        return StreamSupport.stream(spliterator, false).map(CountrySubDivision::new);
+        return StreamSupport.stream(spliterator, false).map(CountrySubdivision::new);
     }
 }

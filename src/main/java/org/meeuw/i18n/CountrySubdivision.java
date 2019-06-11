@@ -14,16 +14,16 @@ import com.neovisionaries.i18n.CountryCode;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-public class CountrySubDivision implements Region {
+public class CountrySubdivision implements Region {
     private static final long serialVersionUID = 0L;
 
     private final CountryCodeSubdivision code;
 
-    public static Optional<CountrySubDivision> of(@Nonnull CountryCode countryCode, @Nonnull String code) {
-        return Optional.ofNullable(SubdivisionFactory.getSubdivision(countryCode, code)).map(CountrySubDivision::new);
+    public static Optional<CountrySubdivision> of(@Nonnull CountryCode countryCode, @Nonnull String code) {
+        return Optional.ofNullable(SubdivisionFactory.getSubdivision(countryCode, code)).map(CountrySubdivision::new);
     }
 
-    public CountrySubDivision(@Nonnull CountryCodeSubdivision code) {
+    public CountrySubdivision(@Nonnull CountryCodeSubdivision code) {
         this.code = code;
     }
 
@@ -65,7 +65,7 @@ public class CountrySubDivision implements Region {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CountrySubDivision that = (CountrySubDivision) o;
+        CountrySubdivision that = (CountrySubdivision) o;
 
         return code != null ? code.equals(that.code) : that.code == null;
     }

@@ -1,5 +1,5 @@
 org.meeuw.i18n.CurrentCountryProvider
 org.meeuw.i18n.FormerCountryProvider
-org.meeuw.i18n.CountrySubDivisionProvider
+org.meeuw.i18n.CountrySubdivisionProvider
 org.meeuw.i18n.UserAssignedProvider
-org.meeuw.i18n.UserAssignedCountrySubDivisionProvider
+org.meeuw.i18n.UserAssignedCountrySubdivisionProvider

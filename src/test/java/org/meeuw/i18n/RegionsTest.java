@@ -56,7 +56,7 @@ public class RegionsTest {
 
         Region utrecht = Regions.getByCode("NL-UT").orElse(null);
         assertThat(utrecht).isNotNull();
-        assertThat(utrecht).isInstanceOf(CountrySubDivision.class);
+        assertThat(utrecht).isInstanceOf(CountrySubdivision.class);
         assertThat(utrecht.getCode()).isEqualTo("NL-UT");
         assertThat(utrecht.getName()).isEqualTo("Utrecht");
     }
@@ -67,7 +67,7 @@ public class RegionsTest {
 
         Region gbn = Regions.getByCode("GB-GBN").orElse(null);
         assertThat(gbn).isNotNull();
-        assertThat(gbn).isInstanceOf(CountrySubDivision.class);
+        assertThat(gbn).isInstanceOf(CountrySubdivision.class);
         assertThat(gbn.getCode()).isEqualTo("NL-UT");
         assertThat(gbn.getName()).isEqualTo("Utrecht");
     }

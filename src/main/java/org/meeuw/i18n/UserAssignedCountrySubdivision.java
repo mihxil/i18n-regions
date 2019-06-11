@@ -10,7 +10,7 @@ import com.neovisionaries.i18n.CountryCode;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-public class UserAssignedCountrySubDivision implements Region {
+public class UserAssignedCountrySubdivision implements Region {
     private static final long serialVersionUID = 0L;
 
     private final CountryCode countryCode;
@@ -18,7 +18,7 @@ public class UserAssignedCountrySubDivision implements Region {
     private final String name;
 
 
-    public UserAssignedCountrySubDivision(
+    public UserAssignedCountrySubdivision(
         @Nonnull CountryCode countryCode,
         @Nonnull String code,
         @Nonnull String name) {
@@ -61,7 +61,7 @@ public class UserAssignedCountrySubDivision implements Region {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UserAssignedCountrySubDivision that = (UserAssignedCountrySubDivision) o;
+        UserAssignedCountrySubdivision that = (UserAssignedCountrySubdivision) o;
 
         if (countryCode != that.countryCode) return false;
         return code.equals(that.code);

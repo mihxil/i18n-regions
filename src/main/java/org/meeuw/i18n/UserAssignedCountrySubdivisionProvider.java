@@ -16,19 +16,19 @@ import com.neovisionaries.i18n.CountryCode;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-public class UserAssignedCountrySubDivisionProvider implements RegionProvider<UserAssignedCountrySubDivision> {
+public class UserAssignedCountrySubdivisionProvider implements RegionProvider<UserAssignedCountrySubdivision> {
 
-    private final Map<CountryCode, Map<String, UserAssignedCountrySubDivision>> cache = new ConcurrentHashMap<>();
+    private final Map<CountryCode, Map<String, UserAssignedCountrySubdivision>> cache = new ConcurrentHashMap<>();
 
     @Override
     public boolean canProvide(Class<? extends Region> clazz) {
-        return clazz.isAssignableFrom(UserAssignedCountrySubDivision.class);
+        return clazz.isAssignableFrom(UserAssignedCountrySubdivision.class);
 
     }
 
 
     @Override
-    public Optional<UserAssignedCountrySubDivision> getByCode(String code) {
+    public Optional<UserAssignedCountrySubdivision> getByCode(String code) {
         String[] countryAndSubDiversion = code.split("-", 2);
         if (countryAndSubDiversion.length < 2) {
             return Optional.empty();
@@ -38,9 +38,9 @@ public class UserAssignedCountrySubDivisionProvider implements RegionProvider<Us
         }
     }
 
-    protected Map<String, UserAssignedCountrySubDivision> ofCountry(CountryCode countryCode) {
+    protected Map<String, UserAssignedCountrySubdivision> ofCountry(CountryCode countryCode) {
         return cache.computeIfAbsent(countryCode, (cc) -> {
-            Map<String, UserAssignedCountrySubDivision> value = new LinkedHashMap<>();
+            Map<String, UserAssignedCountrySubdivision> value = new LinkedHashMap<>();
             Properties properties = new Properties();
             InputStream inputStream = getClass().getResourceAsStream("/subdivisions." + cc.getAlpha2() + ".properties");
             if (inputStream != null) {
@@ -51,25 +51,25 @@ public class UserAssignedCountrySubDivisionProvider implements RegionProvider<Us
                 }
             }
             properties.forEach((k, v) -> {
-                value.put((String) k , new UserAssignedCountrySubDivision(cc, (String) k, (String) v));
+                value.put((String) k , new UserAssignedCountrySubdivision(cc, (String) k, (String) v));
             });
             return Collections.unmodifiableMap(value);
             });
     }
 
     @Override
-    public Stream<UserAssignedCountrySubDivision> values() {
-        Spliterator<UserAssignedCountrySubDivision> spliterator = new Spliterator<UserAssignedCountrySubDivision>() {
+    public Stream<UserAssignedCountrySubdivision> values() {
+        Spliterator<UserAssignedCountrySubdivision> spliterator = new Spliterator<UserAssignedCountrySubdivision>() {
             private int countryCode = 0;
-            private Spliterator<UserAssignedCountrySubDivision> spliterator;
+            private Spliterator<UserAssignedCountrySubdivision> spliterator;
 
             @Override
-            public boolean tryAdvance(Consumer<? super UserAssignedCountrySubDivision> action) {
+            public boolean tryAdvance(Consumer<? super UserAssignedCountrySubdivision> action) {
                 while(spliterator == null || ! spliterator.tryAdvance(action)) {
                     if (countryCode >=  CountryCode.values().length) {
                         return false;
                     }
-                    Collection<UserAssignedCountrySubDivision> subdivisions = ofCountry(CountryCode.values()[countryCode++]).values();
+                    Collection<UserAssignedCountrySubdivision> subdivisions = ofCountry(CountryCode.values()[countryCode++]).values();
 
                     spliterator = subdivisions.spliterator();
                 }
@@ -77,7 +77,7 @@ public class UserAssignedCountrySubDivisionProvider implements RegionProvider<Us
             }
 
             @Override
-            public Spliterator<UserAssignedCountrySubDivision> trySplit() {
+            public Spliterator<UserAssignedCountrySubdivision> trySplit() {
                 return null;
 
             }
