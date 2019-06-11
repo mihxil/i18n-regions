@@ -1,14 +1,12 @@
 package org.meeuw.i18n.validation;
 
-import java.util.Set;
-
-import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import org.junit.Test;
 import org.meeuw.i18n.Country;
+import org.meeuw.i18n.FormerlyAssignedCountryCode;
 import org.meeuw.i18n.Region;
 import com.neovisionaries.i18n.CountryCode;
 
@@ -29,8 +27,12 @@ public class RegionValidatorTest {
     public void isValid() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
-        Set<ConstraintViolation<A>> validate = validator.validate(new A());
-        assertThat(validate).isEmpty();
+        A a = new A();
+        assertThat(validator.validate(a)).hasSize(1);
+
+        a.region = Country.of(FormerlyAssignedCountryCode.CSXX);
+        assertThat(validator.validate(a)).hasSize(0);
+
 
     }
 }

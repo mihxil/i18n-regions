@@ -23,18 +23,18 @@ public class RegionValidator implements ConstraintValidator<ValidRegion, Region>
     public boolean isValid(Region region, ConstraintValidatorContext constraintValidatorContext) {
 
         if ((annotation.predicates() & ValidRegion.OFFICIAL) != 0) {
-            if (!Country.IS_OFFICIAL.test(region)) {
-                return false;
+            if (Country.IS_OFFICIAL.test(region)) {
+                return true;
             }
         }
         if ((annotation.predicates() & ValidRegion.FORMER) != 0) {
-            if (! Country.IS_FORMER.test(region)) {
-                return false;
+            if (Country.IS_FORMER.test(region)) {
+                return true;
             }
         }
         if ((annotation.predicates() & ValidRegion.USER_ASSIGNED) != 0) {
-            if (! Country.IS_USER.test(region)) {
-                return false;
+            if (Country.IS_USER.test(region)) {
+                return true;
             }
         }
         return false;
