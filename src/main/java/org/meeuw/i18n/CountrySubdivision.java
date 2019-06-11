@@ -19,8 +19,14 @@ public class CountrySubdivision implements Region {
 
     private final CountryCodeSubdivision code;
 
-    public static Optional<CountrySubdivision> of(@Nonnull CountryCode countryCode, @Nonnull String code) {
-        return Optional.ofNullable(SubdivisionFactory.getSubdivision(countryCode, code)).map(CountrySubdivision::new);
+    public static Optional<? extends Region> of(
+        @Nonnull CountryCode countryCode,
+        @Nonnull String code) {
+        CountryCodeSubdivision subdivision = SubdivisionFactory.getSubdivision(countryCode, code);
+        if (subdivision != null) {
+            return Optional.of(new CountrySubdivision(subdivision));
+        }
+        return UserAssignedCountrySubdivision.of(countryCode, code);
     }
 
     public CountrySubdivision(@Nonnull CountryCodeSubdivision code) {
