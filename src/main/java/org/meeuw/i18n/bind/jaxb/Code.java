@@ -8,6 +8,7 @@ import org.meeuw.i18n.Region;
 import org.meeuw.i18n.Regions;
 
 /**
+ * An XML Adapter for Regions. The obvious way to marshal/unmarshal is using {@link Region#getCode()}
  * @author Michiel Meeuwissen
  * @since 0.1
  */

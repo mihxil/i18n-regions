@@ -12,7 +12,7 @@ import com.neovisionaries.i18n.CountryCode;
  */
 public interface Country extends Region {
 
-    Predicate<Region> OFFICIAL = (c) -> c instanceof CurrentCountry && ((CurrentCountry) c).getAssignment() == CountryCode.Assignment.OFFICIALLY_ASSIGNED;
+    Predicate<Region> IS_OFFICIAL = (c) -> c instanceof CurrentCountry && ((CurrentCountry) c).getAssignment() == CountryCode.Assignment.OFFICIALLY_ASSIGNED;
     Predicate<Region> IS_FORMER = c -> c instanceof FormerCountry;
     Predicate<Region> IS_USER = c -> c instanceof UserAssignedCountry;
 
