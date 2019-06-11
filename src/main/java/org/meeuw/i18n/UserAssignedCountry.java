@@ -54,18 +54,5 @@ public class UserAssignedCountry extends UserAssigned implements Country {
         return getCode();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        UserAssignedCountry that = (UserAssignedCountry) o;
-
-        return alpha3.equals(that.alpha3);
-    }
-
-    @Override
-    public int hashCode() {
-        return alpha3.hashCode();
-    }
 }

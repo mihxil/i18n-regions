@@ -40,4 +40,19 @@ public abstract class UserAssigned implements Region {
         return name;
 
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserAssigned that = (UserAssigned) o;
+
+        return code.equals(that.code);
+    }
+
+    @Override
+    public int hashCode() {
+        return code.hashCode();
+    }
 }
