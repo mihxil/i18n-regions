@@ -25,7 +25,7 @@
       <id>mihxil</id>
       <name>Michiel Meeuwissen</name>
       <email>michiel.meeuwissen+github@gmail.com</email>
-      <url>http://www.meeuw.org</url>
+      <url>https://meeuw.org</url>
       <roles>
         <role>architect</role>
         <role>developer</role>
@@ -40,6 +40,7 @@
     <junit.version>4.12</junit.version>
     <i18n-subdivisions.version>0.3-SNAPSHOT</i18n-subdivisions.version>
     <i18n-formerly-assigned.version>0.2-SNAPSHOT</i18n-formerly-assigned.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
   <scm>
@@ -101,6 +102,12 @@
       <groupId>javax.persistence</groupId>
       <artifactId>javax.persistence-api</artifactId>
       <version>2.2</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>javax.xml.bind</groupId>
+      <artifactId>jaxb-api</artifactId>
+      <version>2.3.1</version>
       <optional>true</optional>
     </dependency>
   </dependencies>
