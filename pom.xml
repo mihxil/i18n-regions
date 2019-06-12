@@ -37,9 +37,9 @@
 
   <properties>
     <nv-i18n.version>1.25</nv-i18n.version>
-    <junit.version>4.12</junit.version>
     <i18n-subdivisions.version>0.2</i18n-subdivisions.version>
     <i18n-formerly-assigned.version>0.3-SNAPSHOT</i18n-formerly-assigned.version>
+    <junit.version>4.12</junit.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
