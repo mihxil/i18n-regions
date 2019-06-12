@@ -51,53 +51,30 @@
   </scm>
 
 
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>com.neovisionaries</groupId>
-        <artifactId>nv-i18n</artifactId>
-        <version>${nv-i18n.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.meeuw.i18n</groupId>
-        <artifactId>i18n-formerly-assigned</artifactId>
-        <version>${i18n-formerly-assigned.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>be.olsson</groupId>
-        <artifactId>i18n-subdivisions</artifactId>
-        <version>${i18n-subdivisions.version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
-
-
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.assertj</groupId>
-      <artifactId>assertj-core</artifactId>
-      <version>3.12.2</version>
-      <scope>test</scope>
-    </dependency>
     <dependency>
       <groupId>com.neovisionaries</groupId>
       <artifactId>nv-i18n</artifactId>
+      <version>${nv-i18n.version}</version>
     </dependency>
     <dependency>
       <groupId>org.meeuw.i18n</groupId>
       <artifactId>i18n-formerly-assigned</artifactId>
+      <version>${i18n-formerly-assigned.version}</version>
     </dependency>
     <dependency>
       <groupId>be.olsson</groupId>
       <artifactId>i18n-subdivisions</artifactId>
+      <version>${i18n-subdivisions.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>jsr305</artifactId>
+      <version>3.0.2</version>
+      <scope>compile</scope>
+    </dependency>
+
+    <!-- optional dependencies -->
     <dependency>
       <groupId>javax.persistence</groupId>
       <artifactId>javax.persistence-api</artifactId>
@@ -115,6 +92,21 @@
       <artifactId>validation-api</artifactId>
       <version>2.0.1.Final</version>
       <optional>true</optional>
+    </dependency>
+
+
+    <!-- test dependencies -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.12.2</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.hibernate.validator</groupId>
@@ -134,12 +126,7 @@
       <version>2.2.6</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>com.google.code.findbugs</groupId>
-      <artifactId>jsr305</artifactId>
-      <version>3.0.2</version>
-      <scope>compile</scope>
-    </dependency>
+
   </dependencies>
 
 
