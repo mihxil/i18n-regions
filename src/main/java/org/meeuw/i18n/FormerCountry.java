@@ -1,12 +1,10 @@
 package org.meeuw.i18n;
 
-import java.time.Year;
 import java.util.List;
 import java.util.Locale;
 
 import javax.annotation.Nonnull;
 
-import com.google.common.collect.Range;
 
 /**
  * Represents a 'former code', of which the code is defined by the enums of {@link FormerlyAssignedCountryCode}.
@@ -47,7 +45,7 @@ public class FormerCountry implements Country {
         return code;
     }
 
-    public Range<Year> getValidity() {
+    public ValidityRange getValidity() {
         return code.getValidity();
     }
 
