@@ -15,36 +15,59 @@ This project was started to be able to make better use of `CountryCode`'s from [
 Using `CountryCode` as a value in your application has several drawbacks:
 
 1. It is not extensible. If you need a value not in that enum, you're stuck.
-2. It does not contain 'former countries', so e.g. the birth country of a person, or the country of a movie cannot be stored as a 'CountryCode'.
+2. It for example does not contain 'former countries', so e.g. the birth country of a person, or the country of a movie cannot be stored as a 'CountryCode'.
 3. It's only applicable to countries, no other regions.
 
 I decided to wrap `CountryCode` in a class `CurrentCountry`, which implements a `Region` interface, which makes it possible to make other implementation of `Region` too, and to address all the above issues if you choose to use `Region` in stead of `CountryCode` as the type of your variable.
 
 
-implementation
+architecture
 ---
 The central interface of this module is [`org.meeuw.i18n.Region`](src/main/java/org/meeuw/i18n/Region.java), which represents some geographical region.
 
+Instances are created via the [java service providers](https://www.baeldung.com/java-spi) implementing [`org.meeuw.i18n.RegionProvider`](src/main/java/org/meeuw/i18n/RegionProvider.java) (registered via META-INF/services).
 
-Instances are created by services implementing [`org.meeuw.i18n.RegionProvider`](src/main/java/org/meeuw/i18n/RegionProvider.java) (registered via META-INF/services).
+By default we provide these service 
 
-By default we provide services backed by `com.neovisionaries.i18n.CountryCode` (for current countries), by `org.meeuw.i18n.FormerlyAssignedCountryCode` (for former countries) and by `be.olsson.i18n.subdivision.CountryCodeSubdivision` (for subdivisions of countries). We also provide [`org.meeuw.i18n.UserAssignedCountry`](src/main/java/org/meeuw/i18n/UserAssignedCountry.java) (for some common user assigned country codes)
+- For current countries there are [`org.meeuw.i18n.CurrentCountry`s](src/main/java/org/meeuw/i18n/CurrentCountry.java). Backend by `com.neovisionaries.i18n.CountryCode`
+- For former countries there is [`org.meeuw.i18n.FormerCountry`s](src/main/java/org/meeuw/i18n/FormerCountry.java), which is backed by  `org.meeuw.i18n.FormerlyAssignedCountryCode` (from [i18n-formerly-assigned](https://github.com/mihxil/i18n-formerly-assigned)
+- For subdivision of countries [`org.meeuw.i18n.CountrySubdivision`](src/main/java/org/meeuw/i18n/CountrySubdivision.java), which is backed by 
+`be.olsson.i18n.subdivision.CountryCodeSubdivision (from https://github.com/tobias-/i18n-subdivisions)
+- Some common user assigned countries are not hard coded in [`org.meeuw.i18n.UserAssignedCountry`](src/main/java/org/meeuw/i18n/UserAssignedCountry.java)
+- In case there are missing country subdivision they can easily be added via `subdivision.<country code>.properties`. E.g. [`subdivisions.GB.properties`](src/main/resources/subdivisions.GB.properties) provides some which were obviously missing from Great Britain otherwise.
 
-Some utilities to deal with all this are provided in `org.meeuw.i18n.Regions`.
+ 
+Some utilities to deal with all this are provided in `org.meeuw.i18n.Regions`. 
 
 Example code useage can be seen in the [test cases for the Regions utility](src/test/java/org/meeuw/i18n/RegionsTest.java)
  
 
 Persistence
 -----------
-[`org.meeuw.i18n.persistence.RegionToStringConverter`](src/main/java/org/meeuw/i18n/persistence/.RegionToStringConverter`.java)) is meant to arrange JPA persistence of `Region` objects to the database. We want the iso code to be used as simple strings in a database column or so.
+[`org.meeuw.i18n.persistence.RegionToStringConverter`](src/main/java/org/meeuw/i18n/persistence/.RegionToStringConverter.java) is meant to arrange JPA persistence of `Region` objects to the database. We want the iso code to be used as simple strings in a database column or so.
 
 This will also deal gracefully with codes which gets unassigned, because `Regions#getByCode` will also fall back to formerly assigned codes.
+
+
+XML Binding
+----
+The Region interface is JAXB-annotated to be marshallable to XML, which obviously should happen by the (ISO) code string.
+
+Translations
+----
+The region interface also provides `Region#getName(Locale)` to retrieve the name of the region in the given locale. For many countries/locales this is supported by the JVM. Missing values can be provided via the `Regions` resource bundle.
+
+Validation
+-----
+Given a certain field with type `Region` (or one of its sub types) you may still find that makes too much values available. Therefore we also provide some `javax.validation.ConstraintValidator` and associated annotations to limit possible values.
+
+Optional dependencies
+----
+Several dependencies are marked `optional` in the pom.xml. E.g. the annotations used to arrange XML bindings and validation are not present (any more) in java 11. If they are not present, this will not make it impossible to use the classes, you just cannot use JAXB, JPA, validation or whatever the missing dependency is related to.
+
 
 TODO
 ----
 - The persistence solution is not yet well tested
-- We may add validators, to give the possibility to limit the possible values of a `Region` typed variable
-- We may add implementations of  JAXB/Jackon-adapters to arrange proper xml/json bindings of member of type `Region`
 
 

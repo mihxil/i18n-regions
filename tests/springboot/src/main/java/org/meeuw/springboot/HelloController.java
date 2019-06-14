@@ -24,8 +24,6 @@ public class HelloController {
                 li(writer, r);
             });
         });
-
-
     }
 
     @RequestMapping("/{region}")

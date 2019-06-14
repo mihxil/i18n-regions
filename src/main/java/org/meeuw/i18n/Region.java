@@ -1,13 +1,14 @@
 package org.meeuw.i18n;
 
+import org.meeuw.i18n.bind.jaxb.Code;
+import org.meeuw.i18n.persistence.RegionToStringConverter;
+
+import javax.persistence.Convert;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import org.meeuw.i18n.bind.jaxb.Code;
 
 /**
  * The region interface represents a certain geographical region. E.g. a {@link Country}
@@ -16,9 +17,10 @@ import org.meeuw.i18n.bind.jaxb.Code;
  * @since 0.1
  */
 @XmlJavaTypeAdapter(Code.class)
+@Convert(converter = RegionToStringConverter.class)
 public interface Region extends Serializable {
 
-    static final String BUNDLE = "Regions";
+    String BUNDLE = "Regions";
 
     /**
      * The code for the region. For countries: <a href="https://en.wikipedia.org/wiki/ISO_3166>ISO 3166</a>.
