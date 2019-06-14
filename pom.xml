@@ -67,14 +67,15 @@
       <artifactId>i18n-subdivisions</artifactId>
       <version>${i18n-subdivisions.version}</version>
     </dependency>
+
+
+    <!-- optional dependencies -->
     <dependency>
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>jsr305</artifactId>
       <version>3.0.2</version>
-      <scope>compile</scope>
+      <optional>true</optional>
     </dependency>
-
-    <!-- optional dependencies -->
     <dependency>
       <groupId>javax.persistence</groupId>
       <artifactId>javax.persistence-api</artifactId>
