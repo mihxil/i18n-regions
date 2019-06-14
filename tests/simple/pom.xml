@@ -8,7 +8,7 @@
   <packaging>jar</packaging>
   <name>i18n-regions-test-simple</name>
 
-
+  <description>Just a main class with no extra dependencies whatsoever</description>
 
   <dependencies>
     <dependency>

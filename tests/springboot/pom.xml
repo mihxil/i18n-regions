@@ -7,6 +7,9 @@
   <artifactId>test-springboot</artifactId>
   <version>0.1-SNAPSHOT</version>
 
+  <description>Spring boot application demoing stuff a bit</description>
+
+
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
