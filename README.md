@@ -25,19 +25,19 @@ architecture
 ---
 The central interface of this module is [`org.meeuw.i18n.Region`](src/main/java/org/meeuw/i18n/Region.java), which represents some geographical region.
 
-Instances are created via the [java service providers](https://www.baeldung.com/java-spi) implementing [`org.meeuw.i18n.RegionProvider`](src/main/java/org/meeuw/i18n/RegionProvider.java) (registered via META-INF/services).
+Instances are created via  [java service providers](https://www.baeldung.com/java-spi) implementing [`org.meeuw.i18n.RegionProvider`](src/main/java/org/meeuw/i18n/RegionProvider.java) (registered via [META-INF/services](src/main/resourcces/META-INF/services/org.meeuw.i18n.RegionProvider)).
 
 By default we provide these service 
 
-- For current countries there are [`org.meeuw.i18n.CurrentCountry`s](src/main/java/org/meeuw/i18n/CurrentCountry.java). Backend by `com.neovisionaries.i18n.CountryCode`
-- For former countries there is [`org.meeuw.i18n.FormerCountry`s](src/main/java/org/meeuw/i18n/FormerCountry.java), which is backed by  `org.meeuw.i18n.FormerlyAssignedCountryCode` (from [i18n-formerly-assigned](https://github.com/mihxil/i18n-formerly-assigned)
+- For current countries there are [`org.meeuw.i18n.CurrentCountry`'s](src/main/java/org/meeuw/i18n/CurrentCountry.java). Backend by `com.neovisionaries.i18n.CountryCode`
+- For former countries there is [`org.meeuw.i18n.FormerCountry`](src/main/java/org/meeuw/i18n/FormerCountry.java), which is backed by  `org.meeuw.i18n.FormerlyAssignedCountryCode` (from [i18n-formerly-assigned](https://github.com/mihxil/i18n-formerly-assigned)
 - For subdivision of countries [`org.meeuw.i18n.CountrySubdivision`](src/main/java/org/meeuw/i18n/CountrySubdivision.java), which is backed by 
-`be.olsson.i18n.subdivision.CountryCodeSubdivision (from https://github.com/tobias-/i18n-subdivisions)
-- Some common user assigned countries are not hard coded in [`org.meeuw.i18n.UserAssignedCountry`](src/main/java/org/meeuw/i18n/UserAssignedCountry.java)
+`be.olsson.i18n.subdivision.CountryCodeSubdivision` (from https://github.com/tobias-/i18n-subdivisions)
+- Some common user assigned countries are  hard coded in [`org.meeuw.i18n.UserAssignedCountry`](src/main/java/org/meeuw/i18n/UserAssignedCountry.java)
 - In case there are missing country subdivision they can easily be added via `subdivision.<country code>.properties`. E.g. [`subdivisions.GB.properties`](src/main/resources/subdivisions.GB.properties) provides some which were obviously missing from Great Britain otherwise.
 
- 
-Some utilities to deal with all this are provided in `org.meeuw.i18n.Regions`. 
+
+Some utilities to deal with all this are provided in [`org.meeuw.i18n.Regions`](src/main/java/org/meeuw/i18n/Regions.java). 
 
 Example code useage can be seen in the [test cases for the Regions utility](src/test/java/org/meeuw/i18n/RegionsTest.java)
  

@@ -1,11 +1,5 @@
 package org.meeuw.springboot;
 
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
-
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.lang3.ClassUtils;
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.Regions;
@@ -13,6 +7,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 
 @RestController
 public class HelloController {
