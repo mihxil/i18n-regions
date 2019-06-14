@@ -1,14 +1,13 @@
 package org.meeuw.i18n;
 
-import org.meeuw.i18n.bind.jaxb.Code;
-import org.meeuw.i18n.persistence.RegionToStringConverter;
-
-import javax.persistence.Convert;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.meeuw.i18n.bind.jaxb.Code;
 
 /**
  * The region interface represents a certain geographical region. E.g. a {@link Country}
@@ -17,7 +16,6 @@ import java.util.ResourceBundle;
  * @since 0.1
  */
 @XmlJavaTypeAdapter(Code.class)
-@Convert(converter = RegionToStringConverter.class)
 public interface Region extends Serializable {
 
     String BUNDLE = "Regions";

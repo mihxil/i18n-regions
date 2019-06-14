@@ -8,7 +8,7 @@
 geographical regions
 =============
 
-introduction
+Introduction
 ---
 This project was started to be able to make better use of `CountryCode`'s from [nv-i18n](https://github.com/TakahikoKawasaki/nv-i18n)
 
@@ -21,7 +21,7 @@ Using `CountryCode` as a value in your application has several drawbacks:
 I decided to wrap `CountryCode` in a class `CurrentCountry`, which implements a `Region` interface, which makes it possible to make other implementation of `Region` too, and to address all the above issues if you choose to use `Region` in stead of `CountryCode` as the type of your variable.
 
 
-architecture
+Architecture
 ---
 The central interface of this module is [`org.meeuw.i18n.Region`](src/main/java/org/meeuw/i18n/Region.java), which represents some geographical region.
 
@@ -48,6 +48,13 @@ Persistence
 
 This will also deal gracefully with codes which gets unassigned, because `Regions#getByCode` will also fall back to formerly assigned codes.
 
+e.g.
+```java
+  @ElementCollection
+  @Convert(converter = RegionToStringConverter.class)
+  protected List<org.meeuw.i18n.Region> countries;
+```
+
 
 XML Binding
 ----
@@ -68,6 +75,6 @@ Several dependencies are marked `optional` in the pom.xml. E.g. the annotations 
 
 TODO
 ----
-- The persistence solution is not yet well tested
+- validation options are very experimental yet
 
 
