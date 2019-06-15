@@ -1,9 +1,10 @@
 package org.meeuw.i18n;
 
+import com.neovisionaries.i18n.CountryCode;
+
+import javax.annotation.Nonnull;
 import java.util.Optional;
 import java.util.function.Predicate;
-
-import com.neovisionaries.i18n.CountryCode;
 
 /**
  * Represent a 'country', this can be a current (see {@link CurrentCountry} or former country (see {@link FormerCountry)}. It could also be some user defined country (see {@link UserAssignedCountry})
@@ -12,8 +13,24 @@ import com.neovisionaries.i18n.CountryCode;
  */
 public interface Country extends Region {
 
+	/**
+	 * A usefull predicate, e.g. to filter streams of {@link Regions#values()}
+	 *
+	 * Checks wether the region if a {@link CurrentCountry} which is {@link CountryCode.Assignment#OFFICIALLY_ASSIGNED}.
+	 */
     Predicate<Region> IS_OFFICIAL = (c) -> c instanceof CurrentCountry && ((CurrentCountry) c).getAssignment() == CountryCode.Assignment.OFFICIALLY_ASSIGNED;
+    /**
+	 * A usefull predicate, e.g. to filter streams of {@link Regions#values()}
+	 *
+	 * Checks wether the region if a {@link FormerCountry}
+	 */
     Predicate<Region> IS_FORMER = c -> c instanceof FormerCountry;
+
+     /**
+	 * A usefull predicate, e.g. to filter streams of {@link Regions#values()}
+	 *
+	 * Checks wether the region if a {@link UserAssignedCountry}
+	 */
     Predicate<Region> IS_USER_ASSIGNED = c -> c instanceof UserAssignedCountry;
 
     static CurrentCountry of(CountryCode code) {
@@ -24,7 +41,7 @@ public interface Country extends Region {
     }
 
 
-    static Optional<Country> getByCode(String code) {
+    static Optional<Country> getByCode(@Nonnull String code) {
         return Regions.getByCode(code, Country.class);
     }
 

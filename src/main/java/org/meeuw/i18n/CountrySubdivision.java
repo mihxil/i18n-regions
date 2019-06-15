@@ -2,15 +2,14 @@ package org.meeuw.i18n;
 
 import be.olsson.i18n.subdivision.CountryCodeSubdivision;
 import be.olsson.i18n.subdivision.SubdivisionFactory;
+import com.neovisionaries.i18n.CountryCode;
 
+import javax.annotation.Nonnull;
 import java.util.Locale;
 import java.util.Optional;
 
-import javax.annotation.Nonnull;
-
-import com.neovisionaries.i18n.CountryCode;
-
 /**
+ * A subdivision of a country. Backend by {@link CountryCodeSubdivision}.
  * @author Michiel Meeuwissen
  * @since 0.1
  */

@@ -6,6 +6,8 @@ import java.util.stream.Stream;
 
 import com.neovisionaries.i18n.CountryCode;
 
+import javax.annotation.Nonnull;
+
 /**
  * @author Michiel Meeuwissen
  * @since 0.1
@@ -13,13 +15,13 @@ import com.neovisionaries.i18n.CountryCode;
 public class CurrentCountryProvider implements RegionProvider<CurrentCountry> {
 
     @Override
-    public boolean canProvide(Class<? extends Region> clazz) {
+    public boolean canProvide(@Nonnull Class<? extends Region> clazz) {
         return clazz.isAssignableFrom(CurrentCountry.class);
 
     }
 
     @Override
-    public Optional<CurrentCountry> getByCode(String code) {
+    public Optional<CurrentCountry> getByCode(@Nonnull String code) {
         return Optional.ofNullable(CountryCode.getByCode(code)).map(CurrentCountry::new);
     }
 

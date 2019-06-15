@@ -11,7 +11,6 @@ public abstract class UserAssigned implements Region {
 
     protected final String code;
     protected final String name;
-
     protected final String assignedBy;
 
     protected UserAssigned(String code, String name, String assignedBy) {
@@ -45,9 +44,7 @@ public abstract class UserAssigned implements Region {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         UserAssigned that = (UserAssigned) o;
-
         return code.equals(that.code);
     }
 

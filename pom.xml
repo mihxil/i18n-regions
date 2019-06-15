@@ -44,9 +44,9 @@
   </properties>
 
   <scm>
-    <connection>scm:git:git://github.com/mihxil/i18n-formerly-assigned.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/mihxil/i18n-formerly-assigned.git</developerConnection>
-    <url>https://github.com/mihxil/i18n-formerly-assigned</url>
+    <connection>scm:git:git://github.com/mihxil/i18n-regions.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/mihxil/i18n-regions.git</developerConnection>
+    <url>https://github.com/mihxil/i18n-regions</url>
     <tag>HEAD</tag>
   </scm>
 

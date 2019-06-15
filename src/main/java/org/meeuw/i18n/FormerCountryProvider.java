@@ -1,5 +1,6 @@
 package org.meeuw.i18n;
 
+import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -11,14 +12,14 @@ import java.util.stream.Stream;
 public class FormerCountryProvider implements RegionProvider<FormerCountry> {
 
     @Override
-    public boolean canProvide(Class<? extends Region> clazz) {
+    public boolean canProvide(@Nonnull Class<? extends Region> clazz) {
         return clazz.isAssignableFrom(FormerCountry.class);
 
     }
 
 
     @Override
-    public Optional<FormerCountry> getByCode(String code) {
+    public Optional<FormerCountry> getByCode(@Nonnull String code) {
         return Optional.ofNullable(FormerlyAssignedCountryCode.getByCode(code)).map(FormerCountry::new);
     }
 

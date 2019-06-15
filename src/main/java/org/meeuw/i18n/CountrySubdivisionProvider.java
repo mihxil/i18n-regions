@@ -10,6 +10,8 @@ import java.util.stream.StreamSupport;
 
 import com.neovisionaries.i18n.CountryCode;
 
+import javax.annotation.Nonnull;
+
 /**
  * @author Michiel Meeuwissen
  * @since 0.1
@@ -17,14 +19,14 @@ import com.neovisionaries.i18n.CountryCode;
 public class CountrySubdivisionProvider implements RegionProvider<CountrySubdivision> {
 
     @Override
-    public boolean canProvide(Class<? extends Region> clazz) {
+    public boolean canProvide(@Nonnull Class<? extends Region> clazz) {
         return clazz.isAssignableFrom(CountrySubdivision.class);
 
     }
 
 
     @Override
-    public Optional<CountrySubdivision> getByCode(String code) {
+    public Optional<CountrySubdivision> getByCode(@Nonnull String code) {
         String[] countryAndSubDiversion = code.split("-", 2);
         if (countryAndSubDiversion.length < 2) {
             return Optional.empty();

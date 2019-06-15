@@ -1,13 +1,12 @@
 package org.meeuw.i18n;
 
+import org.meeuw.i18n.bind.jaxb.Code;
+
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import org.meeuw.i18n.bind.jaxb.Code;
 
 /**
  * The region interface represents a certain geographical region. E.g. a {@link Country}
@@ -31,6 +30,9 @@ public interface Region extends Serializable {
     Locale toLocale();
 
 
+    /**
+     * What 'type' this region is. E.g. a {@link Type#COUNTRY}, or a {@link Type#SUBDIVISION}.
+     */
     Type getType();
 
     /**
@@ -39,6 +41,10 @@ public interface Region extends Serializable {
 
     String getName();
 
+
+    /**
+     * The name of the region in the given {@link Locale}. The default implementation uses the {@link #BUNDLE} resource bundle. For {@link CurrentCountry} also {@code code.toLocale().getDisplayCountry(locale)} is used.
+     */
     default String getName(Locale locale) {
         try {
             return ResourceBundle.getBundle(BUNDLE, locale).getString(getCode());
@@ -47,10 +53,16 @@ public interface Region extends Serializable {
         }
     }
 
-
+    /**
+     * Return the name of the region in the locale of the language {@link #toLocale()}
+     */
     default String getLocalName() {
         return getName(toLocale());
     }
+
+    /**
+     * Type of regions. For now this is small list, we may add all known 'subdivision' of countries.
+     */
     enum Type {
         /**
          * A country or former country

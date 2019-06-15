@@ -1,0 +1,14 @@
+import org.meeuw.i18n.*;
+
+// Figure this out...
+module i18_regions {
+	exports org.meeuw.i18n;
+	provides RegionProvider with
+			CurrentCountryProvider,
+			FormerCountryProvider,
+			CountrySubdivisionProvider,
+			UserAssignedProvider,
+			UserAssignedCountrySubdivisionProvider,
+			VehicleRegistrationCodeFallbackProvider;
+
+}

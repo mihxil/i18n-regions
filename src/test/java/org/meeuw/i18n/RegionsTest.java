@@ -1,10 +1,11 @@
 package org.meeuw.i18n;
 
-import java.util.Locale;
-import java.util.Optional;
-
+import com.neovisionaries.i18n.CountryCode;
 import org.junit.Ignore;
 import org.junit.Test;
+
+import java.util.Locale;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -105,6 +106,11 @@ public class RegionsTest {
         assertThat(eng.getName()).isEqualTo("England");
     }
 
+    @Test
+    public void byVehicleRegistration() {
+        Country country = Country.getByCode("WAN").orElse(null);
+        assertThat(country).isEqualTo(new CurrentCountry(CountryCode.NG));
+    }
 
     @Test
     public void values() {
