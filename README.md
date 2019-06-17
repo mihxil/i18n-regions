@@ -29,11 +29,11 @@ Instances are created via  [java service providers](https://www.baeldung.com/jav
 
 By default we provide these service 
 
-- For current countries there are [`org.meeuw.i18n.CurrentCountry`'s](src/main/java/org/meeuw/i18n/CurrentCountry.java). Backend by `com.neovisionaries.i18n.CountryCode`
-- For former countries there is [`org.meeuw.i18n.FormerCountry`](src/main/java/org/meeuw/i18n/FormerCountry.java), which is backed by  `org.meeuw.i18n.FormerlyAssignedCountryCode` (from [i18n-formerly-assigned](https://github.com/mihxil/i18n-formerly-assigned)
-- For subdivision of countries [`org.meeuw.i18n.CountrySubdivision`](src/main/java/org/meeuw/i18n/CountrySubdivision.java), which is backed by 
+- For current countries there are [`org.meeuw.i18n.countries.CurrentCountry`'s](src/main/java/org/meeuw/i18n/countries/CurrentCountry.java). Backend by `com.neovisionaries.i18n.CountryCode`
+- For former countries there is [`org.meeuw.i18n.contries.FormerCountry`](src/main/java/org/meeuw/i18n/countries/FormerCountry.java), which is backed by  `org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode` (from [i18n-formerly-assigned](https://github.com/mihxil/i18n-formerly-assigned)
+- For subdivision of countries [`org.meeuw.i18n.subdivisions.CountrySubdivision`](src/main/java/org/meeuw/i18n/subdivisions/CountrySubdivision.java), which is backed by 
 `be.olsson.i18n.subdivision.CountryCodeSubdivision` (from https://github.com/tobias-/i18n-subdivisions)
-- Some common user assigned countries are  hard coded in [`org.meeuw.i18n.UserAssignedCountry`](src/main/java/org/meeuw/i18n/UserAssignedCountry.java)
+- Some common user assigned countries are  hard coded in [`org.meeuw.i18.countries..UserAssignedCountry`](src/main/java/org/meeuw/i18n/countries/UserAssignedCountry.java)
 - In case there are missing country subdivision they can easily be added via `subdivision.<country code>.properties`. E.g. [`subdivisions.GB.properties`](src/main/resources/subdivisions.GB.properties) provides some which were obviously missing from Great Britain otherwise.
 
 

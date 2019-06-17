@@ -10,12 +10,15 @@ import org.meeuw.i18n.subdivisions.UserAssignedCountrySubdivisionProvider;
 module i18_regions {
 	exports org.meeuw.i18n;
 
-	requires static java.validation;
-    requires static java.xml.bind;
-	requires static jsr305;
+
 	requires nv.i18n;
 	requires i18n.subdivisions;
 	requires i18_formerly_assigned;
+
+	requires static java.validation;
+    requires static java.xml.bind;
+	requires static jsr305;
+	requires static java.persistence;
 
 	provides RegionProvider with
 
