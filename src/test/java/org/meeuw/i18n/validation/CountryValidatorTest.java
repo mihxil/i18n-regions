@@ -8,16 +8,15 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import org.junit.Test;
+import org.meeuw.i18n.CountrySubdivision;
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.Regions;
 import com.neovisionaries.i18n.LanguageCode;
 
-import static com.neovisionaries.i18n.CountryCode.CS;
-import static com.neovisionaries.i18n.CountryCode.NL;
+import static com.neovisionaries.i18n.CountryCode.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.meeuw.i18n.Country.of;
 import static org.meeuw.i18n.FormerlyAssignedCountryCode.CSXX;
-import static org.meeuw.i18n.FormerlyAssignedCountryCode.PUUM;
 import static org.meeuw.i18n.UserAssignedCountry.ZZ;
 import static org.meeuw.i18n.validation.ValidCountry.FORMER;
 import static org.meeuw.i18n.validation.ValidCountry.OFFICIAL;
@@ -29,7 +28,7 @@ import static org.meeuw.i18n.validation.ValidCountry.OFFICIAL;
 public class CountryValidatorTest {
 
     static class A {
-        @ValidCountry(value = OFFICIAL | FORMER, includes = "PUUM")
+        @ValidCountry(value = OFFICIAL | FORMER, includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
         Region region;
 
         public A(Region r) {
@@ -60,7 +59,8 @@ public class CountryValidatorTest {
 
 
         assertThat(VALIDATOR.validate(new A(ZZ))).hasSize(1);
-        assertThat(VALIDATOR.validate(new A(of(PUUM)))).hasSize(0);
+        assertThat(VALIDATOR.validate(new A(CountrySubdivision.of(GB, "ENG").orElse(null)))).hasSize(0);
+        assertThat(VALIDATOR.validate(new A(CountrySubdivision.of(GB, "NIR").orElse(null)))).hasSize(0);
 
 
     }
@@ -86,6 +86,8 @@ public class CountryValidatorTest {
             .sorted(Regions.sortByName(LanguageCode.nl))
             .collect(Collectors.toList());
         assertThat(collect).doesNotContain(of(CS));
-        System.out.println(collect.stream().map(r -> Regions.toString(r, LanguageCode.nl)).collect(Collectors.joining("\n")));
+        System.out.println(collect.stream()
+            .map(r -> Regions.toStringWithCode(r, LanguageCode.nl))
+            .collect(Collectors.joining("\n")));
     }
 }
