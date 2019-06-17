@@ -68,6 +68,23 @@ Validation
 -----
 Given a certain field with type `Region` (or one of its sub types) you may still find that makes too much values available. Therefore we also provide some `javax.validation.ConstraintValidator` and associated annotations to limit possible values.
 
+e.g.
+```java
+    @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.USER_ASSIGNED | ValidCountry.FORMER, includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
+    protected List<org.meeuw.i18n.Region> countries;
+```
+
+This list will not validate if you add Regions which don't follow the given rules.
+
+As a utility you can use the settings in the annotation also to filter a stream of regions (e.g. `Regions#values()`)
+```java 
+ return Regions.values()
+            .filter(CountryValidator.fromField(MediaObject.class, "countries"))
+            .sorted(Regions.sortByName(LanguageCode.nl))
+            .map(GuiEntry::of)
+            .collect(Collectors.toList());
+```
+
 Optional dependencies
 ----
 Several dependencies are marked `optional` in the pom.xml. E.g. the annotations used to arrange XML bindings and validation are not present (any more) in java 11. If they are not present, this will not make it impossible to use the classes, you just cannot use JAXB, JPA, validation or whatever the missing dependency is related to.
