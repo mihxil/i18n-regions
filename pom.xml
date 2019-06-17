@@ -173,9 +173,6 @@
             </goals>
             <!-- recompile everything for target VM except the module-info.java -->
             <configuration>
-              <source>${java.version}</source>
-              <target>${java.version}</target>
-              <release>${java.version}</release>
               <excludes>
                 <exclude>module-info.java</exclude>
               </excludes>
@@ -186,8 +183,9 @@
         <configuration>
           <!-- Only required when JAVA_HOME isn't at least Java 9 and when haven't configured the maven-toolchains-plugin -->
           <jdkToolchain>
-            <version>11</version>
+            <version>9</version>
           </jdkToolchain>
+          <target>${java.version}</target>
           <release>${java.version}</release>
         </configuration>
       </plugin>
