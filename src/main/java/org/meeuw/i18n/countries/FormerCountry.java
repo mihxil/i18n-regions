@@ -1,12 +1,11 @@
 package org.meeuw.i18n.countries;
 
-import java.util.List;
-import java.util.Locale;
-
-import javax.annotation.Nonnull;
-
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode;
 import org.meeuw.i18n.formerlyassigned.ValidityRange;
+
+import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -19,7 +18,7 @@ public class FormerCountry implements Country {
 
     private final FormerlyAssignedCountryCode code;
 
-    public FormerCountry(@Nonnull FormerlyAssignedCountryCode code) {
+    public FormerCountry(@NonNull FormerlyAssignedCountryCode code) {
         this.code = code;
     }
 

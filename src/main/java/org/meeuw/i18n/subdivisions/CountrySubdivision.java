@@ -2,14 +2,12 @@ package org.meeuw.i18n.subdivisions;
 
 import be.olsson.i18n.subdivision.CountryCodeSubdivision;
 import be.olsson.i18n.subdivision.SubdivisionFactory;
+import com.neovisionaries.i18n.CountryCode;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.i18n.Region;
+import org.meeuw.i18n.countries.Country;
 
 import java.util.Optional;
-
-import javax.annotation.Nonnull;
-
-import org.meeuw.i18n.countries.Country;
-import org.meeuw.i18n.Region;
-import com.neovisionaries.i18n.CountryCode;
 
 /**
  * @author Michiel Meeuwissen
@@ -18,8 +16,8 @@ import com.neovisionaries.i18n.CountryCode;
 public interface CountrySubdivision extends Region {
 
     static Optional<? extends CountrySubdivision>  of(
-        @Nonnull CountryCode countryCode,
-        @Nonnull String code) {
+            @NonNull CountryCode countryCode,
+            @NonNull String code) {
         CountryCodeSubdivision subdivision = SubdivisionFactory.getSubdivision(countryCode, code);
         if (subdivision != null) {
             return Optional.of(new CountrySubdivisionWithCode(subdivision));

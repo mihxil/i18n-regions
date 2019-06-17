@@ -1,17 +1,16 @@
 package org.meeuw.i18n;
 
+import com.neovisionaries.i18n.LanguageCode;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.i18n.bind.jaxb.Code;
+import org.meeuw.i18n.countries.Country;
+import org.meeuw.i18n.countries.CurrentCountry;
+
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-
-import javax.annotation.Nonnull;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import org.meeuw.i18n.bind.jaxb.Code;
-import org.meeuw.i18n.countries.Country;
-import org.meeuw.i18n.countries.CurrentCountry;
-import com.neovisionaries.i18n.LanguageCode;
 
 /**
  * The region interface represents a certain geographical region. E.g. a {@link Country}
@@ -50,7 +49,7 @@ public interface Region extends Serializable {
     /**
      * The name of the region in the given {@link Locale}. The default implementation uses the {@link #BUNDLE} resource bundle. For {@link CurrentCountry} also {@code code.toLocale().getDisplayCountry(locale)} is used.
      */
-    default String getName(@Nonnull Locale locale) {
+    default String getName(@NonNull Locale locale) {
         try {
             return ResourceBundle.getBundle(BUNDLE, locale).getString(getCode());
         } catch (MissingResourceException mse){
@@ -58,7 +57,7 @@ public interface Region extends Serializable {
         }
     }
 
-    default String getName(@Nonnull LanguageCode languageCode) {
+    default String getName(@NonNull LanguageCode languageCode) {
         return getName(languageCode.toLocale());
     }
 

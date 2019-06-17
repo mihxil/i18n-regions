@@ -1,14 +1,13 @@
 package org.meeuw.i18n.countries;
 
-import java.util.Arrays;
-import java.util.Optional;
-import java.util.stream.Stream;
-
-import javax.annotation.Nonnull;
-
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.RegionProvider;
 import org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode;
+
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * @author Michiel Meeuwissen
@@ -17,14 +16,14 @@ import org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode;
 public class FormerCountryProvider implements RegionProvider<FormerCountry> {
 
     @Override
-    public boolean canProvide(@Nonnull Class<? extends Region> clazz) {
+    public boolean canProvide(@NonNull Class<? extends Region> clazz) {
         return clazz.isAssignableFrom(FormerCountry.class);
 
     }
 
 
     @Override
-    public Optional<FormerCountry> getByCode(@Nonnull String code) {
+    public Optional<FormerCountry> getByCode(@NonNull String code) {
         return Optional.ofNullable(FormerlyAssignedCountryCode.getByCode(code)).map(FormerCountry::new);
     }
 

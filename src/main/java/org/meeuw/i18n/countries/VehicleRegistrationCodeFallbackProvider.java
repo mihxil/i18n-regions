@@ -1,12 +1,11 @@
 package org.meeuw.i18n.countries;
 
-import java.util.Optional;
-import java.util.stream.Stream;
-
-import javax.annotation.Nonnull;
-
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.RegionProvider;
+
+import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * This provider can only 'getByCode', and serves as a fall back for countries. As a fallback, if no region with a given code could be found, this will match on the {@link VehicleRegistrationCode}.
@@ -17,13 +16,13 @@ import org.meeuw.i18n.RegionProvider;
 public class VehicleRegistrationCodeFallbackProvider implements RegionProvider<CurrentCountry> {
 
 	@Override
-	public boolean canProvide(@Nonnull Class<? extends Region> clazz) {
+	public boolean canProvide(@NonNull Class<? extends Region> clazz) {
 		return clazz.isAssignableFrom(CurrentCountry.class);
 
 	}
 
 	@Override
-	public Optional<CurrentCountry> getByCode(@Nonnull String code) {
+	public Optional<CurrentCountry> getByCode(@NonNull String code) {
 		try {
 			VehicleRegistrationCode vehicleRegistrationCode = VehicleRegistrationCode.valueOf(code);
 			return Optional.of(new CurrentCountry(vehicleRegistrationCode.getCode()));

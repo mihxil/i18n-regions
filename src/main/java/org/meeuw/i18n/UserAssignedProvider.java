@@ -1,12 +1,15 @@
 package org.meeuw.i18n;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.i18n.countries.UserAssignedCountry;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Stream;
-
-import org.meeuw.i18n.countries.UserAssignedCountry;
 
 /**
  * @author Michiel Meeuwissen
@@ -33,13 +36,13 @@ public class UserAssignedProvider implements RegionProvider<UserAssigned> {
 
 
     @Override
-    public boolean canProvide(@Nonnull Class<? extends Region> clazz) {
+    public boolean canProvide(@NonNull Class<? extends Region> clazz) {
         return clazz.isAssignableFrom(UserAssigned.class) || clazz.isAssignableFrom(UserAssignedCountry.class);
 
     }
 
     @Override
-    public Optional<UserAssigned> getByCode(@Nonnull String code) {
+    public Optional<UserAssigned> getByCode(@NonNull String code) {
         return Optional.ofNullable(VALUES.get(code));
     }
 

@@ -1,16 +1,15 @@
 package org.meeuw.i18n;
 
+import com.neovisionaries.i18n.LanguageCode;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.i18n.countries.FormerCountry;
+import org.meeuw.i18n.subdivisions.CountrySubdivision;
+
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
-
-import javax.annotation.Nonnull;
-
-import org.meeuw.i18n.countries.FormerCountry;
-import org.meeuw.i18n.subdivisions.CountrySubdivision;
-import com.neovisionaries.i18n.LanguageCode;
 
 /**
  * Utilities related to {@link Region}s. This also implements the java {@link ServiceLoader}
@@ -27,7 +26,7 @@ public class Regions {
      * @return an optional of region. Empty if not found.
      */
     @SuppressWarnings("unchecked")
-    public static <T extends Region> Optional<T> getByCode(@Nonnull String code, @Nonnull Class<T> clazz, @Nonnull Predicate<Region> checker) {
+    public static <T extends Region> Optional<T> getByCode(@NonNull String code, @NonNull Class<T> clazz, @NonNull Predicate<Region> checker) {
         ServiceLoader<RegionProvider> loader = ServiceLoader.load(RegionProvider.class);
         for (RegionProvider<T> provider : loader) {
             if (provider.canProvide(clazz)) {
@@ -43,7 +42,7 @@ public class Regions {
         return Optional.empty();
     }
 
-    public static <T extends Region> Optional<T> getByCode(@Nonnull String code, @Nonnull Class<T> clazz) {
+    public static <T extends Region> Optional<T> getByCode(@NonNull String code, @NonNull Class<T> clazz) {
         return getByCode(code, clazz, (c) -> true);
     }
 
@@ -120,13 +119,13 @@ public class Regions {
         return sortByName(language.toLocale());
     }
 
-    public static String toString(@Nonnull  Region region, @Nonnull  Locale language) {
+    public static String toString(@NonNull  Region region, @NonNull  Locale language) {
         StringBuilder builder = new StringBuilder();
         toStringBuilder(builder, region, language);
         return builder.toString();
     }
 
-    public static String toStringWithCode(@Nonnull  Region region, @Nonnull  Locale language) {
+    public static String toStringWithCode(@NonNull  Region region, @NonNull  Locale language) {
         StringBuilder builder = new StringBuilder();
         builder.append(region.getCode());
         builder.append(':');
@@ -134,11 +133,11 @@ public class Regions {
         return builder.toString();
     }
 
-    public static String toStringWithCode(@Nonnull  Region region, @Nonnull  LanguageCode language) {
+    public static String toStringWithCode(@NonNull  Region region, @NonNull  LanguageCode language) {
         return toStringWithCode(region, language.toLocale());
     }
 
-    public static void toStringBuilder(@Nonnull  StringBuilder builder, @Nonnull  Region region, @Nonnull  Locale language) {
+    public static void toStringBuilder(@NonNull  StringBuilder builder, @NonNull  Region region, @NonNull  Locale language) {
         builder.append(region.getName(language));
         if (region instanceof FormerCountry) {
             builder.append(" (").append(((FormerCountry) region).getValidity()).append(")");
@@ -152,7 +151,7 @@ public class Regions {
     }
 
 
-    public static String toString(@Nonnull  Region region, @Nonnull  LanguageCode language) {
+    public static String toString(@NonNull  Region region, @NonNull  LanguageCode language) {
         return toString(region, language.toLocale());
     }
 }

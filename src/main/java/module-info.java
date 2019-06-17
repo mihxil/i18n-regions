@@ -17,7 +17,7 @@ module i18_regions {
 
 	requires static java.validation;
     requires static java.xml.bind;
-	requires static jsr305;
+	requires static org.checkerframework.checker.qual;
 	requires static java.persistence;
 
 	provides RegionProvider with

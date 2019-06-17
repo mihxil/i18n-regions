@@ -1,13 +1,12 @@
 package org.meeuw.i18n.continents;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.i18n.Region;
+import org.meeuw.i18n.RegionProvider;
+
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.Stream;
-
-import javax.annotation.Nonnull;
-
-import org.meeuw.i18n.Region;
-import org.meeuw.i18n.RegionProvider;
 
 /**
  * @author Michiel Meeuwissen
@@ -15,12 +14,12 @@ import org.meeuw.i18n.RegionProvider;
  */
 public class ContinentProvider implements RegionProvider<Continent> {
     @Override
-    public boolean canProvide(@Nonnull Class<? extends Region> clazz) {
+    public boolean canProvide(@NonNull Class<? extends Region> clazz) {
         return clazz.isAssignableFrom(Continent.class);
     }
 
     @Override
-    public Optional<Continent> getByCode(@Nonnull String code) {
+    public Optional<Continent> getByCode(@NonNull String code) {
         try {
             if (code.startsWith(Continent.PREFIX)) {
                 return Optional.of(new Continent(Continent.Code.valueOf(code.substring(Continent.PREFIX.length()))));

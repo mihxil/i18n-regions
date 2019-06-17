@@ -1,14 +1,13 @@
 package org.meeuw.i18n.subdivisions;
 
+import com.neovisionaries.i18n.CountryCode;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.i18n.countries.Country;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-
-import javax.annotation.Nonnull;
-
-import org.meeuw.i18n.countries.Country;
-import com.neovisionaries.i18n.CountryCode;
 
 /**
  * @author Michiel Meeuwissen
@@ -20,7 +19,7 @@ public class UserAssignedCountrySubdivision implements CountrySubdivision {
     private static final Map<CountryCode, Map<String, UserAssignedCountrySubdivision>> CACHE = new ConcurrentHashMap<>();
 
 
-    public static  Map<String, UserAssignedCountrySubdivision> ofCountry(@Nonnull CountryCode countryCode) {
+    public static  Map<String, UserAssignedCountrySubdivision> ofCountry(@NonNull CountryCode countryCode) {
         return CACHE.computeIfAbsent(countryCode, (cc) -> {
             Map<String, UserAssignedCountrySubdivision> value = new LinkedHashMap<>();
             Properties properties = new Properties();
@@ -38,7 +37,7 @@ public class UserAssignedCountrySubdivision implements CountrySubdivision {
             return Collections.unmodifiableMap(value);
             });
     }
-    public static Optional<UserAssignedCountrySubdivision> of(@Nonnull CountryCode countryCode, String code) {
+    public static Optional<UserAssignedCountrySubdivision> of(@NonNull CountryCode countryCode, String code) {
         return Optional.ofNullable(ofCountry(countryCode).get(code));
     }
 
@@ -50,9 +49,9 @@ public class UserAssignedCountrySubdivision implements CountrySubdivision {
 
 
     public UserAssignedCountrySubdivision(
-        @Nonnull CountryCode countryCode,
-        @Nonnull String code,
-        @Nonnull String name) {
+        @NonNull CountryCode countryCode,
+        @NonNull String code,
+        @NonNull String name) {
         this.countryCode = countryCode;
         this.code = code;
         this.name = name;

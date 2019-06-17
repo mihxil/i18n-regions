@@ -1,14 +1,13 @@
 package org.meeuw.i18n.countries;
 
-import java.util.Optional;
-import java.util.function.Predicate;
-
-import javax.annotation.Nonnull;
-
+import com.neovisionaries.i18n.CountryCode;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.Regions;
 import org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode;
-import com.neovisionaries.i18n.CountryCode;
+
+import java.util.Optional;
+import java.util.function.Predicate;
 
 /**
  * Represent a 'country', this can be a current (see {@link CurrentCountry} or former country (see {@link FormerCountry )}. It could also be some user defined country (see {@link UserAssignedCountry})
@@ -45,7 +44,7 @@ public interface Country extends Region {
     }
 
 
-    static Optional<Country> getByCode(@Nonnull String code) {
+    static Optional<Country> getByCode(@NonNull String code) {
         return Regions.getByCode(code, Country.class);
     }
 

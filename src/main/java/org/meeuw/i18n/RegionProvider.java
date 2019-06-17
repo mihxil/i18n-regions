@@ -1,6 +1,7 @@
 package org.meeuw.i18n;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -19,12 +20,12 @@ public interface RegionProvider<T extends Region> {
      * use {@link #values()} of this class if it known that it would not result any matches.
      */
 
-    boolean canProvide(@Nonnull Class<? extends Region> clazz);
+    boolean canProvide(@NonNull Class<? extends Region> clazz);
 
     /**
      * Searches and returns region with given code. As an {@link Optional}, so it will return {@code Optional.empty()} if this provider does not provide a region with the given code
      */
-    Optional<T> getByCode(@Nonnull String code);
+    Optional<T> getByCode(@NonNull String code);
 
     /**
      * Returns all region instances provided by this provides. As a stream, so it can be filtered, mapped and collected easily according to the use of the caller.

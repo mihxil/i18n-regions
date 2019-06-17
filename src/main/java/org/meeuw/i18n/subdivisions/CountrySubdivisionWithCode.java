@@ -1,12 +1,10 @@
 package org.meeuw.i18n.subdivisions;
 
 import be.olsson.i18n.subdivision.CountryCodeSubdivision;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.i18n.countries.Country;
 
 import java.util.Locale;
-
-import javax.annotation.Nonnull;
-
-import org.meeuw.i18n.countries.Country;
 
 /**
  * A subdivision of a country. Backend by {@link CountryCodeSubdivision}.
@@ -20,7 +18,7 @@ public class CountrySubdivisionWithCode implements CountrySubdivision {
 
 
 
-    public CountrySubdivisionWithCode(@Nonnull CountryCodeSubdivision code) {
+    public CountrySubdivisionWithCode(@NonNull CountryCodeSubdivision code) {
         this.code = code;
     }
 

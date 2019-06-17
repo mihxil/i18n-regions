@@ -1,18 +1,17 @@
 package org.meeuw.i18n.validation;
 
+import com.neovisionaries.i18n.CountryCode;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.i18n.Region;
+import org.meeuw.i18n.Regions;
+import org.meeuw.i18n.countries.Country;
+import org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode;
+
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
-
-import javax.annotation.Nonnull;
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
-
-import org.meeuw.i18n.countries.Country;
-import org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode;
-import org.meeuw.i18n.Region;
-import org.meeuw.i18n.Regions;
-import com.neovisionaries.i18n.CountryCode;
 
 /**
  * @author Michiel Meeuwissen
@@ -60,7 +59,7 @@ public class CountryValidator implements ConstraintValidator<ValidCountry, Objec
 
 
 
-    public static boolean isValid(Region region, @Nonnull ValidCountry annotation) {
+    public static boolean isValid(Region region, @NonNull ValidCountry annotation) {
         if (region == null) {
             // use javax.validation.constraints.NotNull
             return true;
@@ -92,7 +91,7 @@ public class CountryValidator implements ConstraintValidator<ValidCountry, Objec
         return false;
     }
 
-    public static Predicate<Object> fromField(@Nonnull  Class<?> clazz, @Nonnull String field) {
+    public static Predicate<Object> fromField(@NonNull Class<?> clazz, @NonNull String field) {
         try {
             ValidCountry[] annotationsByType = clazz.getDeclaredField(field).getAnnotationsByType(ValidCountry.class);
             if (annotationsByType.length == 0) {

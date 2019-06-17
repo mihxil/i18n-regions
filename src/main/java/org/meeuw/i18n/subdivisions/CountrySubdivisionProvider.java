@@ -2,6 +2,10 @@ package org.meeuw.i18n.subdivisions;
 
 import be.olsson.i18n.subdivision.CountryCodeSubdivision;
 import be.olsson.i18n.subdivision.SubdivisionFactory;
+import com.neovisionaries.i18n.CountryCode;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.i18n.Region;
+import org.meeuw.i18n.RegionProvider;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,12 +15,6 @@ import java.util.function.Consumer;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-import javax.annotation.Nonnull;
-
-import org.meeuw.i18n.Region;
-import org.meeuw.i18n.RegionProvider;
-import com.neovisionaries.i18n.CountryCode;
-
 /**
  * @author Michiel Meeuwissen
  * @since 0.1
@@ -24,14 +22,14 @@ import com.neovisionaries.i18n.CountryCode;
 public class CountrySubdivisionProvider implements RegionProvider<CountrySubdivisionWithCode> {
 
     @Override
-    public boolean canProvide(@Nonnull Class<? extends Region> clazz) {
+    public boolean canProvide(@NonNull Class<? extends Region> clazz) {
         return clazz.isAssignableFrom(CountrySubdivisionWithCode.class);
 
     }
 
 
     @Override
-    public Optional<CountrySubdivisionWithCode> getByCode(@Nonnull String code) {
+    public Optional<CountrySubdivisionWithCode> getByCode(@NonNull String code) {
         String[] countryAndSubDiversion = code.split("-", 2);
         if (countryAndSubDiversion.length < 2) {
             return Optional.empty();
