@@ -1,10 +1,13 @@
 package org.meeuw.i18n;
 
-import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
+
+import javax.annotation.Nonnull;
+
+import com.neovisionaries.i18n.LanguageCode;
 
 /**
  * Utilities related to {@link Region}s. This also implements the java {@link ServiceLoader}
@@ -95,5 +98,29 @@ public class Regions {
 
     public static Stream<Region> values() {
         return values(Region.class);
+    }
+
+    public static Comparator<Region> sortByName(Locale locale) {
+        return new Comparator<Region>() {
+            @Override
+            public int compare(Region o1, Region o2) {
+                return o1.getName(locale).compareTo(o2.getName(locale));
+            }
+        };
+    }
+
+    public static Comparator<Region> sortByName(LanguageCode language) {
+        return sortByName(language.toLocale());
+    }
+
+    public static String toString(@Nonnull  Region region, @Nonnull  LanguageCode language) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(region.getCode());
+        builder.append(':');
+        builder.append(region.getName(language));
+        if (region instanceof FormerCountry) {
+            builder.append(" (").append(((FormerCountry) region).getValidity()).append(")");
+        }
+        return builder.toString();
     }
 }

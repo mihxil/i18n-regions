@@ -1,11 +1,12 @@
 package org.meeuw.i18n;
 
-import com.neovisionaries.i18n.CountryCode;
-
-import javax.annotation.Nonnull;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+
+import javax.annotation.Nonnull;
+
+import com.neovisionaries.i18n.CountryCode;
 
 /**
  * Represents a country of which the code is one of the enum values of {@link CountryCode}.
@@ -48,7 +49,7 @@ public class CurrentCountry implements Country {
     }
 
     @Override
-    public String getName(Locale locale) {
+    public String getName(@Nonnull Locale locale) {
         try {
             return ResourceBundle.getBundle(BUNDLE, locale).getString(this.getCode());
         } catch (MissingResourceException mse){
