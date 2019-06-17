@@ -16,17 +16,17 @@ import javax.annotation.Nonnull;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-public class CountrySubdivisionProvider implements RegionProvider<CountrySubdivision> {
+public class CountrySubdivisionProvider implements RegionProvider<CountrySubdivisionWithCode> {
 
     @Override
     public boolean canProvide(@Nonnull Class<? extends Region> clazz) {
-        return clazz.isAssignableFrom(CountrySubdivision.class);
+        return clazz.isAssignableFrom(CountrySubdivisionWithCode.class);
 
     }
 
 
     @Override
-    public Optional<CountrySubdivision> getByCode(@Nonnull String code) {
+    public Optional<CountrySubdivisionWithCode> getByCode(@Nonnull String code) {
         String[] countryAndSubDiversion = code.split("-", 2);
         if (countryAndSubDiversion.length < 2) {
             return Optional.empty();
@@ -36,13 +36,13 @@ public class CountrySubdivisionProvider implements RegionProvider<CountrySubdivi
             if (subdivision == null){
                 return Optional.empty();
             }
-            return Optional.of(new CountrySubdivision(subdivision));
+            return Optional.of(new CountrySubdivisionWithCode(subdivision));
 
         }
     }
 
     @Override
-    public Stream<CountrySubdivision> values() {
+    public Stream<CountrySubdivisionWithCode> values() {
         Spliterator<CountryCodeSubdivision> spliterator = new Spliterator<CountryCodeSubdivision>() {
             private int countryCode = 0;
             private Spliterator<CountryCodeSubdivision> spliterator;
@@ -78,6 +78,6 @@ public class CountrySubdivisionProvider implements RegionProvider<CountrySubdivi
 
             }
         };
-        return StreamSupport.stream(spliterator, false).map(CountrySubdivision::new);
+        return StreamSupport.stream(spliterator, false).map(CountrySubdivisionWithCode::new);
     }
 }

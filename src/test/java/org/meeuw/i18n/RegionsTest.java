@@ -1,11 +1,11 @@
 package org.meeuw.i18n;
 
-import com.neovisionaries.i18n.CountryCode;
-import org.junit.Ignore;
-import org.junit.Test;
-
 import java.util.Locale;
 import java.util.Optional;
+
+import org.junit.Ignore;
+import org.junit.Test;
+import com.neovisionaries.i18n.CountryCode;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -57,7 +57,7 @@ public class RegionsTest {
 
         Region utrecht = Regions.getByCode("NL-UT").orElse(null);
         assertThat(utrecht).isNotNull();
-        assertThat(utrecht).isInstanceOf(CountrySubdivision.class);
+        assertThat(utrecht).isInstanceOf(CountrySubdivisionWithCode.class);
         assertThat(utrecht.getCode()).isEqualTo("NL-UT");
         assertThat(utrecht.getName()).isEqualTo("Utrecht");
     }
@@ -68,7 +68,7 @@ public class RegionsTest {
 
         Region gbn = Regions.getByCode("GB-GBN").orElse(null);
         assertThat(gbn).isNotNull();
-        assertThat(gbn).isInstanceOf(CountrySubdivision.class);
+        assertThat(gbn).isInstanceOf(CountrySubdivisionWithCode.class);
         assertThat(gbn.getCode()).isEqualTo("NL-UT");
         assertThat(gbn.getName()).isEqualTo("Utrecht");
     }

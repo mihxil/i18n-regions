@@ -115,14 +115,35 @@ public class Regions {
 
     public static String toString(@Nonnull  Region region, @Nonnull  Locale language) {
         StringBuilder builder = new StringBuilder();
+        toStringBuilder(builder, region, language);
+        return builder.toString();
+    }
+
+    public static String toStringWithCode(@Nonnull  Region region, @Nonnull  Locale language) {
+        StringBuilder builder = new StringBuilder();
         builder.append(region.getCode());
         builder.append(':');
+        toStringBuilder(builder, region, language);
+        return builder.toString();
+    }
+
+    public static String toStringWithCode(@Nonnull  Region region, @Nonnull  LanguageCode language) {
+        return toStringWithCode(region, language.toLocale());
+    }
+
+    public static void toStringBuilder(@Nonnull  StringBuilder builder, @Nonnull  Region region, @Nonnull  Locale language) {
         builder.append(region.getName(language));
         if (region instanceof FormerCountry) {
             builder.append(" (").append(((FormerCountry) region).getValidity()).append(")");
         }
-        return builder.toString();
+        if (region instanceof CountrySubdivision) {
+            builder.append(" (");
+            toStringBuilder(builder, ((CountrySubdivision) region).getCountry(), language);
+            builder.append(")");
+        }
+
     }
+
 
     public static String toString(@Nonnull  Region region, @Nonnull  LanguageCode language) {
         return toString(region, language.toLocale());

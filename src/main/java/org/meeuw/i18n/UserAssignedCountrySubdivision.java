@@ -13,7 +13,7 @@ import com.neovisionaries.i18n.CountryCode;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-public class UserAssignedCountrySubdivision implements Region {
+public class UserAssignedCountrySubdivision implements CountrySubdivision {
     private static final long serialVersionUID = 0L;
 
     private static final Map<CountryCode, Map<String, UserAssignedCountrySubdivision>> CACHE = new ConcurrentHashMap<>();
@@ -42,6 +42,7 @@ public class UserAssignedCountrySubdivision implements Region {
     }
 
 
+
     private final CountryCode countryCode;
     private final String code;
     private final String name;
@@ -68,17 +69,17 @@ public class UserAssignedCountrySubdivision implements Region {
     }
 
     @Override
-    public Type getType() {
-
-        return Type.SUBDIVISION;
-    }
-
-    @Override
     public String getName() {
         return name;
 
     }
 
+
+    @Override
+    public Country getCountry() {
+        return Country.of(countryCode);
+
+    }
 
     @Override
     public String toString() {
