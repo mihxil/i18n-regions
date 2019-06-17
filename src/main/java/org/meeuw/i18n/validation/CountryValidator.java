@@ -8,7 +8,10 @@ import javax.annotation.Nonnull;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import org.meeuw.i18n.*;
+import org.meeuw.i18n.Country;
+import org.meeuw.i18n.FormerlyAssignedCountryCode;
+import org.meeuw.i18n.Region;
+import org.meeuw.i18n.Regions;
 import com.neovisionaries.i18n.CountryCode;
 
 /**
@@ -29,7 +32,15 @@ public class CountryValidator implements ConstraintValidator<ValidCountry, Objec
         if (region == null) {
             return true;
         }
-        if (region instanceof Region) {
+        if (region instanceof Iterable) {
+            Iterable <?> i = (Iterable) region;
+            for (Object o : i) {
+                if (! isValid(o, constraintValidatorContext)) {
+                    return false;
+                }
+            }
+            return true;
+        } else if (region instanceof Region) {
             return isValid((Region) region, annotation);
         } else if (region instanceof CountryCode) {
             return isValid(Country.of((CountryCode) region), annotation);
@@ -39,7 +50,7 @@ public class CountryValidator implements ConstraintValidator<ValidCountry, Objec
             Optional<Region> byCode = Regions.getByCode(region.toString());
             return byCode.filter(value -> isValid(value, annotation)).isPresent();
         } else {
-            throw new IllegalArgumentException("The object " + region + " cannot be converted to a region");
+            throw new IllegalArgumentException("The object " + region.getClass().getSimpleName() + ":" + region + " cannot be converted to a region");
         }
     }
 

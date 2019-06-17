@@ -1,5 +1,6 @@
 package org.meeuw.i18n.validation;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,10 +39,10 @@ public class CountryValidatorTest {
 
      static class B {
         @ValidCountry(includes = "ZZ")
-        Region region;
+        List<Region> region;
 
-        public B(Region r) {
-            this.region = r;
+        public B(Region... r) {
+            this.region = Arrays.asList(r);
         }
     }
     private static final ValidatorFactory FACTORY = Validation.buildDefaultValidatorFactory();
