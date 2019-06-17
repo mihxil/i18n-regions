@@ -1,5 +1,6 @@
 package org.meeuw.i18n.validation;
 
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -7,14 +8,14 @@ import javax.annotation.Nonnull;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import org.meeuw.i18n.Country;
-import org.meeuw.i18n.Region;
+import org.meeuw.i18n.*;
+import com.neovisionaries.i18n.CountryCode;
 
 /**
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-public class CountryValidator implements ConstraintValidator<ValidCountry, Region> {
+public class CountryValidator implements ConstraintValidator<ValidCountry, Object> {
 
     ValidCountry annotation;
     @Override
@@ -24,8 +25,19 @@ public class CountryValidator implements ConstraintValidator<ValidCountry, Regio
     }
 
     @Override
-    public boolean isValid(Region region, ConstraintValidatorContext constraintValidatorContext) {
-        return isValid(region, annotation);
+    public boolean isValid(Object region, ConstraintValidatorContext constraintValidatorContext) {
+        if (region instanceof Region) {
+            return isValid((Region) region, annotation);
+        } else if (region instanceof CountryCode) {
+            return isValid(Country.of((CountryCode) region), annotation);
+        } else if (region instanceof FormerlyAssignedCountryCode) {
+            return isValid(Country.of((FormerlyAssignedCountryCode) region), annotation);
+        } else if (region instanceof CharSequence) {
+            Optional<Region> byCode = Regions.getByCode(region.toString());
+            return byCode.filter(value -> isValid(value, annotation)).isPresent();
+        } else {
+            throw new IllegalArgumentException("The object " + region + " cannot be converted to a region");
+        }
     }
 
 
@@ -61,17 +73,21 @@ public class CountryValidator implements ConstraintValidator<ValidCountry, Regio
         return false;
     }
 
-    public static Predicate<Region> fromField(@Nonnull  Class<?> clazz, @Nonnull String field) throws NoSuchFieldException {
-        ValidCountry[] annotationsByType = clazz.getDeclaredField(field).getAnnotationsByType(ValidCountry.class);
-        if (annotationsByType.length == 0) {
-            throw new IllegalArgumentException("No ValidCountry annotation on " + clazz.getSimpleName() + "#" + field);
+    public static Predicate<Region> fromField(@Nonnull  Class<?> clazz, @Nonnull String field) {
+        try {
+            ValidCountry[] annotationsByType = clazz.getDeclaredField(field).getAnnotationsByType(ValidCountry.class);
+            if (annotationsByType.length == 0) {
+                throw new IllegalArgumentException("No ValidCountry annotation on " + clazz.getSimpleName() + "#" + field);
+            }
+            Predicate<Region> predicate = r -> isValid(r, annotationsByType[0]);
+            for (int i = 1; i < annotationsByType.length; i++) {
+                final int index = i;
+                predicate = predicate.and(r -> isValid(r, annotationsByType[index]));
+            }
+            return predicate;
+        } catch (NoSuchFieldException nsfe){
+            throw new RuntimeException(nsfe);
         }
-        Predicate<Region> predicate = r -> isValid(r, annotationsByType[0]);
-        for (int i = 1; i < annotationsByType.length; i++) {
-            final int index = i;
-            predicate = predicate.and(r -> isValid(r, annotationsByType[index]));
-        }
-        return predicate;
 
     }
 }

@@ -113,7 +113,7 @@ public class Regions {
         return sortByName(language.toLocale());
     }
 
-    public static String toString(@Nonnull  Region region, @Nonnull  LanguageCode language) {
+    public static String toString(@Nonnull  Region region, @Nonnull  Locale language) {
         StringBuilder builder = new StringBuilder();
         builder.append(region.getCode());
         builder.append(':');
@@ -122,5 +122,9 @@ public class Regions {
             builder.append(" (").append(((FormerCountry) region).getValidity()).append(")");
         }
         return builder.toString();
+    }
+
+    public static String toString(@Nonnull  Region region, @Nonnull  LanguageCode language) {
+        return toString(region, language.toLocale());
     }
 }
