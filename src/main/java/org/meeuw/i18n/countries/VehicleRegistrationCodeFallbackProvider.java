@@ -1,9 +1,12 @@
-package org.meeuw.i18n;
+package org.meeuw.i18n.countries;
 
 import java.util.Optional;
 import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
+
+import org.meeuw.i18n.Region;
+import org.meeuw.i18n.RegionProvider;
 
 /**
  * This provider can only 'getByCode', and serves as a fall back for countries. As a fallback, if no region with a given code could be found, this will match on the {@link VehicleRegistrationCode}.

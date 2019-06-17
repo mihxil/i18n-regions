@@ -8,6 +8,8 @@ import java.util.stream.StreamSupport;
 
 import javax.annotation.Nonnull;
 
+import org.meeuw.i18n.countries.FormerCountry;
+import org.meeuw.i18n.subdivisions.CountrySubdivision;
 import com.neovisionaries.i18n.LanguageCode;
 
 /**

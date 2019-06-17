@@ -1,10 +1,12 @@
-package org.meeuw.i18n;
+package org.meeuw.i18n.subdivisions;
 
 import be.olsson.i18n.subdivision.CountryCodeSubdivision;
 
 import java.util.Locale;
 
 import javax.annotation.Nonnull;
+
+import org.meeuw.i18n.countries.Country;
 
 /**
  * A subdivision of a country. Backend by {@link CountryCodeSubdivision}.

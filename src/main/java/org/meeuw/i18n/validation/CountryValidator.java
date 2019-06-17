@@ -8,8 +8,8 @@ import javax.annotation.Nonnull;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import org.meeuw.i18n.Country;
-import org.meeuw.i18n.FormerlyAssignedCountryCode;
+import org.meeuw.i18n.countries.Country;
+import org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode;
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.Regions;
 import com.neovisionaries.i18n.CountryCode;

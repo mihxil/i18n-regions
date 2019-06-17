@@ -1,6 +1,7 @@
 package org.meeuw.i18n;
 
 import org.junit.Test;
+import org.meeuw.i18n.countries.FormerCountryProvider;
 
 import java.time.Year;
 

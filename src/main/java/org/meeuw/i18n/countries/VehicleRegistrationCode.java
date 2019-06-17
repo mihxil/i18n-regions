@@ -1,4 +1,4 @@
-package org.meeuw.i18n;
+package org.meeuw.i18n.countries;
 
 import com.neovisionaries.i18n.CountryCode;
 

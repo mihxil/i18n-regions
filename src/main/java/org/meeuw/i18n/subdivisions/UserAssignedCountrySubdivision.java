@@ -1,4 +1,4 @@
-package org.meeuw.i18n;
+package org.meeuw.i18n.subdivisions;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,6 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.annotation.Nonnull;
 
+import org.meeuw.i18n.countries.Country;
 import com.neovisionaries.i18n.CountryCode;
 
 /**

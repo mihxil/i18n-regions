@@ -5,6 +5,12 @@ import java.util.Optional;
 
 import org.junit.Ignore;
 import org.junit.Test;
+import org.meeuw.i18n.continents.Continent;
+import org.meeuw.i18n.countries.Country;
+import org.meeuw.i18n.countries.CurrentCountry;
+import org.meeuw.i18n.countries.FormerCountry;
+import org.meeuw.i18n.countries.UserAssignedCountry;
+import org.meeuw.i18n.subdivisions.CountrySubdivisionWithCode;
 import com.neovisionaries.i18n.CountryCode;
 import com.neovisionaries.i18n.LanguageCode;
 

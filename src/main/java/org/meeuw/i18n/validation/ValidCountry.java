@@ -7,12 +7,14 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+import org.meeuw.i18n.countries.Country;
+
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 
 /**
- * A javax.validation annotation that can be used to restrict the values of a {@link org.meeuw.i18n.Region} (or {@link org.meeuw.i18n.Country} value.
+ * A javax.validation annotation that can be used to restrict the values of a {@link org.meeuw.i18n.Region} (or {@link Country} value.
  *
  * For example
  * {@code
@@ -34,15 +36,15 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 public @interface ValidCountry {
 
     /**
-     * See {@link org.meeuw.i18n.Country#IS_OFFICIAL}
+     * See {@link Country#IS_OFFICIAL}
      */
     int OFFICIAL = 1 << 0;
     /**
-     * See {@link org.meeuw.i18n.Country#IS_FORMER}
+     * See {@link Country#IS_FORMER}
      */
     int FORMER = 1 << 1;
     /**
-     * See {@link org.meeuw.i18n.Country#IS_USER_ASSIGNED}
+     * See {@link Country#IS_USER_ASSIGNED}
      */
     int USER_ASSIGNED = 1 << 2;
 

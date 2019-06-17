@@ -1,9 +1,12 @@
-package org.meeuw.i18n;
+package org.meeuw.i18n.countries;
 
 import java.util.List;
 import java.util.Locale;
 
 import javax.annotation.Nonnull;
+
+import org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode;
+import org.meeuw.i18n.formerlyassigned.ValidityRange;
 
 
 /**

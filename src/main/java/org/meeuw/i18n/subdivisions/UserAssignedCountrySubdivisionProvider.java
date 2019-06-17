@@ -1,4 +1,4 @@
-package org.meeuw.i18n;
+package org.meeuw.i18n.subdivisions;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -9,9 +9,11 @@ import java.util.stream.StreamSupport;
 
 import javax.annotation.Nonnull;
 
+import org.meeuw.i18n.Region;
+import org.meeuw.i18n.RegionProvider;
 import com.neovisionaries.i18n.CountryCode;
 
-import static org.meeuw.i18n.UserAssignedCountrySubdivision.ofCountry;
+import static org.meeuw.i18n.subdivisions.UserAssignedCountrySubdivision.ofCountry;
 
 /**
  * Defines subdivisions of countries via property files /subdivisions.&lt;alpha2 code of country&gt;.properties

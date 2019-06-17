@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.junit.Test;
-import org.meeuw.i18n.CurrentCountry;
+import org.meeuw.i18n.countries.CurrentCountry;
 import org.meeuw.i18n.Region;
 
 import com.neovisionaries.i18n.CountryCode;

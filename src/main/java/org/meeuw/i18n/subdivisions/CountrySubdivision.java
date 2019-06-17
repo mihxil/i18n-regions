@@ -1,4 +1,4 @@
-package org.meeuw.i18n;
+package org.meeuw.i18n.subdivisions;
 
 import be.olsson.i18n.subdivision.CountryCodeSubdivision;
 import be.olsson.i18n.subdivision.SubdivisionFactory;
@@ -7,6 +7,8 @@ import java.util.Optional;
 
 import javax.annotation.Nonnull;
 
+import org.meeuw.i18n.countries.Country;
+import org.meeuw.i18n.Region;
 import com.neovisionaries.i18n.CountryCode;
 
 /**

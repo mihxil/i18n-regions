@@ -1,4 +1,4 @@
-package org.meeuw.i18n;
+package org.meeuw.i18n.countries;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;

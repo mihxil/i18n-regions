@@ -9,6 +9,8 @@ import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.meeuw.i18n.bind.jaxb.Code;
+import org.meeuw.i18n.countries.Country;
+import org.meeuw.i18n.countries.CurrentCountry;
 import com.neovisionaries.i18n.LanguageCode;
 
 /**

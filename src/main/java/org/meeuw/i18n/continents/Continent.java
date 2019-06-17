@@ -1,6 +1,8 @@
-package org.meeuw.i18n;
+package org.meeuw.i18n.continents;
 
 import java.util.Locale;
+
+import org.meeuw.i18n.Region;
 
 /**
  * https://datahub.io/core/continent-codes

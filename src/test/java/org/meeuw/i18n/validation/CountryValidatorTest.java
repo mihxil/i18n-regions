@@ -10,17 +10,17 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import org.junit.Test;
-import org.meeuw.i18n.CountrySubdivision;
-import org.meeuw.i18n.FormerlyAssignedCountryCode;
+import org.meeuw.i18n.subdivisions.CountrySubdivision;
+import org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode;
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.Regions;
 import com.neovisionaries.i18n.LanguageCode;
 
 import static com.neovisionaries.i18n.CountryCode.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.meeuw.i18n.Country.of;
-import static org.meeuw.i18n.FormerlyAssignedCountryCode.CSXX;
-import static org.meeuw.i18n.UserAssignedCountry.ZZ;
+import static org.meeuw.i18n.countries.Country.of;
+import static org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode.CSXX;
+import static org.meeuw.i18n.countries.UserAssignedCountry.ZZ;
 import static org.meeuw.i18n.validation.ValidCountry.FORMER;
 import static org.meeuw.i18n.validation.ValidCountry.OFFICIAL;
 

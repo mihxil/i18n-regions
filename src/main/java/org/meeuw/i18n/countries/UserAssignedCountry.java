@@ -1,4 +1,6 @@
-package org.meeuw.i18n;
+package org.meeuw.i18n.countries;
+
+import org.meeuw.i18n.UserAssigned;
 
 /**
  * http://en.wikipedia.org/wiki/ISO_3166-2

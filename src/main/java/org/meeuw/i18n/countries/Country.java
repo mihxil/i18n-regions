@@ -1,13 +1,17 @@
-package org.meeuw.i18n;
+package org.meeuw.i18n.countries;
 
-import com.neovisionaries.i18n.CountryCode;
-
-import javax.annotation.Nonnull;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import javax.annotation.Nonnull;
+
+import org.meeuw.i18n.Region;
+import org.meeuw.i18n.Regions;
+import org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode;
+import com.neovisionaries.i18n.CountryCode;
+
 /**
- * Represent a 'country', this can be a current (see {@link CurrentCountry} or former country (see {@link FormerCountry)}. It could also be some user defined country (see {@link UserAssignedCountry})
+ * Represent a 'country', this can be a current (see {@link CurrentCountry} or former country (see {@link FormerCountry )}. It could also be some user defined country (see {@link UserAssignedCountry})
  * @author Michiel Meeuwissen
  * @since 0.1
  */

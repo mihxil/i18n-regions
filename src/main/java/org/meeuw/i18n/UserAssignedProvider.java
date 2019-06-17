@@ -6,6 +6,8 @@ import java.lang.reflect.Modifier;
 import java.util.*;
 import java.util.stream.Stream;
 
+import org.meeuw.i18n.countries.UserAssignedCountry;
+
 /**
  * @author Michiel Meeuwissen
  * @since 0.1
