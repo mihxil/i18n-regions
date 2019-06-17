@@ -26,6 +26,9 @@ public class CountryValidator implements ConstraintValidator<ValidCountry, Objec
 
     @Override
     public boolean isValid(Object region, ConstraintValidatorContext constraintValidatorContext) {
+        if (region == null) {
+            return true;
+        }
         if (region instanceof Region) {
             return isValid((Region) region, annotation);
         } else if (region instanceof CountryCode) {
