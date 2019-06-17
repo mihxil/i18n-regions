@@ -46,7 +46,7 @@ public @interface ValidCountry {
      */
     int USER_ASSIGNED = 1 << 2;
 
-    String message() default "{org.meeuw.i18n.constraints.country}";
+    String message() default "{org.meeuw.i18n.validation.country.message}";
 
     Class<?>[] groups() default {};
 

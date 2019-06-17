@@ -53,6 +53,9 @@ public class CountryValidatorTest {
     public void isValid() {
 
         assertThat(VALIDATOR.validate(new A(of(CS)))).hasSize(1);
+        assertThat(VALIDATOR.validate(new A(of(CS))).iterator().next().getMessage()).isEqualTo("CS is not a valid country");;
+
+
 
         assertThat(VALIDATOR.validate(new A(of(CSXX)))).hasSize(0);
 
