@@ -90,8 +90,8 @@ Optional dependencies
 Several dependencies are marked `optional` in the pom.xml. E.g. the annotations used to arrange XML bindings and validation are not present (any more) in java 11. If they are not present, this will not make it impossible to use the classes, you just cannot use JAXB, JPA, validation or whatever the missing dependency is related to.
 
 
-TODO
+Testing
 ----
-- validation options are very experimental yet
+Besides the usual junit test, in the [tests](tests) folder I collect some sample projects to test this stuff out by hand.
 
 
