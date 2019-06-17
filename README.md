@@ -93,5 +93,10 @@ Several dependencies are marked `optional` in the pom.xml. E.g. the annotations 
 Testing
 ----
 Besides the usual junit test, in the [tests](tests) folder I collect some sample projects to test this stuff out by hand.
+Try e.g. 
+```bash
+cd tests/springboot
+mvn spring-boot:run
+```
 
 
