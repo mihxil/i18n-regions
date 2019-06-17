@@ -1,9 +1,8 @@
-package org.meeuw.i18n;
-
-import org.junit.Test;
-import org.meeuw.i18n.countries.FormerCountryProvider;
+package org.meeuw.i18n.countries;
 
 import java.time.Year;
+
+import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
