@@ -19,7 +19,11 @@ public class ContinentProvider implements RegionProvider<Continent> {
     @Override
     public Optional<Continent> getByCode(@Nonnull String code) {
         try {
-            return Optional.of(new Continent(Continent.Code.valueOf(code)));
+            if (code.startsWith(Continent.PREFIX)) {
+                return Optional.of(new Continent(Continent.Code.valueOf(code.substring(Continent.PREFIX.length()))));
+            } else {
+                return Optional.empty();
+            }
         } catch (IllegalArgumentException iae) {
             return Optional.empty();
         }

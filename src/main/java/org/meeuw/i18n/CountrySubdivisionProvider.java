@@ -3,14 +3,17 @@ package org.meeuw.i18n;
 import be.olsson.i18n.subdivision.CountryCodeSubdivision;
 import be.olsson.i18n.subdivision.SubdivisionFactory;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-import com.neovisionaries.i18n.CountryCode;
-
 import javax.annotation.Nonnull;
+
+import com.neovisionaries.i18n.CountryCode;
 
 /**
  * @author Michiel Meeuwissen
@@ -32,6 +35,9 @@ public class CountrySubdivisionProvider implements RegionProvider<CountrySubdivi
             return Optional.empty();
         } else {
             CountryCode countryCode = CountryCode.getByAlpha2Code(countryAndSubDiversion[0]);
+            if (countryCode == null) {
+                return Optional.empty();
+            }
             CountryCodeSubdivision subdivision = SubdivisionFactory.getSubdivision(countryCode, countryAndSubDiversion[1]);
             if (subdivision == null){
                 return Optional.empty();

@@ -7,9 +7,9 @@ import java.util.function.Consumer;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-import com.neovisionaries.i18n.CountryCode;
-
 import javax.annotation.Nonnull;
+
+import com.neovisionaries.i18n.CountryCode;
 
 import static org.meeuw.i18n.UserAssignedCountrySubdivision.ofCountry;
 
@@ -36,6 +36,9 @@ public class UserAssignedCountrySubdivisionProvider implements RegionProvider<Us
             return Optional.empty();
         } else {
             CountryCode countryCode = CountryCode.getByAlpha2Code(countryAndSubDiversion[0]);
+            if (countryCode == null) {
+                return Optional.empty();
+            }
             return Optional.ofNullable(ofCountry(countryCode).get(countryAndSubDiversion[1]));
         }
     }
