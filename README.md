@@ -89,6 +89,12 @@ Optional dependencies
 ----
 Several dependencies are marked `optional` in the pom.xml. E.g. the annotations used to arrange XML bindings and validation are not present (any more) in java 11. If they are not present, this will not make it impossible to use the classes, you just cannot use JAXB, JPA, validation or whatever the missing dependency is related to.
 
+Building
+---
+This projects needs to build with java 11. It produces byte code compatible for java 8 though.  The goal is to be compatible with [jigsaw](https://www.baeldung.com/project-jigsaw-java-modularity), which was introduces in java 9.
+
+If you use java 11 then you can require org.meeuw.i18n.
+
 
 Testing
 ----
