@@ -38,7 +38,7 @@
   <properties>
     <nv-i18n.version>1.25</nv-i18n.version>
     <i18n-subdivisions.version>0.2</i18n-subdivisions.version>
-    <i18n-formerly-assigned.version>0.5-SNAPSHOT</i18n-formerly-assigned.version>
+    <i18n-formerly-assigned.version>0.5</i18n-formerly-assigned.version>
     <junit.version>4.12</junit.version>
     <java.version>8</java.version>
     <checker.version>2.8.2</checker.version>
