@@ -10,7 +10,7 @@ geographical regions
 
 Introduction
 ---
-This project was started to be able to make better use of (`CountryCode`)[https://github.com/TakahikoKawasaki/nv-i18n/blob/master/src/main/java/com/neovisionaries/i18n/CountryCode.java]'s from [nv-i18n](https://github.com/TakahikoKawasaki/nv-i18n)
+This project was started to be able to make better use of [`CountryCode`](https://github.com/TakahikoKawasaki/nv-i18n/blob/master/src/main/java/com/neovisionaries/i18n/CountryCode.java)'s from [nv-i18n](https://github.com/TakahikoKawasaki/nv-i18n)
 
 Using `CountryCode` as a value in your application has several drawbacks:
 
