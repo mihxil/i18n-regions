@@ -1,8 +1,9 @@
 package org.meeuw.i18n;
 
-import javax.annotation.Nonnull;
 import java.util.Optional;
 import java.util.stream.Stream;
+
+import javax.annotation.Nonnull;
 
 /**
  * This provider can only 'getByCode', and serves as a fall back for countries. As a fallback, if no region with a given code could be found, this will match on the {@link VehicleRegistrationCode}.
@@ -30,7 +31,7 @@ public class VehicleRegistrationCodeFallbackProvider implements RegionProvider<C
 	}
 
 	/**
-	 * Returns an empty stream. All values should be provided by {@link CurrentCountryProvider}.
+	 * Returns an empty stream. All values should be provided by {@link AbstractCurrentCountryProvider}.
 	 */
 	@Override
 	public Stream<CurrentCountry> values() {

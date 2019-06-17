@@ -113,6 +113,16 @@ public class RegionsTest {
     }
 
     @Test
+    public void getEastTimor() {
+        Region tptl = Regions.getByCode("TPTL").orElse(null);
+        assertThat(tptl).isNotNull();
+        assertThat(tptl).isInstanceOf(FormerCountry.class);
+        assertThat(tptl.getCode()).isEqualTo("TPTL");
+        assertThat(tptl.getName()).isEqualTo("East Timor");
+        assertThat(tptl.getName(new Locale("nl"))).isEqualTo("Oost Timor");
+
+    }
+    @Test
     public void values() {
 
         Regions.values().forEach(r -> {

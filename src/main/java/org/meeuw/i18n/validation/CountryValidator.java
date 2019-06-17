@@ -29,13 +29,17 @@ public class CountryValidator implements ConstraintValidator<ValidCountry, Objec
 
     @Override
     public boolean isValid(Object region, ConstraintValidatorContext constraintValidatorContext) {
+        return isValid(region, annotation);
+    }
+
+    public static boolean isValid(Object region, ValidCountry annotation) {
         if (region == null) {
             return true;
         }
         if (region instanceof Iterable) {
             Iterable <?> i = (Iterable) region;
             for (Object o : i) {
-                if (! isValid(o, constraintValidatorContext)) {
+                if (! isValid(o, annotation)) {
                     return false;
                 }
             }
@@ -53,6 +57,7 @@ public class CountryValidator implements ConstraintValidator<ValidCountry, Objec
             throw new IllegalArgumentException("The object " + region.getClass().getSimpleName() + ":" + region + " cannot be converted to a region");
         }
     }
+
 
 
     public static boolean isValid(Region region, @Nonnull ValidCountry annotation) {
@@ -87,13 +92,13 @@ public class CountryValidator implements ConstraintValidator<ValidCountry, Objec
         return false;
     }
 
-    public static Predicate<Region> fromField(@Nonnull  Class<?> clazz, @Nonnull String field) {
+    public static Predicate<Object> fromField(@Nonnull  Class<?> clazz, @Nonnull String field) {
         try {
             ValidCountry[] annotationsByType = clazz.getDeclaredField(field).getAnnotationsByType(ValidCountry.class);
             if (annotationsByType.length == 0) {
                 throw new IllegalArgumentException("No ValidCountry annotation on " + clazz.getSimpleName() + "#" + field);
             }
-            Predicate<Region> predicate = r -> isValid(r, annotationsByType[0]);
+            Predicate<Object> predicate = r -> isValid(r, annotationsByType[0]);
             for (int i = 1; i < annotationsByType.length; i++) {
                 final int index = i;
                 predicate = predicate.and(r -> isValid(r, annotationsByType[index]));

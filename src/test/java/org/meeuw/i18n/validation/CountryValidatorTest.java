@@ -2,6 +2,7 @@ package org.meeuw.i18n.validation;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import javax.validation.Validation;
@@ -10,6 +11,7 @@ import javax.validation.ValidatorFactory;
 
 import org.junit.Test;
 import org.meeuw.i18n.CountrySubdivision;
+import org.meeuw.i18n.FormerlyAssignedCountryCode;
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.Regions;
 import com.neovisionaries.i18n.LanguageCode;
@@ -37,6 +39,15 @@ public class CountryValidatorTest {
         }
     }
 
+
+    static class AWithList {
+        @ValidCountry(value = OFFICIAL | FORMER, includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
+        List<Region> region;
+
+        public AWithList(Region... r) {
+            this.region = Arrays.asList(r);
+        }
+    }
      static class B {
         @ValidCountry(includes = "ZZ")
         List<Region> region;
@@ -69,6 +80,15 @@ public class CountryValidatorTest {
 
     }
 
+
+    @Test
+    public void isValidWithList() {
+
+        assertThat(VALIDATOR.validate(new AWithList(of(NL), of(FormerlyAssignedCountryCode.TPTL)))).hasSize(0);
+
+
+    }
+
     @Test
     public void onlyIncludes() {
 
@@ -80,7 +100,12 @@ public class CountryValidatorTest {
         assertThat(VALIDATOR.validate(new B(of(NL)))).hasSize(1);
 
         assertThat(VALIDATOR.validate(new B(ZZ))).hasSize(0);
+    }
 
+    @Test
+    public void eastTimor() {
+        Predicate<Object> predicate = CountryValidator.fromField(A.class, "region");
+        assertThat(predicate.test("TPTL")).isTrue();
     }
 
     @Test

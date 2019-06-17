@@ -3,4 +3,5 @@ org.meeuw.i18n.FormerCountryProvider
 org.meeuw.i18n.CountrySubdivisionProvider
 org.meeuw.i18n.UserAssignedProvider
 org.meeuw.i18n.UserAssignedCountrySubdivisionProvider
+org.meeuw.i18n.UnofficialCurrentCountryProvider
 org.meeuw.i18n.VehicleRegistrationCodeFallbackProvider

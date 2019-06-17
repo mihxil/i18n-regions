@@ -2,6 +2,7 @@ package org.meeuw.i18n;
 
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -24,13 +25,13 @@ public class Regions {
      * @return an optional of region. Empty if not found.
      */
     @SuppressWarnings("unchecked")
-    public static <T extends Region> Optional<T> getByCode(@Nonnull String code, @Nonnull Class<T> clazz) {
+    public static <T extends Region> Optional<T> getByCode(@Nonnull String code, @Nonnull Class<T> clazz, @Nonnull Predicate<Region> checker) {
         ServiceLoader<RegionProvider> loader = ServiceLoader.load(RegionProvider.class);
         for (RegionProvider<T> provider : loader) {
             if (provider.canProvide(clazz)) {
                 Optional<? extends Region> byCode = provider.getByCode(code);
                 if (byCode.isPresent()) {
-                    if (clazz.isInstance(byCode.get())) {
+                    if (clazz.isInstance(byCode.get()) && checker.test(byCode.get())) {
                         return (Optional<T>) byCode;
                     }
                 }
@@ -38,8 +39,12 @@ public class Regions {
 
         }
         return Optional.empty();
-
     }
+
+    public static <T extends Region> Optional<T> getByCode(@Nonnull String code, @Nonnull Class<T> clazz) {
+        return getByCode(code, clazz, (c) -> true);
+    }
+
      /**
      * Searches all available {@link RegionProvider}s for a region with given code and class. This is a defaulting
       * version of {@link #getByCode(String, Class)}, where the second argument is {@link Region}, and hence it will search Regions of all types.
