@@ -91,14 +91,14 @@ Several dependencies are marked `optional` in the pom.xml. E.g. the annotations 
 
 Building
 ---
-This projects needs to build with java 11. It produces byte code compatible for java 8 though.  The goal is to be compatible with [jigsaw](https://www.baeldung.com/project-jigsaw-java-modularity), which was introduces in java 9.
+This projects needs to build with java 11. It produces byte code compatible for java 8 though (besides module-info.class)  The goal is to be compatible with [jigsaw](https://www.baeldung.com/project-jigsaw-java-modularity), which was introduced in java 9.
 
 If you use java 11 then you can require org.meeuw.i18n.
 
 
 Testing
 ----
-Besides the usual junit test, in the [tests](tests) folder I collect some sample projects to test this stuff out by hand.
+Besides the usual junit test in [src/test](src/test), in the [tests](tests) folder I collect some sample projects to test this stuff out by hand.
 Try e.g. 
 ```bash
 cd tests/springboot
