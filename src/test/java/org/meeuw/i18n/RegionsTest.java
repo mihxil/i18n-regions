@@ -11,6 +11,7 @@ import org.meeuw.i18n.countries.CurrentCountry;
 import org.meeuw.i18n.countries.FormerCountry;
 import org.meeuw.i18n.countries.UserAssignedCountry;
 import org.meeuw.i18n.subdivisions.CountrySubdivisionWithCode;
+
 import com.neovisionaries.i18n.CountryCode;
 import com.neovisionaries.i18n.LanguageCode;
 
@@ -132,12 +133,12 @@ public class RegionsTest {
 
      @Test
     public void getContinent() {
-        Region tptl = Regions.getByCode("CONTINENT-AF", Continent.class).orElse(null);
-        assertThat(tptl).isNotNull();
-        assertThat(tptl).isInstanceOf(FormerCountry.class);
-        assertThat(tptl.getCode()).isEqualTo("TPTL");
-        assertThat(tptl.getName()).isEqualTo("East Timor");
-        assertThat(tptl.getName(new Locale("nl"))).isEqualTo("Oost Timor");
+        Region af = Regions.getByCode("CONTINENT-AF", Continent.class).orElse(null);
+        assertThat(af).isNotNull();
+        assertThat(af).isInstanceOf(Continent.class);
+        assertThat(af.getCode()).isEqualTo("CONTINENT-AF");
+        assertThat(af.getName()).isEqualTo("Africa");
+        assertThat(af.getName(new Locale("nl"))).isEqualTo("Afrika");
 
     }
     @Test

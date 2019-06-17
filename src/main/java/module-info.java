@@ -7,13 +7,13 @@ import org.meeuw.i18n.countries.VehicleRegistrationCodeFallbackProvider;
 import org.meeuw.i18n.subdivisions.CountrySubdivisionProvider;
 import org.meeuw.i18n.subdivisions.UserAssignedCountrySubdivisionProvider;
 
-module i18_regions {
+module org.meeuw.i18n {
 	exports org.meeuw.i18n;
 
 
 	requires nv.i18n;
 	requires i18n.subdivisions;
-	requires i18_formerly_assigned;
+	requires org.meeuw.i18n.formerlyassigned;
 
 	requires static java.validation;
     requires static java.xml.bind;

@@ -1,11 +1,11 @@
 package org.meeuw.i18n.persistence;
 
+import java.util.Locale;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.meeuw.i18n.Region;
-
-import java.util.Locale;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -114,6 +114,11 @@ public class RegionToStringConverterTest {
         Region region = impl.convertToEntityAttribute(code);
         assertThat(region).isNotNull();
         System.out.println(region + " " + region.getName(new Locale("nl")));
-        assertThat(impl.convertToDatabaseColumn(region)).isEqualTo(code);
+        if (code.equals("AN")) {
+            // Antillen does not exist any more.
+            assertThat(impl.convertToDatabaseColumn(region)).isEqualTo("ANHH");
+        } else {
+            assertThat(impl.convertToDatabaseColumn(region)).isEqualTo(code);
+        }
     }
 }
