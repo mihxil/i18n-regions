@@ -67,6 +67,7 @@ public interface Region extends Serializable {
         return getName(toLocale());
     }
 
+
     /**
      * Type of regions. For now this is small list, we may add all known 'subdivision' of countries.
      */

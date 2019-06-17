@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.junit.Ignore;
 import org.junit.Test;
 import com.neovisionaries.i18n.CountryCode;
+import com.neovisionaries.i18n.LanguageCode;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -122,11 +123,22 @@ public class RegionsTest {
         assertThat(tptl.getName(new Locale("nl"))).isEqualTo("Oost Timor");
 
     }
+
+     @Test
+    public void getContinent() {
+        Region tptl = Regions.getByCode("CONTINENT-AF", Continent.class).orElse(null);
+        assertThat(tptl).isNotNull();
+        assertThat(tptl).isInstanceOf(FormerCountry.class);
+        assertThat(tptl.getCode()).isEqualTo("TPTL");
+        assertThat(tptl.getName()).isEqualTo("East Timor");
+        assertThat(tptl.getName(new Locale("nl"))).isEqualTo("Oost Timor");
+
+    }
     @Test
     public void values() {
 
         Regions.values().forEach(r -> {
-            System.out.println(r.getClass().getSimpleName() + ":" + r.getCode()  + " : " + r.getName());
+            System.out.println(r.getClass().getSimpleName() + ":" + r.getCode()  + " : " + r.getName() + ":" + r.getName(LanguageCode.nl));
         });
 
     }

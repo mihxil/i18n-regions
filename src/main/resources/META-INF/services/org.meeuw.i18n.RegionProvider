@@ -1,7 +1,21 @@
+#First all official current countries
 org.meeuw.i18n.CurrentCountryProvider
+
+# All known former countries
 org.meeuw.i18n.FormerCountryProvider
-org.meeuw.i18n.CountrySubdivisionProvider
+
+# User assigned countries
+# Hard coded:
 org.meeuw.i18n.UserAssignedProvider
+# Via properties file
 org.meeuw.i18n.UserAssignedCountrySubdivisionProvider
+# Remainig countries in CountryCode (unofficial)
 org.meeuw.i18n.UnofficialCurrentCountryProvider
+# Last fall back, vehicle registration codes. Only to match by code
 org.meeuw.i18n.VehicleRegistrationCodeFallbackProvider
+
+# Subdivisions of countries
+org.meeuw.i18n.CountrySubdivisionProvider
+
+# Continents
+org.meeuw.i18n.ContinentProvider
