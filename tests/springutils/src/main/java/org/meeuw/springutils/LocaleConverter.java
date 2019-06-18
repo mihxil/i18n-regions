@@ -1,4 +1,4 @@
-package org.meeuw.springboot;
+package org.meeuw.springutils;
 
 import java.util.Locale;
 

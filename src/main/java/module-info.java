@@ -14,7 +14,6 @@ module org.meeuw.i18n {
     exports org.meeuw.i18n.validation;
     exports org.meeuw.i18n.spi;
 
-
     requires transitive nv.i18n;
     requires transitive i18n.subdivisions;
     requires transitive org.meeuw.i18n.formerlyassigned;
