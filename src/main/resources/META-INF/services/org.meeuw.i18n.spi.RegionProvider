@@ -6,7 +6,7 @@ org.meeuw.i18n.countries.FormerCountryProvider
 
 # User assigned countries
 # Hard coded:
-org.meeuw.i18n.UserAssignedProvider
+org.meeuw.i18n.countries.UserAssignedProvider
 # Via properties file
 org.meeuw.i18n.subdivisions.UserAssignedCountrySubdivisionProvider
 # Remainig countries in CountryCode (unofficial)

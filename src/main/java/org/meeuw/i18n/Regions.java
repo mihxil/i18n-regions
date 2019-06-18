@@ -3,6 +3,7 @@ package org.meeuw.i18n;
 import com.neovisionaries.i18n.LanguageCode;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.countries.FormerCountry;
+import org.meeuw.i18n.spi.RegionProvider;
 import org.meeuw.i18n.subdivisions.CountrySubdivision;
 
 import java.util.*;

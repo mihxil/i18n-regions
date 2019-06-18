@@ -5,7 +5,7 @@ import be.olsson.i18n.subdivision.SubdivisionFactory;
 import com.neovisionaries.i18n.CountryCode;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.Region;
-import org.meeuw.i18n.RegionProvider;
+import org.meeuw.i18n.spi.RegionProvider;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,19 +1,23 @@
-import org.meeuw.i18n.*;
 import org.meeuw.i18n.continents.ContinentProvider;
-import org.meeuw.i18n.countries.CurrentCountryProvider;
-import org.meeuw.i18n.countries.FormerCountryProvider;
-import org.meeuw.i18n.countries.UnofficialCurrentCountryProvider;
-import org.meeuw.i18n.countries.VehicleRegistrationCodeFallbackProvider;
+import org.meeuw.i18n.countries.*;
+import org.meeuw.i18n.spi.RegionProvider;
 import org.meeuw.i18n.subdivisions.CountrySubdivisionProvider;
 import org.meeuw.i18n.subdivisions.UserAssignedCountrySubdivisionProvider;
 
 module org.meeuw.i18n {
 	exports org.meeuw.i18n;
+	exports org.meeuw.i18n.bind.jaxb;
+	exports org.meeuw.i18n.continents;
+	exports org.meeuw.i18n.countries;
+	exports org.meeuw.i18n.persistence;
+	exports org.meeuw.i18n.subdivisions;
+	exports org.meeuw.i18n.validation;
+	exports org.meeuw.i18n.spi;
 
 
-	requires nv.i18n;
-	requires i18n.subdivisions;
-	requires org.meeuw.i18n.formerlyassigned;
+	requires transitive nv.i18n;
+	requires transitive i18n.subdivisions;
+	requires transitive org.meeuw.i18n.formerlyassigned;
 
 	requires static java.validation;
     requires static java.xml.bind;
@@ -25,7 +29,7 @@ module org.meeuw.i18n {
 		CurrentCountryProvider,
 		FormerCountryProvider,
 
-		org.meeuw.i18n.UserAssignedProvider,
+		UserAssignedProvider,
 		UserAssignedCountrySubdivisionProvider,
 		UnofficialCurrentCountryProvider,
 		VehicleRegistrationCodeFallbackProvider,

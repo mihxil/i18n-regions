@@ -2,7 +2,7 @@ package org.meeuw.i18n.countries;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.Region;
-import org.meeuw.i18n.RegionProvider;
+import org.meeuw.i18n.spi.RegionProvider;
 import org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode;
 
 import java.util.Arrays;

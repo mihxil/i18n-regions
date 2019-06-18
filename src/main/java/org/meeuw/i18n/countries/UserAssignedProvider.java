@@ -1,7 +1,4 @@
-package org.meeuw.i18n;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.meeuw.i18n.countries.UserAssignedCountry;
+package org.meeuw.i18n.countries;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -10,6 +7,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.i18n.Region;
+import org.meeuw.i18n.UserAssigned;
+import org.meeuw.i18n.spi.RegionProvider;
 
 /**
  * @author Michiel Meeuwissen

@@ -1,9 +1,11 @@
-package org.meeuw.i18n;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
+package org.meeuw.i18n.spi;
 
 import java.util.Optional;
 import java.util.stream.Stream;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.i18n.Region;
+import org.meeuw.i18n.Regions;
 
 /**
  * The provider which can be registered as a java service provider.
