@@ -1,17 +1,19 @@
 package org.meeuw.i18n.validation;
 
-import com.neovisionaries.i18n.CountryCode;
+import java.lang.reflect.Method;
+import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.Regions;
 import org.meeuw.i18n.countries.Country;
 import org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode;
-
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
-import java.util.Optional;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
+import com.neovisionaries.i18n.CountryCode;
 
 /**
  * @author Michiel Meeuwissen
@@ -97,15 +99,28 @@ public class CountryValidator implements ConstraintValidator<ValidCountry, Objec
             if (annotationsByType.length == 0) {
                 throw new IllegalArgumentException("No ValidCountry annotation on " + clazz.getSimpleName() + "#" + field);
             }
-            Predicate<Object> predicate = r -> isValid(r, annotationsByType[0]);
-            for (int i = 1; i < annotationsByType.length; i++) {
-                final int index = i;
-                predicate = predicate.and(r -> isValid(r, annotationsByType[index]));
-            }
-            return predicate;
+            return fromAnnotations(annotationsByType);
         } catch (NoSuchFieldException nsfe){
             throw new RuntimeException(nsfe);
         }
+
+    }
+
+    public static Predicate<Object> fromMethod(@NonNull Method method) {
+        ValidCountry[] annotationsByType = method.getAnnotationsByType(ValidCountry.class);
+        if (annotationsByType.length == 0) {
+            throw new IllegalArgumentException("No ValidCountry annotation on " + method);
+        }
+        return fromAnnotations(annotationsByType);
+    }
+
+    public static Predicate<Object> fromAnnotations(ValidCountry[] annotations) {
+        Predicate<Object> predicate = r -> isValid(r, annotations[0]);
+        for (int i = 1; i < annotations.length; i++) {
+            final int index = i;
+            predicate = predicate.and(r -> isValid(r, annotations[index]));
+        }
+        return predicate;
 
     }
 }
