@@ -9,7 +9,7 @@
   </parent>
 
   <artifactId>i18n-regions-continents</artifactId>
-  <packaging>jar</packaging>
+  <description>Provides the continents as region objects</description>
 
   <dependencies>
     <dependency>

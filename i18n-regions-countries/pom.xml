@@ -9,7 +9,7 @@
   </parent>
 
   <artifactId>i18n-regions-countries</artifactId>
-  <packaging>jar</packaging>
+  <description>Provides countries as region objects. This includes all current countries, and also formerly existing modern countries, was well as some 'user defined' countries.</description>
 
   <dependencies>
     <dependency>

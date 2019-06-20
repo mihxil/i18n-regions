@@ -9,7 +9,7 @@
   </parent>
 
   <artifactId>i18n-regions-subdivisions</artifactId>
-  <packaging>jar</packaging>
+  <description>Provides subdivisions of countries as regions.</description>
 
   <dependencies>
     <dependency>

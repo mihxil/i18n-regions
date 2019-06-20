@@ -10,6 +10,7 @@
 
   <artifactId>i18n-regions</artifactId>
   <packaging>jar</packaging>
+  <description>Provides the service loader for Regions, and some utilities to deal with regions generally</description>
 
   <dependencies>
 
