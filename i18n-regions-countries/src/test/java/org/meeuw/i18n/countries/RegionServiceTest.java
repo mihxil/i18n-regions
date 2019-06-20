@@ -82,13 +82,6 @@ public class RegionServiceTest {
     }
 
     @Test
-    public void subdivisionsOfGB(){
-        Region eng = RegionService.getInstance().getByCode("GB-ENG").orElse(null);
-        assertThat(eng.getCode()).isEqualTo("GB-ENG");
-        assertThat(eng.getName()).isEqualTo("England");
-    }
-
-    @Test
     public void byVehicleRegistration() {
         Country country = Country.getByCode("WAN").orElse(null);
         assertThat(country).isEqualTo(new CurrentCountry(CountryCode.NG));

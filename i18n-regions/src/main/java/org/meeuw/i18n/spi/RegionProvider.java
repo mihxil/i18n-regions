@@ -30,7 +30,9 @@ public interface RegionProvider<T extends Region> {
     /**
      * Searches and returns region with given code. As an {@link Optional}, so it will return {@code Optional.empty()} if this provider does not provide a region with the given code
      */
-    Optional<T> getByCode(@NonNull String code);
+    default Optional<T> getByCode(@NonNull String code) {
+        return values().filter(r -> r.getCode().equals(code)).findFirst();
+    }
 
     /**
      * Returns all region instances provided by this provides. As a stream, so it can be filtered, mapped and collected easily according to the use of the caller.

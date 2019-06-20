@@ -1,4 +1,4 @@
-package org.meeuw.i18n.validation;
+package org.meeuw.i18n.countries.validation;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,7 +33,7 @@ import static org.meeuw.i18n.countries.validation.ValidCountry.OFFICIAL;
 public class RegionValidatorTest {
 
     static class A {
-        @ValidRegion(value = OFFICIAL | FORMER, includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
+        @ValidCountry(value = OFFICIAL | FORMER, includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
         Region region;
 
         public A(Region r) {
@@ -43,7 +43,7 @@ public class RegionValidatorTest {
 
 
     static class AWithList {
-        @ValidRegion(value = OFFICIAL | FORMER, includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
+        @ValidCountry(value = OFFICIAL | FORMER, includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
         List<Region> region;
 
         public AWithList(Region... r) {
@@ -51,7 +51,7 @@ public class RegionValidatorTest {
         }
     }
      static class B {
-        @ValidRegion(includes = "ZZ")
+        @ValidCountry(includes = "ZZ")
         List<Region> region;
 
         public B(Region... r) {
@@ -106,14 +106,14 @@ public class RegionValidatorTest {
 
     @Test
     public void eastTimor() {
-        Predicate<Object> predicate = RegionValidator.fromField(A.class, "region");
+        Predicate<Object> predicate = CountryValidator.fromField(A.class, "region");
         assertThat(predicate.test("TPTL")).isTrue();
     }
 
     @Test
     public void useAsStreamFilter() throws NoSuchFieldException {
 
-        List<Region> collect = RegionService.getInstance().values().filter(RegionValidator.fromField(A.class, "region"))
+        List<Region> collect = RegionService.getInstance().values().filter(CountryValidator.fromField(A.class, "region"))
             .sorted(Regions.sortByName(LanguageCode.nl))
             .collect(Collectors.toList());
         assertThat(collect).doesNotContain(of(CS));

@@ -1,11 +1,10 @@
-package org.meeuw.i18n.countries;
+package org.meeuw.i18n.continents;
 
 import java.util.Locale;
 
 import org.junit.Test;
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.RegionService;
-import org.meeuw.i18n.continents.Continent;
 
 import com.neovisionaries.i18n.LanguageCode;
 

@@ -10,6 +10,7 @@ module org.meeuw.i18n.countries {
     requires transitive org.meeuw.i18n;
     requires transitive nv.i18n;
     requires transitive org.meeuw.i18n.formerlyassigned;
+
     requires static java.validation;
 
     uses RegionProvider;

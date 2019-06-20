@@ -21,48 +21,14 @@ public class CodeTest {
     @XmlRootElement
     static class A {
         @XmlAttribute
-        Region region = new Country("UK", "United Kingdom");
-    }
-    static class Country implements Region {
-        private final String code;
-        private final String name;
-
-        Country(String code, String name) {
-            this.code = code;
-            this.name = name;
-        }
+        Region region = new Country("NL", "Netherlands");
 
         @Override
-        public String getCode() {
-            return code;
-        }
-
-        @Override
-        public Type getType() {
-            return Type.COUNTRY;
-
-        }
-
-        @Override
-        public String getName() {
-            return name;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            Country country = (Country) o;
-
-            return code.equals(country.code);
-        }
-
-        @Override
-        public int hashCode() {
-            return code.hashCode();
+        public String toString() {
+            return region.getCode();
         }
     }
+
 
     @Test
     public void unmarshal() {
