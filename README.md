@@ -23,28 +23,28 @@ I decided to wrap `CountryCode` in a class `CurrentCountry`, which implements a 
 
 Architecture
 ---
-The central interface of this module is [`org.meeuw.i18n.Region`](src/main/java/org/meeuw/i18n/Region.java), which represents some geographical region.
+The central interface of this module is [`org.meeuw.i18n.Region`](i18n-regions/src/main/java/org/meeuw/i18n/Region.java), which represents some geographical region.
 
-Instances are created via  [java service providers](https://www.baeldung.com/java-spi) implementing [`org.meeuw.i18n.RegionProvider`](src/main/java/org/meeuw/i18n/RegionProvider.java) (registered via [META-INF/services](src/main/resourcces/META-INF/services/org.meeuw.i18n.RegionProvider)).
+Instances are created via  [java service providers](https://www.baeldung.com/java-spi) implementing [`org.meeuw.i18n.RegionProvider`](i18n-regions//src/main/java/org/meeuw/i18n/RegionProvider.java) (registered via [META-INF/services](src/main/resourcces/META-INF/services/org.meeuw.i18n.RegionProvider)).
 
-By default we provide these service 
+We provide these services:
 
-- For current countries there are [`org.meeuw.i18n.countries.CurrentCountry`'s](src/main/java/org/meeuw/i18n/countries/CurrentCountry.java). Backend by `com.neovisionaries.i18n.CountryCode`
-- For former countries there is [`org.meeuw.i18n.countries.FormerCountry`](src/main/java/org/meeuw/i18n/countries/FormerCountry.java), which is backed by  `org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode` (from [i18n-formerly-assigned](https://github.com/mihxil/i18n-formerly-assigned)
-- For subdivision of countries [`org.meeuw.i18n.subdivisions.CountrySubdivision`](src/main/java/org/meeuw/i18n/subdivisions/CountrySubdivision.java), which is backed by 
+- For current countries there are [`org.meeuw.i18n.countries.CurrentCountry`'s](i18n-regions-countries/src/main/java/org/meeuw/i18n/countries/CurrentCountry.java). Backend by `com.neovisionaries.i18n.CountryCode`
+- For former countries there is [`org.meeuw.i18n.countries.FormerCountry`](i18n-regions-countries/src/main/java/org/meeuw/i18n/countries/FormerCountry.java), which is backed by  `org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode` (from [i18n-formerly-assigned](https://github.com/mihxil/i18n-formerly-assigned)
+- For subdivision of countries [`org.meeuw.i18n.subdivisions.CountrySubdivision`](i18n-regions-subdivisions/src/main/java/org/meeuw/i18n/subdivisions/CountrySubdivision.java), which is backed by 
 `be.olsson.i18n.subdivision.CountryCodeSubdivision` (from https://github.com/tobias-/i18n-subdivisions)
-- Some common user assigned countries are  hard coded in [`org.meeuw.i18.countries..UserAssignedCountry`](src/main/java/org/meeuw/i18n/countries/UserAssignedCountry.java)
-- In case there are missing country subdivision they can easily be added via `subdivision.<country code>.properties`. E.g. [`subdivisions.GB.properties`](src/main/resources/subdivisions.GB.properties) provides some which were obviously missing from Great Britain otherwise.
+- Some common user assigned countries are  hard coded in [`org.meeuw.i18.countries..UserAssignedCountry`](si18n-regions-countries/rc/main/java/org/meeuw/i18n/countries/UserAssignedCountry.java)
+- In case there are missing country subdivision they can easily be added via `subdivision.<country code>.properties`. E.g. [`subdivisions.GB.properties`](18n-regions-subdivisions/src/main/resources/subdivisions.GB.properties) provides some which were obviously missing from Great Britain otherwise.
 
 
-Some utilities to deal with all this are provided in [`org.meeuw.i18n.Regions`](src/main/java/org/meeuw/i18n/Regions.java). 
+Some utilities to deal with all this are provided in [`org.meeuw.i18n.Regions`](i18n-regions/src/main/java/org/meeuw/i18n/Regions.java). 
 
 Example code useage can be seen in the [test cases for the Regions utility](src/test/java/org/meeuw/i18n/RegionsTest.java)
  
 
 Persistence
 -----------
-[`org.meeuw.i18n.persistence.RegionToStringConverter`](src/main/java/org/meeuw/i18n/persistence/RegionToStringConverter.java) is meant to arrange JPA persistence of `Region` objects to the database. We want the iso code to be used as simple strings in a database column or so.
+[`org.meeuw.i18n.persistence.RegionToStringConverter`](18n-region/src/main/java/org/meeuw/i18n/persistence/RegionToStringConverter.java) is meant to arrange JPA persistence of `Region` objects to the database. We want the iso code to be used as simple strings in a database column or so.
 
 This will also deal gracefully with codes which gets unassigned, because `Regions#getByCode` will also fall back to formerly assigned codes.
 
