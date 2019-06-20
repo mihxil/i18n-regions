@@ -1,18 +1,14 @@
 package org.meeuw.i18n;
 
-import java.util.*;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
+import java.util.Comparator;
+import java.util.Locale;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.meeuw.i18n.spi.RegionProvider;
 
 import com.neovisionaries.i18n.LanguageCode;
 
 /**
- * Utilities related to {@link Region}s. This also implements the java {@link ServiceLoader}
+ * Utilities related to {@link Region}s.
  * @author Michiel Meeuwissen
  * @since 0.1
  */

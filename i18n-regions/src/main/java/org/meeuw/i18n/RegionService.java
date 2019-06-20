@@ -10,6 +10,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.spi.RegionProvider;
 
 /**
+ * The singleton service providing information about the registered regions.
  * @author Michiel Meeuwissen
  * @since 0.1
  */

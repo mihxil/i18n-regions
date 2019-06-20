@@ -10,16 +10,16 @@ import java.util.stream.Stream;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.Region;
-import org.meeuw.i18n.UserAssignedCountry;
+import org.meeuw.i18n.UserAssignedRegion;
 import org.meeuw.i18n.spi.RegionProvider;
 
 /**
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-public class UserAssignedCountryProvider implements RegionProvider<UserAssignedCountry> {
+public class UserAssignedCountryProvider implements RegionProvider<UserAssignedRegion> {
 
-    public static final Map<String, UserAssignedCountry> VALUES;
+    public static final Map<String, UserAssignedRegion> VALUES;
 
     static {
         Map<String, org.meeuw.i18n.countries.UserAssignedCountry> v = new HashMap<>();
@@ -39,17 +39,17 @@ public class UserAssignedCountryProvider implements RegionProvider<UserAssignedC
 
     @Override
     public boolean canProvide(@NonNull Class<? extends Region> clazz) {
-        return clazz.isAssignableFrom(UserAssignedCountry.class) || clazz.isAssignableFrom(org.meeuw.i18n.countries.UserAssignedCountry.class);
+        return clazz.isAssignableFrom(UserAssignedRegion.class) || clazz.isAssignableFrom(org.meeuw.i18n.countries.UserAssignedCountry.class);
 
     }
 
     @Override
-    public Optional<UserAssignedCountry> getByCode(@NonNull String code) {
+    public Optional<UserAssignedRegion> getByCode(@NonNull String code) {
         return Optional.ofNullable(VALUES.get(code));
     }
 
     @Override
-    public Stream<UserAssignedCountry> values() {
+    public Stream<UserAssignedRegion> values() {
         return VALUES.values().stream();
 
     }

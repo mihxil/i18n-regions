@@ -7,13 +7,13 @@ import java.util.Locale;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-public abstract class UserAssignedCountry implements Region {
+public abstract class UserAssignedRegion implements Region {
 
     protected final String code;
     protected final String name;
     protected final String assignedBy;
 
-    protected UserAssignedCountry(String code, String name, String assignedBy) {
+    protected UserAssignedRegion(String code, String name, String assignedBy) {
         this.code = code;
         this.name = name;
         this.assignedBy = assignedBy;
@@ -44,7 +44,7 @@ public abstract class UserAssignedCountry implements Region {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserAssignedCountry that = (UserAssignedCountry) o;
+        UserAssignedRegion that = (UserAssignedRegion) o;
         return code.equals(that.code);
     }
 

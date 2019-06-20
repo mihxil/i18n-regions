@@ -1,5 +1,7 @@
 package org.meeuw.i18n.countries;
 
+import org.meeuw.i18n.UserAssignedRegion;
+
 /**
  * http://en.wikipedia.org/wiki/ISO_3166-2
  * https://docs.google.com/spreadsheet/ccc?key=0Ajm-SImXl8LzdGVkU3ZJRV9JS3ZIVDZNNTd6eTVLSGc&usp=sharing#gid=0
@@ -7,7 +9,7 @@ package org.meeuw.i18n.countries;
  * @since 0.1
  */
 @SuppressWarnings("unused")
-public class UserAssignedCountry extends org.meeuw.i18n.UserAssignedCountry implements Country {
+public class UserAssignedCountry extends UserAssignedRegion implements Country {
 
     public static UserAssignedCountry XZ =
         new UserAssignedCountry("XZ", "International Waters", null, -1, "UN/LOCODE");

@@ -7,7 +7,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.RegionService;
-import org.meeuw.i18n.UserAssignedCountry;
+import org.meeuw.i18n.UserAssignedRegion;
 
 import com.neovisionaries.i18n.CountryCode;
 import com.neovisionaries.i18n.LanguageCode;
@@ -61,7 +61,7 @@ public class RegionServiceTest {
 
         Region undefined = RegionService.getInstance().getByCode("ZZ").orElse(null);
         assertThat(undefined).isNotNull();
-        assertThat(undefined).isInstanceOf(UserAssignedCountry.class);
+        assertThat(undefined).isInstanceOf(UserAssignedRegion.class);
         assertThat(undefined.getCode()).isEqualTo("ZZ");
         assertThat(undefined.getName()).isEqualTo("Unknown or Invalid Territory");
         assertThat(undefined.getName(new Locale("nl"))).isEqualTo("Onbekend of ongeldig gebied");
