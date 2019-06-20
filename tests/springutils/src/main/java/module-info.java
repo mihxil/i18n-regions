@@ -1,5 +1,5 @@
 module org.meeuw.springutils {
-    requires org.meeuw.i18n;
+    requires transitive org.meeuw.i18n;
 
     requires spring.web;
 
@@ -9,4 +9,6 @@ module org.meeuw.springutils {
     requires spring.core;
     requires spring.context;
     exports org.meeuw.springutils;
+
+
 }

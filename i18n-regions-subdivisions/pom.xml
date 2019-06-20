@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.meeuw.i18n</groupId>
+    <artifactId>i18n-regions-parent</artifactId>
+    <version>0.1-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>i18n-regions-subdivisions</artifactId>
+  <packaging>jar</packaging>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.meeuw.i18n</groupId>
+      <artifactId>i18n-regions</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>be.olsson</groupId>
+      <artifactId>i18n-subdivisions</artifactId>
+    </dependency>
+
+
+  </dependencies>
+
+</project>

@@ -1,0 +1,3 @@
+org.meeuw.i18n.subdivisions.CountrySubdivisionProvider
+# Via properties file
+org.meeuw.i18n.subdivisions.UserAssignedCountrySubdivisionProvider

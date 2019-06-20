@@ -3,13 +3,20 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.meeuw.i18n</groupId>
-  <artifactId>i18n-regions</artifactId>
-  <version>0.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
-  <name>i18n-regions</name>
+  <artifactId>i18n-regions-parent</artifactId>
+  <packaging>pom</packaging>
 
+  <version>0.1-SNAPSHOT</version>
+  <name>i18n-regions</name>
   <description>Provides wrappers around ISO-codes for geographical regions</description>
   <url>https://github.com/mihxil/i18n-regions</url>
+
+  <modules>
+    <module>i18n-regions</module>
+    <module>i18n-regions-subdivisions</module>
+    <module>i18n-regions-countries</module>
+    <module>i18n-regions-continents</module>
+  </modules>
 
   <licenses>
     <license>
@@ -51,99 +58,6 @@
     <url>https://github.com/mihxil/i18n-regions</url>
     <tag>HEAD</tag>
   </scm>
-
-
-  <dependencies>
-    <dependency>
-      <groupId>com.neovisionaries</groupId>
-      <artifactId>nv-i18n</artifactId>
-      <version>${nv-i18n.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.meeuw.i18n</groupId>
-      <artifactId>i18n-formerly-assigned</artifactId>
-      <version>${i18n-formerly-assigned.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>be.olsson</groupId>
-      <artifactId>i18n-subdivisions</artifactId>
-      <version>${i18n-subdivisions.version}</version>
-    </dependency>
-
-
-    <!-- optional dependencies -->
-    <dependency>
-      <groupId>org.checkerframework</groupId>
-      <artifactId>checker-qual</artifactId>
-      <version>${checker.version}</version>
-      <optional>true</optional>
-    </dependency>
-
-    <dependency>
-      <groupId>javax.persistence</groupId>
-      <artifactId>javax.persistence-api</artifactId>
-      <version>2.2</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>javax.xml.bind</groupId>
-      <artifactId>jaxb-api</artifactId>
-      <version>2.3.1</version>
-      <optional>true</optional>
-    </dependency>
-      <dependency>
-      <groupId>javax.validation</groupId>
-      <artifactId>validation-api</artifactId>
-      <version>2.0.1.Final</version>
-      <optional>true</optional>
-    </dependency>
-
-
-    <!-- test dependencies -->
-
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.assertj</groupId>
-      <artifactId>assertj-core</artifactId>
-      <version>3.12.2</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.sun.xml.bind</groupId>
-      <artifactId>jaxb-impl</artifactId>
-      <version>2.3.2</version>
-      <scope>test</scope>
-    </dependency>
-     <dependency>
-      <groupId>com.sun.xml.bind</groupId>
-      <artifactId>jaxb-core</artifactId>
-      <version>2.3.0.1</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.hibernate.validator</groupId>
-      <artifactId>hibernate-validator</artifactId>
-      <version>6.0.2.Final</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>javax.el</groupId>
-      <artifactId>javax.el-api</artifactId>
-      <version>3.0.0</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.glassfish.web</groupId>
-      <artifactId>javax.el</artifactId>
-      <version>2.2.6</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
 
 
   <build>
@@ -294,6 +208,138 @@
       </build>
     </profile>
   </profiles>
+
+  <dependencyManagement>
+
+    <dependencies>
+       <dependency>
+        <groupId>org.meeuw.i18n</groupId>
+        <artifactId>i18n-regions</artifactId>
+         <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.neovisionaries</groupId>
+        <artifactId>nv-i18n</artifactId>
+        <version>${nv-i18n.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.meeuw.i18n</groupId>
+        <artifactId>i18n-formerly-assigned</artifactId>
+        <version>${i18n-formerly-assigned.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>be.olsson</groupId>
+        <artifactId>i18n-subdivisions</artifactId>
+        <version>${i18n-subdivisions.version}</version>
+      </dependency>
+
+
+
+
+      <!-- optional dependencies -->
+      <dependency>
+        <groupId>javax.annotation</groupId>
+        <artifactId>javax.annotation-api</artifactId>
+        <version>1.3.2</version>
+        <optional>true</optional>
+      </dependency>
+      <dependency>
+        <groupId>org.checkerframework</groupId>
+        <artifactId>checker-qual</artifactId>
+        <version>${checker.version}</version>
+        <optional>true</optional>
+      </dependency>
+
+      <dependency>
+        <groupId>javax.persistence</groupId>
+        <artifactId>javax.persistence-api</artifactId>
+        <version>2.2</version>
+        <optional>true</optional>
+      </dependency>
+      <dependency>
+        <groupId>javax.xml.bind</groupId>
+        <artifactId>jaxb-api</artifactId>
+        <version>2.3.1</version>
+        <optional>true</optional>
+      </dependency>
+      <dependency>
+        <groupId>javax.validation</groupId>
+        <artifactId>validation-api</artifactId>
+        <version>2.0.1.Final</version>
+        <optional>true</optional>
+      </dependency>
+
+
+      <!-- test dependencies -->
+
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.assertj</groupId>
+        <artifactId>assertj-core</artifactId>
+        <version>3.12.2</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.sun.xml.bind</groupId>
+        <artifactId>jaxb-impl</artifactId>
+        <version>2.3.2</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.sun.xml.bind</groupId>
+        <artifactId>jaxb-core</artifactId>
+        <version>2.3.0.1</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.hibernate.validator</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>6.0.2.Final</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>javax.el</groupId>
+        <artifactId>javax.el-api</artifactId>
+        <version>3.0.0</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.glassfish.web</groupId>
+        <artifactId>javax.el</artifactId>
+        <version>2.2.6</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.checkerframework</groupId>
+      <artifactId>checker-qual</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.persistence</groupId>
+      <artifactId>javax.persistence-api</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+    </dependency>
+
+
+  </dependencies>
+
 
   <distributionManagement>
     <snapshotRepository>
