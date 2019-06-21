@@ -18,35 +18,35 @@ import org.meeuw.i18n.RegionService;
  */
 public class RegionValidator implements ConstraintValidator<ValidRegion, Object> {
 
-    ValidRegion annotation;
+    ValidationInfo validationInfo;
     @Override
     public void initialize(ValidRegion constraintAnnotation) {
-        this.annotation = constraintAnnotation;
+        this.validationInfo = ValidationInfo.from(constraintAnnotation);
 
     }
 
     @Override
     public boolean isValid(Object region, ConstraintValidatorContext constraintValidatorContext) {
-        return isValid(region, annotation);
+        return isValid(region, validationInfo);
     }
 
-    public static boolean isValid(Object region, ValidRegion annotation) {
+    public static boolean isValid(Object region, ValidationInfo validationInfo) {
         if (region == null) {
             return true;
         }
         if (region instanceof Iterable) {
             Iterable <?> i = (Iterable) region;
             for (Object o : i) {
-                if (! isValid(o, annotation)) {
+                if (! isValid(o, validationInfo)) {
                     return false;
                 }
             }
             return true;
         } else if (region instanceof Region) {
-            return isValid((Region) region, annotation);
+            return isValid((Region) region, validationInfo).orElse(false);
         } else if (region instanceof CharSequence) {
             Optional<Region> byCode = RegionService.getInstance().getByCode(region.toString());
-            return byCode.filter(value -> isValid(value, annotation)).isPresent();
+            return byCode.filter(value -> isValid(value, validationInfo).orElse(false)).isPresent();
         } else {
             throw new IllegalArgumentException("The object " + region.getClass().getSimpleName() + ":" + region + " cannot be converted to a region");
         }
@@ -54,21 +54,26 @@ public class RegionValidator implements ConstraintValidator<ValidRegion, Object>
 
 
 
-    public static boolean isValid(Region region, @NonNull ValidRegion annotation) {
+    public static Optional<Boolean> isValid(Region region, @NonNull ValidationInfo annotation) {
         if (region == null) {
             // use javax.validation.constraints.NotNull
-            return true;
+            return Optional.of(true);
         }
 
-        if (Stream.of(annotation.excludes()).anyMatch((r) -> region.getCode().equals(r))) {
-            return false;
+        if (Stream.of(annotation.excludes).anyMatch((r) -> region.getCode().equals(r))) {
+            return  Optional.of(false);
         }
 
-        if (Stream.of(annotation.includes()).anyMatch((r) -> region.getCode().equals(r))) {
-            return true;
+        if (Stream.of(annotation.includes).anyMatch((r) -> region.getCode().equals(r))) {
+            return Optional.of(true);
         }
 
-        return false;
+        if (Stream.of(annotation.classes).noneMatch((r) -> r.isInstance(region))) {
+            return Optional.of(false);
+        }
+
+
+        return Optional.empty();
     }
 
     public static Predicate<Object> fromField(@NonNull Class<?> clazz, @NonNull String field) {
@@ -93,12 +98,13 @@ public class RegionValidator implements ConstraintValidator<ValidRegion, Object>
     }
 
     public static Predicate<Object> fromAnnotations(ValidRegion[] annotations) {
-        Predicate<Object> predicate = r -> isValid(r, annotations[0]);
+        Predicate<Object> predicate = r -> isValid(r, ValidationInfo.from(annotations[0]));
         for (int i = 1; i < annotations.length; i++) {
             final int index = i;
-            predicate = predicate.and(r -> isValid(r, annotations[index]));
+            predicate = predicate.and(r -> isValid(r, ValidationInfo.from(annotations[index])));
         }
         return predicate;
 
     }
+
 }

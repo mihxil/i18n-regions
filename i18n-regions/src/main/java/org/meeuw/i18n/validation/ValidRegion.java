@@ -7,6 +7,7 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+import org.meeuw.i18n.Region;
 
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
@@ -41,13 +42,10 @@ public @interface ValidRegion {
 
     Class<? extends Payload>[] payload() default {};
 
-    /**
-     * Base selection. Using a bitmap of the int constants in this class.
-     */
-    int value() default  0;
-
     String[] excludes() default {};
 
     String[] includes() default {};
+
+    Class[] classes() default {Region.class};
 
 }

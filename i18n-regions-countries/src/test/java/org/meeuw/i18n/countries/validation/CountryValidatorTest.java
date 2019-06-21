@@ -30,7 +30,7 @@ import static org.meeuw.i18n.countries.validation.ValidCountry.OFFICIAL;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-public class RegionValidatorTest {
+public class CountryValidatorTest {
 
     static class A {
         @ValidCountry(value = OFFICIAL | FORMER, includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
@@ -51,7 +51,7 @@ public class RegionValidatorTest {
         }
     }
      static class B {
-        @ValidCountry(includes = "ZZ")
+        @ValidCountry(includes = "ZZ", classes = {FormerlyAssignedCountryCode.class})
         List<Region> region;
 
         public B(Region... r) {
@@ -108,6 +108,20 @@ public class RegionValidatorTest {
     public void eastTimor() {
         Predicate<Object> predicate = CountryValidator.fromField(A.class, "region");
         assertThat(predicate.test("TPTL")).isTrue();
+    }
+
+
+    @Test
+    public void testClasses() {
+
+
+        assertThat(VALIDATOR.validate(new B(of(CS)))).hasSize(1);
+
+        assertThat(VALIDATOR.validate(new B(of(CSXX)))).hasSize(1);
+
+        assertThat(VALIDATOR.validate(new B(of(NL)))).hasSize(1);
+
+        assertThat(VALIDATOR.validate(new B(ZZ))).hasSize(0);
     }
 
     @Test

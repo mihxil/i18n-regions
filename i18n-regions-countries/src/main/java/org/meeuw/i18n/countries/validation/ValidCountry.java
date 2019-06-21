@@ -57,10 +57,13 @@ public @interface ValidCountry {
     /**
      * Base selection. Using a bitmap of the int constants in this class.
      */
-    int value() default  0;
+    int value() default  ~0;
 
     String[] excludes() default {};
 
     String[] includes() default {};
+
+    Class[] classes() default {Country.class};
+
 
 }
