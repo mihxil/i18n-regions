@@ -102,7 +102,12 @@ public class RegionServiceTest {
     public void values() {
 
         RegionService.getInstance().values().forEach(r -> {
-            System.out.println(r.getClass().getSimpleName() + ":" + r.getCode()  + " : " + r.getName() + ":" + r.getName(LanguageCode.nl));
+            StringBuilder build = new StringBuilder();
+            r.toStringBuilder(build, LanguageCode.nl.toLocale());
+            System.out.println(
+
+
+                r.getClass().getSimpleName() + ":" + r.getCode()  + " : " + r.getName() + ":" + r.getName(LanguageCode.nl) + ":" + build);
         });
 
     }

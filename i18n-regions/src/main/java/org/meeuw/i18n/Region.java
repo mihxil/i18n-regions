@@ -22,8 +22,6 @@ import com.neovisionaries.i18n.LanguageCode;
 @XmlJavaTypeAdapter(Code.class)
 public interface Region extends Serializable {
 
-    String BUNDLE = "Regions";
-
     /**
      * The code for the region. For countries: <a href="https://en.wikipedia.org/wiki/ISO_3166>ISO 3166</a>.
      */
@@ -48,13 +46,14 @@ public interface Region extends Serializable {
 
     String getName();
 
+    String getBundle();
 
     /**
-     * The name of the region in the given {@link Locale}. The default implementation uses the {@link #BUNDLE} resource bundle. For {@link CurrentCountry} also {@code code.toLocale().getDisplayCountry(locale)} is used.
+     * The name of the region in the given {@link Locale}. The default implementation uses the {@link #getBundle()} resource bundle.
      */
     default String getName(@NonNull Locale locale) {
         try {
-            return ResourceBundle.getBundle(BUNDLE, locale).getString(getCode());
+            return ResourceBundle.getBundle(getBundle(), locale).getString(getCode());
         } catch (MissingResourceException mse){
             return getName();
         }
@@ -71,6 +70,10 @@ public interface Region extends Serializable {
         return getName(toLocale());
     }
 
+    /**
+     *
+     *
+     */
     default void toStringBuilder(@NonNull StringBuilder builder, @NonNull Locale language) {
         builder.append(getName(language));
 

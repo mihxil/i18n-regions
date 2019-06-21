@@ -51,6 +51,12 @@ public class Continent implements Region {
 
     }
 
+    @Override
+    public String getBundle() {
+        return "Continents";
+
+    }
+
     public enum Code {
 
         AF("Africa"),

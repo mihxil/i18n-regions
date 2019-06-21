@@ -1,11 +1,12 @@
 package org.meeuw.i18n.countries;
 
-import com.neovisionaries.i18n.CountryCode;
-import org.checkerframework.checker.nullness.qual.NonNull;
-
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import com.neovisionaries.i18n.CountryCode;
 
 /**
  * Represents a country of which the code is one of the enum values of {@link CountryCode}.
@@ -47,10 +48,14 @@ public class CurrentCountry implements Country {
 
     }
 
+
+    /**
+     * For {@link CurrentCountry} also {@code code.toLocale().getDisplayCountry(locale)} is used.
+     */
     @Override
     public String getName(@NonNull Locale locale) {
         try {
-            return ResourceBundle.getBundle(BUNDLE, locale).getString(this.getCode());
+            return ResourceBundle.getBundle(getBundle(), locale).getString(this.getCode());
         } catch (MissingResourceException mse){
             if (code.getAssignment() == CountryCode.Assignment.OFFICIALLY_ASSIGNED) {
                 return code.toLocale().getDisplayCountry(locale);
@@ -73,6 +78,14 @@ public class CurrentCountry implements Country {
     @Override
     public String toString() {
         return code.toString();
+    }
+
+    @Override
+    public void toStringBuilder(@NonNull StringBuilder builder, @NonNull Locale locale) {
+        Country.super.toStringBuilder(builder, locale);
+        if (code.getAssignment() != CountryCode.Assignment.OFFICIALLY_ASSIGNED) {
+            builder.append(" (").append(code.getAssignment()).append(")");
+        }
     }
 
     public CountryCode.Assignment getAssignment() {

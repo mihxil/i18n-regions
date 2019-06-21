@@ -16,6 +16,13 @@
     <version>2.1.5.RELEASE</version>
   </parent>
 
+
+  <properties>
+    <java.version>8</java.version>
+    <meeuw.i18n.version>0.1-SNAPSHOT</meeuw.i18n.version>
+  </properties>
+
+
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -30,13 +37,24 @@
       <artifactId>test-springutils</artifactId>
       <version>0.1-SNAPSHOT</version>
     </dependency>
+       <dependency>
+      <groupId>org.meeuw.i18n</groupId>
+      <artifactId>i18n-regions-subdivisions</artifactId>
+      <version>${meeuw.i18n.version}</version>
+    </dependency>
+     <dependency>
+      <groupId>org.meeuw.i18n</groupId>
+      <artifactId>i18n-regions-countries</artifactId>
+      <version>${meeuw.i18n.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.meeuw.i18n</groupId>
+      <artifactId>i18n-regions-continents</artifactId>
+      <version>${meeuw.i18n.version}</version>
+    </dependency>
   </dependencies>
 
 
-
-  <properties>
-    <java.version>8</java.version>
-  </properties>
 
 
   <build>

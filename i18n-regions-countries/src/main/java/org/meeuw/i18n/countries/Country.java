@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.RegionService;
-import org.meeuw.i18n.Regions;
 import org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode;
 
 import com.neovisionaries.i18n.CountryCode;
@@ -50,6 +49,10 @@ public interface Country extends Region {
         return RegionService.getInstance().getByCode(code, Country.class);
     }
 
+    @Override
+    default String getBundle() {
+        return "Countries";
+    }
 
     @Override
     default Type getType() {
