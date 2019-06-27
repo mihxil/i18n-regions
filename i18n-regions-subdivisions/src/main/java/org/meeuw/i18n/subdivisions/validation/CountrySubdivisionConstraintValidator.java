@@ -1,11 +1,16 @@
 package org.meeuw.i18n.subdivisions.validation;
 
+import be.olsson.i18n.subdivision.CountryCodeSubdivision;
+
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import org.meeuw.i18n.RegionService;
 import org.meeuw.i18n.subdivisions.CountrySubdivision;
+import org.meeuw.i18n.subdivisions.CountrySubdivisionWithCode;
 import org.meeuw.i18n.validation.RegionConstraintValidator;
 
 /**
@@ -14,25 +19,65 @@ import org.meeuw.i18n.validation.RegionConstraintValidator;
  */
 public class CountrySubdivisionConstraintValidator implements ConstraintValidator<ValidCountrySubdivision, Object> {
 
+    ValidationInfo validationInfo;
 
+    @Override
+    public void initialize(ValidCountrySubdivision constraintAnnotation) {
+        this.validationInfo = ValidationInfo.from(constraintAnnotation);
 
-    protected boolean isValid(CountrySubdivision region, ValidationInfo validationInfo) {
-        Optional<Boolean> aBoolean = RegionConstraintValidator.defaultIsValid(region, validationInfo);
-        return aBoolean.orElse(true);
     }
 
     @Override
-    public boolean isValid(Object value, ConstraintValidatorContext context) {
-        return false;
-
+    public boolean isValid(Object region, ConstraintValidatorContext constraintValidatorContext) {
+        return isValid(region);
     }
+
+
+    private boolean isValid(Object region) {
+        if (region == null) {
+            return true;
+        }
+        if (region instanceof Iterable) {
+            Iterable <?> i = (Iterable) region;
+            for (Object o : i) {
+                if (! isValid(o)) {
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            CountrySubdivision c = convert(region);
+            return isValid(c, validationInfo);
+        }
+    }
+
+
+    private boolean isValid(CountrySubdivision region, ValidationInfo validationInfo) {
+        Optional<Boolean> aBoolean = RegionConstraintValidator.defaultIsValid(region, validationInfo);
+        if (aBoolean.isPresent()) {
+            return aBoolean.get();
+        }
+        if (Stream.of(validationInfo.excludeCountries).anyMatch(c ->  region.getCountryCode().equals(c))) {
+            return false;
+        }
+        if (Stream.of(validationInfo.includeCountries).anyMatch(c ->  region.getCountryCode().equals(c))) {
+            return true;
+        }
+        return false;
+    }
+
 
     protected CountrySubdivision convert(Object o) {
         if (o instanceof CountrySubdivision) {
             return (CountrySubdivision) o;
+        } else if (o instanceof CountryCodeSubdivision) {
+            return new CountrySubdivisionWithCode((CountryCodeSubdivision) o);
+        } else if (o instanceof CharSequence) {
+            Optional<CountrySubdivision> byCode = RegionService.getInstance().getByCode(o .toString(), false, CountrySubdivision.class);
+            return byCode.orElse(null);
+        } else {
+            return null;
         }
-        return null;
-
     }
 /*
 
