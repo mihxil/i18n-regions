@@ -33,7 +33,7 @@ public interface CountrySubdivision extends Region {
 
     @Override
     default String getBundle() {
-        return "Subdivisions";
+        return CountrySubdivision.class.getSimpleName();
     }
     @Override
     default void toStringBuilder(@NonNull StringBuilder builder, @NonNull Locale locale) {

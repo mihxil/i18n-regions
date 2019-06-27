@@ -1,14 +1,1 @@
-#First all official current countries
-org.meeuw.i18n.countries.CurrentCountryProvider
-
-# All known former countries
-org.meeuw.i18n.countries.FormerCountryProvider
-
-# User assigned countries
-# Hard coded:
-org.meeuw.i18n.countries.UserAssignedCountryProvider
-
-# Remainig countries in CountryCode (unofficial)
-org.meeuw.i18n.countries.UnofficialCurrentCountryProvider
-# Last fall back, vehicle registration codes. Only to match by code
-org.meeuw.i18n.countries.VehicleRegistrationCodeFallbackProvider
+org.meeuw.i18n.countries.SomeRegionProvider

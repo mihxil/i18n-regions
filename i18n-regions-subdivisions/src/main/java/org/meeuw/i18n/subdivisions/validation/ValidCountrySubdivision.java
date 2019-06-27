@@ -1,4 +1,4 @@
-package org.meeuw.i18n.countries.validation;
+package org.meeuw.i18n.subdivisions.validation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
@@ -7,14 +7,14 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import org.meeuw.i18n.countries.Country;
+import org.meeuw.i18n.subdivisions.CountrySubdivision;
 
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 
 /**
- * A javax.validation annotation that can be used to restrict the values of a {@link org.meeuw.i18n.Region} (or {@link Country} value.
+ *
  *
  * For example
  * {@code
@@ -31,24 +31,12 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  */
 @Target({FIELD, METHOD, TYPE_PARAMETER})
 @Retention(RUNTIME)
-@Constraint(validatedBy = CountryConstraintValidator.class)
+@Constraint(validatedBy = CountrySubdivisionConstraintValidator.class)
 @Documented
-public @interface ValidCountry {
+public @interface ValidCountrySubdivision {
 
-    /**
-     * See {@link Country#IS_OFFICIAL}
-     */
-    int OFFICIAL = 1 << 0;
-    /**
-     * See {@link Country#IS_FORMER}
-     */
-    int FORMER = 1 << 1;
-    /**
-     * See {@link Country#IS_USER_ASSIGNED}
-     */
-    int USER_ASSIGNED = 1 << 2;
 
-    String message() default "{org.meeuw.i18n.validation.country.message}";
+    String message() default "{org.meeuw.i18n.validation.countrysubdivision.message}";
 
     Class<?>[] groups() default {};
 
@@ -63,7 +51,11 @@ public @interface ValidCountry {
 
     String[] includes() default {};
 
-    Class<? extends Country>[] classes() default {Country.class};
+    String[] excludeCountries() default {};
+
+    String[] includeCountries() default {};
+
+    Class<? extends CountrySubdivision>[] classes() default {CountrySubdivision.class};
 
 
 }

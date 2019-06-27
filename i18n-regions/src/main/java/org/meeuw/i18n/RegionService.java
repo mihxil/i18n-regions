@@ -21,6 +21,7 @@ public class RegionService {
 
     private boolean inited = false;
     private List<RegionProvider> providers;
+
     private RegionService() {
 
     }
@@ -34,7 +35,7 @@ public class RegionService {
             final ServiceLoader<RegionProvider> loader = ServiceLoader.load(RegionProvider.class);
             List<RegionProvider> list = new ArrayList<>();
             loader.iterator().forEachRemaining(list::add);
-            list.sort(RegionProvider.COMPARATOR);
+            list.sort(Regions.priorityComparator());
             providers = Collections.unmodifiableList(list);
             inited = true;
         }
@@ -81,8 +82,6 @@ public class RegionService {
     }
 
     public  <T extends Region> Stream<T> values(Class<T> clazz) {
-        final ServiceLoader<RegionProvider> loader = ServiceLoader.load(RegionProvider.class);
-
         Spliterator<T> spliterator = new Spliterator<T>() {
             private final Iterator<? extends RegionProvider> iterator = getProviders().iterator();
             private Spliterator<T> values;
@@ -130,6 +129,4 @@ public class RegionService {
     public Stream<Region> values() {
         return values(Region.class);
     }
-
-
 }

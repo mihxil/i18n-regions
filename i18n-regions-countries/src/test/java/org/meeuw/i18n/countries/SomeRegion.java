@@ -1,39 +1,34 @@
-package org.meeuw.i18n.bind.jaxb;
+package org.meeuw.i18n.countries;
 
 import org.meeuw.i18n.Region;
 
 /**
  * @author Michiel Meeuwissen
- * @since 0.1
+ * @since ...
  */
-class Country implements Region {
-    private final String code;
-    private final String name;
+public class SomeRegion implements Region {
 
-    Country(String code, String name) {
+    private final String code;
+
+    public SomeRegion(String code) {
         this.code = code;
-        this.name = name;
     }
 
     @Override
     public String getCode() {
         return code;
+
     }
 
     @Override
     public Type getType() {
-        return Type.COUNTRY;
+        return Type.SUBDIVISION;
 
     }
 
     @Override
     public String getName() {
-        return name;
-    }
-
-    @Override
-    public String getBundle() {
-        return "Country";
+        return getCode();
 
     }
 
@@ -42,9 +37,9 @@ class Country implements Region {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Country country = (Country) o;
+        SomeRegion that = (SomeRegion) o;
 
-        return code.equals(country.code);
+        return code.equals(that.code);
     }
 
     @Override
@@ -54,6 +49,6 @@ class Country implements Region {
 
     @Override
     public String toString() {
-        return "A:" + code;
+        return getName();
     }
 }

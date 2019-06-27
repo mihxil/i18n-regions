@@ -31,7 +31,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  */
 @Target({FIELD, METHOD, TYPE_PARAMETER})
 @Retention(RUNTIME)
-@Constraint(validatedBy = RegionValidator.class)
+@Constraint(validatedBy = RegionConstraintValidator.class)
 @Documented
 public @interface ValidRegion {
 
@@ -46,6 +46,6 @@ public @interface ValidRegion {
 
     String[] includes() default {};
 
-    Class[] classes() default {Region.class};
+    Class<? extends Region>[] classes() default {Region.class};
 
 }

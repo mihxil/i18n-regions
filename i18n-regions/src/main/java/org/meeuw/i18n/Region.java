@@ -1,17 +1,14 @@
 package org.meeuw.i18n;
 
+import com.neovisionaries.i18n.LanguageCode;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.i18n.bind.jaxb.Code;
+
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.meeuw.i18n.bind.jaxb.Code;
-
-
-import com.neovisionaries.i18n.LanguageCode;
 
 /**
  * The region interface represents a certain geographical region. E.g. a {@link Country}
@@ -46,7 +43,9 @@ public interface Region extends Serializable {
 
     String getName();
 
-    String getBundle();
+    default String getBundle() {
+        return getClass().getSimpleName();
+    }
 
     /**
      * The name of the region in the given {@link Locale}. The default implementation uses the {@link #getBundle()} resource bundle.

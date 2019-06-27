@@ -3,6 +3,7 @@ package org.meeuw.i18n;
 import java.util.Locale;
 
 /**
+ * User assigned regions have a method {@link #getAssignedBy()}
  *
  * @author Michiel Meeuwissen
  * @since 0.1

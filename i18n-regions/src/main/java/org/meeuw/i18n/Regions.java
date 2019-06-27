@@ -3,6 +3,8 @@ package org.meeuw.i18n;
 import java.util.Comparator;
 import java.util.Locale;
 
+import javax.annotation.Priority;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.neovisionaries.i18n.LanguageCode;
@@ -51,5 +53,16 @@ public class Regions {
 
     public static String toString(@NonNull  Region region, @NonNull  LanguageCode language) {
         return toString(region, language.toLocale());
+    }
+
+    public static <T> Comparator<T> priorityComparator() {
+        return  (o1, o2) -> {
+            final Priority p1 = o1.getClass().getAnnotation(Priority.class);
+            final int v1 = p1 != null ? p1.value() : 100;
+            final Priority p2 = o2.getClass().getAnnotation(Priority.class);
+            final int v2 = p2 != null ? p2.value() : 100;
+            return v1 - v2;
+        };
+
     }
 }

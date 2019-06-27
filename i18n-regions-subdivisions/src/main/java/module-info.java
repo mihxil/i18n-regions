@@ -9,6 +9,7 @@ module org.meeuw.i18n.subdivisions {
 
     requires static org.checkerframework.checker.qual;
     requires i18n.subdivisions;
+    requires java.validation;
 
     provides RegionProvider with
 

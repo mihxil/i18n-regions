@@ -8,6 +8,7 @@ import javax.annotation.Priority;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.Region;
+import org.meeuw.i18n.countries.validation.ValidCountry;
 import org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode;
 import org.meeuw.i18n.spi.RegionProvider;
 
