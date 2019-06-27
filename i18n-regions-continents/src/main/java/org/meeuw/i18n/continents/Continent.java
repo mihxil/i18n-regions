@@ -53,7 +53,7 @@ public class Continent implements Region {
 
     @Override
     public String getBundle() {
-        return "Continents";
+        return "Continent";
 
     }
 
