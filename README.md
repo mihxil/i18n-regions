@@ -25,28 +25,40 @@ Architecture
 ---
 The central interface of this module is [`org.meeuw.i18n.Region`](i18n-regions/src/main/java/org/meeuw/i18n/Region.java), which represents some geographical region.
 
-Instances are created via  [java service providers](https://www.baeldung.com/java-spi) implementing [`org.meeuw.i18n.RegionProvider`](i18n-regions//src/main/java/org/meeuw/i18n/RegionProvider.java) (registered via [META-INF/services](src/main/resourcces/META-INF/services/org.meeuw.i18n.RegionProvider)).
+Instances are created via  [java service providers](https://www.baeldung.com/java-spi) implementing [`org.meeuw.i18n.RegionProvider`](i18n-regions//src/main/java/org/meeuw/i18n/RegionProvider.java) (registered via [META-INF/services](src/main/resourcces/META-INF/services/org.meeuw.i18n.RegionProvider)), which are all managed by  [`org.meeuw.i18n.RegionService`](i18n-regions/src/main/java/org/meeuw/i18n/RegionService.java). 
 
-We provide these services:
+Providers are distributes via different artifacts, do you can by that select what kind of regions the  service should provide 
 
+
+Providers
+========
+
+### Countries
+If you only need countries, you can take a dependency on `org.meeuw.i18:i18n-regions-countries`
+
+It provides:
 - For current countries there are [`org.meeuw.i18n.countries.CurrentCountry`'s](i18n-regions-countries/src/main/java/org/meeuw/i18n/countries/CurrentCountry.java). Backend by `com.neovisionaries.i18n.CountryCode`
 - For former countries there is [`org.meeuw.i18n.countries.FormerCountry`](i18n-regions-countries/src/main/java/org/meeuw/i18n/countries/FormerCountry.java), which is backed by  `org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode` (from [i18n-formerly-assigned](https://github.com/mihxil/i18n-formerly-assigned)
+- Some common user assigned countries are  hard coded in [`org.meeuw.i18.countries..UserAssignedCountry`](si18n-regions-countries/rc/main/java/org/meeuw/i18n/countries/UserAssignedCountry.java)
+
+### Subdivisions of countries
+These are provided in `org.meeuw.i18:i18n-regions-subdivisions`
 - For subdivision of countries [`org.meeuw.i18n.subdivisions.CountrySubdivision`](i18n-regions-subdivisions/src/main/java/org/meeuw/i18n/subdivisions/CountrySubdivision.java), which is backed by 
 `be.olsson.i18n.subdivision.CountryCodeSubdivision` (from https://github.com/tobias-/i18n-subdivisions)
-- Some common user assigned countries are  hard coded in [`org.meeuw.i18.countries..UserAssignedCountry`](si18n-regions-countries/rc/main/java/org/meeuw/i18n/countries/UserAssignedCountry.java)
 - In case there are missing country subdivision they can easily be added via `subdivision.<country code>.properties`. E.g. [`subdivisions.GB.properties`](18n-regions-subdivisions/src/main/resources/subdivisions.GB.properties) provides some which were obviously missing from Great Britain otherwise.
 
+### Continents
+A list of codes for the continents is provided in `org.meeuw.i18:i18n-regions-continents`
 
-Some utilities to deal with all this are provided in [`org.meeuw.i18n.Regions`](i18n-regions/src/main/java/org/meeuw/i18n/Regions.java). 
+### More
+In the same fashion arbitrary region implementations can easily be plugged in.
 
-Example code useage can be seen in the [test cases for the Regions utility](src/test/java/org/meeuw/i18n/RegionsTest.java)
- 
 
 Persistence
 -----------
 [`org.meeuw.i18n.persistence.RegionToStringConverter`](18n-region/src/main/java/org/meeuw/i18n/persistence/RegionToStringConverter.java) is meant to arrange JPA persistence of `Region` objects to the database. We want the iso code to be used as simple strings in a database column or so.
 
-This will also deal gracefully with codes which gets unassigned, because `Regions#getByCode` will also fall back to formerly assigned codes.
+This will also deal gracefully with codes which gets unassigned, because `RegionService#getByCode` will also fall back to formerly assigned codes.
 
 e.g.
 ```java
@@ -79,7 +91,7 @@ This list will not validate if you add Regions which don't follow the given rule
 As a utility you can use the settings in the annotation also to filter a stream of regions (e.g. `Regions#values()`)
 ```java 
  return Regions.values()
-            .filter(CountryValidator.fromField(MediaObject.class, "countries"))
+            .filter(RegionsService.getInstance().fromProperty(MediaObject.class, "countries"))
             .sorted(Regions.sortByName(LanguageCode.nl))
             .map(GuiEntry::of)
             .collect(Collectors.toList());
@@ -93,7 +105,7 @@ Building and Jigsaw
 ---
 This projects needs to build with java 11. It produces byte code compatible for java 8 though (besides module-info.class)  The goal is to be compatible with [jigsaw](https://www.baeldung.com/project-jigsaw-java-modularity), which was introduced in java 9.
 
-If you use java 11 then you can require org.meeuw.i18n.
+If you use java 11 then you can require `org.meeuw.i18n` in `module-info.java`
 
 
 Testing
