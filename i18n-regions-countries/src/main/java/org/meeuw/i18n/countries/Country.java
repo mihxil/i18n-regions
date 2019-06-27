@@ -51,7 +51,7 @@ public interface Country extends Region {
 
     @Override
     default String getBundle() {
-        return "Countries";
+        return "Country";
     }
 
     @Override
