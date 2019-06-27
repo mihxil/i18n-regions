@@ -9,11 +9,13 @@ import java.util.stream.Collectors;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import javax.validation.constraints.NotNull;
 
 import org.junit.Test;
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.RegionService;
 import org.meeuw.i18n.Regions;
+import org.meeuw.i18n.countries.Country;
 import org.meeuw.i18n.countries.FormerCountry;
 import org.meeuw.i18n.countries.SomeRegion;
 import org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode;
@@ -39,23 +41,6 @@ public class CountryValidatorTest {
 
 
 
-    static class CountryAndRegionsWithList {
-        @ValidRegion(includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
-        @ValidCountry(value = OFFICIAL | FORMER)
-        List<Region> region;
-
-        public CountryAndRegionsWithList(Region... r) {
-            this.region = Arrays.asList(r);
-        }
-    }
-    static class FormerAndZZ {
-        @ValidCountry(classes = {FormerCountry.class}, includes = "ZZ")
-        List<Region> region;
-
-        public FormerAndZZ(Region... r) {
-            this.region = Arrays.asList(r);
-        }
-    }
 
     private static final ValidatorFactory FACTORY = Validation.buildDefaultValidatorFactory();
     private static final Validator VALIDATOR = FACTORY.getValidator();
@@ -145,37 +130,83 @@ public class CountryValidatorTest {
     @Test
     public void isValidWithList() {
 
+        class CountryAndRegionsWithList {
+            @ValidRegion(includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
+            @ValidCountry(value = OFFICIAL | FORMER)
+            List<Region> region;
+
+            public CountryAndRegionsWithList(Region... r) {
+                this.region = Arrays.asList(r);
+            }
+        }
+
+
         assertThat(VALIDATOR.validate(new CountryAndRegionsWithList(of(NL), of(FormerlyAssignedCountryCode.TPTL)))).hasSize(0);
 
 
     }
 
     @Test
-    public void onlyIncludes() {
+    public void onlyIncludes() throws NoSuchFieldException {
+        class ZZ {
+            List<Country> region;
+
+            public ZZ(Region r) {
+                this.region = r instanceof  Country ? Arrays.asList((Country) r) : null;
+            }
+            public void setRegion(List<Country> regions) {
+                this.region = regions;
+            }
+            @ValidRegion(classes = Country.class)
+            @ValidCountry(value = 0, includes = "ZZ")
+            @NotNull
+            public List<Country> getRegion() {
+                return this.region;
+            }
+
+        }
 
 
-        assertThat(VALIDATOR.validate(new FormerAndZZ(of(CS)))).hasSize(1);
+        assertThat(VALIDATOR.validate(new ZZ(of(NL)))).hasSize(1);
 
-        assertThat(VALIDATOR.validate(new FormerAndZZ(of(CSXX)))).hasSize(0);
-
-        assertThat(VALIDATOR.validate(new FormerAndZZ(of(NL)))).hasSize(1);
-
-        assertThat(VALIDATOR.validate(new FormerAndZZ(ZZ))).hasSize(0);
+        assertThat(VALIDATOR.validate(new ZZ(ZZ))).hasSize(0);
+        testAsStreamFilter(
+            RegionValidatorService.fromProperty(ZZ.class, "region"),
+            ZZ::new);
     }
 
 
 
     @Test
-    public void testClasses() {
+    public void testClasses() throws NoSuchFieldException {
+        class Former {
+            @ValidRegion(classes = {FormerCountry.class})
+            @NotNull
+            List<Country> region;
+
+            public Former(Country... r) {
+                this.region = Arrays.asList(r);
+            }
+            public Former(Region r) {
+                this.region = r instanceof Country ? Arrays.asList((Country) r) : null;
+            }
+            public void setRegion(List<Country> regions) {
+                this.region = regions;
+            }
+        }
 
 
-        assertThat(VALIDATOR.validate(new FormerAndZZ(of(CS)))).hasSize(1);
+        assertThat(VALIDATOR.validate(new Former(of(CS)))).hasSize(1);
 
-        assertThat(VALIDATOR.validate(new FormerAndZZ(of(CSXX)))).hasSize(0);
+        assertThat(VALIDATOR.validate(new Former(of(CSXX)))).hasSize(0);
 
-        assertThat(VALIDATOR.validate(new FormerAndZZ(of(NL)))).hasSize(1);
+        assertThat(VALIDATOR.validate(new Former(of(NL)))).hasSize(1);
 
-        assertThat(VALIDATOR.validate(new FormerAndZZ(ZZ))).hasSize(0);
+        assertThat(VALIDATOR.validate(new Former(ZZ))).hasSize(1);
+
+        testAsStreamFilter(
+            RegionValidatorService.fromProperty(Former.class, "region"),
+            Former::new);
     }
 
     public void testAsStreamFilter(
@@ -188,7 +219,7 @@ public class CountryValidatorTest {
             .sorted(Regions.sortByName(LanguageCode.nl))
             .collect(Collectors.toList());
         for(Region r : validValues) {
-            assertThat(VALIDATOR.validate(instantiator.apply(r))).hasSize(0);
+            assertThat(VALIDATOR.validate(instantiator.apply(r))).withFailMessage(r + " was supposed to be valid, but is invalid").hasSize(0);
         }
         for (String code : assertToContain) {
             assertThat(validValues.stream().filter(r -> r.getCode().equals(code)).findFirst()).isPresent();

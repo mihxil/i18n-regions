@@ -20,8 +20,8 @@ public class RegionValidatorService {
 
 
 
-    public static Predicate<Object> fromProperty(@NonNull Class<?> clazz, @NonNull String field, Class<?>... groups) {
-        return (o) -> VALIDATOR.validateValue(clazz, field, o, groups).isEmpty();
+    public static Predicate<Object> fromProperty(@NonNull Class<?> clazz, @NonNull String propertyName, Class<?>... groups) {
+        return (o) -> VALIDATOR.validateValue(clazz, propertyName, o, groups).isEmpty();
     }
 
 }
