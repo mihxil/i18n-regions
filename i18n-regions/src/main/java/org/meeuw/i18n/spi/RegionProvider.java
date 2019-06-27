@@ -27,8 +27,11 @@ public interface RegionProvider<T extends Region> {
     /**
      * Searches and returns region with given code. As an {@link Optional}, so it will return {@code Optional.empty()} if this provider does not provide a region with the given code
      */
-    default Optional<T> getByCode(@NonNull String code) {
+    default Optional<T> getByCode(@NonNull String code, boolean lenient) {
         return values().filter(r -> r.getCode().equals(code)).findFirst();
+    }
+    default Optional<T> getByCode(@NonNull String code) {
+        return getByCode(code, true);
     }
 
     /**

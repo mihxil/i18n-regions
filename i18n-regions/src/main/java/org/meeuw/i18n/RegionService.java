@@ -53,10 +53,10 @@ public class RegionService {
      * @return an optional of region. Empty if not found.
      */
     @SuppressWarnings("unchecked")
-    public <T extends Region> Optional<T> getByCode(@NonNull String code, @NonNull Class<T> clazz, @NonNull Predicate<Region> checker) {
+    public <T extends Region> Optional<T> getByCode(@NonNull String code, boolean lenient, @NonNull Class<T> clazz, @NonNull Predicate<Region> checker) {
         for (RegionProvider<?> provider : getProviders()) {
             if (provider.canProvide(clazz)) {
-                Optional<? extends Region> byCode = provider.getByCode(code);
+                Optional<? extends Region> byCode = provider.getByCode(code, lenient);
                 if (byCode.isPresent()) {
                     if (clazz.isInstance(byCode.get()) && checker.test(byCode.get())) {
                         return (Optional<T>) byCode;
@@ -68,8 +68,12 @@ public class RegionService {
         return Optional.empty();
     }
 
+    public  <T extends Region> Optional<T> getByCode(@NonNull String code, boolean lenient, @NonNull Class<T> clazz) {
+        return getByCode(code, lenient, clazz, (c) -> true);
+    }
+
     public  <T extends Region> Optional<T> getByCode(@NonNull String code, @NonNull Class<T> clazz) {
-        return getByCode(code, clazz, (c) -> true);
+        return getByCode(code, true, clazz);
     }
 
      /**
@@ -77,8 +81,11 @@ public class RegionService {
       * version of {@link #getByCode(String, Class)}, where the second argument is {@link Region}, and hence it will search Regions of all types.
      * @return an optional of region. Empty if not found.
      */
+    public  Optional<Region> getByCode(String s, boolean lenient) {
+        return getByCode(s, lenient, Region.class);
+    }
     public  Optional<Region> getByCode(String s) {
-        return getByCode(s, Region.class);
+        return getByCode(s, true);
     }
 
     public  <T extends Region> Stream<T> values(Class<T> clazz) {

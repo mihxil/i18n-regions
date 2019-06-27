@@ -46,7 +46,7 @@ public interface Country extends Region {
 
 
     static Optional<Country> getByCode(@NonNull String code) {
-        return RegionService.getInstance().getByCode(code, Country.class);
+        return RegionService.getInstance().getByCode(code, true, Country.class);
     }
 
     @Override

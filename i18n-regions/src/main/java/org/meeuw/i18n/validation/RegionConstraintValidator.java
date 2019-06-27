@@ -57,7 +57,7 @@ public class RegionConstraintValidator implements ConstraintValidator<ValidRegio
         if(o instanceof Region) {
             return (Region) o;
         } else if (o instanceof CharSequence) {
-            Optional<Region> byCode = RegionService.getInstance().getByCode(o.toString());
+            Optional<Region> byCode = RegionService.getInstance().getByCode(o.toString(), false);
             return byCode.orElseThrow(IllegalArgumentException::new);
         } else {
             throw new IllegalArgumentException("The object " + o + " cannot be converted to a region");
@@ -67,17 +67,14 @@ public class RegionConstraintValidator implements ConstraintValidator<ValidRegio
 
 
 
-
-
     public static Optional<Boolean> defaultIsValid(Region region, ValidationInfo validationInfo) {
         if (region == null) {
             return Optional.of(true);
         }
-        if (Stream.of(validationInfo.getExcludes()).anyMatch((r) -> region.getCode().equals(r))) {
+        if (Stream.of(validationInfo.getExcludes()).anyMatch(region::equals)) {
             return  Optional.of(false);
         }
-
-        if (Stream.of(validationInfo.getIncludes()).anyMatch((r) -> region.getCode().equals(r))) {
+        if (Stream.of(validationInfo.getIncludes()).anyMatch(region::equals)) {
             return Optional.of(true);
         }
         if (Stream.of(validationInfo.getClasses()).noneMatch((r) -> r.isInstance(region))) {

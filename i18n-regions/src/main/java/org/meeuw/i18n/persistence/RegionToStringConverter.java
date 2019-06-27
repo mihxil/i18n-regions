@@ -25,6 +25,6 @@ public class RegionToStringConverter implements AttributeConverter<Region, Strin
 
     @Override
     public Region convertToEntityAttribute(String region) {
-        return region == null ? null : RegionService.getInstance().getByCode(region).orElse(null);
+        return region == null ? null : RegionService.getInstance().getByCode(region, true).orElse(null);
     }
 }

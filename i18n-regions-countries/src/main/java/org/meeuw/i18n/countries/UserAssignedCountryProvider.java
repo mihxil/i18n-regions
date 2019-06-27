@@ -44,7 +44,10 @@ public class UserAssignedCountryProvider implements RegionProvider<UserAssignedR
     }
 
     @Override
-    public Optional<UserAssignedRegion> getByCode(@NonNull String code) {
+    public Optional<UserAssignedRegion> getByCode(@NonNull String code, boolean lenient) {
+        if (lenient) {
+            code = code.toUpperCase();
+        }
         return Optional.ofNullable(VALUES.get(code));
     }
 

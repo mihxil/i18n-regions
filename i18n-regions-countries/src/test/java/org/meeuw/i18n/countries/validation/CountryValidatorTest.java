@@ -198,7 +198,7 @@ public class CountryValidatorTest {
             .sorted(Regions.sortByName(LanguageCode.nl))
             .collect(Collectors.toList());
         for(Region r : invalidValues) {
-            assertThat(VALIDATOR.validate(instantiator.apply(r)).size()).isGreaterThan(0);
+            assertThat(VALIDATOR.validate(instantiator.apply(r)).size()).withFailMessage(""+ r + " is valid, but expected to be invalid").isGreaterThan(0);
         }
         System.out.println(validValues.stream()
             .map(r -> Regions.toStringWithCode(r, LanguageCode.nl))

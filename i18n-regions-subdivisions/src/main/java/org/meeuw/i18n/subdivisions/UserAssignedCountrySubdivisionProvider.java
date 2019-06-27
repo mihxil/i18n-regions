@@ -1,16 +1,17 @@
 package org.meeuw.i18n.subdivisions;
 
-import com.neovisionaries.i18n.CountryCode;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.meeuw.i18n.Region;
-import org.meeuw.i18n.spi.RegionProvider;
-
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.i18n.Region;
+import org.meeuw.i18n.spi.RegionProvider;
+
+import com.neovisionaries.i18n.CountryCode;
 
 import static org.meeuw.i18n.subdivisions.UserAssignedCountrySubdivision.ofCountry;
 
@@ -31,7 +32,10 @@ public class UserAssignedCountrySubdivisionProvider implements RegionProvider<Us
 
 
     @Override
-    public Optional<UserAssignedCountrySubdivision> getByCode(@NonNull String code) {
+    public Optional<UserAssignedCountrySubdivision> getByCode(@NonNull String code, boolean lenient) {
+        if (lenient) {
+
+        }
         String[] countryAndSubDiversion = code.split("-", 2);
         if (countryAndSubDiversion.length < 2) {
             return Optional.empty();

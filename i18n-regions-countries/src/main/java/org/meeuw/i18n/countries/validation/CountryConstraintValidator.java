@@ -90,7 +90,7 @@ public class CountryConstraintValidator implements ConstraintValidator<ValidCoun
         } else if (o instanceof FormerlyAssignedCountryCode) {
             return Country.of((FormerlyAssignedCountryCode) o);
         } else if (o instanceof CharSequence) {
-            Optional<Country> byCode = RegionService.getInstance().getByCode(o .toString(), Country.class);
+            Optional<Country> byCode = RegionService.getInstance().getByCode(o .toString(), false, Country.class);
             return byCode.orElse(null);
         } else {
             return null;

@@ -25,7 +25,12 @@ public class VehicleRegistrationCodeFallbackProvider implements RegionProvider<C
 	}
 
 	@Override
-	public Optional<CurrentCountry> getByCode(@NonNull String code) {
+	public Optional<CurrentCountry> getByCode(@NonNull String code, boolean lenient) {
+		if (! lenient) {
+			return Optional.empty();
+		} else {
+			code = code.toUpperCase();
+		}
 		try {
 			VehicleRegistrationCode vehicleRegistrationCode = VehicleRegistrationCode.valueOf(code);
 			return Optional.of(new CurrentCountry(vehicleRegistrationCode.getCode()));

@@ -21,6 +21,11 @@
       <groupId>be.olsson</groupId>
       <artifactId>i18n-subdivisions</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.meeuw.i18n</groupId>
+      <artifactId>i18n-regions-countries</artifactId>
+      <optional>true</optional>
+    </dependency>
 
     <dependency>
       <groupId>org.hibernate.validator</groupId>

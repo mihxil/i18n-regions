@@ -22,10 +22,12 @@ public class ContinentProvider implements RegionProvider<Continent> {
     }
 
     @Override
-    public Optional<Continent> getByCode(@NonNull String code) {
+    public Optional<Continent> getByCode(@NonNull String code, boolean lenient) {
         try {
             if (code.startsWith(Continent.PREFIX)) {
-                return Optional.of(new Continent(Continent.Code.valueOf(code.substring(Continent.PREFIX.length()))));
+                return Optional.of(new Continent(Continent.Code.valueOf(
+                    code.substring(Continent.PREFIX.length())))
+                );
             } else {
                 return Optional.empty();
             }

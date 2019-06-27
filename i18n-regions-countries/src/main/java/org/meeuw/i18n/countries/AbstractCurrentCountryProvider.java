@@ -30,8 +30,9 @@ public abstract class AbstractCurrentCountryProvider implements RegionProvider<C
     }
 
     @Override
-    public Optional<CurrentCountry> getByCode(@NonNull String code) {
-        return Optional.ofNullable(CountryCode.getByCode(code)).filter(c -> assignments.contains(c.getAssignment())).map(CurrentCountry::new);
+    public Optional<CurrentCountry> getByCode(@NonNull String code, boolean lenient) {
+        return Optional.ofNullable(
+            CountryCode.getByCode(code, ! lenient)).filter(c -> assignments.contains(c.getAssignment())).map(CurrentCountry::new);
     }
 
     @Override

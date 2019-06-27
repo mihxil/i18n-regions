@@ -15,15 +15,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  *
- *
- * For example
- * {@code
- *
- *    @ValidCountry(value = OFFICIAL | FORMER, includes = "ZZ")
- *
- * }
- *
- * So basicly you specify one or more predicates, and/or a number of explicitely included and excluded codes.
+  uded codes.
  *
  *
  * @author Michiel Meeuwissen
@@ -41,11 +33,6 @@ public @interface ValidCountrySubdivision {
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
-
-    /**
-     * Base selection. Using a bitmap of the int constants in this class.
-     */
-    int value() default  ~0;
 
     String[] excludes() default {};
 

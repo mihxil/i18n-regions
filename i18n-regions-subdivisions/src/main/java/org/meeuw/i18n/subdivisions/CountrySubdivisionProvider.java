@@ -31,7 +31,10 @@ public class CountrySubdivisionProvider implements RegionProvider<CountrySubdivi
 
 
     @Override
-    public Optional<CountrySubdivisionWithCode> getByCode(@NonNull String code) {
+    public Optional<CountrySubdivisionWithCode> getByCode(@NonNull String code, boolean lenient) {
+        if (lenient) {
+            code = code.toUpperCase();
+        }
         String[] countryAndSubDiversion = code.split("-", 2);
         if (countryAndSubDiversion.length < 2) {
             return Optional.empty();

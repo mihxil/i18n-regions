@@ -19,7 +19,7 @@ public class SomeRegionProvider implements RegionProvider<SomeRegion> {
 
     @Override
     public Stream<SomeRegion> values() {
-        return Stream.of(new SomeRegion("GB-ENG"));
+        return Stream.of("GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS").map(SomeRegion::new);
 
     }
 }

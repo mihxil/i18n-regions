@@ -21,7 +21,7 @@ public class UserAssignedCountry extends UserAssignedRegion implements Country {
     public static UserAssignedCountry ZZ =
         new UserAssignedCountry("ZZ", "Unknown or Invalid Territory", null, -1, "Unicode Common Locale Data Repository");
     public static UserAssignedCountry XK = new UserAssignedCountry("XK", "Kosovo", "XKX", -1, "European Union");
-    public static UserAssignedCountry XN = new UserAssignedCountry("KN", "Nordic Patent Institute", null, -1, "World Intellectual Property Organization");
+    public static UserAssignedCountry XN = new UserAssignedCountry("XN", "Nordic Patent Institute", null, -1, "World Intellectual Property Organization");
 
 
 
