@@ -1,5 +1,6 @@
 package org.meeuw.i18n.countries;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.UserAssignedRegion;
 
 /**
@@ -29,7 +30,9 @@ public class UserAssignedCountry extends UserAssignedRegion implements Country {
 
     private final int number;
 
-    public UserAssignedCountry(String code, String name, String alpha3, int number, String assignedBy) {
+    public UserAssignedCountry(
+        @NonNull String code,
+        @NonNull String name, String alpha3, int number, String assignedBy) {
         super(code, name, assignedBy);
         this.alpha3 = alpha3;
         this.number = number;

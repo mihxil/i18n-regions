@@ -2,6 +2,8 @@ package org.meeuw.i18n;
 
 import java.util.Locale;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 /**
  * User assigned regions have a method {@link #getAssignedBy()}
  *
@@ -14,7 +16,9 @@ public abstract class UserAssignedRegion implements Region {
     protected final String name;
     protected final String assignedBy;
 
-    protected UserAssignedRegion(String code, String name, String assignedBy) {
+    protected UserAssignedRegion(
+        @NonNull String code,
+        @NonNull String name, String assignedBy) {
         this.code = code;
         this.name = name;
         this.assignedBy = assignedBy;

@@ -6,6 +6,8 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+import javax.annotation.Priority;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.spi.RegionProvider;
 
@@ -25,25 +27,15 @@ public class RegionService {
     private RegionService() {
 
     }
+
+    /**
+     * The singleton of this class.
+     */
     public static RegionService getInstance() {
         INSTANCE.initIfNeeded();
         return INSTANCE;
     }
 
-    private void initIfNeeded() {
-        if (! inited) {
-            final ServiceLoader<RegionProvider> loader = ServiceLoader.load(RegionProvider.class);
-            List<RegionProvider> list = new ArrayList<>();
-            loader.iterator().forEachRemaining(list::add);
-            list.sort(Regions.priorityComparator());
-            providers = Collections.unmodifiableList(list);
-            inited = true;
-        }
-    }
-
-    private List<RegionProvider> getProviders() {
-        return providers;
-    }
 
      /**
       * Searches all available {@link RegionProvider}s for a region with given code and class.
@@ -86,7 +78,6 @@ public class RegionService {
         return getByCode(code, true, clazz);
     }
 
-
     public  Optional<Region> getByCode(String s, boolean lenient) {
         return getByCode(s, lenient, Region.class);
     }
@@ -100,8 +91,11 @@ public class RegionService {
     }
 
     /**
-     * Returns a stream of all known instances of Region. Filtered by class,
-     * @param clazz
+     * Returns a stream of all known instances of Region. Filtered by class.
+     *
+     * You could also use {@link #values()} and then simply {@link Stream#filter(Predicate)}, but the advantage of this method is that {@link RegionProvider}'s which say they cannot {@link RegionProvider#canProvide(Class)} the given class are not even consulted.
+     *
+     * @param clazz The class (a subclass or interface of {@link Region}
      * @param <T>
      * @return
      */
@@ -145,12 +139,48 @@ public class RegionService {
         return StreamSupport.stream(spliterator, false).filter(clazz::isInstance);
     }
 
+
+    /**
+     * @return A stream of all known {@link Region} instances of one of the given {@link Region.Type}.
+     */
     public Stream<? extends Region> values(Region.Type... types) {
         Set<Region.Type> set = new HashSet<>(Arrays.asList(types));
         return values().filter(r -> set.contains(r.getType()));
     }
 
+    /**
+     * @return A stream of all known {@link Region} instances.
+     */
     public Stream<Region> values() {
         return values(Region.class);
     }
+
+
+    private void initIfNeeded() {
+        if (! inited) {
+            final ServiceLoader<RegionProvider> loader = ServiceLoader.load(RegionProvider.class);
+            List<RegionProvider> list = new ArrayList<>();
+            loader.iterator().forEachRemaining(list::add);
+            list.sort(priorityComparator());
+            providers = Collections.unmodifiableList(list);
+            inited = true;
+        }
+    }
+
+    private List<RegionProvider> getProviders() {
+        return providers;
+    }
+
+
+    private static <T> Comparator<T> priorityComparator() {
+        return  (o1, o2) -> {
+            final Priority p1 = o1.getClass().getAnnotation(Priority.class);
+            final int v1 = p1 != null ? p1.value() : 100;
+            final Priority p2 = o2.getClass().getAnnotation(Priority.class);
+            final int v2 = p2 != null ? p2.value() : 100;
+            return v1 - v2;
+        };
+
+    }
+
 }

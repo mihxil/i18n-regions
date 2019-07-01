@@ -31,13 +31,16 @@ public abstract class AbstractCurrentCountryProvider implements RegionProvider<C
 
     @Override
     public Optional<CurrentCountry> getByCode(@NonNull String code, boolean lenient) {
-        return Optional.ofNullable(
-            CountryCode.getByCode(code, ! lenient)).filter(c -> assignments.contains(c.getAssignment())).map(CurrentCountry::new);
+        return Optional.ofNullable(CountryCode.getByCode(code, ! lenient))
+            .filter(c -> assignments.contains(c.getAssignment()))
+            .map(CurrentCountry::new);
     }
 
     @Override
     public Stream<CurrentCountry> values() {
-        return Arrays.stream(CountryCode.values()).filter(c -> assignments.contains(c.getAssignment())).map(CurrentCountry::new);
+        return Arrays.stream(CountryCode.values())
+            .filter(c -> assignments.contains(c.getAssignment()))
+            .map(CurrentCountry::new);
 
     }
 }

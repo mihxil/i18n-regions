@@ -7,7 +7,8 @@ import org.meeuw.i18n.RegionService;
 import org.meeuw.i18n.validation.ValidRegion;
 
 /**
- * Contains
+ * Contains the information of a {@link ValidRegion}.
+ * The advantage being that this class can be extended (an annotation cannot be)
  * @author Michiel Meeuwissen
  * @since 0.1
  */

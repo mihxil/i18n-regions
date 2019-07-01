@@ -1,14 +1,16 @@
 package org.meeuw.i18n;
 
-import com.neovisionaries.i18n.LanguageCode;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.meeuw.i18n.bind.jaxb.Code;
-
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.i18n.bind.jaxb.Code;
+
+import com.neovisionaries.i18n.LanguageCode;
 
 /**
  * The region interface represents a certain geographical region. E.g. a {@link Country}
@@ -70,10 +72,11 @@ public interface Region extends Serializable {
     }
 
     /**
-     *
-     *
+     * Writes a string representation of a region to a string builder. This is meant to be a string for end users, which would make it unambiguously clear to them what is meant. E.g. in case of a subdivision of country, it could include the name of the country itself.
      */
-    default void toStringBuilder(@NonNull StringBuilder builder, @NonNull Locale language) {
+    default void toStringBuilder(
+        @NonNull StringBuilder builder,
+        @NonNull Locale language) {
         builder.append(getName(language));
 
     }

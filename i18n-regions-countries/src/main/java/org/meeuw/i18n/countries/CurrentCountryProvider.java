@@ -1,6 +1,6 @@
 package org.meeuw.i18n.countries;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 
 import javax.annotation.Priority;
@@ -16,7 +16,7 @@ import com.neovisionaries.i18n.CountryCode;
 @Priority(1)
 public class CurrentCountryProvider extends AbstractCurrentCountryProvider {
     public CurrentCountryProvider() {
-        super(new HashSet<>(Arrays.asList(CountryCode.Assignment.OFFICIALLY_ASSIGNED)));
+        super(new HashSet<>(Collections.singletonList(CountryCode.Assignment.OFFICIALLY_ASSIGNED)));
     }
 
 }

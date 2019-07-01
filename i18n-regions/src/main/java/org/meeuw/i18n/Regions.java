@@ -17,52 +17,65 @@ import com.neovisionaries.i18n.LanguageCode;
 public class Regions {
 
 
-
+    /**
+     * A {@link Comparator} to sort regions by {@link Region#getName(Locale)}, and hence in a certain language.
+     * @param locale
+     */
     public static Comparator<Region> sortByName(Locale locale) {
         return Comparator.comparing(o -> o.getName(locale));
     }
 
+      /**
+       * As {@link #sortByName(Locale)}, but with a {@link LanguageCode } argument.
+       */
     public static Comparator<Region> sortByName(LanguageCode language) {
         return sortByName(language.toLocale());
     }
 
-    public static String toString(@NonNull  Region region, @NonNull  Locale language) {
+    /**
+     * Utility for {@link Region#toStringBuilder(StringBuilder, Locale)} without the hassle of creating a {@link StringBuilder}
+     */
+    public static String toString(
+        @NonNull Region region,
+        @NonNull Locale language) {
         StringBuilder builder = new StringBuilder();
-        toStringBuilder(builder, region, language);
-        return builder.toString();
-    }
-
-    public static String toStringWithCode(@NonNull  Region region, @NonNull  Locale language) {
-        StringBuilder builder = new StringBuilder();
-        builder.append(region.getCode());
-        builder.append(':');
-        toStringBuilder(builder, region, language);
-        return builder.toString();
-    }
-
-    public static String toStringWithCode(@NonNull  Region region, @NonNull  LanguageCode language) {
-        return toStringWithCode(region, language.toLocale());
-    }
-
-    public static void toStringBuilder(@NonNull  StringBuilder builder, @NonNull  Region region, @NonNull  Locale language) {
         region.toStringBuilder(builder, language);
-
-
+        return builder.toString();
     }
 
-
-    public static String toString(@NonNull  Region region, @NonNull  LanguageCode language) {
+    /**
+     * As {@link #toString(Region, Locale)}, but with a {@link LanguageCode} argument.
+     */
+    public static String toString(
+        @NonNull  Region region,
+        @NonNull  LanguageCode language) {
         return toString(region, language.toLocale());
     }
 
-    public static <T> Comparator<T> priorityComparator() {
-        return  (o1, o2) -> {
-            final Priority p1 = o1.getClass().getAnnotation(Priority.class);
-            final int v1 = p1 != null ? p1.value() : 100;
-            final Priority p2 = o2.getClass().getAnnotation(Priority.class);
-            final int v2 = p2 != null ? p2.value() : 100;
-            return v1 - v2;
-        };
-
+    /**
+     * As {@link Region#toStringBuilder(StringBuilder, Locale)} but  prefixed with the code.
+     */
+    public static String toStringWithCode(
+        @NonNull Region region,
+        @NonNull Locale language) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(region.getCode());
+        builder.append(':');
+        region.toStringBuilder(builder, language);
+        return builder.toString();
     }
+
+
+    /**
+     * As {@link #toStringWithCode(Region, Locale)} but with a {@link LanguageCode} argument.
+     */
+    public static String toStringWithCode(
+        @NonNull Region region,
+        @NonNull LanguageCode language) {
+        return toStringWithCode(region, language.toLocale());
+    }
+
+
+
+
 }

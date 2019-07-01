@@ -2,6 +2,7 @@ package org.meeuw.i18n.continents;
 
 import java.util.Locale;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.Region;
 
 /**
@@ -18,7 +19,7 @@ public class Continent implements Region {
     private final Code code;
 
 
-    public Continent(Code code) {
+    public Continent(@NonNull Code code) {
         this.code = code;
     }
     @Override
@@ -54,7 +55,21 @@ public class Continent implements Region {
     @Override
     public String getBundle() {
         return "Continent";
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Continent continent = (Continent) o;
+
+        return code == continent.code;
+    }
+
+    @Override
+    public int hashCode() {
+        return code.hashCode();
     }
 
     public enum Code {
