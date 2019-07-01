@@ -1,4 +1,4 @@
-package org.meeuw.springboot11;
+package org.meeuw.springboot8;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
