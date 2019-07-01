@@ -1,4 +1,6 @@
-package org.meeuw.i18n.subdivisions.validation;
+package org.meeuw.i18n.subdivisions.validation.impl;
+
+import org.meeuw.i18n.subdivisions.validation.ValidCountrySubdivision;
 
 /**
  * @author Michiel Meeuwissen
@@ -10,13 +12,13 @@ class ValidationInfo extends org.meeuw.i18n.validation.impl.ValidationInfo {
 
     final String[] excludeCountries;
 
-    public ValidationInfo(String[] excludes, String[] includes, Class[] classes, String[] includeCountries, String[] excludeCountries) {
+    protected ValidationInfo(String[] excludes, String[] includes, Class[] classes, String[] includeCountries, String[] excludeCountries) {
         super(excludes, includes, classes);
         this.includeCountries = includeCountries;
         this.excludeCountries = excludeCountries;
     }
 
-    public static ValidationInfo from(ValidCountrySubdivision annotation) {
+    static ValidationInfo from(ValidCountrySubdivision annotation) {
         return new ValidationInfo(annotation.excludes(), annotation.includes(), annotation.classes(), annotation.includeCountries(), annotation.excludeCountries());
     }
 }

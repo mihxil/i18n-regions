@@ -16,12 +16,16 @@ import org.meeuw.i18n.RegionService;
  */
 public class RegionValidatorService {
     private static final ValidatorFactory FACTORY = Validation.buildDefaultValidatorFactory();
-    private static final Validator VALIDATOR = FACTORY.getValidator();
+    private final Validator VALIDATOR = FACTORY.getValidator();
 
     private static RegionValidatorService INSTANCE = new RegionValidatorService();
 
     public static RegionValidatorService getInstance() {
         return INSTANCE;
+    }
+
+    private RegionValidatorService() {
+
     }
 
     /**
@@ -36,6 +40,10 @@ public class RegionValidatorService {
         @NonNull String propertyName,
         @NonNull Class<?>... groups) {
         return (o) -> VALIDATOR.validateValue(clazz, propertyName, o, groups).isEmpty();
+    }
+
+    public Validator getValidator() {
+        return VALIDATOR;
     }
 
 }

@@ -6,9 +6,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import javax.validation.Validation;
 import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 import javax.validation.constraints.NotNull;
 
 import org.junit.Test;
@@ -39,11 +37,8 @@ import static org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode.CSXX;
  */
 public class CountryValidatorTest {
 
-
-
-
-    private static final ValidatorFactory FACTORY = Validation.buildDefaultValidatorFactory();
-    private static final Validator VALIDATOR = FACTORY.getValidator();
+    private static final RegionValidatorService regionValidatorService = RegionValidatorService.getInstance();
+    private static final Validator VALIDATOR = regionValidatorService.getValidator();
 
 
     @Test
@@ -79,7 +74,7 @@ public class CountryValidatorTest {
         //assertThat(VALIDATOR.validate(new A(CountrySubdivision.of(GB, "NIR").orElse(null)))).hasSize(0);
 
         testAsStreamFilter(
-            RegionValidatorService.fromProperty(CountryAndRegions.class, "region"),
+            regionValidatorService.fromProperty(CountryAndRegions.class, "region"),
             CountryAndRegions::new, "TPTL", "GB-ENG");
 
     }
@@ -121,7 +116,7 @@ public class CountryValidatorTest {
         //assertThat(VALIDATOR.validate(new A(CountrySubdivision.of(GB, "NIR").orElse(null)))).hasSize(0);
 
         testAsStreamFilter(
-            RegionValidatorService.fromProperty(CountryAndRegionsAsString.class, "region"),
+            regionValidatorService.fromProperty(CountryAndRegionsAsString.class, "region"),
             CountryAndRegionsAsString::new, "TPTL", "GB-ENG");
     }
 
@@ -171,7 +166,7 @@ public class CountryValidatorTest {
 
         assertThat(VALIDATOR.validate(new ZZ(ZZ))).hasSize(0);
         testAsStreamFilter(
-            RegionValidatorService.fromProperty(ZZ.class, "region"),
+            regionValidatorService.fromProperty(ZZ.class, "region"),
             ZZ::new);
     }
 
@@ -205,7 +200,7 @@ public class CountryValidatorTest {
         assertThat(VALIDATOR.validate(new Former(ZZ))).hasSize(1);
 
         testAsStreamFilter(
-            RegionValidatorService.fromProperty(Former.class, "region"),
+            regionValidatorService.fromProperty(Former.class, "region"),
             Former::new);
     }
 

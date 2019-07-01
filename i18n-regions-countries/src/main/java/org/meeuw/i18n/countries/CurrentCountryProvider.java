@@ -19,4 +19,5 @@ public class CurrentCountryProvider extends AbstractCurrentCountryProvider {
         super(new HashSet<>(Collections.singletonList(CountryCode.Assignment.OFFICIALLY_ASSIGNED)));
     }
 
+
 }

@@ -22,7 +22,9 @@ public interface RegionProvider<T extends Region> {
      * use {@link #values()} of this class if it known that it would not result any matches.
      */
 
-    boolean canProvide(@NonNull Class<? extends Region> clazz);
+    default boolean canProvide(@NonNull Class<? extends Region> clazz) {
+        return clazz.isAssignableFrom(getProvidedClass());
+    }
 
     /**
      * Searches and returns region with given code. As an {@link Optional}, so it will return {@code Optional.empty()} if this provider does not provide a region with the given code
@@ -33,6 +35,12 @@ public interface RegionProvider<T extends Region> {
     default Optional<T> getByCode(@NonNull String code) {
         return getByCode(code, true);
     }
+
+    default T getByCodeOrNull(@NonNull String code) {
+        return getByCode(code, true).orElse(null);
+    }
+
+    Class<T> getProvidedClass();
 
     /**
      * Returns all region instances provided by this provides. As a stream, so it can be filtered, mapped and collected easily according to the use of the caller.

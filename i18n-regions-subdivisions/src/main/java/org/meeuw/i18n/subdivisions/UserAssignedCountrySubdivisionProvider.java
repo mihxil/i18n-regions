@@ -8,7 +8,6 @@ import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.meeuw.i18n.Region;
 import org.meeuw.i18n.spi.RegionProvider;
 
 import com.neovisionaries.i18n.CountryCode;
@@ -22,13 +21,6 @@ import static org.meeuw.i18n.subdivisions.UserAssignedCountrySubdivision.ofCount
  * @since 0.1
  */
 public class UserAssignedCountrySubdivisionProvider implements RegionProvider<UserAssignedCountrySubdivision> {
-
-
-    @Override
-    public boolean canProvide(@NonNull Class<? extends Region> clazz) {
-        return clazz.isAssignableFrom(UserAssignedCountrySubdivision.class);
-
-    }
 
 
     @Override
@@ -46,6 +38,12 @@ public class UserAssignedCountrySubdivisionProvider implements RegionProvider<Us
             }
             return Optional.ofNullable(ofCountry(countryCode).get(countryAndSubDiversion[1]));
         }
+    }
+
+    @Override
+    public Class<UserAssignedCountrySubdivision> getProvidedClass() {
+        return UserAssignedCountrySubdivision.class;
+
     }
 
 

@@ -155,6 +155,14 @@ public class RegionService {
         return values(Region.class);
     }
 
+    /**
+     * @return The provides currently registerd
+     */
+    public List<RegionProvider> getProviders() {
+        return Collections.unmodifiableList(providers);
+    }
+
+
 
     private void initIfNeeded() {
         if (! inited) {
@@ -165,10 +173,6 @@ public class RegionService {
             providers = Collections.unmodifiableList(list);
             inited = true;
         }
-    }
-
-    private List<RegionProvider> getProviders() {
-        return providers;
     }
 
 

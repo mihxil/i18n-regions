@@ -6,7 +6,6 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.meeuw.i18n.Region;
 import org.meeuw.i18n.spi.RegionProvider;
 
 import com.neovisionaries.i18n.CountryCode;
@@ -24,8 +23,8 @@ public abstract class AbstractCurrentCountryProvider implements RegionProvider<C
     }
 
     @Override
-    public boolean canProvide(@NonNull Class<? extends Region> clazz) {
-        return clazz.isAssignableFrom(CurrentCountry.class);
+    public Class<CurrentCountry> getProvidedClass() {
+        return CurrentCountry.class;
 
     }
 

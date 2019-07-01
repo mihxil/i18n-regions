@@ -2,8 +2,6 @@ package org.meeuw.i18n.bind.jaxb;
 
 import java.util.stream.Stream;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.meeuw.i18n.Region;
 import org.meeuw.i18n.spi.RegionProvider;
 
 /**
@@ -11,11 +9,13 @@ import org.meeuw.i18n.spi.RegionProvider;
  * @since ...
  */
 public class CountryProvider implements RegionProvider<Country> {
+
     @Override
-    public boolean canProvide(@NonNull Class<? extends Region> clazz) {
-        return clazz.isAssignableFrom(Country.class);
+    public Class<Country> getProvidedClass() {
+        return Country.class;
 
     }
+
     @Override
     public Stream<Country> values() {
         return Stream.of(

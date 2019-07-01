@@ -7,7 +7,6 @@ import java.util.stream.Stream;
 import javax.annotation.Priority;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.meeuw.i18n.Region;
 import org.meeuw.i18n.spi.RegionProvider;
 
 /**
@@ -16,10 +15,7 @@ import org.meeuw.i18n.spi.RegionProvider;
  */
 @Priority(100)
 public class ContinentProvider implements RegionProvider<Continent> {
-    @Override
-    public boolean canProvide(@NonNull Class<? extends Region> clazz) {
-        return clazz.isAssignableFrom(Continent.class);
-    }
+
 
     @Override
     public Optional<Continent> getByCode(@NonNull String code, boolean lenient) {
@@ -35,6 +31,11 @@ public class ContinentProvider implements RegionProvider<Continent> {
             return Optional.empty();
         }
 
+    }
+
+    @Override
+    public Class<Continent> getProvidedClass() {
+        return Continent.class;
     }
 
     @Override

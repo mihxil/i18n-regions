@@ -19,6 +19,10 @@ import com.neovisionaries.i18n.CountryCode;
 @Priority(50)
 public class UnofficialCurrentCountryProvider extends AbstractCurrentCountryProvider {
     public UnofficialCurrentCountryProvider() {
-        super(Arrays.stream(CountryCode.Assignment.values()).filter(a -> a != CountryCode.Assignment.OFFICIALLY_ASSIGNED).collect(Collectors.toSet()));
+        super(
+            Arrays.stream(CountryCode.Assignment.values())
+                .filter(a -> a != CountryCode.Assignment.OFFICIALLY_ASSIGNED)
+                .collect(Collectors.toSet())
+        );
     }
 }

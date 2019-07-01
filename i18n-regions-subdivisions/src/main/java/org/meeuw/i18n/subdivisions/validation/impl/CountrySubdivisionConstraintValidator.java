@@ -1,4 +1,4 @@
-package org.meeuw.i18n.subdivisions.validation;
+package org.meeuw.i18n.subdivisions.validation.impl;
 
 import be.olsson.i18n.subdivision.CountryCodeSubdivision;
 
@@ -11,6 +11,7 @@ import javax.validation.ConstraintValidatorContext;
 import org.meeuw.i18n.RegionService;
 import org.meeuw.i18n.subdivisions.CountrySubdivision;
 import org.meeuw.i18n.subdivisions.CountrySubdivisionWithCode;
+import org.meeuw.i18n.subdivisions.validation.ValidCountrySubdivision;
 import org.meeuw.i18n.validation.impl.RegionConstraintValidator;
 
 /**

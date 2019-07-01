@@ -6,7 +6,6 @@ import java.util.stream.Stream;
 import javax.annotation.Priority;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.meeuw.i18n.Region;
 import org.meeuw.i18n.spi.RegionProvider;
 
 /**
@@ -18,11 +17,7 @@ import org.meeuw.i18n.spi.RegionProvider;
 @Priority(100)
 public class VehicleRegistrationCodeFallbackProvider implements RegionProvider<CurrentCountry> {
 
-	@Override
-	public boolean canProvide(@NonNull Class<? extends Region> clazz) {
-		return clazz.isAssignableFrom(CurrentCountry.class);
 
-	}
 
 	@Override
 	public Optional<CurrentCountry> getByCode(@NonNull String code, boolean lenient) {
@@ -38,6 +33,11 @@ public class VehicleRegistrationCodeFallbackProvider implements RegionProvider<C
 			return Optional.empty();
 		}
 
+	}
+
+	@Override
+	public Class<CurrentCountry> getProvidedClass() {
+		return CurrentCountry.class;
 	}
 
 	/**

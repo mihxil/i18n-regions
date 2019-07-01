@@ -7,13 +7,15 @@
   <artifactId>test-springutils</artifactId>
   <version>0.1-SNAPSHOT</version>
 
-
+  <properties>
+    <meeuw.i18n.version>0.2-SNAPSHOT</meeuw.i18n.version>
+  </properties>
 
   <dependencies>
     <dependency>
       <groupId>org.meeuw.i18n</groupId>
       <artifactId>i18n-regions</artifactId>
-      <version>0.1-SNAPSHOT</version>
+      <version>${meeuw.i18n.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>

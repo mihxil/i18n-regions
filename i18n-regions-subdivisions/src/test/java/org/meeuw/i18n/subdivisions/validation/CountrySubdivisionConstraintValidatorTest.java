@@ -42,7 +42,7 @@ public class CountrySubdivisionConstraintValidatorTest {
         }
 
         testAsStreamFilter(
-            RegionValidatorService.fromProperty(Netherlands.class, "region"),
+            RegionValidatorService.getInstance().fromProperty(Netherlands.class, "region"),
             Netherlands::new, "NL-DR");
 
     }

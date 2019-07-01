@@ -19,7 +19,7 @@
 
   <properties>
     <java.version>8</java.version>
-    <meeuw.i18n.version>0.1-SNAPSHOT</meeuw.i18n.version>
+    <meeuw.i18n.version>0.2-SNAPSHOT</meeuw.i18n.version>
   </properties>
 
 

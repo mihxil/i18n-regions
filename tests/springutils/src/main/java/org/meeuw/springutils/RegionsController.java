@@ -2,7 +2,6 @@ package org.meeuw.springutils;
 
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.lang.reflect.ParameterizedType;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
@@ -29,13 +28,7 @@ public class RegionsController {
             writer.println("<p>With translations to: " + language + "</p>");
             ul(writer, () -> {
                 for (RegionProvider<?> c : RegionService.getInstance().getProviders()) {
-                    try {
-                        Class<?> actualType = (Class<?>) ((ParameterizedType) c.getClass().getMethod("getByCode", String.class).getGenericReturnType()).getActualTypeArguments()[0];
-                        li(writer, actualType, () -> writer.print(c.getClass() + ":"));
-                    } catch (Exception e) {
-
-                    }
-
+                    li(writer, c.getProvidedClass(), () -> writer.print(c.getClass() + ":"));
                 }
                 }
             );

@@ -19,7 +19,7 @@ import org.meeuw.i18n.spi.RegionProvider;
  */
 public class UserAssignedCountryProvider implements RegionProvider<UserAssignedRegion> {
 
-    public static final Map<String, UserAssignedRegion> VALUES;
+    private static final Map<String, UserAssignedRegion> VALUES;
 
     static {
         Map<String, org.meeuw.i18n.countries.UserAssignedCountry> v = new HashMap<>();
@@ -49,6 +49,12 @@ public class UserAssignedCountryProvider implements RegionProvider<UserAssignedR
             code = code.toUpperCase();
         }
         return Optional.ofNullable(VALUES.get(code));
+    }
+
+    @Override
+    public Class<UserAssignedRegion> getProvidedClass() {
+        return UserAssignedRegion.class;
+
     }
 
     @Override
