@@ -41,15 +41,18 @@ public class RegionService {
         }
     }
 
-    public List<RegionProvider> getProviders() {
+    private List<RegionProvider> getProviders() {
         return providers;
     }
 
      /**
-     * Searches all available {@link RegionProvider}s for a region with given code and class.
-     * @param code The (ISO) code
-     * @param clazz The subclass or sub interface of {@link Region} which is searched
-     * @param <T>
+      * Searches all available {@link RegionProvider}s for a region with given code and class.
+      * @param code The (ISO) code
+      * @param lenient Whether matching should be lenient or strict. Lenient matching may e.g. be case insensitive or matching on former codes
+      * @param clazz The subclass or sub interface of {@link Region} which is searched
+      * @param checker An extra predicate to which the region must match
+      * @param <T>
+      *
      * @return an optional of region. Empty if not found.
      */
     @SuppressWarnings("unchecked")
@@ -68,26 +71,40 @@ public class RegionService {
         return Optional.empty();
     }
 
+    /**
+     * A defaulting version of {@link #getByCode(String, boolean, Class, Predicate)}. The predicate is implicetely always true.
+     */
+
     public  <T extends Region> Optional<T> getByCode(@NonNull String code, boolean lenient, @NonNull Class<T> clazz) {
         return getByCode(code, lenient, clazz, (c) -> true);
     }
 
+     /**
+      * A defaulting version of {@link #getByCode(String, boolean, Class, Predicate)}. No predicate, lenient matching.
+     */
     public  <T extends Region> Optional<T> getByCode(@NonNull String code, @NonNull Class<T> clazz) {
         return getByCode(code, true, clazz);
     }
 
+
+    public  Optional<Region> getByCode(String s, boolean lenient) {
+        return getByCode(s, lenient, Region.class);
+    }
      /**
      * Searches all available {@link RegionProvider}s for a region with given code and class. This is a defaulting
       * version of {@link #getByCode(String, Class)}, where the second argument is {@link Region}, and hence it will search Regions of all types.
      * @return an optional of region. Empty if not found.
      */
-    public  Optional<Region> getByCode(String s, boolean lenient) {
-        return getByCode(s, lenient, Region.class);
-    }
     public  Optional<Region> getByCode(String s) {
         return getByCode(s, true);
     }
 
+    /**
+     * Returns a stream of all known instances of Region. Filtered by class,
+     * @param clazz
+     * @param <T>
+     * @return
+     */
     public  <T extends Region> Stream<T> values(Class<T> clazz) {
         Spliterator<T> spliterator = new Spliterator<T>() {
             private final Iterator<? extends RegionProvider> iterator = getProviders().iterator();

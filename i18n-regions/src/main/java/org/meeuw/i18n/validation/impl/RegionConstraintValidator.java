@@ -1,4 +1,4 @@
-package org.meeuw.i18n.validation;
+package org.meeuw.i18n.validation.impl;
 
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -8,6 +8,7 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.RegionService;
+import org.meeuw.i18n.validation.ValidRegion;
 
 /**
  * @author Michiel Meeuwissen

@@ -4,7 +4,7 @@ package org.meeuw.i18n.subdivisions.validation;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-class ValidationInfo extends org.meeuw.i18n.validation.ValidationInfo {
+class ValidationInfo extends org.meeuw.i18n.validation.impl.ValidationInfo {
 
     final String[] includeCountries;
 

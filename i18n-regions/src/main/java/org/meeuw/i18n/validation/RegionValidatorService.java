@@ -9,7 +9,7 @@ import javax.validation.ValidatorFactory;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
- * The singleton service providing information about the registered regions.
+
  * @author Michiel Meeuwissen
  * @since 0.1
  */
@@ -18,9 +18,10 @@ public class RegionValidatorService {
     private static final Validator VALIDATOR = FACTORY.getValidator();
 
 
-
-
-    public static Predicate<Object> fromProperty(@NonNull Class<?> clazz, @NonNull String propertyName, Class<?>... groups) {
+    public static Predicate<Object> fromProperty(
+        @NonNull Class<?> clazz,
+        @NonNull String propertyName,
+        @NonNull Class<?>... groups) {
         return (o) -> VALIDATOR.validateValue(clazz, propertyName, o, groups).isEmpty();
     }
 

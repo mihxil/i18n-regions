@@ -8,6 +8,7 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 import org.meeuw.i18n.Region;
+import org.meeuw.i18n.validation.impl.RegionConstraintValidator;
 
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;

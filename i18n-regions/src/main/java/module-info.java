@@ -2,8 +2,12 @@ module org.meeuw.i18n {
     exports org.meeuw.i18n;
     exports org.meeuw.i18n.bind.jaxb;
     exports org.meeuw.i18n.persistence;
+
     exports org.meeuw.i18n.validation;
+    exports org.meeuw.i18n.validation.impl;
+
     exports org.meeuw.i18n.spi;
+
 
 
     requires static java.validation;

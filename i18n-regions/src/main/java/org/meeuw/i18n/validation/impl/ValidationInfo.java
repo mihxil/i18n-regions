@@ -1,11 +1,13 @@
-package org.meeuw.i18n.validation;
+package org.meeuw.i18n.validation.impl;
 
 import java.util.stream.Stream;
 
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.RegionService;
+import org.meeuw.i18n.validation.ValidRegion;
 
 /**
+ * Contains
  * @author Michiel Meeuwissen
  * @since 0.1
  */

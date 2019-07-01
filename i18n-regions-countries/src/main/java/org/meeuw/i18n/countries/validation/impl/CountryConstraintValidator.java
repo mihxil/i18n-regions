@@ -1,4 +1,4 @@
-package org.meeuw.i18n.countries.validation;
+package org.meeuw.i18n.countries.validation.impl;
 
 import java.util.Optional;
 
@@ -7,8 +7,9 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.meeuw.i18n.RegionService;
 import org.meeuw.i18n.countries.Country;
+import org.meeuw.i18n.countries.validation.ValidCountry;
 import org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode;
-import org.meeuw.i18n.validation.RegionConstraintValidator;
+import org.meeuw.i18n.validation.impl.RegionConstraintValidator;
 
 import com.neovisionaries.i18n.CountryCode;
 

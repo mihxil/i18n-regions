@@ -11,7 +11,7 @@ import javax.validation.ConstraintValidatorContext;
 import org.meeuw.i18n.RegionService;
 import org.meeuw.i18n.subdivisions.CountrySubdivision;
 import org.meeuw.i18n.subdivisions.CountrySubdivisionWithCode;
-import org.meeuw.i18n.validation.RegionConstraintValidator;
+import org.meeuw.i18n.validation.impl.RegionConstraintValidator;
 
 /**
  * @author Michiel Meeuwissen

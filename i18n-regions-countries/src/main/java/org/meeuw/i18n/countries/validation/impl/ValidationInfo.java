@@ -1,10 +1,13 @@
-package org.meeuw.i18n.countries.validation;
+package org.meeuw.i18n.countries.validation.impl;
+
+import org.meeuw.i18n.countries.validation.ValidCountry;
 
 /**
+ * Contains the information of a {@link ValidCountry}. The advantage being that this class can be extended (an annotation cannot be)
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-public class ValidationInfo extends org.meeuw.i18n.validation.ValidationInfo {
+public class ValidationInfo extends org.meeuw.i18n.validation.impl.ValidationInfo {
 
     final int value;
 
