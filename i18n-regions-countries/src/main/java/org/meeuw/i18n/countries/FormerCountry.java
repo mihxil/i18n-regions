@@ -74,4 +74,18 @@ public class FormerCountry implements Country {
         }).map(Integer::parseInt).findFirst().orElse(-1);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        FormerCountry that = (FormerCountry) o;
+
+        return code == that.code;
+    }
+
+    @Override
+    public int hashCode() {
+        return code.hashCode();
+    }
 }
