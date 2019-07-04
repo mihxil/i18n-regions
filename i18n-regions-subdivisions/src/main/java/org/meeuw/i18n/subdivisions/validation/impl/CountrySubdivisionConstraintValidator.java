@@ -47,8 +47,14 @@ public class CountrySubdivisionConstraintValidator implements ConstraintValidato
             }
             return true;
         } else {
-            CountrySubdivision c = convert(region);
-            return isValid(c, validationInfo);
+            Optional<CountrySubdivision> c = convert(region);
+            if (c.isPresent()) {
+                return isValid(c.get(), validationInfo);
+            } else {
+                // Value could not be converted to a country subdivision, consider it valid.
+                // Use @RegionValidator to constrain that.
+                return true;
+            }
         }
     }
 
@@ -68,16 +74,15 @@ public class CountrySubdivisionConstraintValidator implements ConstraintValidato
     }
 
 
-    protected CountrySubdivision convert(Object o) {
+    protected Optional<CountrySubdivision> convert(Object o) {
         if (o instanceof CountrySubdivision) {
-            return (CountrySubdivision) o;
+            return Optional.of((CountrySubdivision) o);
         } else if (o instanceof CountryCodeSubdivision) {
-            return new CountrySubdivisionWithCode((CountryCodeSubdivision) o);
+            return Optional.of(new CountrySubdivisionWithCode((CountryCodeSubdivision) o));
         } else if (o instanceof CharSequence) {
-            Optional<CountrySubdivision> byCode = RegionService.getInstance().getByCode(o .toString(), false, CountrySubdivision.class);
-            return byCode.orElse(null);
+            return RegionService.getInstance().getByCode(o .toString(), false, CountrySubdivision.class);
         } else {
-            return null;
+            return Optional.empty();
         }
     }
 /*

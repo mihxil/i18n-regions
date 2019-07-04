@@ -42,8 +42,13 @@ public class RegionConstraintValidator implements ConstraintValidator<ValidRegio
             }
             return true;
         } else {
-            Region r = convert(region);
-            return isValid(r, validationInfo);
+            Optional<Region> r = convert(region);
+            if (r.isPresent()) {
+                return isValid(r.get(), validationInfo);
+            } else {
+                // not convertible to Region, consider this value invalid
+                return false;
+            }
         }
     }
 
@@ -54,14 +59,14 @@ public class RegionConstraintValidator implements ConstraintValidator<ValidRegio
 
     }
 
-    private Region convert(Object o) {
+    private Optional<Region> convert(Object o) {
         if(o instanceof Region) {
-            return (Region) o;
+            return Optional.of((Region) o);
         } else if (o instanceof CharSequence) {
             Optional<Region> byCode = RegionService.getInstance().getByCode(o.toString(), false);
-            return byCode.orElseThrow(IllegalArgumentException::new);
+            return byCode;
         } else {
-            throw new IllegalArgumentException("The object " + o + " cannot be converted to a region");
+            return Optional.empty();
         }
 
     }

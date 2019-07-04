@@ -9,13 +9,14 @@ import javax.validation.Payload;
 
 import org.meeuw.i18n.countries.Country;
 import org.meeuw.i18n.countries.validation.impl.CountryConstraintValidator;
+import org.meeuw.i18n.validation.ValidRegion;
 
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 
 /**
- * A javax.validation annotation that can be used to restrict the values of a {@link org.meeuw.i18n.Region} (or {@link Country} value.
+ * A javax.validation annotation that can be used to restrict the values of a {@link Country} value.
  *
  * For example
  * {@code
@@ -26,11 +27,13 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *
  * So basicly you specify one or more predicates, and/or a number of explicitely included and excluded codes.
  *
+ * When applied to instances of {@link org.meeuw.i18n.Region}s that are not {@link Country} (or convertable to that), are considered valid. Use {@link org.meeuw.i18n.validation.ValidRegion} to constraint that.
+ *
  *
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-@Target({FIELD, METHOD, TYPE_PARAMETER})
+@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
 @Retention(RUNTIME)
 @Constraint(validatedBy = CountryConstraintValidator.class)
 @Documented
@@ -60,10 +63,19 @@ public @interface ValidCountry {
      */
     int value() default  ~0;
 
+    /**
+     * See {@link ValidRegion#excludes()}
+     */
     String[] excludes() default {};
 
+    /**
+     * See {@link ValidRegion#includes()} ()}
+     */
     String[] includes() default {};
 
+    /**
+     * See {@link ValidRegion#classes()}
+     */
     Class<? extends Country>[] classes() default {Country.class};
 
 

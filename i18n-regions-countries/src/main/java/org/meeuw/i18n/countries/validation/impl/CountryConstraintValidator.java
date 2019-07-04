@@ -46,8 +46,13 @@ public class CountryConstraintValidator implements ConstraintValidator<ValidCoun
             }
             return true;
         } else {
-            Country c = convert(region);
-            return isValid(c, validationInfo);
+            Optional<Country> c = convert(region);
+            if (c.isPresent()) {
+                return isValid(c.get(), validationInfo);
+            } else {
+                // value is not a country, consider it valid, use @ValidRegion
+                return true;
+            }
         }
     }
 
@@ -83,18 +88,17 @@ public class CountryConstraintValidator implements ConstraintValidator<ValidCoun
     }
 
 
-    private Country convert(Object o) {
+    private Optional<Country> convert(Object o) {
         if (o instanceof Country) {
-            return (Country) o;
+            return Optional.of((Country) o);
         } else if (o instanceof CountryCode) {
-            return Country.of((CountryCode) o);
+            return Optional.of(Country.of((CountryCode) o));
         } else if (o instanceof FormerlyAssignedCountryCode) {
-            return Country.of((FormerlyAssignedCountryCode) o);
+            return Optional.of(Country.of((FormerlyAssignedCountryCode) o));
         } else if (o instanceof CharSequence) {
-            Optional<Country> byCode = RegionService.getInstance().getByCode(o .toString(), false, Country.class);
-            return byCode.orElse(null);
+            return RegionService.getInstance().getByCode(o .toString(), false, Country.class);
         } else {
-            return null;
+            return Optional.empty();
         }
     }
 

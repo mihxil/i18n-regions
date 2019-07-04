@@ -126,9 +126,31 @@ public class CountryValidatorTest {
     public void isValidWithList() {
 
         class CountryAndRegionsWithList {
-            @ValidRegion(includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
-            @ValidCountry(value = OFFICIAL | FORMER)
-            List<Region> region;
+            List<
+                @ValidRegion(includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"}, payload = {})
+                @ValidCountry(value = OFFICIAL | FORMER)
+                Region> region;
+
+            public CountryAndRegionsWithList(Region... r) {
+                this.region = Arrays.asList(r);
+            }
+        }
+
+
+        assertThat(VALIDATOR.validate(new CountryAndRegionsWithList(of(NL), of(FormerlyAssignedCountryCode.TPTL)))).hasSize(0);
+
+
+    }
+
+    @Test
+    public void isValidWithList2() {
+
+        @ValidRegion(includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"}, payload = {})
+        @ValidCountry(value = OFFICIAL | FORMER)
+        class CountryAndRegionsWithList {
+            List<
+
+                Region> region;
 
             public CountryAndRegionsWithList(Region... r) {
                 this.region = Arrays.asList(r);

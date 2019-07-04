@@ -9,20 +9,20 @@ import javax.validation.Payload;
 
 import org.meeuw.i18n.subdivisions.CountrySubdivision;
 import org.meeuw.i18n.subdivisions.validation.impl.CountrySubdivisionConstraintValidator;
+import org.meeuw.i18n.validation.ValidRegion;
 
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 
 /**
- *
-  uded codes.
+ * Validates a value as a valid {@link CountrySubdivision}. If this is used on more generic value {@link org.meeuw.i18n.Region} this might have be be combined with {@link ValidRegion} and/or other validator.
  *
  *
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-@Target({FIELD, METHOD, TYPE_PARAMETER})
+@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
 @Retention(RUNTIME)
 @Constraint(validatedBy = CountrySubdivisionConstraintValidator.class)
 @Documented
@@ -35,8 +35,14 @@ public @interface ValidCountrySubdivision {
 
     Class<? extends Payload>[] payload() default {};
 
+    /**
+     * See {@link ValidRegion#excludes()}
+     */
     String[] excludes() default {};
 
+    /**
+     * See {@link ValidRegion#includes()} ()}
+     */
     String[] includes() default {};
 
     String[] excludeCountries() default {};
