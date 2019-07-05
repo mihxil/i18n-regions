@@ -15,16 +15,22 @@ import org.meeuw.i18n.RegionService;
  * @since 0.1
  */
 public class RegionValidatorService {
-    private static final ValidatorFactory FACTORY = Validation.buildDefaultValidatorFactory();
+    private static final ValidatorFactory FACTORY = Validation.byDefaultProvider()
+        .configure()
+        .buildValidatorFactory();
+
     private final Validator VALIDATOR = FACTORY.getValidator();
 
     private static RegionValidatorService INSTANCE = new RegionValidatorService();
+
 
     public static RegionValidatorService getInstance() {
         return INSTANCE;
     }
 
     private RegionValidatorService() {
+
+
 
     }
 

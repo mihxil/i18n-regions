@@ -2,10 +2,12 @@ package org.meeuw.i18n.countries.validation;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import javax.validation.constraints.NotNull;
 
@@ -22,8 +24,7 @@ import org.meeuw.i18n.validation.ValidRegion;
 
 import com.neovisionaries.i18n.LanguageCode;
 
-import static com.neovisionaries.i18n.CountryCode.CS;
-import static com.neovisionaries.i18n.CountryCode.NL;
+import static com.neovisionaries.i18n.CountryCode.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.meeuw.i18n.countries.Country.of;
 import static org.meeuw.i18n.countries.UserAssignedCountry.ZZ;
@@ -127,8 +128,10 @@ public class CountryValidatorTest {
 
         class CountryAndRegionsWithList {
             List<
-                @ValidRegion(includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"}, payload = {})
-                @ValidCountry(value = OFFICIAL | FORMER)
+                // valid are countries (further validated by @ValidCountry), and a list of codes.
+                @ValidRegion(includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"}, classes= {Country.class}, payload = {})
+                @ValidCountry(value = OFFICIAL | FORMER, includes = "CS")
+                @NotNull
                 Region> region;
 
             public CountryAndRegionsWithList(Region... r) {
@@ -136,21 +139,30 @@ public class CountryValidatorTest {
             }
         }
 
-
-        assertThat(VALIDATOR.validate(new CountryAndRegionsWithList(of(NL), of(FormerlyAssignedCountryCode.TPTL)))).hasSize(0);
+        Set<ConstraintViolation<CountryAndRegionsWithList>> violations= VALIDATOR.validate(new CountryAndRegionsWithList(
+            of(NL),
+            of(FormerlyAssignedCountryCode.TPTL),
+            new SomeRegion("bla"),
+            of(CS),
+            of(DG),
+            null
+        ));
+        assertThat(violations.stream().map(ConstraintViolation::getMessage))
+            .containsExactlyInAnyOrder("bla is not a valid region", "must not be null", "DG is not a valid country");
 
 
     }
 
+
     @Test
     public void isValidWithList2() {
 
-        @ValidRegion(includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"}, payload = {})
-        @ValidCountry(value = OFFICIAL | FORMER)
-        class CountryAndRegionsWithList {
-            List<
 
-                Region> region;
+        class CountryAndRegionsWithList {
+
+            @ValidRegion(includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
+            @ValidCountry(value = OFFICIAL | FORMER, includes = "CS")
+            List<Region> region;
 
             public CountryAndRegionsWithList(Region... r) {
                 this.region = Arrays.asList(r);
@@ -158,7 +170,12 @@ public class CountryValidatorTest {
         }
 
 
-        assertThat(VALIDATOR.validate(new CountryAndRegionsWithList(of(NL), of(FormerlyAssignedCountryCode.TPTL)))).hasSize(0);
+        assertThat(VALIDATOR.validate(new CountryAndRegionsWithList(
+            of(NL),
+            of(FormerlyAssignedCountryCode.TPTL),
+            of(CS)
+            ))
+        ).hasSize(0);
 
 
     }
