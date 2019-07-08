@@ -13,8 +13,10 @@ import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
+ * A validator for language codes (or {@link java.util.Locale}s (which also is a container for language codes)
+ *
  * @author Michiel Meeuwissen
- * @since 3.0
+ * @since 0.3
  */
 
 @Target({FIELD, METHOD, TYPE_PARAMETER, TYPE_USE})
@@ -29,8 +31,17 @@ public @interface Language {
 
     Class<? extends Payload>[] payload() default {};
 
+    /**
+     * Wether the locale may contain a country.
+     *
+     * If so the country must then be found by {@link org.meeuw.i18n.RegionService} and its type must be {@link org.meeuw.i18n.Region.Type#COUNTRY}.
+     */
+
     boolean mayContainCountry() default true;
 
+     /**
+     * Wether the local may contain a variant
+     */
     boolean mayContainVariant() default false;
 
 }
