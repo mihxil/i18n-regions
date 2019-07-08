@@ -2,6 +2,7 @@ package org.meeuw.i18n.countries.validation;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -40,6 +41,10 @@ public class CountryValidatorTest {
 
     private static final RegionValidatorService regionValidatorService = RegionValidatorService.getInstance();
     private static final Validator VALIDATOR = regionValidatorService.getValidator();
+
+    static {
+        Locale.setDefault(new Locale("nl"));
+    }
 
 
     @Test

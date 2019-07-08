@@ -1,5 +1,6 @@
 package org.meeuw.i18n.countries.validation.impl;
 
+import java.util.Locale;
 import java.util.Optional;
 
 import javax.validation.ConstraintValidator;
@@ -96,7 +97,14 @@ public class CountryConstraintValidator implements ConstraintValidator<ValidCoun
         } else if (o instanceof FormerlyAssignedCountryCode) {
             return Optional.of(Country.of((FormerlyAssignedCountryCode) o));
         } else if (o instanceof CharSequence) {
-            return RegionService.getInstance().getByCode(o .toString(), false, Country.class);
+            return RegionService.getInstance().getByCode(o.toString(), false, Country.class);
+        } else if (o instanceof Locale) {
+            String countryCode = ((Locale) o).getCountry();
+            if (countryCode.isEmpty()) {
+                return Optional.empty();
+            } else {
+                return RegionService.getInstance().getByCode(countryCode, false, Country.class);
+            }
         } else {
             return Optional.empty();
         }
