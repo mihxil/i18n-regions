@@ -1,13 +1,12 @@
 package org.meeuw.i18n.validation.impl;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import org.meeuw.i18n.Region;
+import org.meeuw.i18n.RegionService;
 import org.meeuw.i18n.validation.Language;
 
 import com.neovisionaries.i18n.LanguageAlpha3Code;
@@ -78,8 +77,20 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
 
 
     protected boolean isValid(Locale value) {
-        if (! value.getCountry().isEmpty() && ! annotation.mayContainCountry()) {
-            return false;
+        if (! value.getCountry().isEmpty()) {
+            if (! annotation.mayContainCountry()) {
+                return false;
+            }
+            Optional<Region> byCode = RegionService.getInstance().getByCode(value.getCountry());
+            if (byCode.isEmpty()) {
+                return false;
+            } else {
+                if (byCode.get().getType() != Region.Type.COUNTRY) {
+                    return false;
+                }
+
+            }
+
         }
         if (! value.getVariant().isEmpty() && ! annotation.mayContainVariant()) {
             return false;

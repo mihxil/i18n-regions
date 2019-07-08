@@ -1,5 +1,6 @@
 package org.meeuw.i18n.validation.impl;
 
+import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -65,6 +66,9 @@ public class RegionConstraintValidator implements ConstraintValidator<ValidRegio
         } else if (o instanceof CharSequence) {
             Optional<Region> byCode = RegionService.getInstance().getByCode(o.toString(), false);
             return byCode;
+        } else if (o instanceof Locale){
+            Optional<Region> byCountry = RegionService.getInstance().getByCode(((Locale) o).getCountry(), false);
+            return byCountry;
         } else {
             return Optional.empty();
         }
