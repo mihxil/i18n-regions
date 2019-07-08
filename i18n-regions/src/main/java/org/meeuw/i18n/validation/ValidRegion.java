@@ -30,7 +30,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
+@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE, TYPE_PARAMETER })
 @Retention(RUNTIME)
 @Constraint(validatedBy = RegionConstraintValidator.class)
 @Documented
