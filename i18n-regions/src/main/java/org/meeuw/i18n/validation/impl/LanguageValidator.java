@@ -82,7 +82,7 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
                 return false;
             }
             Optional<Region> byCode = RegionService.getInstance().getByCode(value.getCountry());
-            if (byCode.isEmpty()) {
+            if (! byCode.isPresent()) {
                 return false;
             } else {
                 if (byCode.get().getType() != Region.Type.COUNTRY) {
