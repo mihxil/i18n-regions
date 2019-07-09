@@ -40,6 +40,12 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 public @interface ValidCountry {
 
+    String message() default "{org.meeuw.i18n.validation.country.message}";
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
+
     /**
      * See {@link Country#IS_OFFICIAL}
      */
@@ -53,11 +59,7 @@ public @interface ValidCountry {
      */
     int USER_ASSIGNED = 1 << 2;
 
-    String message() default "{org.meeuw.i18n.validation.country.message}";
 
-    Class<?>[] groups() default {};
-
-    Class<? extends Payload>[] payload() default {};
 
     /**
      * Base selection. Using a bitmap of the int constants in this class.
@@ -70,10 +72,13 @@ public @interface ValidCountry {
     String[] excludes() default {};
 
     /**
-     * See {@link ValidRegion#includes()} ()}
+     * See {@link ValidRegion#includes()}
      */
     String[] includes() default {};
 
+    /**
+     * See {@link ValidRegion#types()}.
+     */
     Region.Type [] types() default {Region.Type.COUNTRY};
 
     /**
