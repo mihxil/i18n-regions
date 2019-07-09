@@ -17,19 +17,22 @@ public class ValidationInfo {
     final Region[] excludes;
     final Region[] includes;
     final Class[] classes;
+    final Region.Type[] types;
 
-    protected ValidationInfo(String[] excludes, String[] includes, Class[] classes) {
+    protected ValidationInfo(String[] excludes, String[] includes, Class[] classes, Region.Type[] types) {
         this.excludes = Stream.of(excludes)
             .map(r -> RegionService.getInstance().getByCode(r, false).orElseThrow(() -> new IllegalStateException("No such region " + r)))
             .toArray(Region[]::new);
         this.includes = Stream.of(includes)
             .map(r -> RegionService.getInstance().getByCode(r, false).orElseThrow(() -> new IllegalStateException("No such region " + r)))
             .toArray(Region[]::new);;
+
         this.classes = classes;
+        this.types = types;
     }
 
     public static ValidationInfo from(ValidRegion annotation) {
-        return new ValidationInfo(annotation.excludes(), annotation.includes(), annotation.classes());
+        return new ValidationInfo(annotation.excludes(), annotation.includes(), annotation.classes(), annotation.types());
     }
 
     public Region[] getExcludes() {
@@ -42,5 +45,9 @@ public class ValidationInfo {
 
     public Class[] getClasses() {
         return classes;
+    }
+
+    public Region.Type[] getTypes() {
+        return types;
     }
 }

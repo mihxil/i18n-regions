@@ -15,16 +15,12 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 
 /**
- * A javax.validation annotation that can be used to restrict the values of a {@link org.meeuw.i18n.Region} (or {@link Country} value.
+ * A javax.validation annotation that can be used to restrict the values of a {@link org.meeuw.i18n.Region} values.
  *
- * For example
- * {@code
+ * It recognized several types
+ * If it is a Region or convertible to a region then it will be valid if the type and classes are as specified.
  *
- *    @ValidCountry(value = OFFICIAL | FORMER, includes = "ZZ")
- *
- * }
- *
- * So basicly you specify one or more predicates, and/or a number of explicitely included and excluded codes.
+ * Locale's are only validated if the 'country' part is filled, and then only be valid if the country is filled and recognized by the RegionsService and it's type is COUNTRY.
  *
  *
  * @author Michiel Meeuwissen
@@ -52,6 +48,11 @@ public @interface ValidRegion {
      * A list of codes to include. They are valid (unless they are also in {@link #excludes()}, regardless of {@link #classes()}
      */
     String[] includes() default {};
+
+     /**
+      * A list of types. The default empty array will allow for any type, or at least leave that unspecified. When validation {@link java.util.Locale} it may default to {@link Region.Type#COUNTRY}.
+     */
+    Region.Type[] types() default {};
 
     /**
      * A list of classes (extensions of {@link Region}) that are to be considered valid.

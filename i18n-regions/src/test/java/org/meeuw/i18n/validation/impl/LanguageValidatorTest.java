@@ -66,7 +66,7 @@ public class LanguageValidatorTest {
     }
 
     @Test
-    @Ignore("fails")
+    @Ignore("fails. 'act' is somewhy not a known language")
     public void achterhoeks() {
         assertTrue(validator.isValid(new Locale("act"), null));
 

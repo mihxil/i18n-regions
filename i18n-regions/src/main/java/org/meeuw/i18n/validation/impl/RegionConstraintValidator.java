@@ -44,12 +44,15 @@ public class RegionConstraintValidator implements ConstraintValidator<ValidRegio
             }
             return true;
         } else {
-            Optional<Region> r = convert(region);
-            if (r.isPresent()) {
-                return isValid(r.get(), validationInfo);
+            ConvertResult r = convert(region);
+            if (r.shouldValidate) {
+                if (! r.isPresent()) {
+                    // not convertible to Region, consider this value invalid
+                    return false;
+                }
+                return isValid(r.region.get(), validationInfo);
             } else {
-                // not convertible to Region, consider this value invalid
-                return false;
+                return true;
             }
         }
     }
@@ -68,11 +71,15 @@ public class RegionConstraintValidator implements ConstraintValidator<ValidRegio
             return ConvertResult.of(RegionService.getInstance().getByCode(o.toString(), false));
         } else if (o instanceof Locale){
 
-            Locale l  = ((Locale) o).getCountry();
-            Optional<Region> byCountry = RegionService.getInstance().getByCode(((Locale) o).getCountry(), false);
-            return byCountry;
+            String c  = ((Locale) o).getCountry();
+            if (c.isEmpty()) {
+                return ConvertResult.NOT_APPLICABLE;
+            } else {
+                Optional<Region> byCountry = RegionService.getInstance().getByCode(((Locale) o).getCountry(), false);
+                return ConvertResult.of(byCountry);
+            }
         } else {
-            return Optional.empty();
+            return ConvertResult.INVALID;
         }
 
     }
@@ -83,10 +90,14 @@ public class RegionConstraintValidator implements ConstraintValidator<ValidRegio
         final Optional<Region> region;
         final boolean shouldValidate;
 
-        public ConvertResult(Optional<Region> region, boolean shouldValidate) {
+        public ConvertResult(@NonNull Optional<Region> region, boolean shouldValidate) {
             this.region = region;
             this.shouldValidate = shouldValidate;
         }
+        public boolean isPresent() {
+            return region.isPresent();
+        }
+
         public static ConvertResult of(@NonNull Region region) {
             return of(Optional.of(region));
         }
@@ -94,6 +105,9 @@ public class RegionConstraintValidator implements ConstraintValidator<ValidRegio
             return new ConvertResult(region, true);
         }
         public static final ConvertResult NOT_APPLICABLE = new ConvertResult(Optional.empty(), false);
+
+        public static final ConvertResult INVALID  = new ConvertResult(Optional.empty(), true);
+
     }
 
 
@@ -109,6 +123,12 @@ public class RegionConstraintValidator implements ConstraintValidator<ValidRegio
         }
         if (Stream.of(validationInfo.getClasses()).noneMatch((r) -> r.isInstance(region))) {
             return Optional.of(false);
+        }
+
+        if (validationInfo.getTypes().length > 0) {
+            if (Stream.of(validationInfo.getTypes()).noneMatch((t) -> region.getType() == t)) {
+                return Optional.of(false);
+            }
         }
         return Optional.empty();
     }
