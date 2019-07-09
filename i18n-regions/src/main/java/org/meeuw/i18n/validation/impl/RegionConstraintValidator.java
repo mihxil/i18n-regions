@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.RegionService;
 import org.meeuw.i18n.validation.ValidRegion;
@@ -60,13 +61,14 @@ public class RegionConstraintValidator implements ConstraintValidator<ValidRegio
 
     }
 
-    private Optional<Region> convert(Object o) {
+    private ConvertResult convert(Object o) {
         if(o instanceof Region) {
-            return Optional.of((Region) o);
+            return ConvertResult.of((Region) o);
         } else if (o instanceof CharSequence) {
-            Optional<Region> byCode = RegionService.getInstance().getByCode(o.toString(), false);
-            return byCode;
+            return ConvertResult.of(RegionService.getInstance().getByCode(o.toString(), false));
         } else if (o instanceof Locale){
+
+            Locale l  = ((Locale) o).getCountry();
             Optional<Region> byCountry = RegionService.getInstance().getByCode(((Locale) o).getCountry(), false);
             return byCountry;
         } else {
@@ -75,6 +77,24 @@ public class RegionConstraintValidator implements ConstraintValidator<ValidRegio
 
     }
 
+
+    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
+    private static class ConvertResult {
+        final Optional<Region> region;
+        final boolean shouldValidate;
+
+        public ConvertResult(Optional<Region> region, boolean shouldValidate) {
+            this.region = region;
+            this.shouldValidate = shouldValidate;
+        }
+        public static ConvertResult of(@NonNull Region region) {
+            return of(Optional.of(region));
+        }
+        public static ConvertResult of(@NonNull Optional<Region> region) {
+            return new ConvertResult(region, true);
+        }
+        public static final ConvertResult NOT_APPLICABLE = new ConvertResult(Optional.empty(), false);
+    }
 
 
     public static Optional<Boolean> defaultIsValid(Region region, ValidationInfo validationInfo) {
