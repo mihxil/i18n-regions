@@ -7,6 +7,7 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+import org.meeuw.i18n.Region;
 import org.meeuw.i18n.countries.Country;
 import org.meeuw.i18n.countries.validation.impl.CountryConstraintValidator;
 import org.meeuw.i18n.validation.ValidRegion;
@@ -72,6 +73,8 @@ public @interface ValidCountry {
      * See {@link ValidRegion#includes()} ()}
      */
     String[] includes() default {};
+
+    Region.Type [] types() default {Region.Type.COUNTRY};
 
     /**
      * See {@link ValidRegion#classes()}

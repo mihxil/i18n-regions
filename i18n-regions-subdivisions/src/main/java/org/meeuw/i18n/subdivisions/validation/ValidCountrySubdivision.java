@@ -7,6 +7,7 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+import org.meeuw.i18n.Region;
 import org.meeuw.i18n.subdivisions.CountrySubdivision;
 import org.meeuw.i18n.subdivisions.validation.impl.CountrySubdivisionConstraintValidator;
 import org.meeuw.i18n.validation.ValidRegion;
@@ -34,6 +35,9 @@ public @interface ValidCountrySubdivision {
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
+
+
+    Region.Type[] types() default {Region.Type.SUBDIVISION};
 
     /**
      * See {@link ValidRegion#excludes()}

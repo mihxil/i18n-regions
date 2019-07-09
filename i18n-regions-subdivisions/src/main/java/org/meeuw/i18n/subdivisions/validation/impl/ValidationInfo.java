@@ -1,5 +1,6 @@
 package org.meeuw.i18n.subdivisions.validation.impl;
 
+import org.meeuw.i18n.Region;
 import org.meeuw.i18n.subdivisions.validation.ValidCountrySubdivision;
 
 /**
@@ -12,13 +13,13 @@ class ValidationInfo extends org.meeuw.i18n.validation.impl.ValidationInfo {
 
     final String[] excludeCountries;
 
-    protected ValidationInfo(String[] excludes, String[] includes, Class[] classes, String[] includeCountries, String[] excludeCountries) {
-        super(excludes, includes, classes);
+    protected ValidationInfo(String[] excludes, String[] includes, Class[] classes, Region.Type[] types, String[] includeCountries, String[] excludeCountries) {
+        super(excludes, includes, classes, types);
         this.includeCountries = includeCountries;
         this.excludeCountries = excludeCountries;
     }
 
     static ValidationInfo from(ValidCountrySubdivision annotation) {
-        return new ValidationInfo(annotation.excludes(), annotation.includes(), annotation.classes(), annotation.includeCountries(), annotation.excludeCountries());
+        return new ValidationInfo(annotation.excludes(), annotation.includes(), annotation.classes(), annotation.types(), annotation.includeCountries(), annotation.excludeCountries());
     }
 }
