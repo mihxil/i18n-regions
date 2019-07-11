@@ -96,12 +96,12 @@ public interface Region extends Serializable {
          */
         CONTINENT,
 
-
-
         /**
          * A subdivision of a country, of which the type is otherwise unknown
          */
-        SUBDIVISION
+        SUBDIVISION,
+
+        UNDEFINED
 
       /*  PROVINCE,
         STATE,
