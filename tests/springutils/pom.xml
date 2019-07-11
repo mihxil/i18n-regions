@@ -8,7 +8,7 @@
   <version>0.1-SNAPSHOT</version>
 
   <properties>
-    <meeuw.i18n.version>0.2-SNAPSHOT</meeuw.i18n.version>
+    <meeuw.i18n.version>0.4-SNAPSHOT</meeuw.i18n.version>
   </properties>
 
   <dependencies>
