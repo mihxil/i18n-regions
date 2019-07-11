@@ -9,8 +9,10 @@ module org.meeuw.i18n.continents {
 
     requires static org.checkerframework.checker.qual;
     requires static java.validation;
+    requires static java.annotation;
 
     requires openlocationcode;
+
 
     provides RegionProvider with
 

@@ -25,7 +25,7 @@ import static com.google.openlocationcode.OpenLocationCode.*;
 public class OpenLocationProvider implements RegionProvider<OpenLocation> {
 
     public static final int CODE_ALPHABET_LENGTH = CODE_ALPHABET.length();
-
+    public static final int CODE_ALPHABET_LENGTH_2 = CODE_ALPHABET_LENGTH * CODE_ALPHABET_LENGTH;
 
     /**
      * Returns the max length of the {@link OpenLocationCode}s returned by {@link #values()}. The length is defined as the number of pairs of longitude/lattidue digits.
@@ -63,6 +63,7 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
 
 
 
+
     /**
      * Returns all possible open location regions. This is a giant list.
      *
@@ -73,77 +74,10 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
 
     @Override
     public Stream<OpenLocation> values() {
-        Spliterator<int[]> spliterator = new Spliterator<int[]>() {
-            int length = 1;
-            int count = 0;
-            int[] template = null;
-            @Override
-            public boolean tryAdvance(Consumer<? super int[]> action) {
-                int arrayLength = length * 2;
-                if (template == null) {
-                    template = new int[arrayLength];
-                } else {
-                    boolean advanced = advance(template);
-                    if (! advanced) {
-                        if (length < maxLength) {
-                            length++;
-                            arrayLength = length * 2;
-                            template = new int[arrayLength];
-                        } else {
-                            return false;
-                        }
-                    }
-                }
+        Spliterator<int[]> spliterator = new OpenLocationCodeSpliterator();
 
+        return StreamSupport.stream(OpenLocationCodeSpliterator::new, OpenLocationCodeSpliterator.CHARACTERISTICS, false).map(a -> new OpenLocation(toCode(a)));
 
-                int[] copy = new int[arrayLength];
-                System.arraycopy(template, 0, copy, 0, arrayLength);
-                action.accept(copy);
-                count++;
-                return true;
-            }
-
-            @Override
-            public Spliterator<int[]> trySplit() {
-                return null;
-
-            }
-
-            @Override
-            public long estimateSize() {
-                return limitForLength(maxLength) - count;
-
-            }
-            @Override
-            public Comparator<? super int[]> getComparator() {
-                return new Comparator<int[]>() {
-                    @Override
-                    public int compare(int[] a, int[] b) {
-                        if (a == b) {
-                            return 0;
-                        }
-
-                        int i = 0;
-                        int max = Math.min(a.length, b.length);
-                        while (i < max) {
-                            if (a[i] != b[i]) {
-                                return Integer.compare(a[i], b[i]);
-                            }
-                            i++;
-                        }
-                        return a.length - b.length;
-                    }
-
-                };
-            }
-            @Override
-            public int characteristics() {
-                return ORDERED | DISTINCT | SORTED | SIZED | NONNULL | IMMUTABLE | SUBSIZED;
-
-            }
-        };
-
-        return StreamSupport.stream(spliterator, false).map(a -> new OpenLocation(toCode(a)));
 
     }
 
@@ -162,10 +96,10 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
             return 9 * 18;
         }
         long previous = limitForLength(length - 1);
-        return previous + 20 * 20 * previous;
+        return previous * (1 + CODE_ALPHABET_LENGTH_2);
     }
 
-    private static OpenLocationCode toCode(int[] template) {
+    static OpenLocationCode toCode(int[] template) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i <= template.length / 2 - 1; i++) {
             builder.append(CODE_ALPHABET.charAt(template[2 * i]));
@@ -183,19 +117,36 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
         return new OpenLocationCode(builder.toString());
     }
 
+    static int[] templateAt(long position) {
+        long numberShorter =  9 * 18;
+        long proposal = numberShorter;
+        int length = 2;
+        while (position > proposal) {
+            numberShorter = proposal;
+            proposal = numberShorter + CODE_ALPHABET_LENGTH_2  * numberShorter;
+            length +=2;
+        }
+        long positionRelative = position - numberShorter;
+        int[] template = new int[length];
+        fillTemplate(template, positionRelative);;
+        return template;
+    }
+    static void fillTemplate(int[] template, long position) {
+        int i = template.length - 1;
+        while (i >= 0) {
+            int max = getMax(i);
+            int modulo = (int) (position % max);
+            template[i] = modulo;
+            position -= modulo;
+            position /= max;
+            i--;
+        }
+
+    }
     private static boolean advance(int[] template) {
         int i = template.length - 1;
         while(i >= 0) {
-            int max;
-            if (i == 0) {
-                // First latitude character can only have first 9 values.
-                max = 9;
-            } else if (i == 1) {
-                // First longitude character can only have first 18 values.
-                max = 18;
-            } else {
-                max = CODE_ALPHABET_LENGTH;
-            }
+            int max = getMax(i);
             template[i]++;
             if (template[i] == max) {
                 template[i] = 0;
@@ -205,6 +156,100 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
             }
         }
         return false;
+    }
+    private static int getMax(int positionInTemplate) {
+        if (positionInTemplate == 0) {
+            // First latitude character can only have first 9 values.
+            return 9;
+        } else if (positionInTemplate == 1) {
+            // First longitude character can only have first 18 values.
+            return 18;
+        } else {
+            return CODE_ALPHABET_LENGTH;
+        }
 
     }
+
+    private static class OpenLocationCodeSpliterator implements Spliterator<int[]> {
+
+        static final int CHARACTERISTICS =  ORDERED | DISTINCT | SORTED | SIZED | NONNULL | IMMUTABLE | SUBSIZED;
+        boolean advanced = false;
+        long count = 0;
+        int[] template = new int[2];
+        long lastCount = limitForLength(maxLength);
+        @Override
+        public boolean tryAdvance(Consumer<? super int[]> action) {
+            if (count > lastCount) {
+                return false;
+            }
+            if (advanced) {
+                if (! advance(template)) {
+                    if (template.length / 2 < maxLength) {
+                        template = new int[template.length + 2];
+                    } else {
+                        return false;
+                    }
+                }
+            }
+            advanced = true;
+            int[] copy = new int[template.length];
+            System.arraycopy(template, 0, copy, 0, template.length);
+            action.accept(copy);
+            count++;
+            return true;
+        }
+
+        @Override
+        public Spliterator<int[]> trySplit() {
+            // We split now by giving the second half of the complete thing to the new spliterator.
+
+            // may be it's nicer to split by increasing a 'step' or so
+            long splitSize = estimateSize() / 2;
+            if (splitSize < 100) {
+                return null;
+            }
+            long currenLastCount = this.lastCount;
+            this.lastCount = this.count + splitSize;
+            OpenLocationCodeSpliterator split = new OpenLocationCodeSpliterator();
+            split.count = this.lastCount + 1;
+            split.template = templateAt(split.count);
+            split.lastCount = currenLastCount;
+            split.advanced = true;
+            return split;
+        }
+
+        @Override
+        public long estimateSize() {
+            return lastCount  - count;
+
+        }
+        @Override
+        public Comparator<? super int[]> getComparator() {
+            return new Comparator<int[]>() {
+                @Override
+                public int compare(int[] a, int[] b) {
+                    if (a == b) {
+                        return 0;
+                    }
+
+                    int i = 0;
+                    int max = Math.min(a.length, b.length);
+                    while (i < max) {
+                        if (a[i] != b[i]) {
+                            return Integer.compare(a[i], b[i]);
+                        }
+                        i++;
+                    }
+                    return a.length - b.length;
+                }
+
+            };
+        }
+        @Override
+        public int characteristics() {
+            return CHARACTERISTICS;
+
+        }
+    };
 }
+
