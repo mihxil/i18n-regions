@@ -8,7 +8,8 @@ module org.meeuw.i18n.continents {
     requires transitive org.meeuw.i18n;
 
     requires static org.checkerframework.checker.qual;
-    requires java.annotation;
+    requires static java.validation;
+
     requires openlocationcode;
 
     provides RegionProvider with

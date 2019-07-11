@@ -3,7 +3,8 @@ package org.meeuw.i18n.openlocationcode;
 import java.net.URI;
 import java.util.Locale;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
+import javax.validation.constraints.NotNull;
+
 import org.meeuw.i18n.Region;
 
 import com.google.openlocationcode.OpenLocationCode;
@@ -18,10 +19,11 @@ import com.google.openlocationcode.OpenLocationCode;
 public class OpenLocation implements Region, Comparable<OpenLocation> {
 
 
+    @NotNull
     private final OpenLocationCode code;
 
 
-    public OpenLocation(@NonNull OpenLocationCode code) {
+    public OpenLocation(@NotNull OpenLocationCode code) {
         this.code = code;
     }
     @Override
