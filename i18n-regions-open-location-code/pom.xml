@@ -17,6 +17,11 @@
       <artifactId>i18n-regions</artifactId>
     </dependency>
     <dependency>
+      <groupId>javax.annotation</groupId>
+      <artifactId>javax.annotation-api</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
       <groupId>com.google.openlocationcode</groupId>
       <artifactId>openlocationcode</artifactId>
       <version>1.0.4</version>

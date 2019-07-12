@@ -16,6 +16,11 @@
       <groupId>org.meeuw.i18n</groupId>
       <artifactId>i18n-regions</artifactId>
     </dependency>
+    <dependency>
+      <groupId>javax.annotation</groupId>
+      <artifactId>javax.annotation-api</artifactId>
+      <optional>true</optional>
+    </dependency>
 
     <dependency>
       <groupId>org.hibernate.validator</groupId>

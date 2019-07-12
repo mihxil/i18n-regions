@@ -7,7 +7,7 @@ module org.meeuw.i18n.countries {
 
 
     requires static org.checkerframework.checker.qual;
-    requires java.annotation;
+    requires static java.annotation;
     requires transitive org.meeuw.i18n;
     requires transitive nv.i18n;
     requires transitive org.meeuw.i18n.formerlyassigned;

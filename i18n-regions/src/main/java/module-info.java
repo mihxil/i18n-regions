@@ -14,7 +14,7 @@ module org.meeuw.i18n {
     requires static java.xml.bind;
     requires static org.checkerframework.checker.qual;
     requires static java.persistence;
-    requires java.annotation;
+    requires static java.annotation;
     requires transitive nv.i18n;
 
     uses org.meeuw.i18n.spi.RegionProvider;

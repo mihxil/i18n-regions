@@ -29,6 +29,11 @@
       <artifactId>validation-api</artifactId>
       <optional>true</optional>
     </dependency>
+    <dependency>
+      <groupId>javax.annotation</groupId>
+      <artifactId>javax.annotation-api</artifactId>
+      <optional>true</optional>
+    </dependency>
 
 
     <!-- test dependencies -->
@@ -51,11 +56,6 @@
     <dependency>
       <groupId>org.glassfish.web</groupId>
       <artifactId>javax.el</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>javax.annotation</groupId>
-      <artifactId>javax.annotation-api</artifactId>
-      <scope>test</scope>
     </dependency>
   </dependencies>
 
