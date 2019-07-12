@@ -222,8 +222,8 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
         public Spliterator<int[]> trySplit() {
             // split will result in the current spliterator handling the even ones, and the split of one the odd ones
             OpenLocationCodeSpliterator split = new OpenLocationCodeSpliterator();
-            if (step == 4) {
-                // having it much bigger will result so much threads that it doesn't increase performnce
+            if (step == 8) {
+                // having it  bigger will result so much threads that it doesn't increase performance
                 return null;
             }
             split.lastCount = lastCount;

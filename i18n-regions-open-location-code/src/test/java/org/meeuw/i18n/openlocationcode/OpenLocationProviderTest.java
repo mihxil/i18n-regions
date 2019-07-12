@@ -12,6 +12,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.Stopwatch;
 import org.junit.runner.Description;
+import org.junit.runners.MethodSorters;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,11 +20,13 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 0.4
  */
-@FixMethodOrder
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class OpenLocationProviderTest {
 
 
     static Set<String> sequentialSet =  new HashSet<>();
+    static Set<String> parallelSet =  Collections.newSetFromMap(new ConcurrentHashMap<String, Boolean>());
+
     static AtomicInteger sequentialCount = new AtomicInteger(0);
 
     static int takeWhileLength = 3;
@@ -69,7 +72,6 @@ public class OpenLocationProviderTest {
     public void test2_valuesParallel() {
         OpenLocationProvider provider = new OpenLocationProvider();
 
-        Set<String> parallelSet =  Collections.newSetFromMap(new ConcurrentHashMap<String, Boolean>());
         AtomicInteger parallelCount = new AtomicInteger(0);
 
         long limit = OpenLocationProvider.limitForLength(takeWhileLength);
@@ -91,7 +93,13 @@ public class OpenLocationProviderTest {
         //assertThat(parallelSet.size()).isEqualTo(parallelCount.get());
         assertThat(parallelCount.get()).isEqualTo(OpenLocationProvider.limitForLength(takeWhileLength));
 
+
+
+    }
+    @Test
+    public void test3_valuesCompareSequentialWithParallel() {
         Assumptions.assumeThat(sequentialSet).isNotEmpty();
+        Assumptions.assumeThat(parallelSet).isNotEmpty();
 
         List<String> plist = new ArrayList<>(parallelSet);
         Collections.sort(plist);
