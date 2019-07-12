@@ -16,6 +16,7 @@ module org.meeuw.i18n {
     requires static java.persistence;
     requires static java.annotation;
     requires transitive nv.i18n;
+    requires java.logging;
 
     uses org.meeuw.i18n.spi.RegionProvider;
 
