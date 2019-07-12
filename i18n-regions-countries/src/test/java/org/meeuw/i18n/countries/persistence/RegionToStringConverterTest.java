@@ -1,4 +1,4 @@
-package org.meeuw.i18n.persistence;
+package org.meeuw.i18n.countries.persistence;
 
 import java.util.Locale;
 
@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.meeuw.i18n.Region;
+import org.meeuw.i18n.persistence.RegionToStringConverter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
