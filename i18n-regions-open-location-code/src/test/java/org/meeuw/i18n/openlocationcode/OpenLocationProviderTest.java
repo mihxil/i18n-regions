@@ -1,17 +1,17 @@
 package org.meeuw.i18n.openlocationcode;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.time.Duration;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.assertj.core.api.Assumptions;
+import org.junit.Before;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
-
-import com.google.openlocationcode.OpenLocationCode;
+import org.junit.rules.Stopwatch;
+import org.junit.runner.Description;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -23,56 +23,81 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class OpenLocationProviderTest {
 
 
-    Set<String> sequentialSet =  new HashSet<>();
-    AtomicInteger sequentialCount = new AtomicInteger(0);
+    static Set<String> sequentialSet =  new HashSet<>();
+    static AtomicInteger sequentialCount = new AtomicInteger(0);
 
+    static int takeWhileLength = 3;
+    static int hashDiv = 100001;
+
+    @Rule
+     public Stopwatch stopwatch = new Stopwatch() {
+         @Override
+         protected void finished(long nanos, Description description) {
+             System.out.println(description.getMethodName() + " " + Duration.ofNanos(nanos));
+         }
+     };
+
+    @Before
+    public void setup() {
+        OpenLocationProvider.setMaxLength(Math.max(takeWhileLength, 4));
+
+    }
 
     @Test
     public void test1_valuesSequential() {
         OpenLocationProvider provider = new OpenLocationProvider();
-        OpenLocationProvider.setMaxLength(2);
         provider.values()
+            .takeWhile(r -> r.getLength() <= takeWhileLength)
             .forEach(r -> {
-                sequentialSet.add(r.getCode());
-                int c = sequentialCount.getAndIncrement();
-                if (c % 100 == 0) {
-                    OpenLocationCode.CodeArea area = r.getOpenLocationCode().decode();
+                sequentialCount.getAndIncrement();
+                if (r.hashCode() % hashDiv == 0) {
+                    // add some random codes to a set to see if parallel handling results the same
+                    sequentialSet.add(r.getCode());
+                    //OpenLocationCode.CodeArea area = r.getOpenLocationCode().decode();
                     //System.out.println(r.getLength() + ":" + c + ":" + r + " " + area.getCenterLatitude() + "," + area.getCenterLongitude() + ":" + r.getPlusURL());
                 }
                 }
             );
 
-        assertThat(sequentialCount.get()).isEqualTo(OpenLocationProvider.limitForLength(OpenLocationProvider.getMaxLength()));
-        assertThat(sequentialSet.size()).isEqualTo(OpenLocationProvider.limitForLength(OpenLocationProvider.getMaxLength()));
+        assertThat(sequentialCount.get()).isEqualTo(OpenLocationProvider.limitForLength(takeWhileLength));
+        //assertThat(sequentialSet.size()).isEqualTo(OpenLocationProvider.limitForLength(takeWhileLength));
 
     }
 
 
     @Test
-    @Ignore("TODO")
     public void test2_valuesParallel() {
         OpenLocationProvider provider = new OpenLocationProvider();
-        OpenLocationProvider.setMaxLength(3);
-
 
         Set<String> parallelSet =  Collections.newSetFromMap(new ConcurrentHashMap<String, Boolean>());
         AtomicInteger parallelCount = new AtomicInteger(0);
 
+        long limit = OpenLocationProvider.limitForLength(takeWhileLength);
         provider.values()
             .parallel()
+            .takeWhile((r) -> parallelCount.get() < limit)
             .forEach(r -> {
+                if (r.getLength() <= takeWhileLength) {
+                    parallelCount.getAndIncrement();
 
-                    long c = parallelCount.getAndIncrement();
-                    parallelSet.add(r.getCode());
-                    if (c % 100 == 0) {
-                        OpenLocationCode.CodeArea area = r.getOpenLocationCode().decode();
-                        System.out.println(Thread.currentThread().getName() + ":" + c + ":" + r + " " + area.getCenterLatitude() + "," + area.getCenterLongitude() + ":" + r.getPlusURL());
+                    if (r.hashCode() % hashDiv == 0) {
+                        parallelSet.add(r.getCode());
+                        //OpenLocationCode.CodeArea area = r.getOpenLocationCode().decode();
+                        //System.out.println(c + ":" + r + " " + area.getCenterLatitude() + "," + area.getCenterLongitude() + ":" + r.getPlusURL());
                     }
                 }
+                }
             );
-        Assumptions.assumeThat(sequentialCount.get()).isGreaterThan(0);
-        assertThat(parallelSet).hasSameElementsAs(sequentialSet);
-        assertThat(parallelCount.get()).isEqualTo(sequentialCount.get());
+        //assertThat(parallelSet.size()).isEqualTo(parallelCount.get());
+        assertThat(parallelCount.get()).isEqualTo(OpenLocationProvider.limitForLength(takeWhileLength));
+
+        Assumptions.assumeThat(sequentialSet).isNotEmpty();
+
+        List<String> plist = new ArrayList<>(parallelSet);
+        Collections.sort(plist);
+        List<String> slist = new ArrayList<>(sequentialSet);
+        Collections.sort(slist);
+        assertThat(plist).isEqualTo(slist);
 
     }
     @Test
@@ -105,6 +130,18 @@ public class OpenLocationProviderTest {
         int[] template = OpenLocationProvider.templateAt(48643);
         String code = OpenLocationProvider.toCode(template).toString();
         assertThat(code).isEqualTo("8M630000+"); //
+    }
+
+
+    @Test
+    public void carrying() {
+        int[] template = new int[4];
+        OpenLocationProvider.fillTemplate(template, 48643);
+        assertThat(OpenLocationProvider.position(template)).isEqualTo(48643);
+        OpenLocationProvider.advance(template, 1);
+        assertThat(OpenLocationProvider.position(template)).isEqualTo(48643 + 1);
+        OpenLocationProvider.advance(template, 999);
+        assertThat(OpenLocationProvider.position(template)).isEqualTo(48643 + 1 + 999);
 
     }
 }

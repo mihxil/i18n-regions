@@ -21,12 +21,10 @@ import static com.google.openlocationcode.OpenLocationCode.SEPARATOR;
  */
 public class OpenLocation implements Region, Comparable<OpenLocation> {
 
-
     @NotNull
     private final OpenLocationCode code;
 
-
-    public OpenLocation(@NotNull OpenLocationCode code) {
+    OpenLocation(@NotNull OpenLocationCode code) {
         this.code = code;
     }
     @Override
