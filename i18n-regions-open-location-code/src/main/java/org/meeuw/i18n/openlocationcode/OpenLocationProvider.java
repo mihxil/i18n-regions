@@ -92,11 +92,11 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
         if (length == 0) {
             return 0;
         }
-        if (length == 1) {
-            return 9 * 18;
+        long result = 9 * 18;
+        for (int i = 1; i < length; i++) {
+            result *= CODE_ALPHABET_LENGTH_2;
         }
-        long previous = limitForLength(length - 1);
-        return previous * (1 + CODE_ALPHABET_LENGTH_2);
+        return result  + limitForLength(length - 1);
     }
 
     static OpenLocationCode toCode(int[] template) {

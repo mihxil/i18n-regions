@@ -9,6 +9,9 @@ import org.meeuw.i18n.Region;
 
 import com.google.openlocationcode.OpenLocationCode;
 
+import static com.google.openlocationcode.OpenLocationCode.PADDING_CHARACTER;
+import static com.google.openlocationcode.OpenLocationCode.SEPARATOR;
+
 /**
  * A wrapper around {@link OpenLocationCode}. Every such code represents a rectangular region on earth.
  * See https://plus.codes/
@@ -35,6 +38,19 @@ public class OpenLocation implements Region, Comparable<OpenLocation> {
     @Override
     public String getCode() {
         return code.getCode();
+    }
+    public int getLength() {
+        int notPaddedLength = 0;
+        String c = getCode();
+        for (int i = 0; i < c.length(); i++) {
+            char ch = c.charAt(i);
+            if (ch != PADDING_CHARACTER && ch != SEPARATOR) {
+                notPaddedLength++;
+            } else {
+                break;
+            }
+        }
+        return notPaddedLength / 2;
     }
 
     public URI getPlusURL() {

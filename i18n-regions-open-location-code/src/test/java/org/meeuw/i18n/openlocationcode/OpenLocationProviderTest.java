@@ -6,6 +6,9 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.assertj.core.api.Assumptions;
+import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.openlocationcode.OpenLocationCode;
@@ -16,21 +19,48 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 0.4
  */
+@FixMethodOrder
 public class OpenLocationProviderTest {
 
+
+    Set<String> sequentialSet =  new HashSet<>();
+    AtomicInteger sequentialCount = new AtomicInteger(0);
+
+
     @Test
-    public void values() {
+    public void test1_valuesSequential() {
         OpenLocationProvider provider = new OpenLocationProvider();
         OpenLocationProvider.setMaxLength(2);
+        provider.values()
+            .forEach(r -> {
+                sequentialSet.add(r.getCode());
+                int c = sequentialCount.getAndIncrement();
+                if (c % 100 == 0) {
+                    OpenLocationCode.CodeArea area = r.getOpenLocationCode().decode();
+                    //System.out.println(r.getLength() + ":" + c + ":" + r + " " + area.getCenterLatitude() + "," + area.getCenterLongitude() + ":" + r.getPlusURL());
+                }
+                }
+            );
+
+        assertThat(sequentialCount.get()).isEqualTo(OpenLocationProvider.limitForLength(OpenLocationProvider.getMaxLength()));
+        assertThat(sequentialSet.size()).isEqualTo(OpenLocationProvider.limitForLength(OpenLocationProvider.getMaxLength()));
+
+    }
+
+
+    @Test
+    @Ignore("TODO")
+    public void test2_valuesParallel() {
+        OpenLocationProvider provider = new OpenLocationProvider();
+        OpenLocationProvider.setMaxLength(3);
 
 
         Set<String> parallelSet =  Collections.newSetFromMap(new ConcurrentHashMap<String, Boolean>());
         AtomicInteger parallelCount = new AtomicInteger(0);
 
-        { //parallel
-            provider.values()
-                .parallel()
-                .forEach(r -> {
+        provider.values()
+            .parallel()
+            .forEach(r -> {
 
                     long c = parallelCount.getAndIncrement();
                     parallelSet.add(r.getCode());
@@ -39,23 +69,8 @@ public class OpenLocationProviderTest {
                         System.out.println(Thread.currentThread().getName() + ":" + c + ":" + r + " " + area.getCenterLatitude() + "," + area.getCenterLongitude() + ":" + r.getPlusURL());
                     }
                 }
-                );
-        }
-        Set<String> sequentialSet =  new HashSet<>();
-        AtomicInteger sequentialCount = new AtomicInteger(0);
-
-
-        {
-            provider.values()
-                .forEach(r -> {
-                        sequentialSet.add(r.getCode());
-                        sequentialCount.getAndIncrement();
-                    }
-                );
-
-        }
-        assertThat(sequentialCount.get()).isEqualTo(OpenLocationProvider.limitForLength(OpenLocationProvider.getMaxLength()));
-        assertThat(sequentialSet.size()).isEqualTo(OpenLocationProvider.limitForLength(OpenLocationProvider.getMaxLength()));
+            );
+        Assumptions.assumeThat(sequentialCount.get()).isGreaterThan(0);
         assertThat(parallelSet).hasSameElementsAs(sequentialSet);
         assertThat(parallelCount.get()).isEqualTo(sequentialCount.get());
 
