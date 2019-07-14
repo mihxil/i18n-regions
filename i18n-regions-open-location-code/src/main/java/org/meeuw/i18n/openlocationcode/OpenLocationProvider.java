@@ -99,6 +99,12 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
         return result  + limitForLength(length - 1);
     }
 
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " (" + limitForLength(maxLength) + " codes in stream)";
+
+    }
+
     static OpenLocationCode toCode(int[] template) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i <= template.length / 2 - 1; i++) {

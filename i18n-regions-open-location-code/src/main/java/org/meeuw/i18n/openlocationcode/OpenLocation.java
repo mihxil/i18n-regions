@@ -78,11 +78,6 @@ public class OpenLocation implements Region, Comparable<OpenLocation> {
     }
 
     @Override
-    public String getBundle() {
-        return null;
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

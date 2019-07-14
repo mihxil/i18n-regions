@@ -89,6 +89,6 @@ public class UserAssignedCountrySubdivisionProvider implements RegionProvider<Us
 
     @Override
     public String toString() {
-        return getClass().getSimpleName();
+        return getClass().getSimpleName() + " (" + values().count() + " subdivisions)";
     }
 }

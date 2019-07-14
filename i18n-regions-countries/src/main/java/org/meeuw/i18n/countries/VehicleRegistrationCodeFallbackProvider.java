@@ -46,6 +46,10 @@ public class VehicleRegistrationCodeFallbackProvider implements RegionProvider<C
 	@Override
 	public Stream<CurrentCountry> values() {
 		return Stream.empty();
-
 	}
+
+	@Override
+    public String toString() {
+        return getClass().getSimpleName() + " (" + values().count() + " countries)";
+    }
 }

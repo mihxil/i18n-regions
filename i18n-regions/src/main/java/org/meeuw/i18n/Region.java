@@ -53,8 +53,12 @@ public interface Region extends Serializable {
      * The name of the region in the given {@link Locale}. The default implementation uses the {@link #getBundle()} resource bundle.
      */
     default String getName(@NonNull Locale locale) {
+        String bundle = getBundle();
+        if (bundle == null) {
+            return getName();
+        }
         try {
-            return ResourceBundle.getBundle(getBundle(), locale).getString(getCode());
+            return ResourceBundle.getBundle(bundle, locale).getString(getCode());
         } catch (MissingResourceException mse){
             return getName();
         }

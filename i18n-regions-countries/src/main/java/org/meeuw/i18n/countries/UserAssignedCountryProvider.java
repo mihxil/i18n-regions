@@ -33,7 +33,6 @@ public class UserAssignedCountryProvider implements RegionProvider<UserAssignedR
             }
         }
         VALUES = Collections.unmodifiableMap(v);
-
     }
 
 
@@ -60,6 +59,10 @@ public class UserAssignedCountryProvider implements RegionProvider<UserAssignedR
     @Override
     public Stream<UserAssignedRegion> values() {
         return VALUES.values().stream();
+    }
 
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " (" + values().count() + " countries)";
     }
 }

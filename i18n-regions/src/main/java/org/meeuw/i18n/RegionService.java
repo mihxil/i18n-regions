@@ -175,6 +175,7 @@ public class RegionService {
             list.sort(priorityComparator());
             providers = Collections.unmodifiableList(list);
             inited = true;
+            logger.info("RegionService has " + providers);
         }
     }
 
