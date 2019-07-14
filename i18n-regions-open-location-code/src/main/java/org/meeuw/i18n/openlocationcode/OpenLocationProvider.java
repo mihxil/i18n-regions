@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.Optional;
 import java.util.Spliterator;
 import java.util.function.Consumer;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -23,6 +24,9 @@ import static com.google.openlocationcode.OpenLocationCode.*;
  */
 @Priority(100)
 public class OpenLocationProvider implements RegionProvider<OpenLocation> {
+
+    private static final Logger logger = Logger.getLogger(OpenLocationProvider.class.getName());
+
 
     public static final int CODE_ALPHABET_LENGTH = CODE_ALPHABET.length();
     public static final int CODE_ALPHABET_LENGTH_2 = CODE_ALPHABET_LENGTH * CODE_ALPHABET_LENGTH;
@@ -74,11 +78,7 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
 
     @Override
     public Stream<OpenLocation> values() {
-        Spliterator<int[]> spliterator = new OpenLocationCodeSpliterator();
-
         return StreamSupport.stream(OpenLocationCodeSpliterator::new, OpenLocationCodeSpliterator.CHARACTERISTICS, false).map(a -> new OpenLocation(toCode(a)));
-
-
     }
 
     /**
@@ -202,15 +202,28 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
     private static class OpenLocationCodeSpliterator implements Spliterator<int[]> {
 
         static final int CHARACTERISTICS =  DISTINCT | NONNULL | IMMUTABLE;
+
+        static int maxStep;
+        static {
+            int availableProcessors = Runtime.getRuntime().availableProcessors();
+             maxStep = Math.min(availableProcessors, 8);
+            logger.info("trySplit will split while step size <= " + maxStep + " (processors: " + availableProcessors + ")");
+        }
+
         long count = 0;
         int[] template = new int[2];
         long lastCount = limitForLength(maxLength);
         int step = 1;
+        int loggedAtStep = -1;
         int offset = 0;
         @Override
         public boolean tryAdvance(Consumer<? super int[]> action) {
             if (count > lastCount) {
                 return false;
+            }
+            if (loggedAtStep != step) {
+                logger.info("Running in " + Thread.currentThread().getName() + " step: " + step + " offset: " + offset);
+                loggedAtStep = step;
             }
             action.accept(template);
 
@@ -228,7 +241,7 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
         public Spliterator<int[]> trySplit() {
             // split will result in the current spliterator handling the even ones, and the split of one the odd ones
             OpenLocationCodeSpliterator split = new OpenLocationCodeSpliterator();
-            if (step == 8) {
+            if (step >= maxStep) {
                 // having it  bigger will result so much threads that it doesn't increase performance
                 return null;
             }
@@ -241,6 +254,8 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
             });
 
             step *= 2;
+
+
             split.step = step;
             split.count = count;
             return split;
