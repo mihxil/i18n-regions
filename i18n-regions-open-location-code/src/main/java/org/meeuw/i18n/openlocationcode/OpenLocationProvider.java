@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.Optional;
 import java.util.Spliterator;
 import java.util.function.Consumer;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -207,7 +208,6 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
         static {
             int availableProcessors = Runtime.getRuntime().availableProcessors();
              maxStep = Math.min(availableProcessors, 8);
-            logger.info("trySplit will split while step size <= " + maxStep + " (processors: " + availableProcessors + ")");
         }
 
         long count = 0;
@@ -221,8 +221,8 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
             if (count > lastCount) {
                 return false;
             }
-            if (loggedAtStep != step) {
-                logger.info("Running in " + Thread.currentThread().getName() + " step: " + step + " offset: " + offset);
+            if (logger.isLoggable(Level.FINE) && loggedAtStep != step) {
+                logger.fine("Running in " + Thread.currentThread().getName() + " step: " + step + " offset: " + offset);
                 loggedAtStep = step;
             }
             action.accept(template);
