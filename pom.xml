@@ -6,7 +6,7 @@
   <artifactId>i18n-regions-parent</artifactId>
   <packaging>pom</packaging>
 
-  <version>0.4</version>
+  <version>0.5-SNAPSHOT</version>
   <name>i18n-regions</name>
   <description>Provides wrappers around ISO-codes for geographical regions</description>
   <url>https://github.com/mihxil/i18n-regions</url>
@@ -57,7 +57,7 @@
     <connection>scm:git:git://github.com/mihxil/i18n-regions.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/mihxil/i18n-regions.git</developerConnection>
     <url>https://github.com/mihxil/i18n-regions</url>
-    <tag>0.4</tag>
+    <tag>HEAD</tag>
   </scm>
 
 
