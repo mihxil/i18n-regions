@@ -52,6 +52,11 @@
       <artifactId>i18n-regions-continents</artifactId>
       <version>${meeuw.i18n.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.meeuw.i18n</groupId>
+      <artifactId>i18n-regions-open-location-code</artifactId>
+      <version>${meeuw.i18n.version}</version>
+    </dependency>
   </dependencies>
 
 
