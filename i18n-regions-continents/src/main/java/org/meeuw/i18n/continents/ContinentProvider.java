@@ -16,7 +16,6 @@ import org.meeuw.i18n.spi.RegionProvider;
 @Priority(100)
 public class ContinentProvider implements RegionProvider<Continent> {
 
-
     @Override
     public Optional<Continent> getByCode(@NonNull String code, boolean lenient) {
         try {
@@ -30,7 +29,6 @@ public class ContinentProvider implements RegionProvider<Continent> {
         } catch (IllegalArgumentException iae) {
             return Optional.empty();
         }
-
     }
 
     @Override
@@ -41,6 +39,11 @@ public class ContinentProvider implements RegionProvider<Continent> {
     @Override
     public Stream<Continent> values() {
         return Arrays.stream(Continent.Code.values()).map(Continent::new);
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " (" + values().count() + " continents)";
 
     }
 }

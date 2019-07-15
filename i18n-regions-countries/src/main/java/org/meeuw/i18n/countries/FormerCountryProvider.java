@@ -39,6 +39,11 @@ public class FormerCountryProvider implements RegionProvider<FormerCountry> {
     @Override
     public Stream<FormerCountry> values() {
         return Arrays.stream(FormerlyAssignedCountryCode.values()).map(FormerCountry::new);
-
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " (" + values().count() + " countries)";
+    }
+
 }

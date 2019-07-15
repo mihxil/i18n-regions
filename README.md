@@ -117,4 +117,17 @@ cd tests/springboot
 mvn spring-boot:run
 ```
 
+Logging
+----
+Some logging happens via the `java.util.logging` framework to avoid any extra dependencies.
+
+When you use slf4j or logback you could take this dependency:
+```xml
+<dependency>
+  <!-- region service uses java.util.logging. This makes it log to logback as springboot does -->
+  <groupId>org.slf4j</groupId>
+  <artifactId>jul-to-slf4j</artifactId>
+  <version>1.7.25</version>
+</dependency>
+```
 

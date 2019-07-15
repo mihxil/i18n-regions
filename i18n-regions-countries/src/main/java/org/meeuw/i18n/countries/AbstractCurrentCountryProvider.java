@@ -25,7 +25,6 @@ public abstract class AbstractCurrentCountryProvider implements RegionProvider<C
     @Override
     public Class<CurrentCountry> getProvidedClass() {
         return CurrentCountry.class;
-
     }
 
     @Override
@@ -40,6 +39,11 @@ public abstract class AbstractCurrentCountryProvider implements RegionProvider<C
         return Arrays.stream(CountryCode.values())
             .filter(c -> assignments.contains(c.getAssignment()))
             .map(CurrentCountry::new);
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " (" + values().count() + " countries)";
 
     }
 }

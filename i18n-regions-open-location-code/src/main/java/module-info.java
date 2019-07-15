@@ -12,6 +12,7 @@ module org.meeuw.i18n.openlocationcode {
     requires static java.annotation;
 
     requires openlocationcode;
+    requires java.logging;
 
 
     provides RegionProvider with

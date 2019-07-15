@@ -84,10 +84,15 @@ public class CountrySubdivisionProvider implements RegionProvider<CountrySubdivi
 
             @Override
             public int characteristics() {
-                return IMMUTABLE;
+                return IMMUTABLE | NONNULL;
 
             }
         };
         return StreamSupport.stream(spliterator, false).map(CountrySubdivisionWithCode::new);
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " (" + values().count() + " subdivisions)";
     }
 }

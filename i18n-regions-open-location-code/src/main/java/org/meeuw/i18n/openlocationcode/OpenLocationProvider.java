@@ -4,6 +4,8 @@ import java.util.Comparator;
 import java.util.Optional;
 import java.util.Spliterator;
 import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -23,6 +25,9 @@ import static com.google.openlocationcode.OpenLocationCode.*;
  */
 @Priority(100)
 public class OpenLocationProvider implements RegionProvider<OpenLocation> {
+
+    private static final Logger logger = Logger.getLogger(OpenLocationProvider.class.getName());
+
 
     public static final int CODE_ALPHABET_LENGTH = CODE_ALPHABET.length();
     public static final int CODE_ALPHABET_LENGTH_2 = CODE_ALPHABET_LENGTH * CODE_ALPHABET_LENGTH;
@@ -74,11 +79,7 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
 
     @Override
     public Stream<OpenLocation> values() {
-        Spliterator<int[]> spliterator = new OpenLocationCodeSpliterator();
-
         return StreamSupport.stream(OpenLocationCodeSpliterator::new, OpenLocationCodeSpliterator.CHARACTERISTICS, false).map(a -> new OpenLocation(toCode(a)));
-
-
     }
 
     /**
@@ -97,6 +98,12 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
             result *= CODE_ALPHABET_LENGTH_2;
         }
         return result  + limitForLength(length - 1);
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " (" + limitForLength(maxLength) + " codes in stream)";
+
     }
 
     static OpenLocationCode toCode(int[] template) {
@@ -143,19 +150,26 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
         }
 
     }
-    private static boolean advance(int[] template) {
+    static int[] advance(int[] template, int step, Consumer<int[]> initter) {
         int i = template.length - 1;
         while(i >= 0) {
             int max = getMax(i);
-            template[i]++;
-            if (template[i] == max) {
-                template[i] = 0;
+            int newValue = (template[i] + step);
+            template[i] = newValue % max;
+            int carry = newValue / max;
+            if (carry > 0) {
+                step = carry;
                 i--;
             } else {
-                return true;
+                return template;
             }
         }
-        return false;
+        template = new int[template.length + 2];
+        initter.accept(template);
+        return template;
+    }
+    static void advance(int[] template, int step) {
+        advance(template, step, (t) -> {throw new IllegalStateException();});
     }
     private static int getMax(int positionInTemplate) {
         if (positionInTemplate == 0) {
@@ -170,57 +184,88 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
 
     }
 
+    static long position(int[] template) {
+        int factor = 1;
+        int result = 0;
+        int i = template.length - 1;
+        while (i >= 0) {
+            int nextExtraFactor = getMax(i);
+            result += template[i] * factor;
+            factor *= nextExtraFactor;
+            i--;
+
+
+        }
+        return result;
+    }
+
+
     private static class OpenLocationCodeSpliterator implements Spliterator<int[]> {
 
-        static final int CHARACTERISTICS =  ORDERED | DISTINCT | SORTED | SIZED | NONNULL | IMMUTABLE | SUBSIZED;
-        boolean advanced = false;
+        static final int CHARACTERISTICS =  DISTINCT | NONNULL | IMMUTABLE;
+
+        static int maxStep;
+        static {
+            int availableProcessors = Runtime.getRuntime().availableProcessors();
+             maxStep = Math.min(availableProcessors, 8);
+        }
+
         long count = 0;
         int[] template = new int[2];
         long lastCount = limitForLength(maxLength);
+        int step = 1;
+        int loggedAtStep = -1;
+        int offset = 0;
         @Override
         public boolean tryAdvance(Consumer<? super int[]> action) {
             if (count > lastCount) {
                 return false;
             }
-            if (advanced) {
-                if (! advance(template)) {
-                    if (template.length / 2 < maxLength) {
-                        template = new int[template.length + 2];
-                    } else {
-                        return false;
-                    }
-                }
+            if (logger.isLoggable(Level.FINE) && loggedAtStep != step) {
+                logger.fine("Running in " + Thread.currentThread().getName() + " step: " + step + " offset: " + offset);
+                loggedAtStep = step;
             }
-            advanced = true;
-            int[] copy = new int[template.length];
-            System.arraycopy(template, 0, copy, 0, template.length);
-            action.accept(copy);
+            action.accept(template);
+
+            template = advance(template, step, (t) -> {
+                advance(t, offset);
+            });
+            if (template.length / 2 > maxLength) {
+                return false;
+            }
             count++;
             return true;
         }
 
         @Override
         public Spliterator<int[]> trySplit() {
-            // We split now by giving the second half of the complete thing to the new spliterator.
-
-            // may be it's nicer to split by increasing a 'step' or so
-            long splitSize = estimateSize() / 2;
-            if (splitSize < 100) {
+            // split will result in the current spliterator handling the even ones, and the split of one the odd ones
+            OpenLocationCodeSpliterator split = new OpenLocationCodeSpliterator();
+            if (step >= maxStep) {
+                // having it  bigger will result so much threads that it doesn't increase performance
                 return null;
             }
-            long currenLastCount = this.lastCount;
-            this.lastCount = this.count + splitSize;
-            OpenLocationCodeSpliterator split = new OpenLocationCodeSpliterator();
-            split.count = this.lastCount + 1;
-            split.template = templateAt(split.count);
-            split.lastCount = currenLastCount;
-            split.advanced = true;
+            split.lastCount = lastCount;
+            split.template = new int[template.length];
+            System.arraycopy(template, 0, split.template, 0, template.length);
+            split.offset = offset + step;
+            split.template = advance(split.template, step, t -> {
+                advance(split.template, split.offset);
+            });
+
+            step *= 2;
+
+
+            split.step = step;
+            split.count = count;
             return split;
         }
 
+
+
         @Override
         public long estimateSize() {
-            return lastCount  - count;
+            return (lastCount  - count) / step;
 
         }
         @Override
@@ -247,7 +292,7 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
         }
         @Override
         public int characteristics() {
-            return CHARACTERISTICS;
+            return step == 1 ? CHARACTERISTICS | SIZED : CHARACTERISTICS;
 
         }
     };

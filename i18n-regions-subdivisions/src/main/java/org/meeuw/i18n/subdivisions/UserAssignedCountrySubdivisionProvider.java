@@ -86,4 +86,9 @@ public class UserAssignedCountrySubdivisionProvider implements RegionProvider<Us
         };
         return StreamSupport.stream(spliterator, false);
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " (" + values().count() + " subdivisions)";
+    }
 }
