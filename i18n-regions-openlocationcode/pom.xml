@@ -8,7 +8,7 @@
     <version>0.5-SNAPSHOT</version>
   </parent>
 
-  <artifactId>i18n-regions-open-location-code</artifactId>
+  <artifactId>i18n-regions-openlocationcode</artifactId>
   <description>Provides open location code areas as region objects</description>
 
   <dependencies>
