@@ -1,7 +1,7 @@
 import org.meeuw.i18n.openlocationcode.OpenLocationProvider;
 import org.meeuw.i18n.spi.RegionProvider;
 
-module org.meeuw.i18n.continents {
+module org.meeuw.i18n.openlocationcode {
 
     exports org.meeuw.i18n.openlocationcode;
 
