@@ -56,7 +56,7 @@ In the same fashion arbitrary region implementations can easily be plugged in.
 
 Persistence
 -----------
-[`org.meeuw.i18n.persistence.RegionToStringConverter`](18n-regions/src/main/java/org/meeuw/i18n/persistence/RegionToStringConverter.java) is meant to arrange JPA persistence of `Region` objects to the database. We want the iso code to be used as simple strings in a database column or so.
+[`org.meeuw.i18n.persistence.RegionToStringConverter`](i18n-regions/src/main/java/org/meeuw/i18n/persistence/RegionToStringConverter.java) is meant to arrange JPA persistence of `Region` objects to the database. We want the iso code to be used as simple strings in a database column or so.
 
 This will also deal gracefully with codes which gets unassigned, because `RegionService#getByCode` will also fall back to formerly assigned codes.
 
@@ -97,8 +97,17 @@ or, if you prefer, on the collection itself:
 
 This list will not validate if you add Regions which don't follow the given rules.
 
+It can also be used on `java.util.Locale`, which contain a country component too:
+```java
+ protected List<
+        @ValidRegion(classes = {Country.class})
+        @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.USER_ASSIGNED | ValidCountry.FORMER, excludes = {"XN"})
+        @Language(mayContainCountry = true)
+        @NotNull Locale> languages;
+```
+(For completeness this also [`@Language`](i18n-regions/src/main/java/org/meeuw/i18n/validation/Language.java) is provided).
 
-As a utility there is `org.meeuw.i18n.validation.RegionValidatorService` which can be used to ise the settings in these annotation also to filter a stream of regions (e.g. `RegionService#values()`)
+As a utility there is `org.meeuw.i18n.validation.RegionValidatorService` which can be used to the settings in these annotations also to filter a stream of regions (e.g. `RegionService#values()`)
 ```java 
  return RegionService.getInstance().values()
             .filter(RegionValidatorService.getInstance().fromProperty(MediaObject.class, "countries"))
