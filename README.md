@@ -118,7 +118,7 @@ As a utility there is `org.meeuw.i18n.validation.RegionValidatorService` which c
 
 Optional dependencies
 ----
-Several dependencies are marked `optional` in the pom.xml. E.g. the annotations used to arrange XML bindings and validation are not present (any more) in java 11. If they are not present, this will not make it impossible to use the classes, you just cannot use JAXB, JPA, validation or whatever the missing dependency is related to.
+Several dependencies are marked `optional` in the pom.xml. E.g. the annotations used to arrange XML bindings and validation are not present (any more) in java 11. If they are not present, this will not make it impossible to use the classes, you just cannot use JAXB, JPA, validation or whatever the missing dependency is related to. It's only about annotations so that doesn't cause (by the JSR-175 specification) problems.
 
 Building and Jigsaw
 ---
