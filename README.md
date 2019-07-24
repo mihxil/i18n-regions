@@ -38,14 +38,14 @@ If you only need countries, you can take a dependency on [`org.meeuw.i18n:i18n-r
 
 It provides:
 - For current countries there are [`org.meeuw.i18n.countries.CurrentCountry`'s](i18n-regions-countries/src/main/java/org/meeuw/i18n/countries/CurrentCountry.java). Backend by `com.neovisionaries.i18n.CountryCode`
-- For former countries there is [`org.meeuw.i18n.countries.FormerCountry`](i18n-regions-countries/src/main/java/org/meeuw/i18n/countries/FormerCountry.java), which is backed by  `org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode` (from [i18n-formerly-assigned](https://github.com/mihxil/i18n-formerly-assigned)
+- For former countries there is [`org.meeuw.i18n.countries.FormerCountry`](i18n-regions-countries/src/main/java/org/meeuw/i18n/countries/FormerCountry.java), which is backed by  `org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode` (from [i18n-formerly-assigned](https://github.com/mihxil/i18n-formerly-assigned))
 - Some common user assigned countries are  hard coded in [`org.meeuw.i18.countries.UserAssignedCountry`](si18n-regions-countries/src/main/java/org/meeuw/i18n/countries/UserAssignedCountry.java)
 
 ### Subdivisions of countries
 These are provided in [`org.meeuw.i18n:i18n-regions-subdivisions`](https://search.maven.org/search?q=g:org.meeuw.i18n%20AND%20a:i18n-regions-subdivisions&core=gav)
 - For subdivision of countries [`org.meeuw.i18n.subdivisions.CountrySubdivision`](i18n-regions-subdivisions/src/main/java/org/meeuw/i18n/subdivisions/CountrySubdivision.java), which is backed by 
 `be.olsson.i18n.subdivision.CountryCodeSubdivision` (from https://github.com/tobias-/i18n-subdivisions)
-- In case there are missing country subdivision they can easily be added via `subdivision.<country code>.properties`. E.g. [`subdivisions.GB.properties`](18n-regions-subdivisions/src/main/resources/subdivisions.GB.properties) provides some which were obviously missing from Great Britain otherwise.
+- In case there are missing country subdivision they can easily be added via `subdivision.<country code>.properties`. E.g. [`subdivisions.GB.properties`](i18n-regions-subdivisions/src/main/resources/subdivisions.GB.properties) provides some which were obviously missing from Great Britain otherwise.
 
 ### Continents
 A list of codes for the continents is provided in [`org.meeuw.i18n:i18n-regions-continents`](https://search.maven.org/search?q=g:org.meeuw.i18n%20AND%20a:i18n-regions-continents&core=ga)
