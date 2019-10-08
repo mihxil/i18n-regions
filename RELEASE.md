@@ -11,5 +11,5 @@ In case sonatype a bit down:
 
 
 ```
-mvn -DaltDeploymentRepository=nexusvpro::default::http://nexus.vpro.nl/content/groups/public deploy
+mvn -DaltDeploymentRepository=nexusvpro::default::http://nexus.vpro.nl/content/repositories/snapshots  deploy
 ```
