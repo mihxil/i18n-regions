@@ -44,12 +44,12 @@
 
 
   <properties>
-    <nv-i18n.version>1.25</nv-i18n.version>
+    <nv-i18n.version>1.26</nv-i18n.version>
     <i18n-subdivisions.version>0.2</i18n-subdivisions.version>
     <i18n-formerly-assigned.version>0.5</i18n-formerly-assigned.version>
     <junit.version>4.12</junit.version>
     <java.version>8</java.version>
-    <checker.version>2.9.0</checker.version>
+    <checker.version>2.11.1</checker.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -298,7 +298,7 @@
       <dependency>
         <groupId>org.assertj</groupId>
         <artifactId>assertj-core</artifactId>
-        <version>3.12.2</version>
+        <version>3.13.2</version>
         <scope>test</scope>
       </dependency>
       <dependency>
