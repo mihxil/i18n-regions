@@ -16,7 +16,7 @@
     <module>i18n-regions-subdivisions</module>
     <module>i18n-regions-countries</module>
     <module>i18n-regions-continents</module>
-    <module>i18n-regions-open-location-code</module>
+    <module>i18n-regions-openlocationcode</module>
   </modules>
 
   <licenses>
