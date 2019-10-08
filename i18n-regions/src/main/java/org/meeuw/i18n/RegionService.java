@@ -189,7 +189,7 @@ public class RegionService {
                 final int v2 = p2 != null ? p2.value() : 100;
                 return v1 - v2;
             } catch (NoClassDefFoundError ncdfe) {
-                logger.warning(ncdfe.getClass() + ":" + ncdfe.getMessage() + " region services " + o1 + " " + o2 + "are unordered");
+                logger.info(ncdfe.getClass() + ":" + ncdfe.getMessage() + " region services " + o1 + " " + o2 + " are unordered");
                 return o1.getClass().getSimpleName().compareTo(o2.getClass().getSimpleName());
             }
         };
