@@ -67,6 +67,7 @@ public interface Country extends Region {
 
 
     /**
+     * Returns the underlying code of this Country object. This may be some {@link Enum} (like {@link CountryCode}), but in cases where the set is a bit more dynamic it can also be simply a {@link String}
      * @since 0.5
      */
     Serializable getCountryCode();
