@@ -1,5 +1,6 @@
 package org.meeuw.i18n.countries;
 
+import java.io.Serializable;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -63,5 +64,12 @@ public interface Country extends Region {
     }
 
     int getNumeric();
+
+
+    /**
+     * @since 0.5
+     */
+    Serializable getCountryCode();
+
 
 }

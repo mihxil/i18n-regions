@@ -28,7 +28,7 @@ public interface CountrySubdivision extends Region {
         return UserAssignedCountrySubdivision.of(countryCode, code);
     }
 
-
+    @Override
     String getCountryCode();
 
     @Override

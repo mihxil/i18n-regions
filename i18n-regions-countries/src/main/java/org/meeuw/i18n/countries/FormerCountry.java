@@ -41,6 +41,7 @@ public class FormerCountry implements Country {
         return code.getName();
     }
 
+    @Override
     public FormerlyAssignedCountryCode getCountryCode() {
         return code;
     }
