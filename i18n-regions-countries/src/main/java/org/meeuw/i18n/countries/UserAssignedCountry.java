@@ -52,6 +52,13 @@ public class UserAssignedCountry extends UserAssignedRegion implements Country {
         return number;
 
     }
+
+    @Override
+    public String getCountryCode() {
+        return code;
+
+    }
+
     @Override
     public String toString() {
         return getCode();
