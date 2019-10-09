@@ -3,11 +3,13 @@ package org.meeuw.i18n.countries;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.RegionService;
+import org.meeuw.i18n.bind.jaxb.Code;
 import org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode;
-
 import com.neovisionaries.i18n.CountryCode;
 
 /**
@@ -15,6 +17,7 @@ import com.neovisionaries.i18n.CountryCode;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
+@XmlJavaTypeAdapter(Code.class)
 public interface Country extends Region {
 
 	/**

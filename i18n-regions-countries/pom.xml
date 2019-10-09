@@ -26,7 +26,11 @@
       <artifactId>validation-api</artifactId>
       <optional>true</optional>
     </dependency>
-
+     <dependency>
+      <groupId>javax.xml.bind</groupId>
+      <artifactId>jaxb-api</artifactId>
+      <optional>true</optional>
+    </dependency>
     <dependency>
       <groupId>javax.annotation</groupId>
       <artifactId>javax.annotation-api</artifactId>
