@@ -1,14 +1,8 @@
 package org.meeuw.i18n.validation.impl;
 
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
+import javax.validation.*;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -29,64 +23,125 @@ public class LanguageValidatorTest {
     private static final RegionValidatorService regionValidatorService = RegionValidatorService.getInstance();
     private static final Validator VALIDATOR = regionValidatorService.getValidator();
 
+
     static {
         Locale.setDefault(new Locale("nl"));
     }
 
-    LanguageValidator validator = new LanguageValidator();
+    LanguageValidator languageValidator = new LanguageValidator();
 
     @Test
     public void testIsValid() {
-        assertTrue(validator.isValid(new Locale("nl"), null));
+        assertTrue(languageValidator.isValid(new Locale("nl"), null));
 
     }
 
     @Test
     public void testIsValidCz() {
-        assertFalse(validator.isValid(new Locale("cz"), null));
+        assertFalse(languageValidator.isValid(new Locale("cz"), null));
 
     }
 
     @Test
     public void testIsValidZxx() {
-        assertTrue(validator.isValid(new Locale("zxx"), null));
+        assertTrue(languageValidator.isValid(new Locale("zxx"), null));
 
     }
 
     @Test
     public void testIsValidJw() {
-        assertTrue(validator.isValid(new Locale("jw"), null));
+        assertTrue(languageValidator.isValid(new Locale("jw"), null));
 
     }
 
     @Test
     public void iso3() {
-        assertTrue(validator.isValid(new Locale("dut"), null));
+        assertTrue(languageValidator.isValid(new Locale("dut"), null));
 
     }
 
     @Test
     @Ignore("fails. 'act' is somewhy not a known language")
     public void achterhoeks() {
-        assertTrue(validator.isValid(new Locale("act"), null));
+        assertTrue(languageValidator.isValid(new Locale("act"), null));
 
     }
 
     public static class A {
         @Language
         String language;
+
+        @Language(mayContainCountry = false)
+        String languageNoCountry;
+
+        @Language(mayContainVariant = true)
+        String languageWithVariant;
+
+        @Language
+        Object object;
     }
+
+    ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+    Validator validator = factory.getValidator();
 
     @Test
     public void testZZ() {
         A a = new A();
         a.language = "ZZ";
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
-        Set<ConstraintViolation<A>> validate = validator.validate(a);
-        System.out.println("" + validate);
+        testValidate(a, 1);
+    }
+
+
+    @Test
+    public void testWithCountry() {
+        {
+            A a = new A();
+            a.language = "nl-NL";
+            testValidate(a, 0);
+        }
+          {
+            A a = new A();
+            a.language = "nl-UU"; // UU is not a valid country
+            testValidate(a, 1);
+        }
+        {
+            A a = new A();
+            a.languageNoCountry = "nl-NL";
+            testValidate(a, 1);
+        }
+        {
+            A a = new A();
+            a.language = "nl-NL-INFORMAL";
+            testValidate(a, 1);
+        }
+        {
+            A a = new A();
+            a.languageWithVariant = "nl-NL-INFORMAL";
+            testValidate(a, 0);
+        }
 
     }
+
+    @Test
+    public void testObject() {
+        {
+            A a = new A();
+            a.object = Arrays.asList("ZZ");
+            testValidate(a, 1);
+        }
+        {
+            A a = new A();
+            a.object = Arrays.asList("nl-NL", "nl-BE");
+            testValidate(a, 0);
+        }
+    }
+
+    private void testValidate(A value, int expectedSize) {
+        Set<ConstraintViolation<A>> validate = validator.validate(value);
+        System.out.println("" + validate);
+        assertThat(validate).hasSize(expectedSize);
+    }
+
 
     @Test
     @Ignore
@@ -101,7 +156,7 @@ public class LanguageValidatorTest {
         // output sorted
         System.out.println("||code||name in english||name in dutch||name in language itself||");
         for (Map.Entry<String, String> e : result.entrySet()) {
-            assertTrue(validator.isValid(new Locale(e.getKey()), null));
+            assertTrue(languageValidator.isValid(new Locale(e.getKey()), null));
             String en = e.getValue();
             String nl = new Locale(e.getKey()).getDisplayLanguage(new Locale("nl"));
             if (nl.equals(en) || nl.equals(e.getKey())) {

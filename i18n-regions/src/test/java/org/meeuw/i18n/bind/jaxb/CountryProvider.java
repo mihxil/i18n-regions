@@ -20,6 +20,7 @@ public class CountryProvider implements RegionProvider<Country> {
     public Stream<Country> values() {
         return Stream.of(
             new Country("NL", "Netherlands"),
+            new Country("BE", "Belgium"),
             new Country("UK", "United Kingdom")
         );
 

@@ -1,10 +1,9 @@
 package org.meeuw.i18n.validation.impl;
 
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
+import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
 import org.junit.Test;
@@ -74,8 +73,47 @@ public class RegionConstraintValidatorTest {
                 this.region = region;
             }
         }
-        B invalid = new B(RegionService.getInstance().getByCode("NL").orElseThrow(IllegalStateException::new));
-        assertThat(VALIDATOR.validate(invalid)).hasSize(1);
+        {
+            B invalid = new B(RegionService.getInstance().getByCode("NL").orElseThrow(IllegalStateException::new));
+            assertThat(VALIDATOR.validate(invalid)).hasSize(1);
+        }
+        {
+            B nullIsValid = new B(null);
+            assertThat(VALIDATOR.validate(nullIsValid)).hasSize(0);
+
+        }
+
+
+    }
+
+    @Test
+    public void validateObject() {
+
+        class A {
+            @ValidRegion(types = Region.Type.COUNTRY)
+            Object region;
+
+            public A(Object region) {
+                this.region = region;
+            }
+        }
+        {
+            A listWithValid = new A(Arrays.asList(RegionService.getInstance().getByCode("NL").orElseThrow(IllegalStateException::new)));
+            assertThat(VALIDATOR.validate(listWithValid)).hasSize(0);
+        }
+
+        {
+            A listWithInValid = new A(Arrays.asList("BLA", "NL"));
+            Set<ConstraintViolation<A>> validate = VALIDATOR.validate(listWithInValid);
+            System.out.println("" + validate);
+            assertThat(VALIDATOR.validate(listWithInValid)).hasSize(1);
+        }
+        {
+            A withUnknownType = new A(Integer.valueOf(1));
+            Set<ConstraintViolation<A>> validate = VALIDATOR.validate(withUnknownType);
+            System.out.println("" + validate);
+            assertThat(VALIDATOR.validate(withUnknownType)).hasSize(1);
+        }
 
     }
 
