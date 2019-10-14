@@ -105,9 +105,9 @@ It can also be used on `java.util.Locale`, which contain a country component too
         @Language(mayContainCountry = true)
         @NotNull Locale> languages;
 ```
-(For completeness this also [`@Language`](i18n-regions/src/main/java/org/meeuw/i18n/validation/Language.java) is provided).
+(For completeness also [`@Language`](i18n-regions/src/main/java/org/meeuw/i18n/validation/Language.java) is provided).
 
-As a utility there is `org.meeuw.i18n.validation.RegionValidatorService` which can be used to the settings in these annotations also to filter a stream of regions (e.g. `RegionService#values()`)
+As a utility there is `org.meeuw.i18n.validation.RegionValidatorService` which can be used to for the settings in these annotations also to filter a stream of regions (e.g. `RegionService#values()`)
 ```java 
  return RegionService.getInstance().values()
             .filter(RegionValidatorService.getInstance().fromProperty(MediaObject.class, "countries"))
