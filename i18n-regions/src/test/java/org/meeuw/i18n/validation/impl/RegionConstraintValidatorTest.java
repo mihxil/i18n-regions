@@ -128,10 +128,10 @@ public class RegionConstraintValidatorTest {
         }
 
         Set<String> regions = RegionService.getInstance().values().filter(RegionValidatorService.getInstance().fromListProperty(A.class, "regions")).map(Region::getCode).collect(Collectors.toSet());
-        assertThat(regions).containsExactly("UK", "NL");
+        assertThat(regions).containsExactly("BE", "UK", "NL");
 
          Set<String> ukExcludes = RegionService.getInstance().values().filter(RegionValidatorService.getInstance().fromListProperty(B.class, "regions")).map(Region::getCode).collect(Collectors.toSet());
-        assertThat(ukExcludes).containsExactly("NL");
+        assertThat(ukExcludes).containsExactly("BE", "NL");
 
 
     }
@@ -147,10 +147,10 @@ public class RegionConstraintValidatorTest {
         }
 
         Set<String> regions = RegionService.getInstance().values().filter(RegionValidatorService.getInstance().fromListProperty(A.class, "regions")).map(Region::getCode).collect(Collectors.toSet());
-        assertThat(regions).containsExactly("UK", "NL");
+        assertThat(regions).containsExactly("BE", "UK", "NL");
 
          Set<String> ukExcludes = RegionService.getInstance().values().filter(RegionValidatorService.getInstance().fromListProperty(B.class, "regions")).map(Region::getCode).collect(Collectors.toSet());
-        assertThat(ukExcludes).containsExactly("NL");
+        assertThat(ukExcludes).containsExactly("BE", "NL");
 
 
     }

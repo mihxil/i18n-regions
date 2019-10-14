@@ -21,7 +21,7 @@ public class CodeTest {
     @XmlRootElement
     static class A {
         @XmlAttribute
-        Region region = new Country("NL", "Netherlands");
+        Region region = new TestCountry("NL", "Netherlands");
 
         @Override
         public String toString() {
@@ -33,7 +33,7 @@ public class CodeTest {
     @Test
     public void unmarshal() {
         A a = JAXB.unmarshal(new StringReader("<a region=\"UK\"/>"), A.class);
-        assertThat(a.region).isEqualTo(new Country("UK", "uk"));
+        assertThat(a.region).isEqualTo(new TestCountry("UK", "uk"));
 
     }
 

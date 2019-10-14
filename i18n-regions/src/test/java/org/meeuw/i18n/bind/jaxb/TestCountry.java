@@ -6,11 +6,11 @@ import org.meeuw.i18n.Region;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-class Country implements Region {
+class TestCountry implements Region {
     private final String code;
     private final String name;
 
-    Country(String code, String name) {
+    TestCountry(String code, String name) {
         this.code = code;
         this.name = name;
     }
@@ -42,7 +42,7 @@ class Country implements Region {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Country country = (Country) o;
+        TestCountry country = (TestCountry) o;
 
         return code.equals(country.code);
     }
