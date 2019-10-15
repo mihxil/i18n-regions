@@ -3,8 +3,6 @@ package org.meeuw.i18n;
 import java.util.Comparator;
 import java.util.Locale;
 
-import javax.annotation.Priority;
-
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.neovisionaries.i18n.LanguageCode;
@@ -15,6 +13,10 @@ import com.neovisionaries.i18n.LanguageCode;
  * @since 0.1
  */
 public class Regions {
+
+    private Regions() {
+
+    }
 
 
     /**
