@@ -1,13 +1,13 @@
 package org.meeuw;
 
 import org.apache.commons.lang3.ClassUtils;
-import org.meeuw.i18n.Regions;
+import org.meeuw.i18n.RegionService;
 
 import java.lang.annotation.Annotation;
 import java.util.Locale;
 
 /**
- * Use e.g.  java -Dfile.encoding=UTF-8 -jar target/i18n-regions-tests-simple-0.1-SNAPSHOT-jar-with-dependencies.jar  nl
+ * Use e.g.  java -Dfile.encoding=UTF-8 -jar  target/i18n-regions-tests-simple-0.1-SNAPSHOT.jar   nl
  * @author Michiel Meeuwissen
  * @since ...
  */
@@ -16,7 +16,7 @@ public class TestSimple {
 	public static void main(String[] argv) {
 		String arg1 = argv.length == 0 ? null : argv[0];
 		Locale locale = arg1 == null ? Locale.getDefault() : new Locale(arg1);
-		Regions.values().forEach(v -> {
+		RegionService.getInstance().values().forEach(v -> {
 
 			System.out.println(" " + v + ":" + v.getName() + ":" + v.getName(locale));
 			System.out.println("class: " + v.getClass().getSimpleName());

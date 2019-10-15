@@ -11,7 +11,7 @@
   <description>Just a main class with no extra dependencies whatsoever</description>
 
   <properties>
-    <meeuw.i18n.version>0.4-SNAPSHOT</meeuw.i18n.version>
+    <meeuw.i18n.version>0.5-SNAPSHOT</meeuw.i18n.version>
   </properties>
 
   <dependencies>
@@ -21,9 +21,14 @@
       <version>${meeuw.i18n.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.meeuw.i18n</groupId>
+      <artifactId>i18n-regions-countries</artifactId>
+      <version>${meeuw.i18n.version}</version>
+    </dependency>
+    <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
-      <version>3.8.1</version>
+      <version>3.9</version>
     </dependency>
   </dependencies>
 
@@ -33,23 +38,26 @@
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.2.1</version>
+        <configuration>
+          <transformers>
+            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+              <manifestEntries>
+                <Main-Class>org.meeuw.TestSimple</Main-Class>
+                <X-Compile-Source-JDK>8</X-Compile-Source-JDK>
+                <X-Compile-Target-JDK>8</X-Compile-Target-JDK>
+              </manifestEntries>
+            </transformer>
+            <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+          </transformers>
+        </configuration>
         <executions>
           <execution>
             <phase>package</phase>
             <goals>
-              <goal>single</goal>
+              <goal>shade</goal>
             </goals>
-            <configuration>
-              <archive>
-                <manifest>
-                  <mainClass>org.meeuw.TestSimple</mainClass>
-                </manifest>
-              </archive>
-              <descriptorRefs>
-                <descriptorRef>jar-with-dependencies</descriptorRef>
-              </descriptorRefs>
-            </configuration>
           </execution>
         </executions>
       </plugin>
