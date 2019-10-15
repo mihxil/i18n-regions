@@ -1,6 +1,5 @@
 package org.meeuw;
 
-import org.apache.commons.lang3.ClassUtils;
 import org.meeuw.i18n.RegionService;
 
 import java.lang.annotation.Annotation;
@@ -22,7 +21,7 @@ public class TestSimple {
 			System.out.println("class: " + v.getClass().getSimpleName());
 			for (Annotation a : v.getClass().getAnnotations()) {
 				System.out.println(("annotation : " + a));
-			}
+			}/*
 			ClassUtils.getAllInterfaces(v.getClass()).forEach(c -> {
 				System.out.println("interface: " + c.getSimpleName());
 						for (Annotation a : c.getAnnotations()) {
@@ -30,7 +29,7 @@ public class TestSimple {
 							System.out.println(("   annotation : " + a));
 						}
 					}
-			);
+			);*/
 
 		});
 	}

@@ -358,6 +358,7 @@
     <dependency>
       <groupId>org.checkerframework</groupId>
       <artifactId>checker-qual</artifactId>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>javax.persistence</groupId>
