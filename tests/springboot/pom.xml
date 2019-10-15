@@ -13,13 +13,13 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.1.6.RELEASE</version>
+    <version>2.1.9.RELEASE</version>
   </parent>
 
 
   <properties>
     <java.version>8</java.version>
-    <meeuw.i18n.version>0.4-SNAPSHOT</meeuw.i18n.version>
+    <meeuw.i18n.version>0.5-SNAPSHOT</meeuw.i18n.version>
   </properties>
 
 
@@ -54,7 +54,7 @@
     </dependency>
     <dependency>
       <groupId>org.meeuw.i18n</groupId>
-      <artifactId>i18n-regions-open-location-code</artifactId>
+      <artifactId>i18n-regions-openlocationcode</artifactId>
       <version>${meeuw.i18n.version}</version>
     </dependency>
   </dependencies>

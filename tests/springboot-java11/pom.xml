@@ -10,14 +10,14 @@
   <description>Spring boot application demoing stuff a bit</description>
 
   <properties>
-    <meeuw.i18n.version>0.4-SNAPSHOT</meeuw.i18n.version>
+    <meeuw.i18n.version>0.5-SNAPSHOT</meeuw.i18n.version>
     <java.version>11</java.version>
   </properties>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.1.6.RELEASE</version>
+    <version>2.1.9.RELEASE</version>
   </parent>
 
   <dependencies>
@@ -47,6 +47,11 @@
     <dependency>
       <groupId>org.meeuw.i18n</groupId>
       <artifactId>i18n-regions-continents</artifactId>
+      <version>${meeuw.i18n.version}</version>
+    </dependency>
+     <dependency>
+      <groupId>org.meeuw.i18n</groupId>
+      <artifactId>i18n-regions-openlocationcode</artifactId>
       <version>${meeuw.i18n.version}</version>
     </dependency>
   </dependencies>

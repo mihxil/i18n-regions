@@ -8,7 +8,7 @@
   <version>0.1-SNAPSHOT</version>
 
   <properties>
-    <meeuw.i18n.version>0.4-SNAPSHOT</meeuw.i18n.version>
+    <meeuw.i18n.version>0.5-SNAPSHOT</meeuw.i18n.version>
   </properties>
 
   <dependencies>
@@ -20,17 +20,17 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
-      <version>5.1.8.RELEASE</version>
+      <version>5.2.0.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
-      <version>3.8.1</version>
+      <version>3.9</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>5.1.8.RELEASE</version>
+      <version>5.2.0.RELEASE</version>
     </dependency>
     <dependency>
       <!-- region service uses java.util.logging. This makes it log to logback as springboot does -->
