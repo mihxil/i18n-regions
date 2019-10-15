@@ -51,7 +51,7 @@ These are provided in [`org.meeuw.i18n:i18n-regions-subdivisions`](https://searc
 A list of codes for the continents is provided in [`org.meeuw.i18n:i18n-regions-continents`](https://search.maven.org/search?q=g:org.meeuw.i18n%20AND%20a:i18n-regions-continents&core=ga)
 
 ### More
-In the same fashion arbitrary region implementations can easily be plugged in.
+In the same fashion arbitrary region implementations can easily be plugged in. This project also provides [a region implemtention based on google 'open location code'](i18n-regions-openlocationcode).
 
 
 Persistence
