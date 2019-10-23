@@ -39,7 +39,7 @@ If you only need countries, you can take a dependency on [`org.meeuw.i18n:i18n-r
 It provides:
 - For current countries there are [`org.meeuw.i18n.countries.CurrentCountry`'s](i18n-regions-countries/src/main/java/org/meeuw/i18n/countries/CurrentCountry.java). Backend by `com.neovisionaries.i18n.CountryCode`
 - For former countries there is [`org.meeuw.i18n.countries.FormerCountry`](i18n-regions-countries/src/main/java/org/meeuw/i18n/countries/FormerCountry.java), which is backed by  `org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode` (from [i18n-formerly-assigned](https://github.com/mihxil/i18n-formerly-assigned))
-- Some common user assigned countries are  hard coded in [`org.meeuw.i18.countries.UserAssignedCountry`](si18n-regions-countries/src/main/java/org/meeuw/i18n/countries/UserAssignedCountry.java)
+- Some common user assigned countries are  hard coded in [`org.meeuw.i18.countries.UserAssignedCountry`](i18n-regions-countries/src/main/java/org/meeuw/i18n/countries/UserAssignedCountry.java)
 
 ### Subdivisions of countries
 These are provided in [`org.meeuw.i18n:i18n-regions-subdivisions`](https://search.maven.org/search?q=g:org.meeuw.i18n%20AND%20a:i18n-regions-subdivisions&core=gav)
