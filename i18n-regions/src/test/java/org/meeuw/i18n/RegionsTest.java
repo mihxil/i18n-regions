@@ -3,7 +3,7 @@ package org.meeuw.i18n;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.neovisionaries.i18n.LanguageCode;
 
@@ -15,10 +15,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-public class RegionsTest {
+class RegionsTest {
 
     @Test
-    public void sortByName() {
+    void sortByName() {
         List<Region> collect = RegionService.getInstance().values().collect(Collectors.toList());
 
         collect.sort(Regions.sortByName(nl));
@@ -30,14 +30,12 @@ public class RegionsTest {
     }
 
     @Test
-    public void testToString() {
-
+    void testToString() {
         assertThat(Regions.toString(RegionService.getInstance().getByCode("NL").orElseThrow(), LanguageCode.nl)).isEqualTo("Nederland");
-
     }
-     @Test
-    public void testToStringWithCode() {
 
+    @Test
+    void testToStringWithCode() {
         assertThat(Regions.toStringWithCode(RegionService.getInstance().getByCode("NL").orElseThrow(), LanguageCode.nl)).isEqualTo("NL:Nederland");
 
     }

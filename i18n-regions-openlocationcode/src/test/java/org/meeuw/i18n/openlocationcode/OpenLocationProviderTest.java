@@ -1,18 +1,14 @@
 package org.meeuw.i18n.openlocationcode;
 
 import java.time.Duration;
+import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.assertj.core.api.Assumptions;
-import org.junit.Before;
-import org.junit.FixMethodOrder;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.Stopwatch;
-import org.junit.runner.Description;
-import org.junit.runners.MethodSorters;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,34 +16,37 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 0.4
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class OpenLocationProviderTest {
+@TestMethodOrder(MethodOrderer.Alphanumeric.class)
+class OpenLocationProviderTest implements BeforeTestExecutionCallback, AfterTestExecutionCallback {
 
 
-    static Set<String> sequentialSet =  new HashSet<>();
-    static Set<String> parallelSet =  Collections.newSetFromMap(new ConcurrentHashMap<String, Boolean>());
+    private static Set<String> sequentialSet =  new HashSet<>();
+    private static Set<String> parallelSet =  Collections.newSetFromMap(new ConcurrentHashMap<String, Boolean>());
 
-    static AtomicInteger sequentialCount = new AtomicInteger(0);
+    private static AtomicInteger sequentialCount = new AtomicInteger(0);
 
-    static int takeWhileLength = 3;
-    static int hashDiv = 100001;
+    private static int takeWhileLength = 3;
+    private static int hashDiv = 100001;
 
-    @Rule
-     public Stopwatch stopwatch = new Stopwatch() {
-         @Override
-         protected void finished(long nanos, Description description) {
-             System.out.println(description.getMethodName() + " " + Duration.ofNanos(nanos));
-         }
-     };
+    private Instant start = Instant.now();
 
-    @Before
-    public void setup() {
+    @Override
+    public void afterTestExecution(ExtensionContext extensionContext) throws Exception {
+        System.out.println(extensionContext.getDisplayName() + " " + Duration.between(start, Instant.now()));
+    }
+
+    @Override
+    public void beforeTestExecution(ExtensionContext extensionContext) throws Exception {
+        start = Instant.now();
+    }
+
+    @BeforeEach
+    void setup() {
         OpenLocationProvider.setMaxLength(Math.max(takeWhileLength, 4));
-
     }
 
     @Test
-    public void test1_valuesSequential() {
+    void test1_valuesSequential() {
         OpenLocationProvider provider = new OpenLocationProvider();
         provider.values()
             .takeWhile(r -> r.getLength() <= takeWhileLength)
@@ -69,7 +68,7 @@ public class OpenLocationProviderTest {
 
 
     @Test
-    public void test2_valuesParallel() {
+    void test2_valuesParallel() {
         OpenLocationProvider provider = new OpenLocationProvider();
 
         AtomicInteger parallelCount = new AtomicInteger(0);
@@ -97,7 +96,7 @@ public class OpenLocationProviderTest {
 
     }
     @Test
-    public void test3_valuesCompareSequentialWithParallel() {
+    void test3_valuesCompareSequentialWithParallel() {
         Assumptions.assumeThat(sequentialSet).isNotEmpty();
         Assumptions.assumeThat(parallelSet).isNotEmpty();
 
@@ -109,14 +108,14 @@ public class OpenLocationProviderTest {
 
     }
     @Test
-    public void limitForLength() {
+    void limitForLength() {
         assertThat(OpenLocationProvider.limitForLength(1)).isEqualTo(9 * 18);
         assertThat(OpenLocationProvider.limitForLength(2)).isEqualTo(9 * 18 + 9 * 18 * 20 * 20);
         assertThat(OpenLocationProvider.limitForLength(3)).isEqualTo(9 * 18 + 9 * 18 * 20 * 20 + 9 * 18 * 20 * 20 * 20 * 20);
     }
 
     @Test
-    public void fillTemplate2() {
+    void fillTemplate2() {
         int[] template = new int[2];
         OpenLocationProvider.fillTemplate(template, 40);
         assertThat(template).isEqualTo(new int[] {2, 4}); // 40 = 2 * 18 + 4
@@ -126,7 +125,7 @@ public class OpenLocationProviderTest {
 
     }
     @Test
-    public void fillTemplate4() {
+    void fillTemplate4() {
         int[] template = new int[4];
         OpenLocationProvider.fillTemplate(template, 62837);
         String code = OpenLocationProvider.toCode(template).toString();
@@ -134,7 +133,7 @@ public class OpenLocationProviderTest {
     }
 
     @Test
-    public void templateAt() {
+    void templateAt() {
         int[] template = OpenLocationProvider.templateAt(48643);
         String code = OpenLocationProvider.toCode(template).toString();
         assertThat(code).isEqualTo("8M630000+"); //
@@ -142,7 +141,7 @@ public class OpenLocationProviderTest {
 
 
     @Test
-    public void carrying() {
+    void carrying() {
         int[] template = new int[4];
         OpenLocationProvider.fillTemplate(template, 48643);
         assertThat(OpenLocationProvider.position(template)).isEqualTo(48643);

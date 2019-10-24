@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.RegionService;
 import org.meeuw.i18n.validation.RegionValidatorService;
@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since ...
  */
-public class RegionConstraintValidatorTest {
+class RegionConstraintValidatorTest {
      private static final RegionValidatorService regionValidatorService = RegionValidatorService.getInstance();
     private static final Validator VALIDATOR = regionValidatorService.getValidator();
 
@@ -28,13 +28,13 @@ public class RegionConstraintValidatorTest {
 
 
     @Test
-    public void validateLocale() {
+    void validateLocale() {
 
         class A {
             @ValidRegion
             Locale locale;
 
-            public A(Locale locale) {
+            A(Locale locale) {
                 this.locale = locale;
             }
         }
@@ -51,13 +51,13 @@ public class RegionConstraintValidatorTest {
     }
 
     @Test
-    public void validateByType() {
+    void validateByType() {
 
         class A {
             @ValidRegion(types = Region.Type.COUNTRY)
             Region region;
 
-            public A(Region region) {
+            A(Region region) {
                 this.region = region;
             }
         }
@@ -69,7 +69,7 @@ public class RegionConstraintValidatorTest {
             @ValidRegion(types = Region.Type.CONTINENT)
             Region region;
 
-            public B(Region region) {
+            B(Region region) {
                 this.region = region;
             }
         }
@@ -87,13 +87,13 @@ public class RegionConstraintValidatorTest {
     }
 
     @Test
-    public void validateObject() {
+    void validateObject() {
 
         class A {
             @ValidRegion(types = Region.Type.COUNTRY)
             Object region;
 
-            public A(Object region) {
+            A(Object region) {
                 this.region = region;
             }
         }
@@ -118,7 +118,7 @@ public class RegionConstraintValidatorTest {
     }
 
     @Test
-    public void listProperty() {
+    void listProperty() {
 
         class A {
             List<@ValidRegion(types = Region.Type.COUNTRY)  Region> regions;
@@ -137,7 +137,7 @@ public class RegionConstraintValidatorTest {
     }
 
     @Test
-    public void setProperty() {
+    void setProperty() {
 
         class A {
             Set<@ValidRegion(types = Region.Type.COUNTRY)  Region> regions;

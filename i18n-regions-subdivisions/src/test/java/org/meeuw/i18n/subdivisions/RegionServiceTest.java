@@ -1,7 +1,7 @@
 package org.meeuw.i18n.subdivisions;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.RegionService;
 
@@ -11,12 +11,12 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-public class RegionServiceTest {
+class RegionServiceTest {
 
 
 
     @Test
-    public void getCountrySubDivisionUtrecht() {
+    void getCountrySubDivisionUtrecht() {
 
         Region utrecht = RegionService.getInstance().getByCode("NL-UT").orElse(null);
         assertThat(utrecht).isNotNull();
@@ -26,8 +26,8 @@ public class RegionServiceTest {
     }
 
     @Test
-    @Ignore("This is missing in subdivision, make pull request")
-    public void getCountrySubDivisionGreatBritain() {
+    @Disabled("This is missing in subdivision, make pull request")
+    void getCountrySubDivisionGreatBritain() {
 
         Region gbn = RegionService.getInstance().getByCode("GB-GBN").orElse(null);
         assertThat(gbn).isNotNull();
@@ -38,7 +38,7 @@ public class RegionServiceTest {
 
 
     @Test
-    public void subdivisionsOfGB(){
+    void subdivisionsOfGB(){
         Region eng = RegionService.getInstance().getByCode("GB-ENG").orElse(null);
         assertThat(eng.getCode()).isEqualTo("GB-ENG");
         assertThat(eng.getName()).isEqualTo("England");

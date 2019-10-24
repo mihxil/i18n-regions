@@ -2,7 +2,7 @@ package org.meeuw.i18n.continents;
 
 import java.util.Locale;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.RegionService;
 
@@ -14,10 +14,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-public class RegionServiceTest {
+class RegionServiceTest {
 
      @Test
-    public void getContinent() {
+     void getContinent() {
         Region af = RegionService.getInstance().getByCode("CONTINENT-AF", Continent.class).orElse(null);
         assertThat(af).isNotNull();
         assertThat(af).isInstanceOf(Continent.class);
@@ -27,7 +27,7 @@ public class RegionServiceTest {
 
     }
     @Test
-    public void values() {
+    void values() {
 
         RegionService.getInstance().values().forEach(r -> {
             System.out.println(r.getClass().getSimpleName() + ":" + r.getCode()  + " : " + r.getName() + ":" + r.getName(LanguageCode.nl));

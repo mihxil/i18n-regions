@@ -7,7 +7,7 @@ import javax.xml.bind.JAXB;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.meeuw.i18n.Region;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-public class CodeTest {
+class CodeTest {
 
     @XmlRootElement
     static class A {
@@ -31,14 +31,14 @@ public class CodeTest {
 
 
     @Test
-    public void unmarshal() {
+    void unmarshal() {
         A a = JAXB.unmarshal(new StringReader("<a region=\"UK\"/>"), A.class);
         assertThat(a.region).isEqualTo(new TestCountry("UK", "uk"));
 
     }
 
     @Test
-    public void marshal() {
+    void marshal() {
         A a = new A();
         StringWriter w = new StringWriter();
         JAXB.marshal(a, w);

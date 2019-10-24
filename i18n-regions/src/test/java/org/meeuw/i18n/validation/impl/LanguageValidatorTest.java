@@ -4,22 +4,22 @@ import java.util.*;
 
 import javax.validation.*;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.meeuw.i18n.validation.Language;
 import org.meeuw.i18n.validation.RegionValidatorService;
 
 import com.neovisionaries.i18n.LanguageAlpha3Code;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * @author Michiel Meeuwissen
  * @since 0.3
  */
-public class LanguageValidatorTest {
+class LanguageValidatorTest {
     private static final RegionValidatorService regionValidatorService = RegionValidatorService.getInstance();
     private static final Validator VALIDATOR = regionValidatorService.getValidator();
 
@@ -28,46 +28,46 @@ public class LanguageValidatorTest {
         Locale.setDefault(new Locale("nl"));
     }
 
-    LanguageValidator languageValidator = new LanguageValidator();
+    private LanguageValidator languageValidator = new LanguageValidator();
 
     @Test
-    public void testIsValid() {
+    void testIsValid() {
         assertTrue(languageValidator.isValid(new Locale("nl"), null));
 
     }
 
     @Test
-    public void testIsValidCz() {
+    void testIsValidCz() {
         assertFalse(languageValidator.isValid(new Locale("cz"), null));
 
     }
 
     @Test
-    public void testIsValidZxx() {
+    void testIsValidZxx() {
         assertTrue(languageValidator.isValid(new Locale("zxx"), null));
 
     }
 
     @Test
-    public void testIsValidJw() {
+    void testIsValidJw() {
         assertTrue(languageValidator.isValid(new Locale("jw"), null));
 
     }
 
     @Test
-    public void iso3() {
+    void iso3() {
         assertTrue(languageValidator.isValid(new Locale("dut"), null));
 
     }
 
     @Test
-    @Ignore("fails. 'act' is somewhy not a known language")
-    public void achterhoeks() {
+    @Disabled("fails. 'act' is somewhy not a known language")
+    void achterhoeks() {
         assertTrue(languageValidator.isValid(new Locale("act"), null));
 
     }
 
-    public static class A {
+    static class A {
         @Language
         String language;
 
@@ -81,11 +81,11 @@ public class LanguageValidatorTest {
         Object object;
     }
 
-    ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-    Validator validator = factory.getValidator();
+    private ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+    private Validator validator = factory.getValidator();
 
     @Test
-    public void testZZ() {
+    void testZZ() {
         A a = new A();
         a.language = "ZZ";
         testValidate(a, 1);
@@ -93,7 +93,7 @@ public class LanguageValidatorTest {
 
 
     @Test
-    public void testWithCountry() {
+    void testWithCountry() {
         {
             A a = new A();
             a.language = "nl-NL";
@@ -123,7 +123,7 @@ public class LanguageValidatorTest {
     }
 
     @Test
-    public void testObject() {
+    void testObject() {
         {
             A a = new A();
             a.object = Arrays.asList("ZZ");
@@ -144,8 +144,8 @@ public class LanguageValidatorTest {
 
 
     @Test
-    @Ignore
-    public void wiki() {
+    @Disabled
+    void wiki() {
         Map<String, String> result = new TreeMap<>();
         for (String s : Locale.getISOLanguages()) {
             result.put(s, new Locale(s).getDisplayLanguage(new Locale("en")));
@@ -172,7 +172,7 @@ public class LanguageValidatorTest {
     }
 
     @Test
-    public void test() {
+    void test() {
 
         class A {
             @Language

@@ -9,7 +9,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.RegionService;
 import org.meeuw.i18n.Regions;
@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since ...
  */
-public class CountrySubdivisionConstraintValidatorTest {
+class CountrySubdivisionConstraintValidatorTest {
 
     private static final ValidatorFactory FACTORY = Validation.buildDefaultValidatorFactory();
     private static final Validator VALIDATOR = FACTORY.getValidator();
@@ -31,12 +31,12 @@ public class CountrySubdivisionConstraintValidatorTest {
 
 
     @Test
-    public void includeCountries() throws NoSuchFieldException {
+    void includeCountries() throws NoSuchFieldException {
         class Netherlands {
             @ValidCountrySubdivision(includeCountries = "NL")
             Region region;
 
-            public Netherlands(Region r) {
+            Netherlands(Region r) {
                 this.region = r;
             }
         }
@@ -46,10 +46,10 @@ public class CountrySubdivisionConstraintValidatorTest {
             Netherlands::new, "NL-DR");
 
     }
-     public void testAsStreamFilter(
-        Predicate<Object> predicate,
-        Function<Region, Object> instantiator,
-        String... assertToContain) throws NoSuchFieldException {
+     void testAsStreamFilter(
+         Predicate<Object> predicate,
+         Function<Region, Object> instantiator,
+         String... assertToContain) throws NoSuchFieldException {
 
         List<Region> validValues = RegionService.getInstance().values()
             .filter(predicate)

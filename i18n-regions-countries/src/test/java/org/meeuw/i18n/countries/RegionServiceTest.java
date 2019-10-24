@@ -4,7 +4,7 @@ import java.util.Locale;
 import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.RegionService;
 import org.meeuw.i18n.UserAssignedRegion;
@@ -18,10 +18,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-public class RegionServiceTest {
+class RegionServiceTest {
 
     @Test
-    public void getCurrentByCode() {
+    void getCurrentByCode() {
 
         Optional<Country> nl = RegionService.getInstance().getByCode("NL", Country.class);
         Assertions.assertThat(nl).isPresent();
@@ -34,12 +34,12 @@ public class RegionServiceTest {
     }
 
     @Test
-    public void getCurrentByCodeAsCountry() {
+    void getCurrentByCodeAsCountry() {
         Optional<CurrentCountry> nl = RegionService.getInstance().getByCode("NL", CurrentCountry.class);
         assertThat(nl.get().getAlpha3()).isEqualTo("NLD");
     }
     @Test
-    public void getFormerByCode() {
+    void getFormerByCode() {
         Region cshh = RegionService.getInstance().getByCode("CSHH").orElse(null);
         assertThat(cshh).isNotNull();
         assertThat(cshh).isInstanceOf(FormerCountry.class);
@@ -49,7 +49,7 @@ public class RegionServiceTest {
 
     }
     @Test
-    public void getFormerByCodeAsCountry() {
+    void getFormerByCodeAsCountry() {
         Optional<Country> cshh = RegionService.getInstance().getByCode("CSHH", Country.class);
         assertThat(cshh.get().getCode()).isEqualTo("CSHH");
         assertThat(((FormerCountry) cshh.get()).getFormerCodes().get(0)).isEqualTo("CS");
@@ -57,7 +57,7 @@ public class RegionServiceTest {
 
 
     @Test
-    public void getCountryZZ() {
+    void getCountryZZ() {
 
         Region undefined = RegionService.getInstance().getByCode("ZZ").orElse(null);
         assertThat(undefined).isNotNull();
@@ -70,7 +70,7 @@ public class RegionServiceTest {
 
 
     @Test
-    public void getFormerCountryCS() {
+    void getFormerCountryCS() {
 
         Region cshh = RegionService.getInstance().getByCode("CS", FormerCountry.class).orElse(null);
         assertThat(cshh).isNotNull();
@@ -82,13 +82,13 @@ public class RegionServiceTest {
     }
 
     @Test
-    public void byVehicleRegistration() {
+    void byVehicleRegistration() {
         Country country = Country.getByCode("WAN").orElse(null);
         assertThat(country).isEqualTo(new CurrentCountry(CountryCode.NG));
     }
 
     @Test
-    public void getEastTimor() {
+    void getEastTimor() {
         Region tptl = RegionService.getInstance().getByCode("TPTL").orElse(null);
         assertThat(tptl).isNotNull();
         assertThat(tptl).isInstanceOf(FormerCountry.class);
@@ -99,7 +99,7 @@ public class RegionServiceTest {
     }
 
     @Test
-    public void values() {
+    void values() {
 
         RegionService.getInstance().values().forEach(r -> {
             StringBuilder build = new StringBuilder();

@@ -2,9 +2,8 @@ package org.meeuw.i18n.countries.persistence;
 
 import java.util.Locale;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.persistence.RegionToStringConverter;
 
@@ -14,11 +13,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-@RunWith(Parameterized.class)
-public class RegionToStringConverterTest {
+
+class RegionToStringConverterTest {
 
     // The existing values in POMS.
-    static String[] examples = {
+    private static String[] examples = {
          "AD",
  "AF",
  "AN",
@@ -97,21 +96,21 @@ public class RegionToStringConverterTest {
  "ZZ"
     };
 
-    @Parameterized.Parameters
-    public static Object[] getParameters() {
+    static String[] persistedCountryValues() {
         return examples;
     }
 
-    RegionToStringConverter impl = new RegionToStringConverter();
-    String code;
+    private RegionToStringConverter impl = new RegionToStringConverter();
+    private String code;
 
-    public RegionToStringConverterTest(String code) {
+    RegionToStringConverterTest(String code) {
         this.code = code;
     }
 
 
-    @Test
-    public void convertToEntityAttribute() {
+    @ParameterizedTest
+    @MethodSource("persistedCountryValues")
+    void convertToEntityAttribute() {
         Region region = impl.convertToEntityAttribute(code);
         assertThat(region).isNotNull();
         System.out.println(region + " " + region.getName(new Locale("nl")));

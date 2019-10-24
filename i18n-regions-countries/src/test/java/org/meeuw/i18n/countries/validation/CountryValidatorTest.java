@@ -12,7 +12,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import javax.validation.constraints.NotNull;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.RegionService;
 import org.meeuw.i18n.Regions;
@@ -37,7 +37,7 @@ import static org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode.CSXX;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-public class CountryValidatorTest {
+class CountryValidatorTest {
 
     private static final RegionValidatorService regionValidatorService = RegionValidatorService.getInstance();
     private static final Validator VALIDATOR = regionValidatorService.getValidator();
@@ -48,13 +48,13 @@ public class CountryValidatorTest {
 
 
     @Test
-    public void combineValidRegionAndValidCountry() throws NoSuchFieldException {
+    void combineValidRegionAndValidCountry() throws NoSuchFieldException {
         class CountryAndRegions {
             @ValidRegion(includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
             @ValidCountry(value = OFFICIAL | FORMER)
             Region region;
 
-            public CountryAndRegions(Region r) {
+            CountryAndRegions(Region r) {
                 this.region = r;
             }
         }
@@ -86,17 +86,17 @@ public class CountryValidatorTest {
     }
 
     @Test
-    public void combineValidRegionAndValidCountryString() throws NoSuchFieldException {
+    void combineValidRegionAndValidCountryString() throws NoSuchFieldException {
 
         class CountryAndRegionsAsString {
             @ValidRegion(includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
             @ValidCountry(value = OFFICIAL | FORMER)
             String region;
 
-            public CountryAndRegionsAsString(String r) {
+            CountryAndRegionsAsString(String r) {
                 this.region = r;
             }
-            public CountryAndRegionsAsString(Region r) {
+            CountryAndRegionsAsString(Region r) {
                 this(r.getCode());
             }
         }
@@ -129,7 +129,7 @@ public class CountryValidatorTest {
 
 
     @Test
-    public void isValidWithList() {
+    void isValidWithList() {
 
         class CountryAndRegionsWithList {
             List<
@@ -139,7 +139,7 @@ public class CountryValidatorTest {
                 @NotNull
                 Region> region;
 
-            public CountryAndRegionsWithList(Region... r) {
+            CountryAndRegionsWithList(Region... r) {
                 this.region = Arrays.asList(r);
             }
         }
@@ -160,7 +160,7 @@ public class CountryValidatorTest {
 
 
     @Test
-    public void isValidWithList2() {
+    void isValidWithList2() {
 
 
         class CountryAndRegionsWithList {
@@ -169,7 +169,7 @@ public class CountryValidatorTest {
             @ValidCountry(value = OFFICIAL | FORMER, includes = "CS")
             List<Region> region;
 
-            public CountryAndRegionsWithList(Region... r) {
+            CountryAndRegionsWithList(Region... r) {
                 this.region = Arrays.asList(r);
             }
         }
@@ -186,11 +186,11 @@ public class CountryValidatorTest {
     }
 
     @Test
-    public void onlyIncludes() throws NoSuchFieldException {
+    void onlyIncludes() throws NoSuchFieldException {
         class ZZ {
             List<Country> region;
 
-            public ZZ(Region r) {
+            ZZ(Region r) {
                 this.region = r instanceof  Country ? Arrays.asList((Country) r) : null;
             }
             public void setRegion(List<Country> regions) {
@@ -217,16 +217,16 @@ public class CountryValidatorTest {
 
 
     @Test
-    public void testClasses() throws NoSuchFieldException {
+    void testClasses() throws NoSuchFieldException {
         class Former {
             @ValidRegion(classes = {FormerCountry.class})
             @NotNull
             List<Country> region;
 
-            public Former(Country... r) {
+            Former(Country... r) {
                 this.region = Arrays.asList(r);
             }
-            public Former(Region r) {
+            Former(Region r) {
                 this.region = r instanceof Country ? Arrays.asList((Country) r) : null;
             }
             public void setRegion(List<Country> regions) {
@@ -248,7 +248,7 @@ public class CountryValidatorTest {
             Former::new);
     }
 
-    public void testAsStreamFilter(
+    void testAsStreamFilter(
         Predicate<Object> predicate,
         Function<Region, Object> instantiator,
         String... assertToContain) throws NoSuchFieldException {
