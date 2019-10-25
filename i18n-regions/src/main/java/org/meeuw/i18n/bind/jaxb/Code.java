@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.RegionService;
 
@@ -23,7 +24,8 @@ public class Code extends XmlAdapter<String, Region> {
     }
 
     @Override
-    public String marshal(Region countryCode) {
+    @Nullable
+    public String marshal(@Nullable Region countryCode) {
         return Optional.ofNullable(countryCode)
             .map(Region::getCode)
             .orElse(null);

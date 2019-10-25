@@ -4,9 +4,7 @@ import java.util.Collections;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
+import javax.validation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.RegionService;
@@ -31,9 +29,6 @@ public class RegionValidatorService {
     }
 
     private RegionValidatorService() {
-
-
-
     }
 
     /**
@@ -71,21 +66,23 @@ public class RegionValidatorService {
         return fromWrappedProperty(clazz, propertyName, Collections::singleton, groups);
     }
 
-      /**
+    /**
      * Returns the validation info for the given property of the name as a {@link Predicate}, which can e.g. be used to {@link java.util.stream.Stream#filter(Predicate)} the results of {@link RegionService#values()}
      * @param clazz
      * @param propertyName  The property which is annotation with javax.validation annotation's like {@link ValidRegion}.
      * @param groups
      * @return
      */
-    public Predicate<Object> fromWrappedProperty(
+    public @NonNull Predicate<Object> fromWrappedProperty(
         @NonNull Class<?> clazz,
         @NonNull String propertyName,
         @NonNull Function<Object, ?> wrapper,
         @NonNull Class<?>... groups
     ) {
-
-        return (o) -> VALIDATOR.validateValue(clazz, propertyName, wrapper.apply(o), groups).isEmpty();
+        return o -> {
+            Object apply = wrapper.apply(o);
+            return VALIDATOR.validateValue(clazz, propertyName, apply, groups).isEmpty();
+        };
     }
 
     public Validator getValidator() {

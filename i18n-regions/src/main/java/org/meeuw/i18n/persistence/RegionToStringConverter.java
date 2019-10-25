@@ -3,6 +3,7 @@ package org.meeuw.i18n.persistence;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.RegionService;
 
@@ -19,12 +20,15 @@ import org.meeuw.i18n.RegionService;
 public class RegionToStringConverter implements AttributeConverter<Region, String> {
 
     @Override
-    public String convertToDatabaseColumn(Region region) {
+    @Nullable
+    public String convertToDatabaseColumn(@Nullable Region region) {
         return region == null ? null : region.getCode();
     }
 
     @Override
-    public Region convertToEntityAttribute(String region) {
-        return region == null ? null : RegionService.getInstance().getByCode(region, true).orElse(null);
+    @Nullable
+    public Region convertToEntityAttribute(@Nullable String region) {
+        return region == null ? null :
+            RegionService.getInstance().getByCode(region, true).orElse(null);
     }
 }

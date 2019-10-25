@@ -81,7 +81,7 @@ public class RegionService {
         return getByCode(code, true, clazz);
     }
 
-    public  Optional<Region> getByCode(String s, boolean lenient) {
+    public  Optional<Region> getByCode(@NonNull String s, boolean lenient) {
         return getByCode(s, lenient, Region.class);
     }
      /**
@@ -183,9 +183,9 @@ public class RegionService {
     private static <T> Comparator<T> priorityComparator() {
         return  (o1, o2) -> {
             try {
-                final Priority p1 = o1.getClass().getAnnotation(Priority.class);
+                final Priority p1 = o1 == null ? null : o1.getClass().getAnnotation(Priority.class);
                 final int v1 = p1 != null ? p1.value() : 100;
-                final Priority p2 = o2.getClass().getAnnotation(Priority.class);
+                final Priority p2 = o2 == null ? null : o2.getClass().getAnnotation(Priority.class);
                 final int v2 = p2 != null ? p2.value() : 100;
                 return v1 - v2;
             } catch (NoClassDefFoundError ncdfe) {

@@ -5,6 +5,7 @@ import java.util.*;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import org.checkerframework.checker.nullness.qual.*;
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.RegionService;
 import org.meeuw.i18n.validation.Language;
@@ -35,20 +36,22 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
         }
     }
 
+    @MonotonicNonNull
     Language annotation;
 
     @Override
-    public void initialize(Language constraintAnnotation) {
+    @EnsuresNonNull("annotation")
+    public void initialize(@NonNull Language constraintAnnotation) {
         this.annotation = constraintAnnotation;
     }
 
     @Override
-
-
-    public boolean isValid(Object value, ConstraintValidatorContext context) {
+    @RequiresNonNull("annotation")
+    public boolean isValid(@Nullable Object value, @Nullable ConstraintValidatorContext context) {
         return isValid(value);
     }
-     private boolean isValid(Object value) {
+    @RequiresNonNull("annotation")
+    private boolean isValid(@Nullable Object value) {
         if (value == null) {
             return true;
         }
@@ -76,6 +79,7 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
     }
 
 
+    @RequiresNonNull("annotation")
     protected boolean isValid(Locale value) {
         if (! value.getCountry().isEmpty()) {
             if (! annotation.mayContainCountry()) {

@@ -8,8 +8,6 @@ module org.meeuw.i18n {
 
     exports org.meeuw.i18n.spi;
 
-
-
     requires static java.validation;
     requires static java.xml.bind;
     requires static org.checkerframework.checker.qual;

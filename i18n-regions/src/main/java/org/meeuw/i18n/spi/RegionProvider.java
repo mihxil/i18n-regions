@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.RegionService;
 
@@ -36,7 +37,7 @@ public interface RegionProvider<T extends Region> {
         return getByCode(code, true);
     }
 
-    default T getByCodeOrNull(@NonNull String code) {
+    default @Nullable T getByCodeOrNull(@NonNull String code) {
         return getByCode(code, true).orElse(null);
     }
 

@@ -1,8 +1,6 @@
 package org.meeuw.i18n.openlocationcode;
 
-import java.util.Comparator;
-import java.util.Optional;
-import java.util.Spliterator;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,6 +11,7 @@ import javax.annotation.Priority;
 import javax.validation.constraints.Min;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.meeuw.i18n.spi.RegionProvider;
 
 import com.google.openlocationcode.OpenLocationCode;
@@ -47,8 +46,7 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
         OpenLocationProvider.maxLength = maxLength;
     }
 
-    @Min(value = 0)
-    private static int maxLength = 4;
+    private static @Min(value = 0) int maxLength = 4;
 
 
     @Override
@@ -238,6 +236,8 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
         }
 
         @Override
+        @SuppressWarnings("override.return.invalid") // Checker forgot to annotate Spliterator
+        @Nullable
         public Spliterator<int[]> trySplit() {
             // split will result in the current spliterator handling the even ones, and the split of one the odd ones
             OpenLocationCodeSpliterator split = new OpenLocationCodeSpliterator();
@@ -254,20 +254,16 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
             });
 
             step *= 2;
-
-
             split.step = step;
             split.count = count;
             return split;
         }
 
-
-
         @Override
         public long estimateSize() {
             return (lastCount  - count) / step;
-
         }
+
         @Override
         public Comparator<? super int[]> getComparator() {
             return new Comparator<int[]>() {
@@ -287,14 +283,11 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
                     }
                     return a.length - b.length;
                 }
-
             };
         }
         @Override
         public int characteristics() {
             return step == 1 ? CHARACTERISTICS | SIZED : CHARACTERISTICS;
-
         }
     };
 }
-

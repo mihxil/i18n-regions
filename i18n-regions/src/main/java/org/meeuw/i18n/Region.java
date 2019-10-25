@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.meeuw.i18n.bind.jaxb.Code;
 
 import com.neovisionaries.i18n.LanguageCode;
@@ -29,7 +30,7 @@ public interface Region extends Serializable {
     /**
      * The locale associated with the region.
      */
-    default Locale toLocale() {
+    default @Nullable Locale toLocale() {
         return null;
     }
 
@@ -71,8 +72,9 @@ public interface Region extends Serializable {
     /**
      * Return the name of the region in the locale of the language {@link #toLocale()}
      */
-    default String getLocalName() {
-        return getName(toLocale());
+    default @Nullable String getLocalName() {
+        Locale locale = toLocale();
+        return locale == null ? null : getName(locale);
     }
 
     /**

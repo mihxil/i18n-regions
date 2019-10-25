@@ -8,6 +8,8 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.checkerframework.checker.optional.qual.MaybePresent;
 import org.meeuw.i18n.Region;
 import org.meeuw.i18n.RegionService;
 import org.meeuw.i18n.validation.ValidRegion;
@@ -27,11 +29,11 @@ public class RegionConstraintValidator implements ConstraintValidator<ValidRegio
     }
 
     @Override
-    public boolean isValid(Object region, ConstraintValidatorContext constraintValidatorContext) {
+    public boolean isValid(@Nullable Object region, ConstraintValidatorContext constraintValidatorContext) {
         return isValidRegion(region);
     }
 
-    protected boolean isValidRegion(Object region) {
+    protected boolean isValidRegion(@Nullable Object region) {
         if (region == null) {
             return true;
         }
@@ -111,7 +113,7 @@ public class RegionConstraintValidator implements ConstraintValidator<ValidRegio
     }
 
 
-    public static Optional<Boolean> defaultIsValid(Region region, ValidationInfo validationInfo) {
+    public static @MaybePresent Optional<Boolean> defaultIsValid(@Nullable Region region, ValidationInfo validationInfo) {
         if (region == null) {
             return Optional.of(true);
         }
