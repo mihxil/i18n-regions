@@ -5,9 +5,8 @@
   <groupId>org.meeuw.i18n</groupId>
   <artifactId>i18n-regions-parent</artifactId>
   <packaging>pom</packaging>
-
   <version>1.0-SNAPSHOT</version>
-  <name>i18n-regions</name>
+  <name>i18n-regions-parent</name>
   <description>Provides wrappers around ISO-codes for geographical regions</description>
   <url>https://github.com/mihxil/i18n-regions</url>
 
@@ -227,8 +226,11 @@
             <artifactId>maven-javadoc-plugin</artifactId>
             <version>3.1.1</version>
             <configuration>
+              <!-- https://bugs.openjdk.java.net/browse/JDK-8212233 -->
+              <source>8</source>
               <additionalOptions>
                 <additionalOption>-Xdoclint:none</additionalOption>
+                <additionalOption>-source 8</additionalOption>
               </additionalOptions>
               <excludes>
                 <exclude>module-info.java</exclude>
@@ -276,9 +278,6 @@
         <artifactId>i18n-subdivisions</artifactId>
         <version>${i18n-subdivisions.version}</version>
       </dependency>
-
-
-
 
       <!-- optional dependencies -->
       <dependency>
