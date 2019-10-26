@@ -14,7 +14,7 @@ import org.meeuw.i18n.bind.jaxb.Code;
 import com.neovisionaries.i18n.LanguageCode;
 
 /**
- * The region interface represents a certain geographical region. E.g. a {@link Country}
+ * The region interface represents a certain geographical region. E.g. a Country.
  *
  * @author Michiel Meeuwissen
  * @since 0.1
@@ -23,7 +23,7 @@ import com.neovisionaries.i18n.LanguageCode;
 public interface Region extends Serializable {
 
     /**
-     * The code for the region. For countries: <a href="https://en.wikipedia.org/wiki/ISO_3166>ISO 3166</a>.
+     * The code for the region. For countries: <a href="https://en.wikipedia.org/wiki/ISO_3166">ISO 3166</a>.
      */
     String getCode();
 
