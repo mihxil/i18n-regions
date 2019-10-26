@@ -89,9 +89,11 @@
         <configuration>
           <source>11</source>
           <target>11</target>
+ <!--
           <annotationProcessors>
             <annotationProcessor>org.checkerframework.checker.nullness.NullnessChecker</annotationProcessor>
           </annotationProcessors>
+          -->
           <compilerArgs>
             <arg>-AprintErrorStack</arg>
             <arg>-Awarns</arg>
@@ -153,6 +155,26 @@
         <configuration>
           <branchName>${project.version}</branchName>
           <tagNameFormat>@{project.version}</tagNameFormat>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.22.2</version>
+        <configuration>
+          <argLine>
+            --illegal-access=permit
+          </argLine>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>2.22.2</version>
+         <configuration>
+          <argLine>
+            --illegal-access=permit
+          </argLine>
         </configuration>
       </plugin>
       <plugin>
