@@ -221,12 +221,13 @@
               </execution>
             </executions>
           </plugin>
+          <!--
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
             <version>3.1.1</version>
             <configuration>
-              <!-- https://bugs.openjdk.java.net/browse/JDK-8212233 -->
+              &lt;!&ndash; https://bugs.openjdk.java.net/browse/JDK-8212233 &ndash;&gt;
               <source>8</source>
               <additionalOptions>
                 <additionalOption>-Xdoclint:none</additionalOption>
@@ -244,7 +245,7 @@
                 </goals>
               </execution>
             </executions>
-          </plugin>
+          </plugin>-->
         </plugins>
       </build>
     </profile>
