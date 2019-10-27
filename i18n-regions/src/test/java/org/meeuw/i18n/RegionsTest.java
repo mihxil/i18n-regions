@@ -15,10 +15,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-class RegionsTest {
+public class RegionsTest {
 
     @Test
-    void sortByName() {
+    public void sortByName() {
         List<Region> collect = RegionService.getInstance().values().collect(Collectors.toList());
 
         collect.sort(Regions.sortByName(nl));
@@ -30,12 +30,12 @@ class RegionsTest {
     }
 
     @Test
-    void testToString() {
+    public void testToString() {
         assertThat(Regions.toString(RegionService.getInstance().getByCode("NL").orElseThrow(), LanguageCode.nl)).isEqualTo("Nederland");
     }
 
     @Test
-    void testToStringWithCode() {
+    public void testToStringWithCode() {
         assertThat(Regions.toStringWithCode(RegionService.getInstance().getByCode("NL").orElseThrow(), LanguageCode.nl)).isEqualTo("NL:Nederland");
 
     }

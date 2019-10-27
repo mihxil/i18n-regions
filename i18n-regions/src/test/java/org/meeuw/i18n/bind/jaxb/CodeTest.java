@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-class CodeTest {
+public class CodeTest {
 
     @XmlRootElement
     static class A {
@@ -31,14 +31,14 @@ class CodeTest {
 
 
     @Test
-    void unmarshal() {
+    public void unmarshal() {
         A a = JAXB.unmarshal(new StringReader("<a region=\"UK\"/>"), A.class);
         assertThat(a.region).isEqualTo(new TestCountry("UK", "uk"));
 
     }
 
     @Test
-    void marshal() {
+    public void marshal() {
         A a = new A();
         StringWriter w = new StringWriter();
         JAXB.marshal(a, w);
