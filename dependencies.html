@@ -9,7 +9,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content="Apache Maven Doxia Site Renderer 1.9.1" />
-    <title>i18n-regions-parent &#x2013; Project Dependencies</title>
+    <title>i18n-regions &#x2013; Project Dependencies</title>
     <link rel="stylesheet" href="./css/maven-base.css" />
     <link rel="stylesheet" href="./css/maven-theme.css" />
     <link rel="stylesheet" href="./css/site.css" />
@@ -17,7 +17,7 @@
   </head>
   <body class="composite">
     <div id="banner">
-<div id="bannerLeft">i18n-regions-parent
+<div id="bannerLeft">i18n-regions
 </div>
       <div class="clear">
         <hr/>
@@ -28,33 +28,27 @@
         <span id="publishDate">Last Published: 2019-11-02</span>
           &#xA0;| <span id="projectVersion">Version: 1.0-SNAPSHOT</span>
       </div>
-      <div class="xright"><a href="./" title="i18n-regions-parent">i18n-regions-parent</a>      </div>
+      <div class="xright"><a href="./" title="i18n-regions">i18n-regions</a>      </div>
       <div class="clear">
         <hr/>
       </div>
     </div>
     <div id="leftColumn">
       <div id="navcolumn">
-       <h5>Modules</h5>
+       <h5>Parent Project</h5>
     <ul>
-     <li class="none"><a href="i18n-regions/index.html" title="i18n-regions">i18n-regions</a></li>
-     <li class="none"><a href="i18n-regions-subdivisions/index.html" title="i18n-regions-subdivisions">i18n-regions-subdivisions</a></li>
-     <li class="none"><a href="i18n-regions-countries/index.html" title="i18n-regions-countries">i18n-regions-countries</a></li>
-     <li class="none"><a href="i18n-regions-continents/index.html" title="i18n-regions-continents">i18n-regions-continents</a></li>
-     <li class="none"><a href="i18n-regions-openlocationcode/index.html" title="i18n-regions-openlocationcode">i18n-regions-openlocationcode</a></li>
+     <li class="none"><a href="../index.html" title="i18n-regions-parent">i18n-regions-parent</a></li>
     </ul>
        <h5>Project Documentation</h5>
     <ul>
      <li class="expanded"><a href="project-info.html" title="Project Information">Project Information</a>
       <ul>
        <li class="none"><strong>Dependencies</strong></li>
-       <li class="none"><a href="dependency-convergence.html" title="Dependency Convergence">Dependency Convergence</a></li>
        <li class="none"><a href="dependency-info.html" title="Dependency Information">Dependency Information</a></li>
        <li class="none"><a href="dependency-management.html" title="Dependency Management">Dependency Management</a></li>
        <li class="none"><a href="distribution-management.html" title="Distribution Management">Distribution Management</a></li>
        <li class="none"><a href="index.html" title="About">About</a></li>
        <li class="none"><a href="licenses.html" title="Licenses">Licenses</a></li>
-       <li class="none"><a href="modules.html" title="Project Modules">Project Modules</a></li>
        <li class="none"><a href="plugin-management.html" title="Plugin Management">Plugin Management</a></li>
        <li class="none"><a href="plugins.html" title="Plugins">Plugins</a></li>
        <li class="none"><a href="scm.html" title="Source Code Management">Source Code Management</a></li>
@@ -82,11 +76,39 @@
 <th>Licenses</th>
 <th>Optional</th></tr>
 <tr class="b">
+<td>com.neovisionaries</td>
+<td><a class="externalLink" href="https://github.com/TakahikoKawasaki/nv-i18n">nv-i18n</a></td>
+<td>1.26</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td>
+<td>No</td></tr>
+<tr class="a">
+<td>javax.annotation</td>
+<td><a class="externalLink" href="http://jcp.org/en/jsr/detail?id=250">javax.annotation-api</a></td>
+<td>1.3.2</td>
+<td>jar</td>
+<td><a class="externalLink" href="https://github.com/javaee/javax.annotation/blob/master/LICENSE">CDDL + GPLv2 with classpath exception</a></td>
+<td>Yes</td></tr>
+<tr class="b">
 <td>javax.persistence</td>
 <td><a class="externalLink" href="https://github.com/javaee/jpa-spec">javax.persistence-api</a></td>
 <td>2.2</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License v1.0</a><a class="externalLink" href="http://www.eclipse.org/org/documents/edl-v10.php">Eclipse Distribution License v. 1.0</a></td>
+<td>Yes</td></tr>
+<tr class="a">
+<td>javax.validation</td>
+<td><a class="externalLink" href="http://beanvalidation.org">validation-api</a></td>
+<td>2.0.1.Final</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License 2.0</a></td>
+<td>Yes</td></tr>
+<tr class="b">
+<td>javax.xml.bind</td>
+<td><a class="externalLink" href="https://github.com/javaee/jaxb-spec/jaxb-api">jaxb-api</a></td>
+<td>2.3.1</td>
+<td>jar</td>
+<td><a class="externalLink" href="https://oss.oracle.com/licenses/CDDL+GPL-1.1">CDDL 1.1</a><a class="externalLink" href="https://oss.oracle.com/licenses/CDDL+GPL-1.1">GPL2 w/ CPE</a></td>
 <td>Yes</td></tr>
 <tr class="a">
 <td>org.checkerframework</td>
@@ -105,19 +127,54 @@
 <th>Type</th>
 <th>Licenses</th></tr>
 <tr class="b">
+<td>javax.el</td>
+<td><a class="externalLink" href="http://uel-spec.java.net">javax.el-api</a></td>
+<td>3.0.0</td>
+<td>jar</td>
+<td><a class="externalLink" href="https://glassfish.dev.java.net/nonav/public/CDDL+GPL.html">CDDL + GPLv2 with classpath exception</a></td></tr>
+<tr class="a">
 <td>org.assertj</td>
 <td><a class="externalLink" href="http://assertj.org/assertj-core">assertj-core</a></td>
 <td>3.14.0</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></td></tr>
+<tr class="b">
+<td>org.glassfish.web</td>
+<td><a class="externalLink" href="http://uel.java.net">javax.el</a></td>
+<td>2.2.6</td>
+<td>jar</td>
+<td><a class="externalLink" href="https://glassfish.dev.java.net/nonav/public/CDDL+GPL.html">CDDL + GPLv2 with classpath exception</a></td></tr>
 <tr class="a">
+<td>org.hibernate.validator</td>
+<td><a class="externalLink" href="http://hibernate.org/validator/hibernate-validator">hibernate-validator</a></td>
+<td>6.0.2.Final</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License 2.0</a></td></tr>
+<tr class="b">
 <td>org.junit.jupiter</td>
 <td><a class="externalLink" href="https://junit.org/junit5/">junit-jupiter</a></td>
 <td>5.5.2</td>
 <td>jar</td>
 <td><a class="externalLink" href="https://www.eclipse.org/legal/epl-v20.html">Eclipse Public License v2.0</a></td></tr></table></section></section><a name="Project_Transitive_Dependencies"></a><section>
 <h2><a name="Project_Transitive_Dependencies"></a>Project Transitive Dependencies</h2>
-<p>The following is a list of transitive dependencies for this project. Transitive dependencies are the dependencies of the project dependencies.</p><a name="Project_Transitive_Dependencies_test"></a><section>
+<p>The following is a list of transitive dependencies for this project. Transitive dependencies are the dependencies of the project dependencies.</p><a name="Project_Transitive_Dependencies_compile"></a><section>
+<h3><a name="compile"></a>compile</h3>
+<p>The following is a list of compile dependencies for this project. These dependencies are required to compile and run the application:</p>
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>GroupId</th>
+<th>ArtifactId</th>
+<th>Version</th>
+<th>Type</th>
+<th>Licenses</th>
+<th>Optional</th></tr>
+<tr class="b">
+<td>javax.activation</td>
+<td><a class="externalLink" href="http://java.net/all/javax.activation-api/">javax.activation-api</a></td>
+<td>1.2.0</td>
+<td>jar</td>
+<td><a class="externalLink" href="https://github.com/javaee/activation/blob/master/LICENSE.txt">CDDL/GPLv2+CE</a></td>
+<td>Yes</td></tr></table></section><a name="Project_Transitive_Dependencies_test"></a><section>
 <h3><a name="test"></a>test</h3>
 <p>The following is a list of test dependencies for this project. These dependencies are only required to compile and run unit tests for the application:</p>
 <table border="0" class="bodyTable">
@@ -128,11 +185,23 @@
 <th>Type</th>
 <th>Licenses</th></tr>
 <tr class="b">
+<td>com.fasterxml</td>
+<td><a class="externalLink" href="http://github.com/cowtowncoder/java-classmate">classmate</a></td>
+<td>1.3.1</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
+<tr class="a">
 <td>org.apiguardian</td>
 <td><a class="externalLink" href="https://github.com/apiguardian-team/apiguardian">apiguardian-api</a></td>
 <td>1.1.0</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache License, Version 2.0</a></td></tr>
+<tr class="b">
+<td>org.jboss.logging</td>
+<td><a class="externalLink" href="http://www.jboss.org">jboss-logging</a></td>
+<td>3.3.0.Final</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, version 2.0</a></td></tr>
 <tr class="a">
 <td>org.junit.jupiter</td>
 <td><a class="externalLink" href="https://junit.org/junit5/">junit-jupiter-api</a></td>
@@ -192,17 +261,110 @@
 <a name="Dependency_Tree"></a><section>
 <h3><a name="Dependency_Tree"></a>Dependency Tree</h3>
 <ul>
-<li>org.meeuw.i18n:i18n-regions-parent:pom:1.0-SNAPSHOT <img id="_img1" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep0', '_img1' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep0" style="display:none">
+<li>org.meeuw.i18n:i18n-regions:jar:1.0-SNAPSHOT <img id="_img1" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep0', '_img1' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep0" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
-<th>i18n-regions-parent</th></tr>
+<th>i18n-regions</th></tr>
 <tr class="b">
 <td>
-<p><b>Description: </b>Provides wrappers around ISO-codes for geographical regions</p>
-<p><b>URL: </b><a class="externalLink" href="https://github.com/mihxil/i18n-regions">https://github.com/mihxil/i18n-regions</a></p>
+<p><b>Description: </b>Provides the service loader for Regions, and some utilities to deal with regions generally</p>
+<p><b>URL: </b><a class="externalLink" href="https://github.com/mihxil/i18n-regions/i18n-regions">https://github.com/mihxil/i18n-regions/i18n-regions</a></p>
 <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td></tr></table></div>
 <ul>
-<li>org.junit.jupiter:junit-jupiter:jar:5.5.2 (test) <img id="_img3" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep2', '_img3' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep2" style="display:none">
+<li>com.neovisionaries:nv-i18n:jar:1.26 (compile) <img id="_img3" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep2', '_img3' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep2" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Neo Visionaries Internationalization Package</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Package to support internationalization</p>
+<p><b>URL: </b><a class="externalLink" href="https://github.com/TakahikoKawasaki/nv-i18n">https://github.com/TakahikoKawasaki/nv-i18n</a></p>
+<p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li>
+<li>javax.xml.bind:jaxb-api:jar:2.3.1 (compile) <img id="_img5" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep4', '_img5' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep4" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>jaxb-api</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>JAXB (JSR 222) API</p>
+<p><b>URL: </b><a class="externalLink" href="https://github.com/javaee/jaxb-spec/jaxb-api">https://github.com/javaee/jaxb-spec/jaxb-api</a></p>
+<p><b>Project Licenses: </b><a class="externalLink" href="https://oss.oracle.com/licenses/CDDL+GPL-1.1">CDDL 1.1</a>, <a class="externalLink" href="https://oss.oracle.com/licenses/CDDL+GPL-1.1">GPL2 w/ CPE</a></p></td></tr></table></div>
+<ul>
+<li>javax.activation:javax.activation-api:jar:1.2.0 (compile) <img id="_img7" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep6', '_img7' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep6" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>JavaBeans Activation Framework API jar</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>JavaBeans Activation Framework API jar</p>
+<p><b>URL: </b><a class="externalLink" href="http://java.net/all/javax.activation-api/">http://java.net/all/javax.activation-api/</a></p>
+<p><b>Project Licenses: </b><a class="externalLink" href="https://github.com/javaee/activation/blob/master/LICENSE.txt">CDDL/GPLv2+CE</a></p></td></tr></table></div></li></ul></li>
+<li>javax.validation:validation-api:jar:2.0.1.Final (compile) <img id="_img9" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep8', '_img9' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep8" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Bean Validation API</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Bean Validation API</p>
+<p><b>URL: </b><a class="externalLink" href="http://beanvalidation.org">http://beanvalidation.org</a></p>
+<p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License 2.0</a></p></td></tr></table></div></li>
+<li>javax.annotation:javax.annotation-api:jar:1.3.2 (compile) <img id="_img11" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep10', '_img11' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep10" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>javax.annotation API</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Common Annotations for the JavaTM Platform API</p>
+<p><b>URL: </b><a class="externalLink" href="http://jcp.org/en/jsr/detail?id=250">http://jcp.org/en/jsr/detail?id=250</a></p>
+<p><b>Project Licenses: </b><a class="externalLink" href="https://github.com/javaee/javax.annotation/blob/master/LICENSE">CDDL + GPLv2 with classpath exception</a></p></td></tr></table></div></li>
+<li>org.hibernate.validator:hibernate-validator:jar:6.0.2.Final (test) <img id="_img13" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep12', '_img13' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep12" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Hibernate Validator Engine</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Hibernate's Bean Validation (JSR-380) reference implementation.</p>
+<p><b>URL: </b><a class="externalLink" href="http://hibernate.org/validator/hibernate-validator">http://hibernate.org/validator/hibernate-validator</a></p>
+<p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License 2.0</a></p></td></tr></table></div>
+<ul>
+<li>org.jboss.logging:jboss-logging:jar:3.3.0.Final (test) <img id="_img15" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep14', '_img15' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep14" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>JBoss Logging 3</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>The JBoss Logging Framework</p>
+<p><b>URL: </b><a class="externalLink" href="http://www.jboss.org">http://www.jboss.org</a></p>
+<p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, version 2.0</a></p></td></tr></table></div></li>
+<li>com.fasterxml:classmate:jar:1.3.1 (test) <img id="_img17" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep16', '_img17' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep16" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>ClassMate</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Library for introspecting types with full generic information
+        including resolving of field and method types.</p>
+<p><b>URL: </b><a class="externalLink" href="http://github.com/cowtowncoder/java-classmate">http://github.com/cowtowncoder/java-classmate</a></p>
+<p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li></ul></li>
+<li>javax.el:javax.el-api:jar:3.0.0 (test) <img id="_img19" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep18', '_img19' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep18" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Expression Language 3.0 API</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Java.net - The Source for Java Technology Collaboration</p>
+<p><b>URL: </b><a class="externalLink" href="http://uel-spec.java.net">http://uel-spec.java.net</a></p>
+<p><b>Project Licenses: </b><a class="externalLink" href="https://glassfish.dev.java.net/nonav/public/CDDL+GPL.html">CDDL + GPLv2 with classpath exception</a></p></td></tr></table></div></li>
+<li>org.glassfish.web:javax.el:jar:2.2.6 (test) <img id="_img21" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep20', '_img21' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep20" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Expression Language 2.2 Implementation</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Java.net - The Source for Java Technology Collaboration</p>
+<p><b>URL: </b><a class="externalLink" href="http://uel.java.net">http://uel.java.net</a></p>
+<p><b>Project Licenses: </b><a class="externalLink" href="https://glassfish.dev.java.net/nonav/public/CDDL+GPL.html">CDDL + GPLv2 with classpath exception</a></p></td></tr></table></div></li>
+<li>org.junit.jupiter:junit-jupiter:jar:5.5.2 (test) <img id="_img23" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep22', '_img23' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep22" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>JUnit Jupiter (Aggregator)</th></tr>
@@ -212,7 +374,7 @@
 <p><b>URL: </b><a class="externalLink" href="https://junit.org/junit5/">https://junit.org/junit5/</a></p>
 <p><b>Project Licenses: </b><a class="externalLink" href="https://www.eclipse.org/legal/epl-v20.html">Eclipse Public License v2.0</a></p></td></tr></table></div>
 <ul>
-<li>org.junit.jupiter:junit-jupiter-api:jar:5.5.2 (test) <img id="_img5" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep4', '_img5' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep4" style="display:none">
+<li>org.junit.jupiter:junit-jupiter-api:jar:5.5.2 (test) <img id="_img25" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep24', '_img25' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep24" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>JUnit Jupiter API</th></tr>
@@ -222,7 +384,7 @@
 <p><b>URL: </b><a class="externalLink" href="https://junit.org/junit5/">https://junit.org/junit5/</a></p>
 <p><b>Project Licenses: </b><a class="externalLink" href="https://www.eclipse.org/legal/epl-v20.html">Eclipse Public License v2.0</a></p></td></tr></table></div>
 <ul>
-<li>org.apiguardian:apiguardian-api:jar:1.1.0 (test) <img id="_img7" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep6', '_img7' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep6" style="display:none">
+<li>org.apiguardian:apiguardian-api:jar:1.1.0 (test) <img id="_img27" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep26', '_img27' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep26" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>org.apiguardian:apiguardian-api</th></tr>
@@ -231,7 +393,7 @@
 <p><b>Description: </b>@API Guardian</p>
 <p><b>URL: </b><a class="externalLink" href="https://github.com/apiguardian-team/apiguardian">https://github.com/apiguardian-team/apiguardian</a></p>
 <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache License, Version 2.0</a></p></td></tr></table></div></li>
-<li>org.opentest4j:opentest4j:jar:1.2.0 (test) <img id="_img9" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep8', '_img9' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep8" style="display:none">
+<li>org.opentest4j:opentest4j:jar:1.2.0 (test) <img id="_img29" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep28', '_img29' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep28" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>org.opentest4j:opentest4j</th></tr>
@@ -240,7 +402,7 @@
 <p><b>Description: </b>Open Test Alliance for the JVM</p>
 <p><b>URL: </b><a class="externalLink" href="https://github.com/ota4j-team/opentest4j">https://github.com/ota4j-team/opentest4j</a></p>
 <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache License, Version 2.0</a></p></td></tr></table></div></li>
-<li>org.junit.platform:junit-platform-commons:jar:1.5.2 (test) <img id="_img11" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep10', '_img11' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep10" style="display:none">
+<li>org.junit.platform:junit-platform-commons:jar:1.5.2 (test) <img id="_img31" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep30', '_img31' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep30" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>JUnit Platform Commons</th></tr>
@@ -249,7 +411,7 @@
 <p><b>Description: </b>Module &quot;junit-platform-commons&quot; of JUnit 5.</p>
 <p><b>URL: </b><a class="externalLink" href="https://junit.org/junit5/">https://junit.org/junit5/</a></p>
 <p><b>Project Licenses: </b><a class="externalLink" href="https://www.eclipse.org/legal/epl-v20.html">Eclipse Public License v2.0</a></p></td></tr></table></div></li></ul></li>
-<li>org.junit.jupiter:junit-jupiter-params:jar:5.5.2 (test) <img id="_img13" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep12', '_img13' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep12" style="display:none">
+<li>org.junit.jupiter:junit-jupiter-params:jar:5.5.2 (test) <img id="_img33" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep32', '_img33' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep32" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>JUnit Jupiter Params</th></tr>
@@ -258,7 +420,7 @@
 <p><b>Description: </b>Module &quot;junit-jupiter-params&quot; of JUnit 5.</p>
 <p><b>URL: </b><a class="externalLink" href="https://junit.org/junit5/">https://junit.org/junit5/</a></p>
 <p><b>Project Licenses: </b><a class="externalLink" href="https://www.eclipse.org/legal/epl-v20.html">Eclipse Public License v2.0</a></p></td></tr></table></div></li>
-<li>org.junit.jupiter:junit-jupiter-engine:jar:5.5.2 (test) <img id="_img15" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep14', '_img15' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep14" style="display:none">
+<li>org.junit.jupiter:junit-jupiter-engine:jar:5.5.2 (test) <img id="_img35" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep34', '_img35' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep34" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>JUnit Jupiter Engine</th></tr>
@@ -268,7 +430,7 @@
 <p><b>URL: </b><a class="externalLink" href="https://junit.org/junit5/">https://junit.org/junit5/</a></p>
 <p><b>Project Licenses: </b><a class="externalLink" href="https://www.eclipse.org/legal/epl-v20.html">Eclipse Public License v2.0</a></p></td></tr></table></div>
 <ul>
-<li>org.junit.platform:junit-platform-engine:jar:1.5.2 (test) <img id="_img17" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep16', '_img17' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep16" style="display:none">
+<li>org.junit.platform:junit-platform-engine:jar:1.5.2 (test) <img id="_img37" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep36', '_img37' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep36" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>JUnit Platform Engine API</th></tr>
@@ -277,7 +439,7 @@
 <p><b>Description: </b>Module &quot;junit-platform-engine&quot; of JUnit 5.</p>
 <p><b>URL: </b><a class="externalLink" href="https://junit.org/junit5/">https://junit.org/junit5/</a></p>
 <p><b>Project Licenses: </b><a class="externalLink" href="https://www.eclipse.org/legal/epl-v20.html">Eclipse Public License v2.0</a></p></td></tr></table></div></li></ul></li></ul></li>
-<li>org.checkerframework:checker-qual:jar:2.11.1 (compile) <img id="_img19" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep18', '_img19' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep18" style="display:none">
+<li>org.checkerframework:checker-qual:jar:2.11.1 (compile) <img id="_img39" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep38', '_img39' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep38" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Checker Qual</th></tr>
@@ -289,7 +451,7 @@
         org.checkerframework:checker</p>
 <p><b>URL: </b><a class="externalLink" href="https://checkerframework.org">https://checkerframework.org</a></p>
 <p><b>Project Licenses: </b><a class="externalLink" href="http://opensource.org/licenses/MIT">The MIT License</a></p></td></tr></table></div></li>
-<li>javax.persistence:javax.persistence-api:jar:2.2 (compile) <img id="_img21" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep20', '_img21' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep20" style="display:none">
+<li>javax.persistence:javax.persistence-api:jar:2.2 (compile) <img id="_img41" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep40', '_img41' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep40" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>javax.persistence-api</th></tr>
@@ -298,7 +460,7 @@
 <p><b>Description: </b>Java(TM) Persistence API</p>
 <p><b>URL: </b><a class="externalLink" href="https://github.com/javaee/jpa-spec">https://github.com/javaee/jpa-spec</a></p>
 <p><b>Project Licenses: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License v1.0</a>, <a class="externalLink" href="http://www.eclipse.org/org/documents/edl-v10.php">Eclipse Distribution License v. 1.0</a></p></td></tr></table></div></li>
-<li>org.assertj:assertj-core:jar:3.14.0 (test) <img id="_img23" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep22', '_img23' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep22" style="display:none">
+<li>org.assertj:assertj-core:jar:3.14.0 (test) <img id="_img43" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep42', '_img43' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep42" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>AssertJ fluent assertions</th></tr>
@@ -308,12 +470,19 @@
 <p><b>URL: </b><a class="externalLink" href="http://assertj.org/assertj-core">http://assertj.org/assertj-core</a></p>
 <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td></tr></table></div></li></ul></li></ul></section></section><a name="Licenses"></a><section>
 <h2><a name="Licenses"></a>Licenses</h2>
+<p><b>Apache License, version 2.0: </b>JBoss Logging 3</p>
+<p><b>CDDL 1.1: </b>jaxb-api</p>
 <p><b>The Apache License, Version 2.0: </b>org.apiguardian:apiguardian-api, org.opentest4j:opentest4j</p>
-<p><b>The MIT License: </b>Checker Qual</p>
-<p><b>Apache License, Version 2.0: </b>AssertJ fluent assertions, i18n-regions-parent</p>
 <p><b>Eclipse Public License v2.0: </b>JUnit Jupiter (Aggregator), JUnit Jupiter API, JUnit Jupiter Engine, JUnit Jupiter Params, JUnit Platform Commons, JUnit Platform Engine API</p>
 <p><b>Eclipse Distribution License v. 1.0: </b>javax.persistence-api</p>
-<p><b>Eclipse Public License v1.0: </b>javax.persistence-api</p></section><a name="Dependency_File_Details"></a><section>
+<p><b>Eclipse Public License v1.0: </b>javax.persistence-api</p>
+<p><b>GPL2 w/ CPE: </b>jaxb-api</p>
+<p><b>CDDL/GPLv2+CE: </b>JavaBeans Activation Framework API jar</p>
+<p><b>Apache License 2.0: </b>Bean Validation API, Hibernate Validator Engine</p>
+<p><b>The MIT License: </b>Checker Qual</p>
+<p><b>Apache License, Version 2.0: </b>AssertJ fluent assertions, i18n-regions</p>
+<p><b>CDDL + GPLv2 with classpath exception: </b>Expression Language 2.2 Implementation, Expression Language 3.0 API, javax.annotation API</p>
+<p><b>The Apache Software License, Version 2.0: </b>ClassMate, Neo Visionaries Internationalization Package</p></section><a name="Dependency_File_Details"></a><section>
 <h2><a name="Dependency_File_Details"></a>Dependency File Details</h2>
 <table border="0" class="bodyTable">
 <tr class="a">
@@ -325,6 +494,30 @@
 <th>Java Version</th>
 <th title="Indicates whether these dependencies have been compiled with debug information.">Debug Information</th></tr>
 <tr class="b">
+<td>classmate-1.3.1.jar</td>
+<td>64.8 kB</td>
+<td>52</td>
+<td>37</td>
+<td>4</td>
+<td>1.6</td>
+<td>Yes</td></tr>
+<tr class="a">
+<td>nv-i18n-1.26.jar</td>
+<td>340.3 kB</td>
+<td>445</td>
+<td>435</td>
+<td>1</td>
+<td>1.5</td>
+<td>Yes</td></tr>
+<tr class="b">
+<td>javax.el-api-3.0.0.jar</td>
+<td>73.1 kB</td>
+<td>57</td>
+<td>46</td>
+<td>1</td>
+<td>1.7</td>
+<td>Yes</td></tr>
+<tr class="a">
 <td>apiguardian-api-1.1.0.jar</td>
 <td>2.4 kB</td>
 <td>8</td>
@@ -332,13 +525,37 @@
 <td>2</td>
 <td>-</td>
 <td>Yes</td></tr>
-<tr class="a">
+<tr class="b">
 <td>assertj-core-3.14.0.jar</td>
 <td>4.5 MB</td>
 <td>3103</td>
 <td>3027</td>
 <td>61</td>
 <td>-</td>
+<td>Yes</td></tr>
+<tr class="a">
+<td>javax.el-2.2.6.jar</td>
+<td>117.5 kB</td>
+<td>88</td>
+<td>74</td>
+<td>4</td>
+<td>1.6</td>
+<td>Yes</td></tr>
+<tr class="b">
+<td>hibernate-validator-6.0.2.Final.jar</td>
+<td>1.1 MB</td>
+<td>867</td>
+<td>758</td>
+<td>71</td>
+<td>1.8</td>
+<td>Yes</td></tr>
+<tr class="a">
+<td>jboss-logging-3.3.0.Final.jar</td>
+<td>66.8 kB</td>
+<td>60</td>
+<td>48</td>
+<td>1</td>
+<td>1.6</td>
 <td>Yes</td></tr>
 <tr class="b">
 <td>junit-jupiter-5.5.2.jar</td>
@@ -397,12 +614,44 @@
 <td>-</td>
 <td>Yes</td></tr>
 <tr class="a">
+<td>javax.activation-api-1.2.0.jar</td>
+<td>56.7 kB</td>
+<td>41</td>
+<td>31</td>
+<td>1</td>
+<td>1.5</td>
+<td>Yes</td></tr>
+<tr class="b">
+<td>javax.annotation-api-1.3.2.jar</td>
+<td>26.6 kB</td>
+<td>29</td>
+<td>15</td>
+<td>3</td>
+<td>1.8</td>
+<td>Yes</td></tr>
+<tr class="a">
 <td>javax.persistence-api-2.2.jar</td>
 <td>164.6 kB</td>
 <td>227</td>
 <td>207</td>
 <td>4</td>
 <td>1.8</td>
+<td>Yes</td></tr>
+<tr class="b">
+<td>validation-api-2.0.1.Final.jar</td>
+<td>93.1 kB</td>
+<td>163</td>
+<td>143</td>
+<td>9</td>
+<td>1.8</td>
+<td>Yes</td></tr>
+<tr class="a">
+<td>jaxb-api-2.3.1.jar</td>
+<td>128.1 kB</td>
+<td>136</td>
+<td>111</td>
+<td>7</td>
+<td>-</td>
 <td>Yes</td></tr>
 <tr class="b">
 <td>checker-qual-2.11.1.jar</td>
@@ -421,29 +670,29 @@
 <th>Java Version</th>
 <th>Debug Information</th></tr>
 <tr class="b">
-<td>11</td>
-<td>6.1 MB</td>
-<td>4559</td>
-<td>4290</td>
-<td>157</td>
+<td>21</td>
+<td>8.1 MB</td>
+<td>6497</td>
+<td>5988</td>
+<td>259</td>
 <td>1.8</td>
-<td>10</td></tr>
+<td>20</td></tr>
 <tr class="a">
-<td>compile: 2</td>
-<td>compile: 365.7 kB</td>
-<td>compile: 591</td>
-<td>compile: 513</td>
-<td>compile: 36</td>
+<td>compile: 7</td>
+<td>compile: 1 MB</td>
+<td>compile: 1405</td>
+<td>compile: 1248</td>
+<td>compile: 57</td>
 <td>-</td>
-<td>compile: 2</td></tr>
+<td>compile: 7</td></tr>
 <tr class="b">
-<td>test: 9</td>
-<td>test: 5.7 MB</td>
-<td>test: 3968</td>
-<td>test: 3777</td>
-<td>test: 121</td>
+<td>test: 14</td>
+<td>test: 7.1 MB</td>
+<td>test: 5092</td>
+<td>test: 4740</td>
+<td>test: 202</td>
 <td>-</td>
-<td>test: 8</td></tr></table></section>
+<td>test: 13</td></tr></table></section>
       </div>
     </div>
     <div class="clear">
