@@ -3,8 +3,8 @@ package org.meeuw.i18n.continents;
 import java.util.Locale;
 
 import org.junit.jupiter.api.Test;
-import org.meeuw.i18n.Region;
-import org.meeuw.i18n.RegionService;
+import org.meeuw.i18n.regions.Region;
+import org.meeuw.i18n.regions.RegionService;
 
 import com.neovisionaries.i18n.LanguageCode;
 
@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-class RegionServiceTest {
+public class RegionServiceTest {
 
      @Test
      void getContinent() {
@@ -27,7 +27,7 @@ class RegionServiceTest {
 
     }
     @Test
-    void values() {
+    public void values() {
 
         RegionService.getInstance().values().forEach(r -> {
             System.out.println(r.getClass().getSimpleName() + ":" + r.getCode()  + " : " + r.getName() + ":" + r.getName(LanguageCode.nl));

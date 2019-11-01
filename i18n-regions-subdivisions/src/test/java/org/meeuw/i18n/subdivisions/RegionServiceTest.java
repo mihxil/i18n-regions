@@ -2,8 +2,8 @@ package org.meeuw.i18n.subdivisions;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.meeuw.i18n.Region;
-import org.meeuw.i18n.RegionService;
+import org.meeuw.i18n.regions.Region;
+import org.meeuw.i18n.regions.RegionService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

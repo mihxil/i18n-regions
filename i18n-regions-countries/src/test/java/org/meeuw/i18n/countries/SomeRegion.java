@@ -1,6 +1,6 @@
 package org.meeuw.i18n.countries;
 
-import org.meeuw.i18n.Region;
+import org.meeuw.i18n.regions.Region;
 
 /**
  * @author Michiel Meeuwissen

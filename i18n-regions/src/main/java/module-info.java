@@ -1,12 +1,11 @@
-module org.meeuw.i18n {
-    exports org.meeuw.i18n;
-    exports org.meeuw.i18n.bind.jaxb;
-    exports org.meeuw.i18n.persistence;
+module org.meeuw.i18n.regions {
+    exports org.meeuw.i18n.regions.bind.jaxb;
+    exports org.meeuw.i18n.regions.persistence;
+    exports org.meeuw.i18n.regions.validation;
+    exports org.meeuw.i18n.regions.validation.impl;
+    exports org.meeuw.i18n.regions.spi;
+    exports org.meeuw.i18n.regions;
 
-    exports org.meeuw.i18n.validation;
-    exports org.meeuw.i18n.validation.impl;
-
-    exports org.meeuw.i18n.spi;
 
     requires static java.validation;
     requires static java.xml.bind;
@@ -16,7 +15,6 @@ module org.meeuw.i18n {
     requires transitive nv.i18n;
     requires java.logging;
 
-    uses org.meeuw.i18n.spi.RegionProvider;
-
+    uses org.meeuw.i18n.regions.spi.RegionProvider;
 
 }

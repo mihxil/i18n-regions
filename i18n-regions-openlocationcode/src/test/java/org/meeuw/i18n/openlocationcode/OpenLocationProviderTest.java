@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 0.4
  */
 @TestMethodOrder(MethodOrderer.Alphanumeric.class)
-class OpenLocationProviderTest implements BeforeTestExecutionCallback, AfterTestExecutionCallback {
+public class OpenLocationProviderTest implements BeforeTestExecutionCallback, AfterTestExecutionCallback {
 
 
     private static Set<String> sequentialSet =  new HashSet<>();
@@ -41,12 +41,12 @@ class OpenLocationProviderTest implements BeforeTestExecutionCallback, AfterTest
     }
 
     @BeforeEach
-    void setup() {
+    public void setup() {
         OpenLocationProvider.setMaxLength(Math.max(takeWhileLength, 4));
     }
 
     @Test
-    void test1_valuesSequential() {
+    public void test1_valuesSequential() {
         OpenLocationProvider provider = new OpenLocationProvider();
         provider.values()
             .takeWhile(r -> r.getLength() <= takeWhileLength)
@@ -68,7 +68,7 @@ class OpenLocationProviderTest implements BeforeTestExecutionCallback, AfterTest
 
 
     @Test
-    void test2_valuesParallel() {
+    public void test2_valuesParallel() {
         OpenLocationProvider provider = new OpenLocationProvider();
 
         AtomicInteger parallelCount = new AtomicInteger(0);
@@ -96,7 +96,7 @@ class OpenLocationProviderTest implements BeforeTestExecutionCallback, AfterTest
 
     }
     @Test
-    void test3_valuesCompareSequentialWithParallel() {
+    public void test3_valuesCompareSequentialWithParallel() {
         Assumptions.assumeThat(sequentialSet).isNotEmpty();
         Assumptions.assumeThat(parallelSet).isNotEmpty();
 
@@ -108,14 +108,14 @@ class OpenLocationProviderTest implements BeforeTestExecutionCallback, AfterTest
 
     }
     @Test
-    void limitForLength() {
+    public void limitForLength() {
         assertThat(OpenLocationProvider.limitForLength(1)).isEqualTo(9 * 18);
         assertThat(OpenLocationProvider.limitForLength(2)).isEqualTo(9 * 18 + 9 * 18 * 20 * 20);
         assertThat(OpenLocationProvider.limitForLength(3)).isEqualTo(9 * 18 + 9 * 18 * 20 * 20 + 9 * 18 * 20 * 20 * 20 * 20);
     }
 
     @Test
-    void fillTemplate2() {
+    public void fillTemplate2() {
         int[] template = new int[2];
         OpenLocationProvider.fillTemplate(template, 40);
         assertThat(template).isEqualTo(new int[] {2, 4}); // 40 = 2 * 18 + 4
@@ -125,7 +125,7 @@ class OpenLocationProviderTest implements BeforeTestExecutionCallback, AfterTest
 
     }
     @Test
-    void fillTemplate4() {
+    public void fillTemplate4() {
         int[] template = new int[4];
         OpenLocationProvider.fillTemplate(template, 62837);
         String code = OpenLocationProvider.toCode(template).toString();
@@ -133,7 +133,7 @@ class OpenLocationProviderTest implements BeforeTestExecutionCallback, AfterTest
     }
 
     @Test
-    void templateAt() {
+    public void templateAt() {
         int[] template = OpenLocationProvider.templateAt(48643);
         String code = OpenLocationProvider.toCode(template).toString();
         assertThat(code).isEqualTo("8M630000+"); //
@@ -141,7 +141,7 @@ class OpenLocationProviderTest implements BeforeTestExecutionCallback, AfterTest
 
 
     @Test
-    void carrying() {
+    public void carrying() {
         int[] template = new int[4];
         OpenLocationProvider.fillTemplate(template, 48643);
         assertThat(OpenLocationProvider.position(template)).isEqualTo(48643);

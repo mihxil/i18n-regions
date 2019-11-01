@@ -4,7 +4,7 @@ import java.net.URI;
 import java.util.Locale;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.meeuw.i18n.Region;
+import org.meeuw.i18n.regions.Region;
 
 import com.google.openlocationcode.OpenLocationCode;
 

@@ -9,9 +9,9 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.meeuw.i18n.Region;
-import org.meeuw.i18n.UserAssignedRegion;
-import org.meeuw.i18n.spi.RegionProvider;
+import org.meeuw.i18n.regions.Region;
+import org.meeuw.i18n.regions.UserAssignedRegion;
+import org.meeuw.i18n.regions.spi.RegionProvider;
 
 /**
  * @author Michiel Meeuwissen

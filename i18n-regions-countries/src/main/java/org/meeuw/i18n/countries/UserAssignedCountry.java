@@ -1,7 +1,7 @@
 package org.meeuw.i18n.countries;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.meeuw.i18n.UserAssignedRegion;
+import org.meeuw.i18n.regions.UserAssignedRegion;
 
 /**
  * http://en.wikipedia.org/wiki/ISO_3166-2

@@ -1,6 +1,6 @@
 package org.meeuw.i18n.countries.validation.impl;
 
-import org.meeuw.i18n.Region;
+import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.countries.validation.ValidCountry;
 
 /**
@@ -8,7 +8,7 @@ import org.meeuw.i18n.countries.validation.ValidCountry;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-public class ValidationInfo extends org.meeuw.i18n.validation.impl.ValidationInfo {
+public class ValidationInfo extends org.meeuw.i18n.regions.validation.impl.ValidationInfo {
 
     final int value;
 

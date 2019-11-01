@@ -6,11 +6,11 @@ import java.util.Optional;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import org.meeuw.i18n.RegionService;
+import org.meeuw.i18n.regions.RegionService;
 import org.meeuw.i18n.countries.Country;
 import org.meeuw.i18n.countries.validation.ValidCountry;
 import org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode;
-import org.meeuw.i18n.validation.impl.RegionConstraintValidator;
+import org.meeuw.i18n.regions.validation.impl.RegionConstraintValidator;
 
 import com.neovisionaries.i18n.CountryCode;
 

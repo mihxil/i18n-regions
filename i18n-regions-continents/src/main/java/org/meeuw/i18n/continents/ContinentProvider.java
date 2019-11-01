@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 import javax.annotation.Priority;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.meeuw.i18n.spi.RegionProvider;
+import org.meeuw.i18n.regions.spi.RegionProvider;
 
 /**
  * @author Michiel Meeuwissen

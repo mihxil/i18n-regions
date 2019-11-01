@@ -7,8 +7,8 @@ import java.util.Locale;
 import java.util.Optional;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.meeuw.i18n.Region;
-import org.meeuw.i18n.RegionService;
+import org.meeuw.i18n.regions.Region;
+import org.meeuw.i18n.regions.RegionService;
 
 import com.neovisionaries.i18n.CountryCode;
 

@@ -12,7 +12,7 @@ import javax.validation.constraints.Min;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.meeuw.i18n.spi.RegionProvider;
+import org.meeuw.i18n.regions.spi.RegionProvider;
 
 import com.google.openlocationcode.OpenLocationCode;
 

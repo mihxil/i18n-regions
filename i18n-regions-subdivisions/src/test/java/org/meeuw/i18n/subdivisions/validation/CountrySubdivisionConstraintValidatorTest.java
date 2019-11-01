@@ -10,10 +10,10 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import org.junit.jupiter.api.Test;
-import org.meeuw.i18n.Region;
-import org.meeuw.i18n.RegionService;
-import org.meeuw.i18n.Regions;
-import org.meeuw.i18n.validation.RegionValidatorService;
+import org.meeuw.i18n.regions.Region;
+import org.meeuw.i18n.regions.RegionService;
+import org.meeuw.i18n.regions.Regions;
+import org.meeuw.i18n.regions.validation.RegionValidatorService;
 
 import com.neovisionaries.i18n.LanguageCode;
 

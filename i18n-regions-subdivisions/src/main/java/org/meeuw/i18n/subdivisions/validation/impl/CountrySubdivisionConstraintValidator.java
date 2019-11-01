@@ -8,11 +8,11 @@ import java.util.stream.Stream;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import org.meeuw.i18n.RegionService;
+import org.meeuw.i18n.regions.RegionService;
 import org.meeuw.i18n.subdivisions.CountrySubdivision;
 import org.meeuw.i18n.subdivisions.CountrySubdivisionWithCode;
 import org.meeuw.i18n.subdivisions.validation.ValidCountrySubdivision;
-import org.meeuw.i18n.validation.impl.RegionConstraintValidator;
+import org.meeuw.i18n.regions.validation.impl.RegionConstraintValidator;
 
 /**
  * @author Michiel Meeuwissen

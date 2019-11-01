@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 import javax.annotation.Priority;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.meeuw.i18n.spi.RegionProvider;
+import org.meeuw.i18n.regions.spi.RegionProvider;
 
 /**
  * This provider can only 'getByCode', and serves as a fall back for countries. As a fallback, if no region with a given code could be found, this will match on the {@link VehicleRegistrationCode}.

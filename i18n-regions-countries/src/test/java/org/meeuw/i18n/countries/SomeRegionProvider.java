@@ -2,7 +2,7 @@ package org.meeuw.i18n.countries;
 
 import java.util.stream.Stream;
 
-import org.meeuw.i18n.spi.RegionProvider;
+import org.meeuw.i18n.regions.spi.RegionProvider;
 
 /**
  * @author Michiel Meeuwissen

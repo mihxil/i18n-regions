@@ -7,10 +7,10 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import org.meeuw.i18n.Region;
+import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.countries.Country;
 import org.meeuw.i18n.countries.validation.impl.CountryConstraintValidator;
-import org.meeuw.i18n.validation.ValidRegion;
+import org.meeuw.i18n.regions.validation.ValidRegion;
 
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
@@ -28,7 +28,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *
  * So basicly you specify one or more predicates, and/or a number of explicitely included and excluded codes.
  *
- * When applied to instances of {@link org.meeuw.i18n.Region}s that are not {@link Country} (or convertable to that), are considered valid. Use {@link org.meeuw.i18n.validation.ValidRegion} to constraint that.
+ * When applied to instances of {@link Region}s that are not {@link Country} (or convertable to that), are considered valid. Use {@link org.meeuw.i18n.regions.validation.ValidRegion} to constraint that.
  *
  *
  * @author Michiel Meeuwissen

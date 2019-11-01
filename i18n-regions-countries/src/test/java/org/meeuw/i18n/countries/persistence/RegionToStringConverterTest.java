@@ -4,8 +4,8 @@ import java.util.Locale;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.meeuw.i18n.Region;
-import org.meeuw.i18n.persistence.RegionToStringConverter;
+import org.meeuw.i18n.regions.Region;
+import org.meeuw.i18n.regions.persistence.RegionToStringConverter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 0.1
  */
 
-class RegionToStringConverterTest {
+public class RegionToStringConverterTest {
 
     // The existing values in POMS.
     private static String[] examples = {
@@ -101,16 +101,12 @@ class RegionToStringConverterTest {
     }
 
     private RegionToStringConverter impl = new RegionToStringConverter();
-    private String code;
 
-    RegionToStringConverterTest(String code) {
-        this.code = code;
-    }
 
 
     @ParameterizedTest
     @MethodSource("persistedCountryValues")
-    void convertToEntityAttribute() {
+    public void convertToEntityAttribute(String code) {
         Region region = impl.convertToEntityAttribute(code);
         assertThat(region).isNotNull();
         System.out.println(region + " " + region.getName(new Locale("nl")));
