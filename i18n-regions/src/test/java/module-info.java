@@ -11,16 +11,17 @@ open module org.meeuw.i18n.regions {
 
 
     requires static java.validation;
-    requires static java.xml.bind;
     requires static org.checkerframework.checker.qual;
     requires static java.persistence;
     requires static java.annotation;
     requires transitive nv.i18n;
     requires java.logging;
 
-    requires static org.junit.jupiter.api;
-    requires static org.junit.jupiter.params;
-    requires static org.assertj.core;
+    requires org.junit.jupiter.api;
+    requires org.junit.jupiter.params;
+    requires org.assertj.core;
+    requires java.xml.bind;
+
 
 
     provides RegionProvider with
