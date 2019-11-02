@@ -444,6 +444,11 @@
 
 
   <distributionManagement>
+    <site>
+      <id>github-pages</id>
+      <name>github pages</name>
+      <url>https://mihxil.github.io/i18n-regions/</url>
+    </site>
     <snapshotRepository>
       <id>ossrh</id>
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
