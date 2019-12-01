@@ -96,7 +96,7 @@ public class RegionToStringConverterTest {
  "ZZ"
     };
 
-    static String[] persistedCountryValues() {
+    public static String[] persistedCountryValues() {
         return examples;
     }
 

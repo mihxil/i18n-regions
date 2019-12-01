@@ -20,11 +20,11 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * A javax.validation annotation that can be used to restrict the values of a {@link Country} value.
  *
  * For example
- * {@code
+ * <pre>{@code
  *
  *    @ValidCountry(value = OFFICIAL | FORMER, includes = "ZZ")
  *
- * }
+ * }</pre>
  *
  * So basicly you specify one or more predicates, and/or a number of explicitely included and excluded codes.
  *

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Logger;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -14,22 +15,31 @@ import com.neovisionaries.i18n.CountryCode;
  * @since 0.1
  */
 public class UserAssignedCountrySubdivision implements CountrySubdivision {
+
+    private static final Logger logger = Logger.getLogger(UserAssignedCountrySubdivision.class.getName());
+
     private static final long serialVersionUID = 0L;
 
     private static final Map<CountryCode, Map<String, UserAssignedCountrySubdivision>> CACHE = new ConcurrentHashMap<>();
 
 
     public static  Map<String, UserAssignedCountrySubdivision> ofCountry(@NonNull CountryCode countryCode) {
+        logger.fine("Getting " + countryCode);
         return CACHE.computeIfAbsent(countryCode, (cc) -> {
             Map<String, UserAssignedCountrySubdivision> value = new LinkedHashMap<>();
             Properties properties = new Properties();
-            InputStream inputStream = UserAssignedCountrySubdivision.class.getResourceAsStream("/subdivisions." + cc.getAlpha2() + ".properties");
+            String resource = "/org/meeuw/i18n/subdivisions/subdivisions." + cc.getAlpha2() + ".properties";
+            InputStream inputStream = UserAssignedCountrySubdivision.class.getResourceAsStream(resource);
             if (inputStream != null) {
                 try {
+                    logger.info("Loading " + inputStream);
                     properties.load(inputStream);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+            } else {
+                logger.finer("Not found " + resource);
+                //
             }
             properties.forEach((k, v) -> {
                 value.put((String) k , new UserAssignedCountrySubdivision(cc, (String) k, (String) v));
@@ -40,7 +50,6 @@ public class UserAssignedCountrySubdivision implements CountrySubdivision {
     public static Optional<UserAssignedCountrySubdivision> of(@NonNull CountryCode countryCode, String code) {
         return Optional.ofNullable(ofCountry(countryCode).get(code));
     }
-
 
 
     private final CountryCode countryCode;

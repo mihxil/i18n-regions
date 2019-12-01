@@ -1,0 +1,9 @@
+--add-opens
+  org.meeuw.i18n.subdivisions/org.meeuw.i18n.subdivisions=ALL-UNNAMED
+--add-opens
+  org.meeuw.i18n.subdivisions/org.meeuw.i18n.subdivisions.validation=ALL-UNNAMED
+
+--add-reads
+  org.meeuw.i18n.subdivisions=org.junit.jupiter.api
+--add-reads
+  org.meeuw.i18n.subdivisions=org.assertj.core

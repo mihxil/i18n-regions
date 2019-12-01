@@ -20,6 +20,8 @@
       <groupId>javax.annotation</groupId>
       <artifactId>javax.annotation-api</artifactId>
       <optional>true</optional>
+      <version>1.3.2</version>
+      <type>jar</type>
     </dependency>
 
     <dependency>

@@ -11,12 +11,12 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-class RegionServiceTest {
+public class RegionServiceTest {
 
 
 
     @Test
-    void getCountrySubDivisionUtrecht() {
+    public void getCountrySubDivisionUtrecht() {
 
         Region utrecht = RegionService.getInstance().getByCode("NL-UT").orElse(null);
         assertThat(utrecht).isNotNull();
@@ -27,7 +27,7 @@ class RegionServiceTest {
 
     @Test
     @Disabled("This is missing in subdivision, make pull request")
-    void getCountrySubDivisionGreatBritain() {
+    public void getCountrySubDivisionGreatBritain() {
 
         Region gbn = RegionService.getInstance().getByCode("GB-GBN").orElse(null);
         assertThat(gbn).isNotNull();
@@ -38,7 +38,7 @@ class RegionServiceTest {
 
 
     @Test
-    void subdivisionsOfGB(){
+    public void subdivisionsOfGB(){
         Region eng = RegionService.getInstance().getByCode("GB-ENG").orElse(null);
         assertThat(eng.getCode()).isEqualTo("GB-ENG");
         assertThat(eng.getName()).isEqualTo("England");

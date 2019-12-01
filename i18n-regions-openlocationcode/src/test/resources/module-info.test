@@ -1,0 +1,7 @@
+--add-opens
+  foo/foo=org.junit.platform.commons
+
+// "requires org.junit.jupiter.api"
+--add-reads
+  foo=org.junit.jupiter.api
+  org.assertj.core;

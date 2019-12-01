@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RegionServiceTest {
 
      @Test
-     void getContinent() {
+     public void getContinent() {
         Region af = RegionService.getInstance().getByCode("CONTINENT-AF", Continent.class).orElse(null);
         assertThat(af).isNotNull();
         assertThat(af).isInstanceOf(Continent.class);

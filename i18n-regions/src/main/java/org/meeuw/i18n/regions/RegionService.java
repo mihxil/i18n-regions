@@ -3,6 +3,7 @@ package org.meeuw.i18n.regions;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -67,7 +68,7 @@ public class RegionService {
     }
 
     /**
-     * A defaulting version of {@link #getByCode(String, boolean, Class, Predicate)}. The predicate is implicetely always true.
+     * A defaulting version of {@link #getByCode(String, boolean, Class, Predicate)}. The predicate is implicitly always true.
      */
 
     public  <T extends Region> Optional<T> getByCode(@NonNull String code, boolean lenient, @NonNull Class<T> clazz) {
@@ -159,7 +160,7 @@ public class RegionService {
     }
 
     /**
-     * @return The provides currently registerd
+     * @return The provides currently registered
      */
     public List<RegionProvider> getProviders() {
         return Collections.unmodifiableList(providers);
@@ -175,7 +176,7 @@ public class RegionService {
             list.sort(priorityComparator());
             providers = Collections.unmodifiableList(list);
             inited = true;
-            logger.info("RegionService has " + providers);
+            logger.log(Level.INFO, "RegionService has {0}", providers);
         }
     }
 
@@ -189,7 +190,7 @@ public class RegionService {
                 final int v2 = p2 != null ? p2.value() : 100;
                 return v1 - v2;
             } catch (NoClassDefFoundError ncdfe) {
-                logger.info(ncdfe.getClass() + ":" + ncdfe.getMessage() + " region services " + o1 + " " + o2 + " are unordered");
+                logger.log(Level.INFO, "{0}:{1} region services {2} {3} are unordered", new Object[]{ncdfe.getClass(), ncdfe.getMessage(), o1, o2});
                 return o1.getClass().getSimpleName().compareTo(o2.getClass().getSimpleName());
             }
         };

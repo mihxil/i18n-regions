@@ -1,0 +1,14 @@
+--add-opens
+  org.meeuw.i18n.regions/org.meeuw.i18n.regions=org.junit.platform.commons
+
+--add-opens
+  org.meeuw.i18n.regions/org.meeuw.i18n.regions.validation.impl=org.junit.platform.commons
+
+--add-opens
+  org.meeuw.i18n.regions/org.meeuw.i18n.regions.validation.impl=org.hibernate.validator
+
+--add-reads
+  org.meeuw.i18n.regions=org.junit.jupiter.api
+--add-reads
+  org.meeuw.i18n.regions=org.assertj.core
+

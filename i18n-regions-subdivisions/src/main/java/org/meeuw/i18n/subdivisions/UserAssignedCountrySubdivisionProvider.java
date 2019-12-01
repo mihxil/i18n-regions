@@ -55,8 +55,8 @@ public class UserAssignedCountrySubdivisionProvider implements RegionProvider<Us
 
             @Override
             public boolean tryAdvance(Consumer<? super UserAssignedCountrySubdivision> action) {
-                while(spliterator == null || ! spliterator.tryAdvance(action)) {
-                    if (countryCode >=  CountryCode.values().length) {
+                while (spliterator == null || !spliterator.tryAdvance(action)) {
+                    if (countryCode >= CountryCode.values().length) {
                         return false;
                     }
                     Collection<UserAssignedCountrySubdivision> subdivisions = ofCountry(CountryCode.values()[countryCode++]).values();

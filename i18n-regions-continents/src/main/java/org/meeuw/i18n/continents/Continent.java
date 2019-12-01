@@ -6,8 +6,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.regions.Region;
 
 /**
- * https://datahub.io/core/continent-codes
-
+ * <a href="https://datahub.io/core/continent-codes">See datahub</a>
  * @author Michiel Meeuwissen
  * @since 0.1
  */
