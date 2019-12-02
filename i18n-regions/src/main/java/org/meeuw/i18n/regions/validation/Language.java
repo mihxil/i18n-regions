@@ -27,7 +27,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 public @interface Language {
 
-    String message() default "{org.meeuw.i18n.validation.language.message}";
+    String message() default "{org.meeuw.i18n.regions.validation.language.message}";
 
     Class<?>[] groups() default {};
 

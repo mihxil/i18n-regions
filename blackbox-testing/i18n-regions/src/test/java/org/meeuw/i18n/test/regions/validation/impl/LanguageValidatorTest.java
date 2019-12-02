@@ -76,7 +76,8 @@ public class LanguageValidatorTest {
     public void testZZ() {
         A a = new A();
         a.language = "ZZ";
-        testValidate(a, 1);
+        Set<ConstraintViolation<A>> constraintViolations = testValidate(a, 1);
+        assertThat(constraintViolations.iterator().next().getMessage()).isEqualTo("ZZ is een ongeldige ISO639 taalcode");
     }
 
 
@@ -124,10 +125,11 @@ public class LanguageValidatorTest {
         }
     }
 
-    private void testValidate(A value, int expectedSize) {
+    private Set<ConstraintViolation<A>> testValidate(A value, int expectedSize) {
         Set<ConstraintViolation<A>> validate = validator.validate(value);
         System.out.println("" + validate);
         assertThat(validate).hasSize(expectedSize);
+        return validate;
     }
 
 

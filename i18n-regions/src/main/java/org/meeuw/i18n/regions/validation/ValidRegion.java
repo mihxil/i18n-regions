@@ -33,7 +33,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 public @interface ValidRegion {
 
 
-    String message() default "{org.meeuw.i18n.validation.region.message}";
+    String message() default "{org.meeuw.i18n.regions.validation.region.message}";
 
     Class<?>[] groups() default {};
 

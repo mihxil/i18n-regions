@@ -8,8 +8,8 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.ClassUtils;
-import org.meeuw.i18n.Region;
-import org.meeuw.i18n.RegionService;
+import org.meeuw.i18n.regions.Region;
+import org.meeuw.i18n.regions.RegionService;
 import org.meeuw.i18n.regions.spi.RegionProvider;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,7 +41,9 @@ public class RegionsController {
         @RequestHeader(HttpHeaders.ACCEPT_LANGUAGE) Locale language,
         HttpServletResponse response) throws Exception {
         html(response, writer -> {
-            Region r = RegionService.getInstance().getByCode(region).orElseThrow(IllegalArgumentException::new);
+            Region r = RegionService.getInstance()
+                .getByCode(region)
+                .orElseThrow(IllegalArgumentException::new);
             writer.println("<h1>" + r.getName() + ": " + r.getName(language) + "</h1>");
             writer.println("<p>code:" + r.getCode() + "</p>");
             writer.println("<p>class: <a href='/type/" + r.getClass().getName() + "'>" + r.getClass().getName() + "</a></p>");

@@ -14,16 +14,20 @@
   <description>Black box testing</description>
 
 
- <modules>
-   <module>i18n-regions</module>
-   <module>i18n-regions-countries</module>
-   <module>i18n-regions-subdivisions</module>
-   <!--
+  <modules>
+    <module>i18n-regions</module>
+    <module>i18n-regions-countries</module>
+    <module>i18n-regions-subdivisions</module>
+    <!--
 
     <module>i18n-regions-continents</module>
     -->
 
- </modules>
+  </modules>
+
+  <build>
+    <defaultGoal>clean test</defaultGoal>
+  </build>
 
 
 </project>

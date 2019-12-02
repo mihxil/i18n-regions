@@ -1,5 +1,5 @@
 module org.meeuw.springutils {
-    requires transitive org.meeuw.i18n;
+    requires transitive org.meeuw.i18n.regions;
 
     requires spring.web;
 

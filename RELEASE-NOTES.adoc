@@ -1,0 +1,13 @@
+= Releas notes
+:toc:
+
+== 1.0
+
+When upgrading from 0.5 a few packages where changed. It was decided to make a clean module package correspondance.
+
+Hence e.g.
+
+- `org.meeuw.i18n.Region` -> `org.meeuw.i18n.regions.Region`
+- `org.meeuw.i18n.RegionService` -> `org.meeuw.i18n.regions.RegionService`
+
+Testing is also done with java 11 modules. The artifacts are still compatible with java 8 though.

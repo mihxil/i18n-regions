@@ -1,0 +1,7 @@
+= Blackbox testing for i18-regions
+
+In this module we collect 'black box' test fo the other modules
+
+This seemed to be the simplest solution. No complicated stuff with `module-info.test` or maven invoker plugins.
+
+Most of the stuff in the project could quite well be tested as a 'block box'.

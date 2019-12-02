@@ -2,7 +2,6 @@ package org.meeuw.i18n.countries;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +21,7 @@ public class VehicleRegistrationCodeTest {
                 differences.add(code.getName() + " " + (code.getCode() == null ? null : code.getCode().getName()));
             }
         }
-        System.out.println(differences.stream().collect(Collectors.joining("\n")));
+        System.out.println(String.join("\n", differences));
     }
 
 }
