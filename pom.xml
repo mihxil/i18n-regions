@@ -16,8 +16,6 @@
     <module>i18n-regions-countries</module>
     <module>i18n-regions-continents</module>
     <module>i18n-regions-openlocationcode</module>
-    <module>blackbox-testing</module>
-    <module>i18n-regions-bom</module>
   </modules>
 
   <licenses>
@@ -81,7 +79,6 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
         <configuration>
@@ -135,7 +132,6 @@
 
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
         <version>3.1.2</version>
         <configuration>
@@ -156,36 +152,16 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
         <version>3.8.2</version>
       </plugin>
-      <!--<plugin>
-        <groupId>de.sormuras.junit</groupId>
-        <artifactId>junit-platform-maven-plugin</artifactId>
-        <version>1.0.0-M5</version>
-        <extensions>true</extensions> &lt;!&ndash; Necessary to execute it in 'test' phase. &ndash;&gt;
-        <executions>
-          <execution>
-            <id>Launch JUnit Platform</id>
-            <phase>test</phase>
-            <goals>
-              <goal>launch</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <tweaks>
-            <failIfNoTests>false</failIfNoTests>
-          </tweaks>
-        </configuration>
-
-      </plugin>
--->
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>2.22.2</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>3.0.0-M1</version>
       </plugin>
       <!--  <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -217,9 +193,24 @@
 
   <profiles>
     <profile>
+      <id>build</id>
+      <modules>
+        <module>blackbox-testing</module>
+      </modules>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+    </profile>
+    <profile>
       <id>deploy</id>
       <build>
         <plugins>
+          <plugin>
+            <artifactId>maven-deploy-plugin</artifactId>
+            <configuration>
+              <skip>true</skip>
+            </configuration>
+          </plugin>
           <plugin>
             <groupId>org.sonatype.plugins</groupId>
             <artifactId>nexus-staging-maven-plugin</artifactId>
@@ -323,7 +314,7 @@
       <dependency>
         <groupId>org.meeuw.i18n</groupId>
         <artifactId>i18n-regions-bom</artifactId>
-        <version>${project.version}</version>
+        <version>1.0.1</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -436,10 +427,6 @@
       <artifactId>javax.persistence-api</artifactId>
       <optional>true</optional>
     </dependency>
-
-
-
-
   </dependencies>
 
 
@@ -473,6 +460,10 @@
           </reportSet>
         </reportSets>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>3.0.0-M1</version></plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>

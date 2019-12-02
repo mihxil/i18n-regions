@@ -7,7 +7,7 @@
     <artifactId>i18n-regions-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-</parent>
+  </parent>
 
   <artifactId>i18n-regions-blackbox-testing</artifactId>
   <packaging>pom</packaging>
@@ -18,16 +18,28 @@
     <module>i18n-regions</module>
     <module>i18n-regions-countries</module>
     <module>i18n-regions-subdivisions</module>
-    <!--
-
-    <module>i18n-regions-continents</module>
-    -->
-
   </modules>
 
   <build>
     <defaultGoal>clean test</defaultGoal>
-  </build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
+        </configuration>
+      </plugin>
 
+    </plugins>
+  </build>
 
 </project>

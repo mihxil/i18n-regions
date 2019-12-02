@@ -36,6 +36,9 @@ All this is a bit annoying, because in every setup I could think of it would giv
 
 Blackbox testing is less flexible, and I generally considered testing a valid argument for 'white boxing', i.e. e.g. accessing package access methods.
 
+Another annoyance is that these modules may get deploy to repository which is pointless.
+
+I arranged via profiles that this is avoided
 
 == Java service loaders
 Since a long time you can load java services via META-INF/<name of services>.properties
