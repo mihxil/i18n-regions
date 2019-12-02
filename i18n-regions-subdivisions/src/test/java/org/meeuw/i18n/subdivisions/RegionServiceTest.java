@@ -2,8 +2,10 @@ package org.meeuw.i18n.subdivisions;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.meeuw.i18n.regions.Region;
-import org.meeuw.i18n.regions.RegionService;
+import org.meeuw.i18n.regions.*;
+
+import com.neovisionaries.i18n.CountryCode;
+import com.neovisionaries.i18n.LanguageCode;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -39,9 +41,17 @@ public class RegionServiceTest {
 
     @Test
     public void subdivisionsOfGB(){
-        Region eng = RegionService.getInstance().getByCode("GB-ENG").orElse(null);
+        Region eng = RegionService.getInstance().getByCode("GB-ENG").orElseThrow();
         assertThat(eng.getCode()).isEqualTo("GB-ENG");
         assertThat(eng.getName()).isEqualTo("England");
+        assertThat(eng.getName(LanguageCode.nl)).isEqualTo("Engeland");
+
+        Region engOf = CountrySubdivision.of(CountryCode.GB, "ENG").orElseThrow();
+        assertThat(engOf).isEqualTo(eng);
+
+        assertThat(Regions.toString(eng, LanguageCode.nl)).isEqualTo("Engeland (GB)");
+        assertThat(Regions.toStringWithCode(eng, LanguageCode.nl)).isEqualTo("GB-ENG:Engeland (GB)");
+
     }
 
 

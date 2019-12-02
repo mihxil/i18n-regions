@@ -38,7 +38,13 @@ public interface CountrySubdivision extends Region {
     default void toStringBuilder(@NonNull StringBuilder builder, @NonNull Locale locale) {
         Region.super.toStringBuilder(builder, locale);
         builder.append(" (");
-        RegionService.getInstance().getByCode(getCountryCode()).ifPresent(c -> c.toStringBuilder(builder, locale));
+        Optional<Region> byCode = RegionService.getInstance()
+            .getByCode(getCountryCode());
+        if (byCode.isPresent()) {
+            byCode.get().toStringBuilder(builder, locale);
+        } else {
+            builder.append(getCountryCode());
+        }
         builder.append(")");
     }
 

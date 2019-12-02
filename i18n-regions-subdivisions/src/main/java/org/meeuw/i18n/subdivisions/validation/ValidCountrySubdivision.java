@@ -30,7 +30,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 public @interface ValidCountrySubdivision {
 
 
-    String message() default "{org.meeuw.i18n.validation.countrysubdivision.message}";
+    String message() default "{org.meeuw.i18n.regions.validation.countrysubdivision.message}";
 
     Class<?>[] groups() default {};
 
