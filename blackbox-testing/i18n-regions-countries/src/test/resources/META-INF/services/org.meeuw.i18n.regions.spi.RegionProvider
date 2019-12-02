@@ -1,0 +1,2 @@
+# I don't know why this file needs to exist. It is defined in module-info.java
+org.meeuw.i18n.test.some.SomeRegionProvider

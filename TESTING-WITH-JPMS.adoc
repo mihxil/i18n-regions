@@ -1,7 +1,7 @@
 = Testing with JPMS (java platform module system, 'jigswaw')
 :toc:
 
-== introduction
+== Introduction
 The short version of this: it is hard.
 
 When searching for this you inevitable end up on this URL:
@@ -37,3 +37,21 @@ All this is a bit annoying, because in every setup I could think of it would giv
 
 Blackbox testing is less flexible, and I generally considered testing a valid argument for 'white boxing', i.e. e.g. accessing package access methods.
 
+
+== Java service loaders
+Since a long time you can load java services via META-INF/<name of services>.properties
+In JPMS you can put the service in module-info.java, like so:
+[source,java]
+----
+module org.meeuw.i18n.countries {
+
+  provides RegionProvider with
+        CurrentCountryProvider,
+        FormerCountryProvider,
+
+        UserAssignedCountryProvider,
+        UnofficialCurrentCountryProvider,
+        VehicleRegistrationCodeFallbackProvider;
+}
+----
+This however does not seem to work in a test-only module. I haven't figured out yet why that is, and even if I'm not somehow mistaken here.

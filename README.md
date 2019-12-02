@@ -155,4 +155,5 @@ There are very few log events, it is not important.
 Version 1.0
 ---
 For version 1.0 I'm trying to more properly modularize all this test it. It's a bit more complicated then I anticipated and lots of tests are failing now. Probably some stuff must be moved to proper black box testing. I'm also doubting if the white box testing module-info.java  patching is configured correctly and/or properly supported by Intellij and/or maven.
+I'm documenting by findings [here](TESTING-WITH-JPMS.adoc)
 

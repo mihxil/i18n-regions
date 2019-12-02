@@ -16,8 +16,7 @@
     <module>i18n-regions-countries</module>
     <module>i18n-regions-continents</module>
     <module>i18n-regions-openlocationcode</module>
-
-    <module>i18n-regions-blackbox-testing</module>
+    <module>blackbox-testing</module>
 
   </modules>
 
@@ -348,6 +347,11 @@
       <dependency>
         <groupId>org.meeuw.i18n</groupId>
         <artifactId>i18n-regions-countries</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.meeuw.i18n</groupId>
+        <artifactId>i18n-regions-continents</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
