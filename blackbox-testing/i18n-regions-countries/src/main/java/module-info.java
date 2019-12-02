@@ -5,9 +5,7 @@ import org.meeuw.i18n.test.some.SomeRegionProvider;
  * @since ...
  */
 open module org.meeuw.i18n.test.countries {
-    requires org.junit.jupiter.api;
     requires org.meeuw.i18n.countries;
-    requires org.assertj.core;
     requires java.validation;
 
     exports org.meeuw.i18n.test.some;
