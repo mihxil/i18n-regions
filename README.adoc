@@ -23,9 +23,9 @@ I decided to wrap `CountryCode` in a class `CurrentCountry`, which implements a 
 
 == Architecture
 
-The central interface of this module is link:i18n-regions/src/main/java/org/meeuw/i18n/Region.java[`org.meeuw.i18n.Region`], which represents some geographical region.
+The central interface of this module is link:i18n-regions/src/main/java/org/meeuw/i18n/regions/Region.java[`org.meeuw.i18n.regions.Region`], which represents some geographical region.
 
-Instances are created via https://www.baeldung.com/java-spi[java service providers] implementing link:i18n-regions/src/main/java/org/meeuw/i18n/spi/RegionProvider.java[`org.meeuw.i18n.regions.spi.RegionProvider`] (registered via link:i18n-regions/src/main/resources/META-INF/services/org.meeuw.i18n.spi.regions.RegionProvider[META-INF/services]), which are all managed by link:i18n-regions/src/main/java/org/meeuw/i18n/ergions/RegionService.java[`org.meeuw.i18n.regions.RegionService`].
+Instances are created via https://www.baeldung.com/java-spi[java service providers] implementing link:i18n-regions/src/main/java/org/meeuw/i18n/regions/spi/RegionProvider.java[`org.meeuw.i18n.regions.spi.RegionProvider`] (registered via link:i18n-regions/src/main/resources/META-INF/services/org.meeuw.i18n.regions.spi.RegionProvider[META-INF/services]), which are all managed by link:i18n-regions/src/main/java/org/meeuw/i18n/regions/RegionService.java[`org.meeuw.i18n.regions.RegionService`].
 
 Providers are distributes via different artifacts, so you can in that way select what kind of regions the service should provide.
 
@@ -45,7 +45,7 @@ It provides:
 These are provided in https://search.maven.org/search?q=g:org.meeuw.i18n%20AND%20a:i18n-regions-subdivisions&core=gav[`org.meeuw.i18n:i18n-regions-subdivisions`]
 - For subdivision of countries link:i18n-regions-subdivisions/src/main/java/org/meeuw/i18n/subdivisions/CountrySubdivision.java[`org.meeuw.i18n.subdivisions.CountrySubdivision`], which is backed by
 `be.olsson.i18n.subdivision.CountryCodeSubdivision` (from https://github.com/tobias-/i18n-subdivisions)
-- In case there are missing country subdivision they can easily be added via `subdivision.&lt;country code&gt;.properties`. E.g. link:i18n-regions-subdivisions/src/main/resources/subdivisions.GB.properties[`subdivisions.GB.properties`] provides some which were obviously missing from Great Britain otherwise.
+- In case there are missing country subdivision they can easily be added via `subdivision.&lt;country code&gt;.properties`. E.g. link:i18n-regions-subdivisions/src/main/resources/org/meeuw/i18n/subdivisions/subdivisions.GB.properties[`subdivisions.GB.properties`] provides some which were obviously missing from Great Britain otherwise.
 
 === Continents
 
@@ -86,9 +86,9 @@ e.g.
 
 [source,java]
 ----
- protected List<
+protected List<
         // valid are countries (further validated by @ValidCountry), and a list of codes.
-        org.meeuw.i18n.
+   org.meeuw.i18n.regions.
         @ValidRegion(classes = {Country.class}, includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
         @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.USER_ASSIGNED | ValidCountry.FORMER, excludes = {"XN"})
         @NotNull Region> countries;
@@ -99,7 +99,7 @@ or, if you prefer, on the collection itself:
 [source,java]
 ----
     @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.USER_ASSIGNED | ValidCountry.FORMER, includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
-    protected List<org.meeuw.i18n.Region> countries;
+    protected List<org.meeuw.i18n.regions.Region> countries;
 ----
 
 This list will not validate if you add Regions which don't follow the given rules.
@@ -117,7 +117,7 @@ It can also be used on `java.util.Locale`, which contain a country component too
 
 (For completeness also link:i18n-regions/src/main/java/org/meeuw/i18n/validation/Language.java[`@Language`] is provided).
 
-As a utility there is `org.meeuw.i18n.validation.RegionValidatorService` which can be used to for the settings in these annotations also to filter a stream of regions (e.g. `RegionService#values()`)
+As a utility there is `org.meeuw.i18n.regions.validation.RegionValidatorService` which can be used to for the settings in these annotations also to filter a stream of regions (e.g. `RegionService#values()`)
 
 [source,java ]
 ----
