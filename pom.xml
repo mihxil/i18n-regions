@@ -17,6 +17,7 @@
     <module>i18n-regions-continents</module>
     <module>i18n-regions-openlocationcode</module>
     <module>blackbox-testing</module>
+    <module>i18n-regions-bom</module>
   </modules>
 
   <licenses>
@@ -43,9 +44,6 @@
   </developers>
 
   <properties>
-    <nv-i18n.version>1.27</nv-i18n.version>
-    <i18n-subdivisions.version>0.2</i18n-subdivisions.version>
-    <i18n-formerly-assigned.version>0.5</i18n-formerly-assigned.version>
     <junit.version>5.6.0-M1</junit.version>
     <java.target.version>8</java.target.version>
     <checker.version>2.11.1</checker.version>
@@ -320,42 +318,16 @@
 
   <dependencyManagement>
 
+
     <dependencies>
-       <dependency>
-        <groupId>org.meeuw.i18n</groupId>
-        <artifactId>i18n-regions</artifactId>
-         <version>${project.version}</version>
-      </dependency>
       <dependency>
         <groupId>org.meeuw.i18n</groupId>
-        <artifactId>i18n-regions-countries</artifactId>
+        <artifactId>i18n-regions-bom</artifactId>
         <version>${project.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
-      <dependency>
-        <groupId>org.meeuw.i18n</groupId>
-        <artifactId>i18n-regions-continents</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.meeuw.i18n</groupId>
-        <artifactId>i18n-regions-subdivisions</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.neovisionaries</groupId>
-        <artifactId>nv-i18n</artifactId>
-        <version>${nv-i18n.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.meeuw.i18n</groupId>
-        <artifactId>i18n-formerly-assigned</artifactId>
-        <version>${i18n-formerly-assigned.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>be.olsson</groupId>
-        <artifactId>i18n-subdivisions</artifactId>
-        <version>${i18n-subdivisions.version}</version>
-      </dependency>
+
 
       <!-- optional dependencies -->
       <dependency>
@@ -530,7 +502,7 @@
     </plugins>
   </reporting>
 
-   <repositories>
+  <repositories>
     <repository>
       <id>sonatype_snapshot</id>
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
