@@ -1,4 +1,4 @@
-= Testing with JPMS (java platform module system, 'jigswaw')
+= Testing with JPMS (java platform module system, 'jigsaw')
 :toc:
 
 == Introduction
