@@ -5,6 +5,7 @@ import org.meeuw.i18n.regions.spi.RegionProvider;
 
 import javax.annotation.Priority;
 import java.util.*;
+import java.util.concurrent.ForkJoinPool;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.logging.Level;
@@ -181,7 +182,10 @@ public class RegionService {
                 }
             }
             if (init) {
-                logger.log(Level.INFO, "RegionService has {0}", providers);
+                // run in separate thread to avoid dead locks
+                ForkJoinPool.commonPool().execute(() ->
+                        logger.log(Level.INFO, "RegionService has {0}", providers)
+                );
             }
         }
 
