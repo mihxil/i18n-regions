@@ -168,6 +168,7 @@ public class RegionService {
 
     private void initIfNeeded() {
         if (! inited) {
+            boolean init = false;
             synchronized(this) {
                 if (! inited) {
                     final ServiceLoader<RegionProvider> loader = ServiceLoader.load(RegionProvider.class);
@@ -176,9 +177,12 @@ public class RegionService {
                     list.sort(priorityComparator());
                     providers = Collections.unmodifiableList(list);
                     inited = true;
+                    init = true;
                 }
             }
-            logger.log(Level.INFO, "RegionService has {0}", providers);
+            if (init) {
+                logger.log(Level.INFO, "RegionService has {0}", providers);
+            }
         }
 
     }
