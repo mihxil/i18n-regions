@@ -31,7 +31,7 @@ public class UserAssignedCountrySubdivision implements CountrySubdivision {
             InputStream inputStream = UserAssignedCountrySubdivision.class.getResourceAsStream(resource);
             if (inputStream != null) {
                 try {
-                    logger.info("Loading " + inputStream);
+                    logger.info("Loading " + resource);
                     properties.load(inputStream);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
