@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ForkJoinPool;
 import java.util.logging.Logger;
 
 /**
@@ -31,14 +32,14 @@ public class UserAssignedCountrySubdivision implements CountrySubdivision {
             InputStream inputStream = UserAssignedCountrySubdivision.class.getResourceAsStream(resource);
             if (inputStream != null) {
                 try {
-                    logger.info("Loading " + resource);
+                    //logger.info("Loading " + resource);
                     properties.load(inputStream);
+                    ForkJoinPool.commonPool().execute(() -> {
+                        logger.info(() -> "Loaded " + resource);
+                    });
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-            } else {
-                logger.finer("Not found " + resource);
-                //
             }
             properties.forEach((k, v) -> {
                 value.put((String) k , new UserAssignedCountrySubdivision(cc, (String) k, (String) v));
