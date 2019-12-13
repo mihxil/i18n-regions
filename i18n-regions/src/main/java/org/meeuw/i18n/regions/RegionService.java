@@ -176,10 +176,11 @@ public class RegionService {
                     list.sort(priorityComparator());
                     providers = Collections.unmodifiableList(list);
                     inited = true;
-                    logger.log(Level.INFO, "RegionService has {0}", providers);
                 }
             }
+            logger.log(Level.INFO, "RegionService has {0}", providers);
         }
+
     }
 
 
