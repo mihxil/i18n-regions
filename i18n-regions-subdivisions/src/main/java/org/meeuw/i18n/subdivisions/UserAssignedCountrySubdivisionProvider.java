@@ -1,16 +1,15 @@
 package org.meeuw.i18n.subdivisions;
 
+import com.neovisionaries.i18n.CountryCode;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.i18n.regions.spi.RegionProvider;
+
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.meeuw.i18n.regions.spi.RegionProvider;
-
-import com.neovisionaries.i18n.CountryCode;
 
 import static org.meeuw.i18n.subdivisions.UserAssignedCountrySubdivision.ofCountry;
 
@@ -49,7 +48,7 @@ public class UserAssignedCountrySubdivisionProvider implements RegionProvider<Us
 
     @Override
     public Stream<UserAssignedCountrySubdivision> values() {
-        Spliterator<UserAssignedCountrySubdivision> spliterator = new Spliterator<UserAssignedCountrySubdivision>() {
+        Spliterator<UserAssignedCountrySubdivision> spliterator = new Spliterator<>() {
             private int countryCode = 0;
             private Spliterator<UserAssignedCountrySubdivision> spliterator;
 

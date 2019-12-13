@@ -1,5 +1,9 @@
 package org.meeuw.i18n.regions;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.i18n.regions.spi.RegionProvider;
+
+import javax.annotation.Priority;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -7,11 +11,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
-
-import javax.annotation.Priority;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.meeuw.i18n.regions.spi.RegionProvider;
 
 /**
  * The singleton service providing information about the registered regions.
@@ -26,7 +25,7 @@ public class RegionService {
     private static final RegionService INSTANCE = new RegionService();
 
     private boolean inited = false;
-    private List<RegionProvider> providers;
+    private List<RegionProvider<? extends Region>> providers;
 
     private RegionService() {
 
@@ -47,7 +46,7 @@ public class RegionService {
       * @param lenient Whether matching should be lenient or strict. Lenient matching may e.g. be case insensitive or matching on former codes
       * @param clazz The subclass or sub interface of {@link Region} which is searched
       * @param checker An extra predicate to which the region must match
-      * @param <T>
+      * @param <T> The type of the requested Region type
       *
      * @return an optional of region. Empty if not found.
      */
@@ -101,11 +100,10 @@ public class RegionService {
      *
      * @param clazz The class (a subclass or interface of {@link Region}
      * @param <T>
-     * @return
      */
     public  <T extends Region> Stream<T> values(Class<T> clazz) {
         Spliterator<T> spliterator = new Spliterator<T>() {
-            private final Iterator<? extends RegionProvider> iterator = getProviders().iterator();
+            private final Iterator<? extends RegionProvider<? extends Region>> iterator = getProviders().iterator();
             private Spliterator<T> values;
             @Override
             public boolean tryAdvance(Consumer<? super T> action) {
@@ -162,7 +160,7 @@ public class RegionService {
     /**
      * @return The provides currently registered
      */
-    public List<RegionProvider> getProviders() {
+    public List<RegionProvider<?>> getProviders() {
         return Collections.unmodifiableList(providers);
     }
 
@@ -170,13 +168,17 @@ public class RegionService {
 
     private void initIfNeeded() {
         if (! inited) {
-            final ServiceLoader<RegionProvider> loader = ServiceLoader.load(RegionProvider.class);
-            List<RegionProvider> list = new ArrayList<>();
-            loader.iterator().forEachRemaining(list::add);
-            list.sort(priorityComparator());
-            providers = Collections.unmodifiableList(list);
-            inited = true;
-            logger.log(Level.INFO, "RegionService has {0}", providers);
+            synchronized(this) {
+                if (! inited) {
+                    final ServiceLoader<RegionProvider> loader = ServiceLoader.load(RegionProvider.class);
+                    List<RegionProvider<?>> list = new ArrayList<>();
+                    loader.iterator().forEachRemaining(list::add);
+                    list.sort(priorityComparator());
+                    providers = Collections.unmodifiableList(list);
+                    inited = true;
+                    logger.log(Level.INFO, "RegionService has {0}", providers);
+                }
+            }
         }
     }
 

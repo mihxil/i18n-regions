@@ -1,14 +1,13 @@
 package org.meeuw.i18n.subdivisions;
 
+import com.neovisionaries.i18n.CountryCode;
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
-
-import com.neovisionaries.i18n.CountryCode;
 
 /**
  * @author Michiel Meeuwissen
@@ -45,7 +44,7 @@ public class UserAssignedCountrySubdivision implements CountrySubdivision {
                 value.put((String) k , new UserAssignedCountrySubdivision(cc, (String) k, (String) v));
             });
             return Collections.unmodifiableMap(value);
-            });
+        });
     }
     public static Optional<UserAssignedCountrySubdivision> of(@NonNull CountryCode countryCode, String code) {
         return Optional.ofNullable(ofCountry(countryCode).get(code));
