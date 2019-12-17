@@ -250,7 +250,6 @@
             <artifactId>maven-javadoc-plugin</artifactId>
             <version>3.1.1</version>
             <configuration>
-              &lt;!&ndash; https://bugs.openjdk.java.net/browse/JDK-8212233 &ndash;&gt;
               <source>8</source>
               <additionalOptions>
                 <additionalOption>-Xdoclint:none</additionalOption>
@@ -269,7 +268,6 @@
               </execution>
             </executions>
           </plugin>
-
         </plugins>
       </build>
     </profile>
