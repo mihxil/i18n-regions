@@ -448,11 +448,6 @@
 
 
   <distributionManagement>
-    <site>
-      <id>github-pages</id>
-      <name>github pages</name>
-      <url>https://mihxil.github.io/i18n-regions/</url>
-    </site>
     <snapshotRepository>
       <id>ossrh</id>
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
@@ -463,52 +458,6 @@
     </repository>
   </distributionManagement>
 
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>3.0.0</version>
-        <reportSets>
-          <reportSet>
-            <reports><!-- select reports -->
-              <report>index</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-deploy-plugin</artifactId>
-        <version>3.0.0-M1</version></plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.1.1</version>
-         <configuration>
-           <source>11</source>
-           <additionalOptions>
-             <!--<additionalparam>-Xdoclint:all -Xdoclint:-missing</additionalparam>-->
-             <additionalOption>-Xdoclint:none</additionalOption>
-             <additionalOption>-source 11</additionalOption>
-           </additionalOptions>
-         </configuration>
-        <reportSets>
-          <reportSet><!-- by default, id = "default" -->
-            <reports><!-- select non-aggregate reports -->
-              <report>javadoc</report>
-            </reports>
-          </reportSet>
-
-        </reportSets>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-report-plugin</artifactId>
-        <version>3.0.0-M3</version>
-      </plugin>
-    </plugins>
-  </reporting>
 
   <repositories>
     <repository>
