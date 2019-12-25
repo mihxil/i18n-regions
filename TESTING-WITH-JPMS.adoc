@@ -36,9 +36,9 @@ All this is a bit annoying, because in every setup I could think of it would giv
 
 Blackbox testing is less flexible, and I generally considered testing a valid argument for 'white boxing', i.e. e.g. accessing package access methods.
 
-Another annoyance is that these modules may get deploy to repository which is pointless.
+Another annoyance is that these modules may get deployed to a repository, which is pointless.
 
-I arranged via profiles that this is avoided
+I arranged via profiles that this is avoided.
 
 == Java service loaders
 Since a long time you can load java services via META-INF/<name of services>.properties
@@ -56,7 +56,7 @@ module org.meeuw.i18n.countries {
 ;
 }
 ----
-This however does not seem to work in a test-only module. I haven't figured out yet why that is, and even if I'm not somehow mistaken here.
+This however does not seem to work in a test-only module. I haven't figured out yet why that is, and I'm even unsure if I'm not somehow mistaken here.
 
 
 == Other java > 8 considerations
@@ -65,3 +65,5 @@ It is a bit early to ditch support java 8 entirely. Not everyone is running java
 
 - Only `module-info.java`, plus possibly test code,  is to be compiled with target java 11.
 - The rest of the code is compiled with target java 8.
+
+This is done by some configuration on the maven compiler plugin. The code is actually compiled with java 11, but should be compatible with java 8.
