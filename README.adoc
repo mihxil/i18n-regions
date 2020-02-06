@@ -3,7 +3,7 @@
 
 image:https://travis-ci.org/mihxil/i18n-regions.svg?[Build Status,link=https://travis-ci.org/mihxil/i18n-regions]
 image:https://img.shields.io/maven-central/v/org.meeuw.i18n/i18n-regions.svg?label=Maven%20Central[Maven Central,link=https://search.maven.org/search?q=g:%22org.meeuw.i18n%22]
-image:https://img.shields.io/nexus/s/https/oss.sonatype.org/org.meeuw.i18n/i18n-regions.svg[snapshots,link=https://oss.sonatype.org/content/repositories/staging/org/meeuw/i18n/]
+image:https://img.shields.io/nexus/s/https/oss.sonatype.org/org.meeuw.i18n/i18n-regions.svg[snapshots,link=https://oss.sonatype.org/content/repositories/snapshots/org/meeuw/i18n/]
 image:http://www.javadoc.io/badge/org.meeuw.i18n/i18n-regions.svg?color=blue[javadoc,link=http://www.javadoc.io/doc/org.meeuw.i18n/i18n-regions]
 image:https://codecov.io/gh/mihxil/i18n-regions/branch/master/graph/badge.svg[codecov,link=https://codecov.io/gh/mihxil/i18n-regions]
 
