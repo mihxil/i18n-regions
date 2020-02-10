@@ -70,7 +70,7 @@ e.g.
 protected List<org.meeuw.i18n.regions.Region> countries;
 ----
 
-The converter is marked as `autoApply`, so in principle it is not needed to add this `@Convert` annotation explicitely.
+The converter is marked as `autoApply`, so in principle it is not needed to add this `@Convert` annotation explicitely, if this converter is available in your persistence.xml (or its equivalent)
 
 
 == XML Binding
