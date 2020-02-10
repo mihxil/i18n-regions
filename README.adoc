@@ -70,6 +70,9 @@ e.g.
 protected List<org.meeuw.i18n.regions.Region> countries;
 ----
 
+The converter is marked as `autoApply`, so in principle it is not needed to add this `@Convert` annotation explicitely.
+
+
 == XML Binding
 
 The Region interface is JAXB-annotated to be marshallable to XML, which obviously should happen by the (ISO) code string.
