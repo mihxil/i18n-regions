@@ -1,14 +1,15 @@
 package org.meeuw.i18n.subdivisions;
 
-import com.neovisionaries.i18n.CountryCode;
-import org.checkerframework.checker.nullness.qual.NonNull;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ForkJoinPool;
 import java.util.logging.Logger;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import com.neovisionaries.i18n.CountryCode;
 
 /**
  * @author Michiel Meeuwissen
@@ -35,7 +36,7 @@ public class UserAssignedCountrySubdivision implements CountrySubdivision {
                     //logger.info("Loading " + resource);
                     properties.load(inputStream);
                     ForkJoinPool.commonPool().execute(() -> {
-                        logger.info(() -> "Loaded " + resource);
+                        logger.fine(() -> "Loaded " + resource);
                     });
                 } catch (IOException e) {
                     throw new RuntimeException(e);
