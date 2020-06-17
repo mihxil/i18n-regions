@@ -9,7 +9,9 @@ mvn -Pdeploy release:prepare release:perform -DreleaseVersion=1.0.0 -Ddevelopmen
 In case sonatype a bit down, or we need to have snapshots in vpro nexus
 
 ----
-mvn -P'!test' -DaltDeploymentRepository=nexusvpro::http://nexus.vpro.nl/content/repositories/snapshots  deploy
+mvn -P'!test' -DaltDeploymentRepository=nexusvpro::default::http://nexus.vpro.nl/content/repositories/snapshots  deploy
+
+mvn -f i18n-regions-bom -P'!test' -DaltDeploymentRepository=nexusvpro::default::
 
 mvn -P'!test' -DaltDeploymentRepository=nexusvpro::default::http://nexus.vpro.nl/content/repositories/releases  deploy
 ----

@@ -7,7 +7,10 @@ env:
   - SONATYPE_USERNAME=mihxil
   - secure: GrzzL3nyAuVlxd/yKa0/BmS0I6uLtCTdMK1lOHu4yvF5jPG/mzLHC6rN9TkOdOvXireFNWg6iRQSntjhscJEro9PJmeKyDd9LYpPR/LEZfahF6nlsCqRP37ZGGCn4LtaVMI6Oik8dFxhXb6XRvXQnO5Suv4ix6CNIcFZgh2mNSd5QX77CXpzKMbDIzJYIp+8IwcNmX0gRl1y4nSk0YjqBbvu7USijb0Y8E17gx5XTnWYK0KJp3Yk2tNzgUv3wPwQvXRfiWY5Nw2TndQSqga9rN7UQ3JB+xRclsIAZkRdQoGtTUImzf4ND50c98xEunwyr/qnsmv9qzqAZcZ1cHInnClccwYrln/i/qHJQwoI+BHQ0lsIzTUgA4x9wiT3iukOhwJ50aZJua1xOAEG5BMkhlxoN8YJOasvi+DTRAtGNMZ+DzF/FgUMjY7GBUQ26TV1e6tm4Kn68W03zdJ1hQ2OwQ9I0wh1hgCFgbuEyx8ekOo/7xOWwmlwTQiBDtu0ZyhD4ZB+yN0UHDqviEDP0fWQPtvY9GcKZc2cse+Hq6CrjsTH1qd08FTL8tD/cPkdWAWSvyY4xjVsAqcAPqll4VLlLjKIOTyr+2Cdo8PqBN+ESTIA4Uf4lII4p+pJ0IjpBKEiT+BVI2G1/Wr1aaAUqYftP8R7UDA0jVhvKZ6VrhlOHYE=
   - secure: A5skQGEkEcXv3ZAyGaEQ+BtcPKiFC0t0g7gE96PW+vjJypi2qIdhgZzyL1yslyBpeaJCav09Zy/vDJoa6DVg2WnSInEWULdlGh1XcKO6lky4K6upVa1/iZ7Cl9NSkq0FX4fKuNhkvzBVMcSeOQXkZCsZUltM//u15AINPFWRSMhqCn1JRZwtIk+zV3j54zF6V5heNA+GQZ6FdQ8Of8J8NGKGF/WyKOpCpnfAAGLYd+br5UoRuUS8Hhsf8zpa2cNuzXM2OyGYlpCGq+CjF+yZUoRt7NmJNBWH9L0H2Q5gzrEl18smgV/jhbADCNYWrLrGDuOd3f2uVXw/I+kc6vfORlQW/tlgvSSZ6wXLy4UCeF8XwFKSAg32yHeOQPV3t4dPk/RLohx+Iz7oDek1TSCC3isJ0KBbaDjcNjItMdepfqmpjeN5dV3PO3/YNRYO6X5uONtUYcHDZc3CBo8TJgrdfPyeOXNYpkHZoSQsNor1ENeKBv5rFvXSUti2F0MhSin28rWxG+dzuLzptK8aLYl8NKFgSaWPgvjxlWru4bTTZW/uWQtydE6dbVb5wIVhHEl9eg73scE9GnAxZsZUkxfrLrLwC2V3idWLQYNtCx/TY+FY9Y3VWoHtcUDDH4AYhEFBLxecZgiI62KhkAb3TNozHsPBfHj/s5kMcQefQUkDywM=
-script: mvn clean test install
+script:
+  - mvn clean test install
+  - mvn -f i18n-regions-bom clean install
 after_success:
-- bash <(curl -s https://codecov.io/bash)
-- mvn -Pdeploy deploy --settings .travis-settings.xml -DskipTests=true -Dgpg.skip=true  -B
+  - bash <(curl -s https://codecov.io/bash)
+  - mvn -Pdeploy deploy --settings .travis-settings.xml -DskipTests=true -Dgpg.skip=true  -B
+  - mvn -f i18n-regions-bom  -Pdeploy deploy --settings .travis-settings.xml -DskipTests=true -Dgpg.skip=true  -B
