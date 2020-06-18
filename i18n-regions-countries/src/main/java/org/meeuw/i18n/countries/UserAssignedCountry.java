@@ -5,7 +5,7 @@ import org.meeuw.i18n.regions.UserAssignedRegion;
 
 /**
  * http://en.wikipedia.org/wiki/ISO_3166-2
- * https://docs.google.com/spreadsheet/ccc?key=0Ajm-SImXl8LzdGVkU3ZJRV9JS3ZIVDZNNTd6eTVLSGc&usp=sharing#gid=0
+ * <a href="https://docs.google.com/spreadsheet/ccc?key=0Ajm-SImXl8LzdGVkU3ZJRV9JS3ZIVDZNNTd6eTVLSGc&amp;usp=sharing#gid=0">this doc</a>
  * @author Michiel Meeuwissen
  * @since 0.1
  */

@@ -1,16 +1,15 @@
 package org.meeuw.i18n.countries.validation;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+import org.meeuw.i18n.countries.Country;
+import org.meeuw.i18n.countries.validation.impl.CountryConstraintValidator;
+import org.meeuw.i18n.regions.Region;
+import org.meeuw.i18n.regions.validation.ValidRegion;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
-
-import org.meeuw.i18n.regions.Region;
-import org.meeuw.i18n.countries.Country;
-import org.meeuw.i18n.countries.validation.impl.CountryConstraintValidator;
-import org.meeuw.i18n.regions.validation.ValidRegion;
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
@@ -20,11 +19,9 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * A javax.validation annotation that can be used to restrict the values of a {@link Country} value.
  *
  * For example
- * <pre>{@code
- *
+ * <pre>
  *    @ValidCountry(value = OFFICIAL | FORMER, includes = "ZZ")
- *
- * }</pre>
+ * </pre>
  *
  * So basicly you specify one or more predicates, and/or a number of explicitely included and excluded codes.
  *
