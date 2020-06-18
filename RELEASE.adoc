@@ -8,9 +8,9 @@ Change pom.xml to refer to this new bom.
 Then make the actual release
 [source,bash]
 ----
-mvn release:branch -DbranchName=1.0-SNAPSHOT -DdevelopmentVersion=1.1-SNAPSHOT
-git checkout 1.0-SNAPSHOT
-mvn -Pdeploy release:prepare release:perform -DreleaseVersion=1.0.0 -DdevelopmentVersion=1.0.1-SNAPSHOT
+mvn release:branch -DbranchName=1.1-SNAPSHOT -DdevelopmentVersion=1.2-SNAPSHOT
+git checkout 1.1-SNAPSHOT
+mvn -Pdeploy release:prepare release:perform -DreleaseVersion=1.1.0 -DdevelopmentVersion=1.1.1-SNAPSHOT
 ----
 
 In case sonatype a bit down, or we need to have snapshots in vpro nexus
