@@ -18,6 +18,7 @@
     <module>i18n-regions</module>
     <module>i18n-regions-countries</module>
     <module>i18n-regions-subdivisions</module>
+    <module>i18n-regions-continents</module>
   </modules>
 
   <build>
