@@ -24,7 +24,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *
  *    @ValidCountry(value = OFFICIAL | FORMER, includes = "ZZ")
  *
- * }</pre>
+ * }
+ * </pre>
  *
  * So basicly you specify one or more predicates, and/or a number of explicitely included and excluded codes.
  *
