@@ -12,5 +12,5 @@ script:
   - mvn -f i18n-regions-bom clean install
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-  - mvn -Pdeploy deploy --settings .travis-settings.xml -DskipTests=true -Dgpg.skip=true  -B
+  - mvn -Pdeploy,blackboxtesting deploy --settings .travis-settings.xml -DskipTests=true -Dgpg.skip=true  -B
   - mvn -f i18n-regions-bom  -Pdeploy deploy --settings .travis-settings.xml -DskipTests=true -Dgpg.skip=true  -B
