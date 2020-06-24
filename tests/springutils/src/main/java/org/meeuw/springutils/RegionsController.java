@@ -52,7 +52,6 @@ public class RegionsController {
                     li(writer, i, () -> {});
                 }
             });
-            writer.println("</ul>");
         });
     }
 
