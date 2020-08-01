@@ -19,7 +19,7 @@ Using `CountryCode` as a value in your application has several drawbacks:
 . It for example does not contain 'former countries', so e.g. the birth country of a person, or the country of a movie cannot be stored as a 'CountryCode'.
 . It's only applicable to countries, no other regions.
 
-I decided to wrap `CountryCode` in a class `CurrentCountry`, which implements a `Region` interface, which makes it possible to make other implementation of `Region` too, and to address all the above issues if you choose to use `Region` in stead of `CountryCode` as the type of your variable.
+I decided to wrap `CountryCode` in a class `CurrentCountry`, which implements a `Region` interface, which makes it possible to make other implementation of `Region` too, and to address all the above issues if you choose to use `Region` instead of `CountryCode` as the type of your variable.
 
 == Architecture
 
@@ -37,7 +37,7 @@ If you only need countries, you can take a dependency on https://search.maven.or
 
 It provides:
 
-- For current countries there are link:i18n-regions-countries/src/main/java/org/meeuw/i18n/countries/CurrentCountry.java[`org.meeuw.i18n.countries.CurrentCountry`'s]. Backend by `com.neovisionaries.i18n.CountryCode`
+- For current countries there are link:i18n-regions-countries/src/main/java/org/meeuw/i18n/countries/CurrentCountry.java[`org.meeuw.i18n.countries.CurrentCountry`]s. Backed by `com.neovisionaries.i18n.CountryCode`
 - For former countries there is link:i18n-regions-countries/src/main/java/org/meeuw/i18n/countries/FormerCountry.java[`org.meeuw.i18n.countries.FormerCountry`], which is backed by `org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode` (from https://github.com/mihxil/i18n-formerly-assigned[i18n-formerly-assigned])
 - Some common user assigned countries are hard coded in link:i18n-regions-countries/src/main/java/org/meeuw/i18n/countries/UserAssignedCountry.java[`org.meeuw.i18.countries.UserAssignedCountry`]
 
@@ -90,7 +90,7 @@ The region interface also provides `Region#getName(Locale)` to retrieve the name
 
 == Validation
 
-Given a certain field with type `Region` (or one of its sub types) you may still find that makes too much values available. Therefore we also provide some `javax.validation.ConstraintValidator` and associated annotations to limit possible values.
+Given a certain field with type `Region` (or one of its sub types) you may still find that makes too many values available. Therefore, we also provide some `javax.validation.ConstraintValidator` and associated annotations to limit possible values.
 
 e.g.
 
