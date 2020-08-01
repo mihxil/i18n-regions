@@ -25,7 +25,6 @@ public class CountrySubdivisionConstraintValidator implements ConstraintValidato
     @Override
     public void initialize(ValidCountrySubdivision constraintAnnotation) {
         this.validationInfo = ValidationInfo.from(constraintAnnotation);
-
     }
 
     @Override

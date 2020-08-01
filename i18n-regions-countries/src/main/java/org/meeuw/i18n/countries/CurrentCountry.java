@@ -45,7 +45,6 @@ public class CurrentCountry implements Country {
     @Override
     public Locale toLocale() {
         return code.toLocale();
-
     }
 
 
@@ -90,7 +89,6 @@ public class CurrentCountry implements Country {
 
     public CountryCode.Assignment getAssignment() {
         return code.getAssignment();
-
     }
 
     @Override

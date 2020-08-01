@@ -44,7 +44,6 @@ public abstract class UserAssignedRegion implements Region {
     @Override
     public String getName() {
         return name;
-
     }
 
     @Override

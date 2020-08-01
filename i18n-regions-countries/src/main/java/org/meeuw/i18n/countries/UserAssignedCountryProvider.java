@@ -27,7 +27,7 @@ public class UserAssignedCountryProvider implements RegionProvider<UserAssignedR
             if (Modifier.isStatic(f.getModifiers()) && org.meeuw.i18n.countries.UserAssignedCountry.class.isAssignableFrom(f.getType())) {
                 try {
                     v.put(f.getName(), (org.meeuw.i18n.countries.UserAssignedCountry) f.get(null));
-                } catch (IllegalAccessException e) {
+                } catch (IllegalAccessException ignored) {
 
                 }
             }

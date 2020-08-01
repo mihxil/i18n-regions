@@ -30,25 +30,21 @@ public class Continent implements Region {
     @Override
     public String getCode() {
         return PREFIX + code.name();
-
     }
 
     @Override
     public Locale toLocale() {
         return null;
-
     }
 
     @Override
     public Type getType() {
         return Type.CONTINENT;
-
     }
 
     @Override
     public String getName() {
         return code.getName();
-
     }
 
     @Override

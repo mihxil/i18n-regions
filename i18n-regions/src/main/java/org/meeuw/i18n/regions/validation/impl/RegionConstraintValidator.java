@@ -25,7 +25,6 @@ public class RegionConstraintValidator implements ConstraintValidator<ValidRegio
     @Override
     public void initialize(ValidRegion constraintAnnotation) {
         this.validationInfo = ValidationInfo.from(constraintAnnotation);
-
     }
 
     @Override
@@ -83,7 +82,6 @@ public class RegionConstraintValidator implements ConstraintValidator<ValidRegio
         } else {
             return ConvertResult.INVALID;
         }
-
     }
 
 

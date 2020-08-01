@@ -41,7 +41,6 @@ public class UserAssignedCountrySubdivisionProvider implements RegionProvider<Us
     @Override
     public Class<UserAssignedCountrySubdivision> getProvidedClass() {
         return UserAssignedCountrySubdivision.class;
-
     }
 
 
@@ -68,19 +67,16 @@ public class UserAssignedCountrySubdivisionProvider implements RegionProvider<Us
             @Override
             public Spliterator<UserAssignedCountrySubdivision> trySplit() {
                 return null;
-
             }
 
             @Override
             public long estimateSize() {
                 return Long.MAX_VALUE;
-
             }
 
             @Override
             public int characteristics() {
                 return IMMUTABLE;
-
             }
         };
         return StreamSupport.stream(spliterator, false);

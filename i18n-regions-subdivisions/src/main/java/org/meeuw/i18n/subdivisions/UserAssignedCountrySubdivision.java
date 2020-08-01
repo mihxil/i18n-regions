@@ -75,20 +75,17 @@ public class UserAssignedCountrySubdivision implements CountrySubdivision {
     @Override
     public Locale toLocale() {
         return countryCode.toLocale();
-
     }
 
     @Override
     public String getName() {
         return name;
-
     }
 
 
     @Override
     public String getCountryCode() {
         return countryCode.name();
-
     }
 
     @Override

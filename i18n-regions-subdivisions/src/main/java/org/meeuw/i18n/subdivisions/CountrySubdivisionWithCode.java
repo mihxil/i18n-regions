@@ -16,8 +16,6 @@ public class CountrySubdivisionWithCode implements CountrySubdivision {
 
     private final CountryCodeSubdivision code;
 
-
-
     public CountrySubdivisionWithCode(@NonNull CountryCodeSubdivision code) {
         this.code = code;
     }
@@ -30,7 +28,6 @@ public class CountrySubdivisionWithCode implements CountrySubdivision {
     @Override
     public Locale toLocale() {
         return code.getCountryCode().toLocale();
-
     }
 
     @Override
@@ -43,7 +40,6 @@ public class CountrySubdivisionWithCode implements CountrySubdivision {
     @Override
     public String getName() {
         return code.getName();
-
     }
 
     public CountryCodeSubdivision getCountryCodeSubdivision() {

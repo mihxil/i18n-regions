@@ -92,7 +92,6 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
                 if (byCode.get().getType() != Region.Type.COUNTRY) {
                     return false;
                 }
-
             }
 
         }

@@ -56,15 +56,12 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
         } catch (IllegalArgumentException iae) {
             return Optional.empty();
         }
-
     }
 
     @Override
     public Class<OpenLocation> getProvidedClass() {
         return OpenLocation.class;
     }
-
-
 
 
     /**
@@ -136,6 +133,7 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
         fillTemplate(template, positionRelative);;
         return template;
     }
+
     static void fillTemplate(int[] template, long position) {
         int i = template.length - 1;
         while (i >= 0) {
@@ -146,8 +144,8 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
             position /= max;
             i--;
         }
-
     }
+
     static int[] advance(int[] template, int step, Consumer<int[]> initter) {
         int i = template.length - 1;
         while(i >= 0) {
@@ -166,9 +164,11 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
         initter.accept(template);
         return template;
     }
+
     static void advance(int[] template, int step) {
         advance(template, step, (t) -> {throw new IllegalStateException();});
     }
+
     private static int getMax(int positionInTemplate) {
         if (positionInTemplate == 0) {
             // First latitude character can only have first 9 values.
@@ -179,7 +179,6 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
         } else {
             return CODE_ALPHABET_LENGTH;
         }
-
     }
 
     static long position(int[] template) {
@@ -191,12 +190,9 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
             result += template[i] * factor;
             factor *= nextExtraFactor;
             i--;
-
-
         }
         return result;
     }
-
 
     private static class OpenLocationCodeSpliterator implements Spliterator<int[]> {
 

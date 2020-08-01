@@ -17,8 +17,6 @@ import org.meeuw.i18n.regions.spi.RegionProvider;
 @Priority(100)
 public class VehicleRegistrationCodeFallbackProvider implements RegionProvider<CurrentCountry> {
 
-
-
 	@Override
 	public Optional<CurrentCountry> getByCode(@NonNull String code, boolean lenient) {
 		if (! lenient) {

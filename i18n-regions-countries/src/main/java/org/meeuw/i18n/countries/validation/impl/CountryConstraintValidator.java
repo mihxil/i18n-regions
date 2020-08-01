@@ -26,7 +26,6 @@ public class CountryConstraintValidator implements ConstraintValidator<ValidCoun
     @Override
     public void initialize(ValidCountry constraintAnnotation) {
         this.validationInfo = ValidationInfo.from(constraintAnnotation);
-
     }
 
     @Override
@@ -82,10 +81,7 @@ public class CountryConstraintValidator implements ConstraintValidator<ValidCoun
             }
         }
 
-
-
         return false;
-
     }
 
 

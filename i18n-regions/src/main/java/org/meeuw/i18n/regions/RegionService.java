@@ -23,7 +23,6 @@ public class RegionService {
 
     private static final Logger logger = Logger.getLogger(RegionService.class.getName());
 
-
     private static final RegionService INSTANCE = new RegionService();
 
     private boolean inited = false;
@@ -125,19 +124,16 @@ public class RegionService {
             @Override
             public Spliterator<T> trySplit() {
                 return null;
-
             }
 
             @Override
             public long estimateSize() {
                 return Long.MAX_VALUE;
-
             }
 
             @Override
             public int characteristics() {
                 return IMMUTABLE;
-
             }
         };
         return StreamSupport.stream(spliterator, false).filter(clazz::isInstance);

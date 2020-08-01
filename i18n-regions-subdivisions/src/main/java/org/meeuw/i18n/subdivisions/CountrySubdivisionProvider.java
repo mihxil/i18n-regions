@@ -48,7 +48,6 @@ public class CountrySubdivisionProvider implements RegionProvider<CountrySubdivi
     @Override
     public Class<CountrySubdivisionWithCode> getProvidedClass() {
         return CountrySubdivisionWithCode.class;
-
     }
 
     @Override
@@ -73,19 +72,16 @@ public class CountrySubdivisionProvider implements RegionProvider<CountrySubdivi
             @Override
             public Spliterator<CountryCodeSubdivision> trySplit() {
                 return null;
-
             }
 
             @Override
             public long estimateSize() {
                 return Long.MAX_VALUE;
-
             }
 
             @Override
             public int characteristics() {
                 return IMMUTABLE | NONNULL;
-
             }
         };
         return StreamSupport.stream(spliterator, false).map(CountrySubdivisionWithCode::new);

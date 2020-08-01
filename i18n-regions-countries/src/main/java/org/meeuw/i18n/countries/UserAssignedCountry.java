@@ -44,19 +44,16 @@ public class UserAssignedCountry extends UserAssignedRegion implements Country {
 
     public String getAlpha3() {
         return alpha3;
-
     }
 
     @Override
     public int getNumeric() {
         return number;
-
     }
 
     @Override
     public String getCountryCode() {
         return code;
-
     }
 
     @Override

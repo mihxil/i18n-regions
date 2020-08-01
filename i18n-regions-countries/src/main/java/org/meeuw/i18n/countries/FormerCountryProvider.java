@@ -33,7 +33,6 @@ public class FormerCountryProvider implements RegionProvider<FormerCountry> {
     @Override
     public Class<FormerCountry> getProvidedClass() {
         return FormerCountry.class;
-
     }
 
     @Override
