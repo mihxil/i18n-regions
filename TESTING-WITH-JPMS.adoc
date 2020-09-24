@@ -17,17 +17,16 @@ I considered it but:
 
 
 == Intellij
-Does not supported `module-info.java` shadowing. It doesn't recognize `module-info.test` at all.
+Does not support `module-info.java` shadowing. It doesn't recognize `module-info.test` at all.
 
 
 == Maven
-This is all about surefire/failsafe plugins. I think they do support module-info shadowing, but it it hard without proper support of IDE. Shadowing should enabled whitebox testing (by e.g. giving access to junit framework, to parts of the code that actually should be hidden)
+This is all about surefire/failsafe plugins. I think they do support module-info shadowing, but it is hard without proper support of IDE. Shadowing should enabled whitebox testing (by e.g. giving access to junit framework, to parts of the code that actually should be hidden)
 
 == Blackbox vs whitebox testing
 Blackbox testing should in principle be more straightforward. You could simply make a new maven module, and place your tests in a entire new jigsaw module.
 
-
-All this is a bit annoying, because in every setup I could think of it would give rather a lot of boiler place.
+All this is a bit annoying, because in every setup I could think of it would give rather a lot of boiler plate.
 
 - Place blackbox tests in a directory next to `main` and test `test`
 - Place blackbox tests in a module below the current one
