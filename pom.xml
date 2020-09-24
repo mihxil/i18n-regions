@@ -42,9 +42,9 @@
   </developers>
 
   <properties>
-    <junit.version>5.7.0-M1</junit.version>
+    <junit.version>5.7.0</junit.version>
     <java.target.version>8</java.target.version>
-    <checker.version>3.5.0</checker.version>
+    <checker.version>3.6.1</checker.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -341,7 +341,7 @@
       <dependency>
         <groupId>org.assertj</groupId>
         <artifactId>assertj-core</artifactId>
-        <version>3.16.1</version>
+        <version>3.17.2</version>
         <scope>test</scope>
       </dependency>
       <dependency>
