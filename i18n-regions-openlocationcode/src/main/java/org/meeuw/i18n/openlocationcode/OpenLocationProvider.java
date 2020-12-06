@@ -27,7 +27,6 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
 
     private static final Logger logger = Logger.getLogger(OpenLocationProvider.class.getName());
 
-
     public static final int CODE_ALPHABET_LENGTH = CODE_ALPHABET.length();
     public static final int CODE_ALPHABET_LENGTH_2 = CODE_ALPHABET_LENGTH * CODE_ALPHABET_LENGTH;
 
@@ -98,7 +97,6 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
     @Override
     public String toString() {
         return getClass().getSimpleName() + " (" + limitForLength(maxLength) + " codes in stream)";
-
     }
 
     static OpenLocationCode toCode(int[] template) {
@@ -221,9 +219,7 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
             }
             action.accept(template);
 
-            template = advance(template, step, (t) -> {
-                advance(t, offset);
-            });
+            template = advance(template, step, (t) -> advance(t, offset));
             if (template.length / 2 > maxLength) {
                 return false;
             }
@@ -245,9 +241,7 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
             split.template = new int[template.length];
             System.arraycopy(template, 0, split.template, 0, template.length);
             split.offset = offset + step;
-            split.template = advance(split.template, step, t -> {
-                advance(split.template, split.offset);
-            });
+            split.template = advance(split.template, step, t -> advance(split.template, split.offset));
 
             step *= 2;
             split.step = step;

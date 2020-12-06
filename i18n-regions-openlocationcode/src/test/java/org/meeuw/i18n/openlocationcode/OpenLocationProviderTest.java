@@ -10,39 +10,42 @@ import org.assertj.core.api.Assumptions;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.*;
 
+import com.google.openlocationcode.OpenLocationCode;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Michiel Meeuwissen
  * @since 0.4
  */
-@TestMethodOrder(MethodOrderer.Alphanumeric.class)
+@TestMethodOrder(MethodOrderer.MethodName.class)
 public class OpenLocationProviderTest implements BeforeTestExecutionCallback, AfterTestExecutionCallback {
 
 
-    private static Set<String> sequentialSet =  new HashSet<>();
-    private static Set<String> parallelSet =  Collections.newSetFromMap(new ConcurrentHashMap<String, Boolean>());
+    private static final Set<String> sequentialSet =  new HashSet<>();
+    private static final Set<String> parallelSet =  Collections.newSetFromMap(new ConcurrentHashMap<>());
 
-    private static AtomicInteger sequentialCount = new AtomicInteger(0);
+    private static final AtomicInteger sequentialCount = new AtomicInteger(0);
 
-    private static int takeWhileLength = 3;
-    private static int hashDiv = 100001;
+    private static final int takeWhileLength = 3;
+    private static final int hashDiv = 100001;
 
     private Instant start = Instant.now();
 
     @Override
-    public void afterTestExecution(ExtensionContext extensionContext) throws Exception {
+    public void afterTestExecution(ExtensionContext extensionContext) {
         System.out.println(extensionContext.getDisplayName() + " " + Duration.between(start, Instant.now()));
     }
 
     @Override
-    public void beforeTestExecution(ExtensionContext extensionContext) throws Exception {
+    public void beforeTestExecution(ExtensionContext extensionContext) {
         start = Instant.now();
     }
 
     @BeforeEach
     public void setup() {
         OpenLocationProvider.setMaxLength(Math.max(takeWhileLength, 4));
+        assertThat(OpenLocationProvider.getMaxLength()).isEqualTo(Math.max(takeWhileLength, 4));
     }
 
     @Test
@@ -149,6 +152,21 @@ public class OpenLocationProviderTest implements BeforeTestExecutionCallback, Af
         assertThat(OpenLocationProvider.position(template)).isEqualTo(48643 + 1);
         OpenLocationProvider.advance(template, 999);
         assertThat(OpenLocationProvider.position(template)).isEqualTo(48643 + 1 + 999);
-
     }
+
+    @Test
+    public void byCodeAndDetails() {
+        OpenLocationProvider provider = new OpenLocationProvider();
+
+        Optional<OpenLocation> byCode = provider.getByCode("CM3V0000+", false);
+        assertThat(byCode).contains(new OpenLocation(new OpenLocationCode("CM3V0000+")));
+        assertThat(byCode.get().getClass()).isEqualTo(provider.getProvidedClass());
+
+        Optional<OpenLocation> unfound = provider.getByCode("CM3Vxxx+", false);
+        assertThat(unfound).isNotPresent();
+
+        assertThat(provider.toString()).isEqualTo("OpenLocationProvider (10393984962 codes in stream)");
+    }
+
+
 }
