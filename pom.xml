@@ -44,7 +44,7 @@
   <properties>
     <junit.version>5.7.0</junit.version>
     <java.target.version>8</java.target.version>
-    <checker.version>3.6.1</checker.version>
+    <checker.version>3.8.0</checker.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -341,19 +341,19 @@
       <dependency>
         <groupId>org.assertj</groupId>
         <artifactId>assertj-core</artifactId>
-        <version>3.17.2</version>
+        <version>3.18.1</version>
         <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.glassfish.jaxb</groupId>
         <artifactId>jaxb-runtime</artifactId>
-        <version>3.0.0-M4</version>
+        <version>3.0.0</version>
         <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.hibernate.validator</groupId>
         <artifactId>hibernate-validator</artifactId>
-        <version>6.1.5.Final</version>
+        <version>6.1.6.Final</version>
         <scope>test</scope>
       </dependency>
 
