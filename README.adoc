@@ -159,6 +159,10 @@ cd tests/springboot
 mvn spring-boot:run
 ----
 
+There are also tests in 'blackbox-testing'. Mainly testing validation code (because JPMS).
+
+TODO: it seems that these tests currently are not accounted in the coverage reports.
+
 == Logging
 
 Some logging happens via the `java.util.logging` framework to avoid any extra dependencies.
