@@ -17,7 +17,7 @@
     </dependency>
     <dependency>
       <groupId>org.meeuw.i18n</groupId>
-      <artifactId>i18n-regions-blackbox-testing</artifactId>
+      <artifactId>i18n-regions-blackbox-testing-regions</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
