@@ -103,7 +103,7 @@ public class RegionService {
      * @param <T>
      */
     public  <T extends Region> Stream<T> values(Class<T> clazz) {
-        Spliterator<T> spliterator = new Spliterator<>() {
+        Spliterator<T> spliterator = new Spliterator<T>() {
             private final Iterator<? extends RegionProvider<? extends Region>> iterator = getProviders().iterator();
             private Spliterator<T> values;
 
