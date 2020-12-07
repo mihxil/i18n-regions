@@ -1,5 +1,6 @@
 package org.meeuw.i18n.test.subdivisions;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -25,23 +26,42 @@ public class CountrySubdivisionConstraintValidatorTest {
     private static final ValidatorFactory FACTORY = Validation.buildDefaultValidatorFactory();
     private static final Validator VALIDATOR = FACTORY.getValidator();
 
+    static class Netherlands {
+        @ValidCountrySubdivision(includeCountries = "NL")
+        public final Region region;
+
+        public Netherlands(Region r) {
+            this.region = r;
+        }
+    }
+     static class Netherlandss {
+        @ValidCountrySubdivision(includeCountries = "NL")
+        public final List<Region> region;
+
+        public Netherlandss(Region... r) {
+            this.region = Arrays.asList(r);
+        }
+    }
 
     @Test
-    public void includeCountries() throws NoSuchFieldException {
-        class Netherlands {
-            @ValidCountrySubdivision(includeCountries = "NL")
-            public final Region region;
-
-            public Netherlands(Region r) {
-                this.region = r;
-            }
-        }
-
+    public void includeValidCountries() {
         testAsStreamFilter(
             RegionValidatorService.getInstance().fromProperty(Netherlands.class, "region"),
             Netherlands::new, "NL-DR");
-
     }
+
+    @Test
+    public void includeValidCountriess() {
+        testAsStreamFilter(
+            RegionValidatorService.getInstance().fromProperty(Netherlandss.class, "region"),
+            Netherlandss::new, "NL-DR");
+    }
+
+    @Test
+    public void nullIsValid() {
+        assertThat(VALIDATOR.validate(new Netherlands(null))).hasSize(0);
+    }
+
     void testAsStreamFilter(
          Predicate<Object> predicate,
          Function<Region, Object> instantiator,
@@ -51,9 +71,11 @@ public class CountrySubdivisionConstraintValidatorTest {
             .filter(predicate)
             .sorted(Regions.sortByName(LanguageCode.nl))
             .collect(Collectors.toList());
+
         for(Region r : validValues) {
             assertThat(VALIDATOR.validate(instantiator.apply(r))).withFailMessage(r + " was supposed to be valid, but is invalid").hasSize(0);
         }
+
         for (String code : assertToContain) {
             assertThat(validValues.stream().filter(r -> r.getCode().equals(code)).findFirst()).withFailMessage("No " + code + "found in " + validValues).isPresent();
         }
