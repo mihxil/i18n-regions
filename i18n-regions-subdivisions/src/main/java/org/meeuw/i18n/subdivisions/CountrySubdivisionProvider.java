@@ -52,7 +52,7 @@ public class CountrySubdivisionProvider implements RegionProvider<CountrySubdivi
 
     @Override
     public Stream<CountrySubdivisionWithCode> values() {
-        Spliterator<CountryCodeSubdivision> spliterator = new Spliterator<>() {
+        Spliterator<CountryCodeSubdivision> spliterator = new Spliterator<CountryCodeSubdivision>() {
             private int countryCode = 0;
             private Spliterator<CountryCodeSubdivision> spliterator;
 

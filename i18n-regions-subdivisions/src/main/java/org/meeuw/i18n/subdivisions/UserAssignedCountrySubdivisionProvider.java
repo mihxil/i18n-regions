@@ -44,7 +44,7 @@ public class UserAssignedCountrySubdivisionProvider implements RegionProvider<Us
     @Override
     public Stream<UserAssignedCountrySubdivision> values() {
         Spliterator<UserAssignedCountrySubdivision> spliterator =
-            new Spliterator<>() {
+            new Spliterator<UserAssignedCountrySubdivision>() {
                 private int countryCode = 0;
                 private Spliterator<UserAssignedCountrySubdivision> spliterator;
 
