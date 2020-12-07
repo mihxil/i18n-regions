@@ -9,7 +9,5 @@
   </parent>
 
   <artifactId>i18n-regions-blackbox-testing-continents</artifactId>
-  <packaging>pom</packaging>
-
 
 </project>
