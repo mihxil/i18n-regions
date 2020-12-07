@@ -128,7 +128,7 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
         }
         long positionRelative = position - numberShorter;
         int[] template = new int[length];
-        fillTemplate(template, positionRelative);;
+        fillTemplate(template, positionRelative);
         return template;
     }
 
@@ -196,7 +196,7 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
 
         static final int CHARACTERISTICS =  DISTINCT | NONNULL | IMMUTABLE;
 
-        static int maxStep;
+        static final int maxStep;
         static {
             int availableProcessors = Runtime.getRuntime().availableProcessors();
              maxStep = Math.min(availableProcessors, 8);
@@ -279,5 +279,5 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
         public int characteristics() {
             return step == 1 ? CHARACTERISTICS | SIZED : CHARACTERISTICS;
         }
-    };
+    }
 }

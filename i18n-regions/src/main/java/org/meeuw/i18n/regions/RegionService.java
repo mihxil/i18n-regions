@@ -103,12 +103,13 @@ public class RegionService {
      * @param <T>
      */
     public  <T extends Region> Stream<T> values(Class<T> clazz) {
-        Spliterator<T> spliterator = new Spliterator<T>() {
+        Spliterator<T> spliterator = new Spliterator<>() {
             private final Iterator<? extends RegionProvider<? extends Region>> iterator = getProviders().iterator();
             private Spliterator<T> values;
+
             @Override
             public boolean tryAdvance(Consumer<? super T> action) {
-                while(values == null || ! values.tryAdvance(action)) {
+                while (values == null || !values.tryAdvance(action)) {
                     if (iterator.hasNext()) {
                         RegionProvider<? extends Region> rp = iterator.next();
                         if (rp.canProvide(clazz)) {

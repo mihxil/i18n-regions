@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RegionToStringConverterTest {
 
     // The existing values in POMS.
-    private static String[] examples = {
+    private static final String[] examples = {
          "AD",
  "AF",
  "AN",
@@ -100,7 +100,7 @@ public class RegionToStringConverterTest {
         return examples;
     }
 
-    private RegionToStringConverter impl = new RegionToStringConverter();
+    private final RegionToStringConverter impl = new RegionToStringConverter();
 
 
 

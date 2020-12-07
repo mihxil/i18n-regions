@@ -1,8 +1,6 @@
 package org.meeuw.i18n.countries;
 
-import java.util.Locale;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -103,6 +101,6 @@ public class CurrentCountry implements Country {
 
     @Override
     public int hashCode() {
-        return code != null ? code.hashCode() : 0;
+        return Objects.hashCode(code);
     }
 }

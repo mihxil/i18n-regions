@@ -13,7 +13,7 @@ class ValidationInfo extends org.meeuw.i18n.regions.validation.impl.ValidationIn
 
     final String[] excludeCountries;
 
-    protected ValidationInfo(String[] excludes, String[] includes, Class[] classes, Region.Type[] types, String[] includeCountries, String[] excludeCountries) {
+    protected ValidationInfo(String[] excludes, String[] includes, Class<?>[] classes, Region.Type[] types, String[] includeCountries, String[] excludeCountries) {
         super(excludes, includes, classes, types);
         this.includeCountries = includeCountries;
         this.excludeCountries = excludeCountries;

@@ -23,9 +23,6 @@ public class UserAssignedCountrySubdivisionProvider implements RegionProvider<Us
 
     @Override
     public Optional<UserAssignedCountrySubdivision> getByCode(@NonNull String code, boolean lenient) {
-        if (lenient) {
-
-        }
         String[] countryAndSubDiversion = code.split("-", 2);
         if (countryAndSubDiversion.length < 2) {
             return Optional.empty();
@@ -47,38 +44,38 @@ public class UserAssignedCountrySubdivisionProvider implements RegionProvider<Us
     @Override
     public Stream<UserAssignedCountrySubdivision> values() {
         Spliterator<UserAssignedCountrySubdivision> spliterator =
-            new Spliterator<UserAssignedCountrySubdivision/* we want to be java 8 compliant for now*/>() {
-            private int countryCode = 0;
-            private Spliterator<UserAssignedCountrySubdivision> spliterator;
+            new Spliterator<>() {
+                private int countryCode = 0;
+                private Spliterator<UserAssignedCountrySubdivision> spliterator;
 
-            @Override
-            public boolean tryAdvance(Consumer<? super UserAssignedCountrySubdivision> action) {
-                while (spliterator == null || !spliterator.tryAdvance(action)) {
-                    if (countryCode >= CountryCode.values().length) {
-                        return false;
+                @Override
+                public boolean tryAdvance(Consumer<? super UserAssignedCountrySubdivision> action) {
+                    while (spliterator == null || !spliterator.tryAdvance(action)) {
+                        if (countryCode >= CountryCode.values().length) {
+                            return false;
+                        }
+                        Collection<UserAssignedCountrySubdivision> subdivisions = ofCountry(CountryCode.values()[countryCode++]).values();
+
+                        spliterator = subdivisions.spliterator();
                     }
-                    Collection<UserAssignedCountrySubdivision> subdivisions = ofCountry(CountryCode.values()[countryCode++]).values();
-
-                    spliterator = subdivisions.spliterator();
+                    return true;
                 }
-                return true;
-            }
 
-            @Override
-            public Spliterator<UserAssignedCountrySubdivision> trySplit() {
-                return null;
-            }
+                @Override
+                public Spliterator<UserAssignedCountrySubdivision> trySplit() {
+                    return null;
+                }
 
-            @Override
-            public long estimateSize() {
-                return Long.MAX_VALUE;
-            }
+                @Override
+                public long estimateSize() {
+                    return Long.MAX_VALUE;
+                }
 
-            @Override
-            public int characteristics() {
-                return IMMUTABLE;
-            }
-        };
+                @Override
+                public int characteristics() {
+                    return IMMUTABLE;
+                }
+            };
         return StreamSupport.stream(spliterator, false);
     }
 

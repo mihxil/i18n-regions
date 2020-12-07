@@ -127,7 +127,7 @@ It can also be used on `java.util.Locale`, which contain a country component too
 
 (For completeness also link:i18n-regions/src/main/java/org/meeuw/i18n/validation/Language.java[`@Language`] is provided).
 
-As a utility there is `org.meeuw.i18n.regions.validation.RegionValidatorService` which can be used to for the settings in these annotations also to filter a stream of regions (e.g. `RegionService#values()`)
+As a utility there is `org.meeuw.i18n.regions.validation.RegionValidatorService` which can be used to for the settings in these annotations also to filter a stream of regions (e.g. `RegionService#values()`).
 
 [source,java ]
 ----
@@ -140,13 +140,13 @@ As a utility there is `org.meeuw.i18n.regions.validation.RegionValidatorService`
 
 == Optional dependencies
 
-Several dependencies are marked `optional` in the pom.xml. E.g. the annotations used to arrange XML bindings and validation are not present (any more) in java 11. If they are not present, this will not make it impossible to use the classes, you just cannot use JAXB, JPA, validation or whatever the missing dependency is related to. It's only about annotations so that doesn't cause (by the JSR-175 specification) problems.
+Several dependencies are marked `optional` in the pom.xml. E.g. the annotations used to arrange XML bindings and validation are not present (anymore) in java 11. If they are not present, this will not make it impossible to use the classes, you just cannot use JAXB, JPA, validation or whatever the missing dependency is related to. It's only about annotations so that doesn't cause (by the JSR-175 specification) problems.
 
 == Building and Jigsaw
 
 This projects needs to build with java 11. It produces byte code compatible for java 8 though (besides module-info.class) The goal is to be compatible with https://www.baeldung.com/project-jigsaw-java-modularity[jigsaw], which was introduced in java 9.
 
-If you use java 11 then you can require `org.meeuw.i18n.regions` in `module-info.java`
+If you use java 11 then you can require `org.meeuw.i18n.regions` in `module-info.java`.
 
 == Testing
 

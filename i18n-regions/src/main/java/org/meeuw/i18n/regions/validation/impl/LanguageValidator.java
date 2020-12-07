@@ -29,7 +29,7 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
         VALID_ISO_LANGUAGES.addAll(Arrays.asList(Locale.getISOLanguages()));
         for (LanguageAlpha3Code cod : LanguageAlpha3Code.values()) {
             VALID_ISO3_LANGUAGES.add(cod.toString());
-            if (cod.getAlpha2() != null && ! VALID_ISO_LANGUAGES.contains(cod.getAlpha2().name())){
+            if (cod.getAlpha2() != null) {
                 VALID_ISO_LANGUAGES.add(cod.getAlpha2().name());
             }
             VALID_ISO_LANGUAGES.addAll(Arrays.asList(LEGACY));

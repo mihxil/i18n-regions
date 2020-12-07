@@ -30,7 +30,7 @@ public class CountrySubdivisionConstraintValidatorTest {
     public void includeCountries() throws NoSuchFieldException {
         class Netherlands {
             @ValidCountrySubdivision(includeCountries = "NL")
-            public Region region;
+            public final Region region;
 
             public Netherlands(Region r) {
                 this.region = r;

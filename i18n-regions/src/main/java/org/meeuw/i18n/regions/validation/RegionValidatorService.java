@@ -21,7 +21,7 @@ public class RegionValidatorService {
 
     private final Validator VALIDATOR = FACTORY.getValidator();
 
-    private static RegionValidatorService INSTANCE = new RegionValidatorService();
+    private static final RegionValidatorService INSTANCE = new RegionValidatorService();
 
 
     public static RegionValidatorService getInstance() {

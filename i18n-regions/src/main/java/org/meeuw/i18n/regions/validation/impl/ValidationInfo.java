@@ -25,7 +25,7 @@ public class ValidationInfo {
             .toArray(Region[]::new);
         this.includes = Stream.of(includes)
             .map(r -> RegionService.getInstance().getByCode(r, false).orElseThrow(() -> new IllegalStateException("No such region " + r)))
-            .toArray(Region[]::new);;
+            .toArray(Region[]::new);
 
         this.classes = classes;
         this.types = types;

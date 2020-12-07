@@ -30,7 +30,7 @@ public class LanguageValidatorTest {
         Locale.setDefault(new Locale("nl"));
     }
 
-    private LanguageValidator languageValidator = new LanguageValidator();
+    private final LanguageValidator languageValidator = new LanguageValidator();
 
     @Test
     public void testIsValid() {
@@ -69,8 +69,8 @@ public class LanguageValidatorTest {
 
     }
 
-    private ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-    private Validator validator = factory.getValidator();
+    private final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+    private final Validator validator = factory.getValidator();
 
     @Test
     public void testZZ() {
@@ -166,7 +166,7 @@ public class LanguageValidatorTest {
 
         class A {
             @Language
-            String language;
+            final String language;
             A(String l) {
                 this.language = l;
             }

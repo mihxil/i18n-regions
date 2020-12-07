@@ -76,9 +76,7 @@ public class CountryConstraintValidator implements ConstraintValidator<ValidCoun
             }
         }
         if ((validationInfo.value & ValidCountry.USER_ASSIGNED) != 0) {
-            if (Country.IS_USER_ASSIGNED.test(region)) {
-                return true;
-            }
+            return Country.IS_USER_ASSIGNED.test(region);
         }
 
         return false;

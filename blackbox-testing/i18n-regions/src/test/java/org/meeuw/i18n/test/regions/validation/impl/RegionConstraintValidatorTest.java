@@ -32,7 +32,7 @@ public class RegionConstraintValidatorTest {
 
         class A {
             @ValidRegion
-            Locale locale;
+            final Locale locale;
 
             A(Locale locale) {
                 this.locale = locale;
@@ -55,7 +55,7 @@ public class RegionConstraintValidatorTest {
 
         class A {
             @ValidRegion(types = Region.Type.COUNTRY)
-            Region region;
+            final Region region;
 
             A(Region region) {
                 this.region = region;
@@ -67,7 +67,7 @@ public class RegionConstraintValidatorTest {
 
          class B  {
             @ValidRegion(types = Region.Type.CONTINENT)
-            Region region;
+            final Region region;
 
             B(Region region) {
                 this.region = region;
@@ -91,7 +91,7 @@ public class RegionConstraintValidatorTest {
 
         class A {
             @ValidRegion(types = Region.Type.COUNTRY)
-            Object region;
+            final Object region;
 
             A(Object region) {
                 this.region = region;
@@ -109,7 +109,7 @@ public class RegionConstraintValidatorTest {
             assertThat(VALIDATOR.validate(listWithInValid)).hasSize(1);
         }
         {
-            A withUnknownType = new A(Integer.valueOf(1));
+            A withUnknownType = new A(1);
             Set<ConstraintViolation<A>> validate = VALIDATOR.validate(withUnknownType);
             System.out.println("" + validate);
             assertThat(VALIDATOR.validate(withUnknownType)).hasSize(1);

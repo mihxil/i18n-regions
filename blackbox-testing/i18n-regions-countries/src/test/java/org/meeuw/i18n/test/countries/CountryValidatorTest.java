@@ -40,7 +40,7 @@ public class CountryValidatorTest {
     public static class CountryAndRegions {
         @ValidRegion(includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
         @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.FORMER)
-        public Region region;
+        public final Region region;
 
         public CountryAndRegions(Region r) {
             this.region = r;
@@ -52,7 +52,7 @@ public class CountryValidatorTest {
         {
             // CS is not an official country any more:
             assertThat(VALIDATOR.validate(new CountryAndRegions(Country.of(CS)))).hasSize(1);
-            assertThat(VALIDATOR.validate(new CountryAndRegions(Country.of(CS))).iterator().next().getMessage()).isEqualTo("CS is not a valid country");;
+            assertThat(VALIDATOR.validate(new CountryAndRegions(Country.of(CS))).iterator().next().getMessage()).isEqualTo("CS is not a valid country");
         }
 
         {
@@ -79,7 +79,7 @@ public class CountryValidatorTest {
     public static class CountryAndRegionsAsString {
         @ValidRegion(includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
         @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.FORMER)
-        public String region;
+        public final String region;
 
         CountryAndRegionsAsString(String r) {
             this.region = r;
@@ -95,7 +95,7 @@ public class CountryValidatorTest {
         {
             // CS is not an official country any more:
             assertThat(VALIDATOR.validate(new CountryAndRegionsAsString(Country.of(CS)))).hasSize(1);
-            assertThat(VALIDATOR.validate(new CountryAndRegionsAsString(Country.of(CS))).iterator().next().getMessage()).isEqualTo("CS is not a valid country");;
+            assertThat(VALIDATOR.validate(new CountryAndRegionsAsString(Country.of(CS))).iterator().next().getMessage()).isEqualTo("CS is not a valid country");
         }
 
         {
@@ -119,7 +119,7 @@ public class CountryValidatorTest {
     }
 
    public static class CountryAndRegionsWithList {
-       public List<
+       public final List<
            // valid are countries (further validated by @ValidCountry), and a list of codes.
            @ValidRegion(includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"}, classes= {Country.class}, payload = {})
            @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.FORMER, includes = "CS")
@@ -153,7 +153,7 @@ public class CountryValidatorTest {
 
         @ValidRegion(includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
         @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.FORMER, includes = "CS")
-        public List<Region> region;
+        public final List<Region> region;
 
         CountryAndRegionsWithList2(Region... r) {
             this.region = Arrays.asList(r);
@@ -178,7 +178,7 @@ public class CountryValidatorTest {
             public List<Country> region;
 
             ZZ(Region r) {
-                this.region = r instanceof  Country ? Arrays.asList((Country) r) : null;
+                this.region = r instanceof  Country ? Collections.singletonList((Country) r) : null;
             }
             public void setRegion(List<Country> regions) {
                 this.region = regions;
@@ -214,7 +214,7 @@ public class CountryValidatorTest {
                 this.region = Arrays.asList(r);
             }
             Former(Region r) {
-                this.region = r instanceof Country ? Arrays.asList((Country) r) : null;
+                this.region = r instanceof Country ? Collections.singletonList((Country) r) : null;
             }
             public void setRegion(List<Country> regions) {
                 this.region = regions;

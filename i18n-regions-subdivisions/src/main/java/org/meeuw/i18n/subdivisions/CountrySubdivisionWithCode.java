@@ -3,6 +3,7 @@ package org.meeuw.i18n.subdivisions;
 import be.olsson.i18n.subdivision.CountryCodeSubdivision;
 
 import java.util.Locale;
+import java.util.Objects;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -63,11 +64,11 @@ public class CountrySubdivisionWithCode implements CountrySubdivision {
 
         CountrySubdivisionWithCode that = (CountrySubdivisionWithCode) o;
 
-        return code != null ? code.equals(that.code) : that.code == null;
+        return Objects.equals(code, that.code);
     }
 
     @Override
     public int hashCode() {
-        return code != null ? code.hashCode() : 0;
+        return Objects.hashCode(code);
     }
 }

@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class CurrentCountryProviderTest {
 
-    private CurrentCountryProvider currentCountryProvider = new CurrentCountryProvider();
+    private final CurrentCountryProvider currentCountryProvider = new CurrentCountryProvider();
 
     @Test
     public void canProvide() {

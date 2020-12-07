@@ -50,8 +50,9 @@ public class RegionConstraintValidator implements ConstraintValidator<ValidRegio
                 if (! r.isPresent()) {
                     // not convertible to Region, consider this value invalid
                     return false;
+                } else {
+                    return isValid(r.region.get(), validationInfo);
                 }
-                return isValid(r.region.get(), validationInfo);
             } else {
                 return true;
             }

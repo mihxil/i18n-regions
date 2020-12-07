@@ -52,14 +52,14 @@ public class CountrySubdivisionProvider implements RegionProvider<CountrySubdivi
 
     @Override
     public Stream<CountrySubdivisionWithCode> values() {
-        Spliterator<CountryCodeSubdivision> spliterator = new Spliterator<CountryCodeSubdivision>() {
+        Spliterator<CountryCodeSubdivision> spliterator = new Spliterator<>() {
             private int countryCode = 0;
             private Spliterator<CountryCodeSubdivision> spliterator;
 
             @Override
             public boolean tryAdvance(Consumer<? super CountryCodeSubdivision> action) {
-                while(spliterator == null || ! spliterator.tryAdvance(action)) {
-                    if (countryCode >=  CountryCode.values().length) {
+                while (spliterator == null || !spliterator.tryAdvance(action)) {
+                    if (countryCode >= CountryCode.values().length) {
                         return false;
                     }
                     List<CountryCodeSubdivision> subdivisions = SubdivisionFactory.getSubdivisions(CountryCode.values()[countryCode++]);

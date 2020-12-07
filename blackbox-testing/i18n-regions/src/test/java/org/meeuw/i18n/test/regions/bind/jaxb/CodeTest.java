@@ -22,7 +22,7 @@ public class CodeTest {
     @XmlRootElement
     public static class A {
         @XmlAttribute
-        public Region region = new TestCountry("NL", "Netherlands");
+        public final Region region = new TestCountry("NL", "Netherlands");
 
         @Override
         public String toString() {

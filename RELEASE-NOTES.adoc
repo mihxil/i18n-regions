@@ -1,15 +1,15 @@
-= Releas notes
+= Release notes
 :toc:
 
 == 1.1
 
-The main reason for this release was lowering some log statement. We log with jul, but it is a bit cumbersome to configure it for everytime. We just lowered to log to FINE. 
+The main reason for this release was lowering some log statement. We log with jul, but it is a bit cumbersome to configure it for everytime. We just lowered to log to FINE.
 
 == 1.0
 
-When upgrading from 0.5 a few packages where changed. It was decided to make a clean module package correspondance.
+When upgrading from 0.5 a few packages where changed. It was decided to make a clean module package correspondence.
 
-Hence e.g.
+Hence, e.g.
 
 - `org.meeuw.i18n.Region` -> `org.meeuw.i18n.regions.Region`
 - `org.meeuw.i18n.RegionService` -> `org.meeuw.i18n.regions.RegionService`
