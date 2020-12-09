@@ -19,7 +19,7 @@ Using `CountryCode` as a value in your application has several drawbacks:
 . It for example does not contain 'former countries', so e.g. the birth country of a person, or the country of a movie cannot be stored as a 'CountryCode'.
 . It's only applicable to countries, no other regions.
 
-I decided to wrap `CountryCode` in a class `CurrentCountry`, which implements a `Region` interface, which makes it possible to make other implementation of `Region` too, and to address all the above issues if you choose to use `Region` instead of `CountryCode` as the type of your variable.
+I decided to wrap `CountryCode` in a class `CurrentCountry`, which implements a `Region` interface, which makes it possible to make other implementation of `Region` too, and to address all the above issues. You have to use `Region` instead of `CountryCode` as the type of your variable then.
 
 == Architecture
 
@@ -27,7 +27,7 @@ The central interface of this module is link:i18n-regions/src/main/java/org/meeu
 
 Instances are created via https://www.baeldung.com/java-spi[java service providers] implementing link:i18n-regions/src/main/java/org/meeuw/i18n/regions/spi/RegionProvider.java[`org.meeuw.i18n.regions.spi.RegionProvider`] (registered via link:i18n-regions/src/main/resources/META-INF/services/org.meeuw.i18n.regions.spi.RegionProvider[META-INF/services]), which are all managed by link:i18n-regions/src/main/java/org/meeuw/i18n/regions/RegionService.java[`org.meeuw.i18n.regions.RegionService`].
 
-Providers are distributes via different artifacts, so you can in that way select what kind of regions the service should provide.
+Providers are distributed via different artifacts, so you can in that way select what kind of regions the service should provide.
 
 == Providers
 
@@ -55,7 +55,7 @@ A list of codes for the continents is provided in https://search.maven.org/searc
 
 === More
 
-In the same fashion arbitrary region implementations can easily be plugged in. This project also provides link:i18n-regions-openlocationcode[a region implementation based on google 'open location code'].
+In the same fashion arbitrary region implementations can easily be plugged in. This project also provides link:i18n-regions-openlocationcode[a region implementation based on google's 'open location code'].
 
 == Persistence
 
@@ -82,7 +82,7 @@ The converter is marked as `autoApply`, so in principle it is not needed to add 
 
 == XML Binding
 
-The Region interface is JAXB-annotated to be marshallable to XML, which obviously should happen by the (ISO) code string.
+The Region interface is JAXB-annotated to be marshallable to XML, which obviously should happen by the (ISO) code string. This can also be used for json.
 
 == Translations
 
@@ -114,7 +114,7 @@ or, if you prefer, on the collection itself:
 
 This list will not validate if you add Regions which don't follow the given rules.
 
-It can also be used on `java.util.Locale`, which contain a country component too:
+It can also be used on `java.util.Locale`, which contains a country component too:
 
 [source,java]
 ----
@@ -127,15 +127,15 @@ It can also be used on `java.util.Locale`, which contain a country component too
 
 (For completeness also link:i18n-regions/src/main/java/org/meeuw/i18n/validation/Language.java[`@Language`] is provided).
 
-As a utility there is `org.meeuw.i18n.regions.validation.RegionValidatorService` which can be used to for the settings in these annotations also to filter a stream of regions (e.g. `RegionService#values()`).
+As a utility there is `org.meeuw.i18n.regions.validation.RegionValidatorService` which can be used to filter a stream of regions  (e.g. `RegionService#values()`) based on the settings of these annotations.
 
 [source,java ]
 ----
+ // A list of all valid regions for the property 'countries' of the 'MediaObject'
  return RegionService.getInstance().values()
             .filter(RegionValidatorService.getInstance().fromProperty(MediaObject.class, "countries"))
-            .sorted(Regions.sortByName(LanguageCode.nl))
-            .map(GuiEntry::of)
-            .collect(Collectors.toList());
+            .sorted(Regions.sortByName(LanguageCode.nl));
+
 ----
 
 == Optional dependencies
@@ -161,13 +161,13 @@ mvn spring-boot:run
 
 There are also tests in 'blackbox-testing'. Mainly testing validation code (because JPMS).
 
-TODO: it seems that these tests currently are not accounted in the coverage reports.
+To achieve a proper report of test coverage the module 'report-aggregation' just depends on everything together witht some jacoco plugin configuration.
 
 == Logging
 
 Some logging happens via the `java.util.logging` framework to avoid any extra dependencies.
 
-When you use slf4j or logback you could take this dependency:
+When you use slf4j or logback or so you could take a dependency to catch such  logging in your logging framework of choice.
 
 [source,xml]
 ----
