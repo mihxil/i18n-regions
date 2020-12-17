@@ -17,36 +17,36 @@ import org.meeuw.i18n.regions.spi.RegionProvider;
 @Priority(100)
 public class VehicleRegistrationCodeFallbackProvider implements RegionProvider<CurrentCountry> {
 
-	@Override
-	public Optional<CurrentCountry> getByCode(@NonNull String code, boolean lenient) {
-		if (! lenient) {
-			return Optional.empty();
-		} else {
-			code = code.toUpperCase();
-		}
-		try {
-			VehicleRegistrationCode vehicleRegistrationCode = VehicleRegistrationCode.valueOf(code);
-			return Optional.of(new CurrentCountry(vehicleRegistrationCode.getCode()));
-		} catch (IllegalArgumentException iae) {
-			return Optional.empty();
-		}
+    @Override
+    public Optional<CurrentCountry> getByCode(@NonNull String code, boolean lenient) {
+        if (! lenient) {
+            return Optional.empty();
+        } else {
+            code = code.toUpperCase();
+        }
+        try {
+            VehicleRegistrationCode vehicleRegistrationCode = VehicleRegistrationCode.valueOf(code);
+            return Optional.of(new CurrentCountry(vehicleRegistrationCode.getCode()));
+        } catch (IllegalArgumentException iae) {
+            return Optional.empty();
+        }
 
-	}
+    }
 
-	@Override
-	public Class<CurrentCountry> getProvidedClass() {
-		return CurrentCountry.class;
-	}
+    @Override
+    public Class<CurrentCountry> getProvidedClass() {
+        return CurrentCountry.class;
+    }
 
-	/**
-	 * Returns an empty stream. All values should be provided by {@link AbstractCurrentCountryProvider}.
-	 */
-	@Override
-	public Stream<CurrentCountry> values() {
-		return Stream.empty();
-	}
+    /**
+     * Returns an empty stream. All values should be provided by {@link AbstractCurrentCountryProvider}.
+     */
+    @Override
+    public Stream<CurrentCountry> values() {
+        return Stream.empty();
+    }
 
-	@Override
+    @Override
     public String toString() {
         return getClass().getSimpleName() + " (" + values().count() + " countries)";
     }

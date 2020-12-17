@@ -21,24 +21,24 @@ import com.neovisionaries.i18n.CountryCode;
 @XmlJavaTypeAdapter(Code.class)
 public interface Country extends Region {
 
-	/**
-	 * A usefull predicate, e.g. to filter streams of {@link RegionService#values()}
-	 *
-	 * Checks wether the region if a {@link CurrentCountry} which is {@link CountryCode.Assignment#OFFICIALLY_ASSIGNED}.
-	 */
+    /**
+     * A usefull predicate, e.g. to filter streams of {@link RegionService#values()}
+     *
+     * Checks wether the region if a {@link CurrentCountry} which is {@link CountryCode.Assignment#OFFICIALLY_ASSIGNED}.
+     */
     Predicate<Region> IS_OFFICIAL = (c) -> c instanceof CurrentCountry && ((CurrentCountry) c).getAssignment() == CountryCode.Assignment.OFFICIALLY_ASSIGNED;
     /**
-	 * A usefull predicate, e.g. to filter streams of {@link RegionService#values()}
-	 *
-	 * Checks wether the region if a {@link FormerCountry}
-	 */
+     * A usefull predicate, e.g. to filter streams of {@link RegionService#values()}
+     *
+     * Checks wether the region if a {@link FormerCountry}
+     */
     Predicate<Region> IS_FORMER = c -> c instanceof FormerCountry;
 
-     /**
-	 * A usefull predicate, e.g. to filter streams of {@link RegionService#values()}
-	 *
-	 * Checks wether the region if a {@link UserAssignedCountry}
-	 */
+    /**
+     * A usefull predicate, e.g. to filter streams of {@link RegionService#values()}
+     *
+     * Checks wether the region if a {@link UserAssignedCountry}
+     */
     Predicate<Region> IS_USER_ASSIGNED = c -> c instanceof UserAssignedCountry;
 
     static CurrentCountry of(CountryCode code) {
