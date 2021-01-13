@@ -46,6 +46,19 @@ public class CountryValidatorTest {
             this.region = r;
         }
     }
+    public static class CountryAndRegionsOrUserDefined {
+
+        @ValidRegion(includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
+        @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.FORMER | ValidCountry.USER_ASSIGNED)
+        public final Region orUsedDefined;
+
+
+        public CountryAndRegionsOrUserDefined(Region r) {
+            this.orUsedDefined = r;
+        }
+    }
+
+
     @Test
     public void combineValidRegionAndValidCountry() throws NoSuchFieldException {
 
@@ -200,6 +213,7 @@ public class CountryValidatorTest {
             regionValidatorService.fromProperty(ZZ.class, "region"),
             ZZ::new);
     }
+
 
 
 

@@ -13,11 +13,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class FormerCountryTest {
 
-	@Test
+    @Test
     public void getValidity() {
-		new FormerCountryProvider().values().forEach((country) -> {
-			// it wouldn't be former otherwise!
-			assertThat(country.getValidity().contains(Year.now())).isFalse();
-		});
-	}
+        new FormerCountryProvider().values().forEach((country) -> {
+            // it wouldn't be former otherwise!
+            assertThat(country.getValidity().contains(Year.now())).isFalse();
+        });
+    }
 }

@@ -46,4 +46,9 @@ public @interface Language {
      */
     boolean mayContainVariant() default false;
 
+    /**
+     * xml:lang uses '-' between language and country and is basicly case insensitive
+     */
+    boolean forXml() default true;
+
 }

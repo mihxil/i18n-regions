@@ -7,6 +7,8 @@ import javax.validation.*;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.meeuw.i18n.regions.validation.Language;
 import org.meeuw.i18n.regions.validation.RegionValidatorService;
 import org.meeuw.i18n.regions.validation.impl.LanguageValidator;
@@ -32,79 +34,59 @@ public class LanguageValidatorTest {
 
     private final LanguageValidator languageValidator = new LanguageValidator();
 
-    @Test
-    public void testIsValid() {
-        assertTrue(languageValidator.isValid(new Locale("nl"), null));
-
+    @ParameterizedTest
+    @ValueSource(strings = {"nl", "zxx", "jw", "dut"})
+    public void testIsValid(String lang) {
+        assertTrue(languageValidator.isValid(new Locale(lang), null));
     }
 
-    @Test
-    public void testIsValidCz() {
-        assertFalse(languageValidator.isValid(new Locale("cz"), null));
-
-    }
-
-    @Test
-    public void testIsValidZxx() {
-        assertTrue(languageValidator.isValid(new Locale("zxx"), null));
-
-    }
-
-    @Test
-    void testIsValidJw() {
-        assertTrue(languageValidator.isValid(new Locale("jw"), null));
-
-    }
-
-    @Test
-    void iso3() {
-        assertTrue(languageValidator.isValid(new Locale("dut"), null));
-
+    @ParameterizedTest
+    @ValueSource(strings = {"cz"})
+    public void testIsInValid(String lang) {
+        assertFalse(languageValidator.isValid(new Locale(lang), null));
     }
 
     @Test
     @Disabled("fails. 'act' is somewhy not a known language")
     void achterhoeks() {
         assertTrue(languageValidator.isValid(new Locale("act"), null));
-
     }
 
     private final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
     private final Validator validator = factory.getValidator();
 
-    @Test
-    public void testZZ() {
-        A a = new A();
-        a.language = "ZZ";
-        Set<ConstraintViolation<A>> constraintViolations = testValidate(a, 1);
-        assertThat(constraintViolations.iterator().next().getMessage()).isEqualTo("ZZ is een ongeldige ISO639 taalcode");
+    @ParameterizedTest
+    @ValueSource(strings = {
+        "ZZ",
+        "nl-UU"// UU is not a valid country
+    })
+    public void testValidateInvalid(String language) {
+        WithLanguageFields a = new WithLanguageFields();
+        a.language = language;
+        Set<ConstraintViolation<WithLanguageFields>> constraintViolations = testValidate(a, 1);
+        assertThat(constraintViolations.iterator().next().getMessage()).isEqualTo(language + " is een ongeldige ISO639 taalcode");
     }
 
 
     @Test
     public void testWithCountry() {
         {
-            A a = new A();
+            WithLanguageFields a = new WithLanguageFields();
             a.language = "nl-NL";
             testValidate(a, 0);
         }
-          {
-            A a = new A();
-            a.language = "nl-UU"; // UU is not a valid country
-            testValidate(a, 1);
-        }
         {
-            A a = new A();
+            WithLanguageFields a = new WithLanguageFields();
             a.languageNoCountry = "nl-NL";
             testValidate(a, 1);
         }
         {
-            A a = new A();
+            WithLanguageFields a = new WithLanguageFields();
             a.language = "nl-NL-INFORMAL";
             testValidate(a, 1);
         }
         {
-            A a = new A();
+            WithLanguageFields a = new WithLanguageFields();
             a.languageWithVariant = "nl-NL-INFORMAL";
             testValidate(a, 0);
         }
@@ -114,19 +96,19 @@ public class LanguageValidatorTest {
     @Test
     void testObject() {
         {
-            A a = new A();
+            WithLanguageFields a = new WithLanguageFields();
             a.object = Arrays.asList("ZZ");
             testValidate(a, 1);
         }
         {
-            A a = new A();
+            WithLanguageFields a = new WithLanguageFields();
             a.object = Arrays.asList("nl-NL", "nl-BE");
             testValidate(a, 0);
         }
     }
 
-    private Set<ConstraintViolation<A>> testValidate(A value, int expectedSize) {
-        Set<ConstraintViolation<A>> validate = validator.validate(value);
+    private Set<ConstraintViolation<WithLanguageFields>> testValidate(WithLanguageFields value, int expectedSize) {
+        Set<ConstraintViolation<WithLanguageFields>> validate = validator.validate(value);
         System.out.println("" + validate);
         assertThat(validate).hasSize(expectedSize);
         return validate;
@@ -161,19 +143,32 @@ public class LanguageValidatorTest {
         }
     }
 
-    @Test
-    void test() {
-
-        class A {
-            @Language
-            final String language;
-            A(String l) {
-                this.language = l;
-            }
+    static class AXml {
+        @Language(forXml = true)
+        final String language;
+        AXml(String l) {
+            this.language = l;
         }
+    }
 
-        assertThat(VALIDATOR.validate(new A("nl"))).isEmpty();
+    static class C {
+        @Language(forXml = false)
+        final String language;
+        C(String l) {
+                this.language = l;
+        }
+    }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"nl", "nl-NL"})
+    void validA(String lang) {
+        assertThat(VALIDATOR.validate(new C(lang))).isEmpty();
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"NL", "bl", "bl-A", "nl-A"})
+    void invalidA(String lang) {
+        assertThat(VALIDATOR.validate(new C(lang))).hasSize(1);
     }
 
 }

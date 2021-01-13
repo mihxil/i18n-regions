@@ -11,6 +11,7 @@ import org.meeuw.i18n.regions.RegionService;
 import org.meeuw.i18n.regions.validation.Language;
 
 import com.neovisionaries.i18n.LanguageAlpha3Code;
+import com.neovisionaries.i18n.LanguageCode;
 
 
 /**
@@ -64,8 +65,12 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
             }
             return true;
         } else {
-            Locale locale = toLocale(value);
-            return isValid(locale);
+            try {
+                Locale locale = toLocale(value);
+                return isValid(locale);
+            } catch (IllegalArgumentException iae) {
+                return false;
+            }
         }
     }
 
@@ -74,10 +79,34 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
         if (o instanceof Locale) {
             return (Locale) o;
         } else {
-            return Locale.forLanguageTag(o.toString());
+            if (annotation.forXml()) {
+                return Locale.forLanguageTag(o.toString());
+            } else {
+                return adapt(o.toString(), false);
+            }
         }
     }
 
+    public static Locale adapt(String v, boolean lenient) {
+        if (v == null) {
+            return null;
+        }
+        String[] split = v.split("[_-]", 3);
+        LanguageCode languageCode = LanguageCode.getByCode(split[0], ! lenient);
+        if (languageCode == null && ! lenient) {
+            throw new IllegalArgumentException("Not a valid language " + split[0]);
+        }
+        String language = languageCode == null ? split[0] : languageCode.name().toLowerCase();
+
+        switch (split.length) {
+            case 1:
+                return new Locale(language);
+            case 2:
+                return new Locale(language, split[1].toUpperCase());
+            default:
+                return new Locale(language, split[1].toUpperCase(), split[2]);
+        }
+    }
 
     @RequiresNonNull("annotation")
     protected boolean isValid(Locale value) {
