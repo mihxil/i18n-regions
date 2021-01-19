@@ -1,7 +1,6 @@
 package org.meeuw.i18n.regions.validation.impl;
 
-import java.util.Locale;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Stream;
 
 import javax.validation.ConstraintValidator;
@@ -116,10 +115,10 @@ public class RegionConstraintValidator implements ConstraintValidator<ValidRegio
         if (region == null) {
             return Optional.of(true);
         }
-        if (Stream.of(validationInfo.getExcludes()).anyMatch(region::equals)) {
+        if (Arrays.asList(validationInfo.getExcludes()).contains(region)) {
             return  Optional.of(false);
         }
-        if (Stream.of(validationInfo.getIncludes()).anyMatch(region::equals)) {
+        if (Arrays.asList(validationInfo.getIncludes()).contains(region)) {
             return Optional.of(true);
         }
         if (Stream.of(validationInfo.getClasses()).noneMatch((r) -> r.isInstance(region))) {

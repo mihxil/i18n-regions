@@ -7,7 +7,7 @@ The main reason for this release was lowering some log statement. We log with ju
 
 == 1.0
 
-When upgrading from 0.5 a few packages where changed. It was decided to make a clean module package correspondence.
+When upgrading from 0.5, a few packages where changed. It was decided to make a clean module package correspondence.
 
 Hence, e.g.
 

@@ -19,7 +19,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *
  * For example
  * <pre>
- *    @ValidCountry(value = OFFICIAL | FORMER, includes = "ZZ")
+ *    {@literal @}ValidCountry(value = OFFICIAL | FORMER, includes = "ZZ")
  * </pre>
  *
  * So basicly you specify one or more predicates, and/or a number of explicitely included and excluded codes.

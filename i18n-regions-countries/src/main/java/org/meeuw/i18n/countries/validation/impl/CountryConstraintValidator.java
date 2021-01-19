@@ -21,7 +21,7 @@ import com.neovisionaries.i18n.CountryCode;
 public class CountryConstraintValidator implements ConstraintValidator<ValidCountry, Object> {
 
 
-    ValidationInfo validationInfo;
+    private ValidationInfo validationInfo;
 
     @Override
     public void initialize(ValidCountry constraintAnnotation) {

@@ -39,7 +39,6 @@ public class UserAssignedCountryProvider implements RegionProvider<UserAssignedR
     @Override
     public boolean canProvide(@NonNull Class<? extends Region> clazz) {
         return clazz.isAssignableFrom(UserAssignedRegion.class) || clazz.isAssignableFrom(org.meeuw.i18n.countries.UserAssignedCountry.class);
-
     }
 
     @Override
@@ -53,7 +52,6 @@ public class UserAssignedCountryProvider implements RegionProvider<UserAssignedR
     @Override
     public Class<UserAssignedRegion> getProvidedClass() {
         return UserAssignedRegion.class;
-
     }
 
     @Override

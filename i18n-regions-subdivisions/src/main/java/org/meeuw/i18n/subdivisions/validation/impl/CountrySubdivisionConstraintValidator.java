@@ -20,7 +20,7 @@ import org.meeuw.i18n.regions.validation.impl.RegionConstraintValidator;
  */
 public class CountrySubdivisionConstraintValidator implements ConstraintValidator<ValidCountrySubdivision, Object> {
 
-    ValidationInfo validationInfo;
+    private ValidationInfo validationInfo;
 
     @Override
     public void initialize(ValidCountrySubdivision constraintAnnotation) {

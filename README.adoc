@@ -92,7 +92,7 @@ The region interface also provides `Region#getName(Locale)` to retrieve the name
 
 == Validation
 
-Given a certain field with type `Region` (or one of its sub types) you may still find that makes too many values available. Therefore, we also provide some `javax.validation.ConstraintValidator` and associated annotations to limit possible values.
+Given a certain field with type `Region` (or one of its subtypes) you may still find that makes too many values available. Therefore, we also provide some `javax.validation.ConstraintValidator` and associated annotations to limit possible values.
 
 e.g.
 
@@ -129,7 +129,7 @@ It can also be used on `java.util.Locale`, which contains a country component to
 
 (For completeness also link:i18n-regions/src/main/java/org/meeuw/i18n/validation/Language.java[`@Language`] is provided).
 
-As a utility there is `org.meeuw.i18n.regions.validation.RegionValidatorService` which can be used to filter a stream of regions  (e.g. `RegionService#values()`) based on the settings of these annotations.
+As a utility, there is `org.meeuw.i18n.regions.validation.RegionValidatorService` which can be used to filter a stream of regions  (e.g. `RegionService#values()`) based on the settings of these annotations.
 
 [source,java ]
 ----
