@@ -23,7 +23,7 @@ public class CurrentCountry implements Country {
 
     @Override
     public String getCode() {
-        return code.getAlpha2();
+        return getAlpha2();
     }
 
     public String getAlpha2() {
