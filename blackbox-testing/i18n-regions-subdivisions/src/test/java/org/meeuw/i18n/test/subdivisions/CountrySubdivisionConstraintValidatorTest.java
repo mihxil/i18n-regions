@@ -1,6 +1,7 @@
 package org.meeuw.i18n.test.subdivisions;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -10,7 +11,6 @@ import javax.validation.*;
 import org.junit.jupiter.api.Test;
 import org.meeuw.i18n.regions.*;
 import org.meeuw.i18n.regions.validation.RegionValidatorService;
-import org.meeuw.i18n.subdivisions.CountrySubdivisionWithCode;
 import org.meeuw.i18n.subdivisions.validation.ValidCountrySubdivision;
 
 import com.neovisionaries.i18n.LanguageCode;
@@ -62,13 +62,7 @@ public class CountrySubdivisionConstraintValidatorTest {
         assertThat(VALIDATOR.validate(new Netherlands(null))).hasSize(0);
     }
 
-    @Test
-    public void getCode() {
-        Optional<Region> byCode = RegionService.getInstance().getByCode("NL-DR");
-        assertThat(byCode).isPresent();
-        assertThat(byCode).containsInstanceOf(CountrySubdivisionWithCode.class);;
-        assertThat(((CountrySubdivisionWithCode) byCode.get()).getCountryCodeSubdivision().getCode()).isEqualTo("DR");
-    }
+
 
     void testAsStreamFilter(
          Predicate<Object> predicate,

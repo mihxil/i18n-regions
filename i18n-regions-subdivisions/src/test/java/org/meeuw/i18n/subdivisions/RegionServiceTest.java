@@ -1,5 +1,7 @@
 package org.meeuw.i18n.subdivisions;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.meeuw.i18n.regions.*;
@@ -14,8 +16,6 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 0.1
  */
 public class RegionServiceTest {
-
-
 
     @Test
     public void getCountrySubDivisionUtrecht() {
@@ -54,6 +54,20 @@ public class RegionServiceTest {
 
     }
 
+    @Test
+    public void getCode() {
+        Optional<Region> byCode = RegionService.getInstance().getByCode("NL-DR");
+        assertThat(byCode).isPresent();
+        assertThat(byCode).containsInstanceOf(CountrySubdivisionWithCode.class);;
+        assertThat(((CountrySubdivisionWithCode) byCode.get()).getCountryCodeSubdivision().getCode()).isEqualTo("DR");
+    }
+
+    @Test
+    public void getLocale() {
+        Optional<Region> byCode = RegionService.getInstance().getByCode("NL-DR");
+        assertThat(byCode).containsInstanceOf(CountrySubdivisionWithCode.class);;
+        assertThat(((CountrySubdivisionWithCode) byCode.get()).toLocale().getCountry()).isEqualTo("NL");
+    }
 
 
 }
