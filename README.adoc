@@ -41,7 +41,7 @@ It provides:
 - For former countries there is link:i18n-regions-countries/src/main/java/org/meeuw/i18n/countries/FormerCountry.java[`org.meeuw.i18n.countries.FormerCountry`], which is backed by `org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode` (from https://github.com/mihxil/i18n-formerly-assigned[i18n-formerly-assigned])
 - Some common user assigned countries are hard coded in link:i18n-regions-countries/src/main/java/org/meeuw/i18n/countries/UserAssignedCountry.java[`org.meeuw.i18.countries.UserAssignedCountry`]
 
-all countires implement an interface link:i18n-regions-countries/src/main/java/org/meeuw/i18n/countries/Country.java[`org.meeuw.i18n.countries.Country`]
+all countries implement an interface link:i18n-regions-countries/src/main/java/org/meeuw/i18n/countries/Country.java[`org.meeuw.i18n.countries.Country`]
 
 === Subdivisions of countries
 
