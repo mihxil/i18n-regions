@@ -17,7 +17,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RegionsTest {
 
     static {
-
         System.out.println("oh nee " + RegionsTest.class.getResourceAsStream("/module-info.class"));
     }
 
@@ -42,7 +41,6 @@ public class RegionsTest {
     @Test
     public void testToStringWithCode() {
         assertThat(Regions.toStringWithCode(RegionService.getInstance().getByCode("NL").orElseThrow(), nl)).isEqualTo("NL:Nederland");
-
     }
 
 }
