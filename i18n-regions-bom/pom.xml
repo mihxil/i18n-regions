@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.meeuw.i18n</groupId>
-  <version>1.1.0</version>
+  <version>1.1.0-SNAPSHOT</version>
   <artifactId>i18n-regions-bom</artifactId>
   <packaging>pom</packaging>
   <name>i18n-regions-bom</name>
@@ -11,7 +11,7 @@
 
 
   <properties>
-    <i18n-regions.version>1.1.0</i18n-regions.version>
+    <i18n-regions.version>1.1.1-SNAPSHOT</i18n-regions.version>
     <nv-i18n.version>1.27</nv-i18n.version>
     <i18n-subdivisions.version>0.2</i18n-subdivisions.version>
     <i18n-formerly-assigned.version>0.5</i18n-formerly-assigned.version>
