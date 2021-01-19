@@ -16,6 +16,8 @@
     <module>i18n-regions-countries</module>
     <module>i18n-regions-continents</module>
     <module>i18n-regions-openlocationcode</module>
+    <module>blackbox-testing</module>
+    <module>report-aggregation</module>
   </modules>
 
   <licenses>
@@ -44,7 +46,9 @@
   <properties>
     <junit.version>5.7.0</junit.version>
     <java.target.version>8</java.target.version>
-    <checker.version>3.8.0</checker.version>
+    <checker.version>3.9.1</checker.version>
+    <jacoco.version>0.8.6</jacoco.version>
+
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -190,6 +194,7 @@
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco.version}</version>
         <executions>
           <execution>
             <id>agent</id>
