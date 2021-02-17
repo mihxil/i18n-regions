@@ -156,10 +156,16 @@ public class RegionService {
     }
 
     /**
-     * @return The provides currently registered
+     * @return The providers currently registered
      */
     public List<RegionProvider<?>> getProviders() {
         return Collections.unmodifiableList(providers);
+    }
+
+    /**
+     */
+    public <T extends RegionProvider<?>> Optional<T> getProvider(Class<T> clazz) {
+        return (Optional<T>) providers.stream().filter(clazz::isInstance).findFirst();
     }
 
 

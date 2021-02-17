@@ -57,6 +57,10 @@ public class OpenLocationProvider implements RegionProvider<OpenLocation> {
         }
     }
 
+    public OpenLocation getByCoordinates(double latitude, double longitude) {
+        return new OpenLocation(new OpenLocationCode(latitude, longitude));
+    }
+
     @Override
     public Class<OpenLocation> getProvidedClass() {
         return OpenLocation.class;

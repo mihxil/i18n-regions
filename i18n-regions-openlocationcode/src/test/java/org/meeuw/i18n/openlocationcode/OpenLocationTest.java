@@ -4,8 +4,7 @@ import java.net.URI;
 
 import org.junit.jupiter.api.Test;
 import org.meeuw.i18n.regions.Region;
-
-import com.google.openlocationcode.OpenLocationCode;
+import org.meeuw.i18n.regions.RegionService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  */
 class OpenLocationTest {
-    final OpenLocation debilt = new OpenLocation(new OpenLocationCode(52.129490, 5.205140));
+    final OpenLocation debilt = RegionService.getInstance().getProvider(OpenLocationProvider.class).get().getByCoordinates(52.129490, 5.205140);
 
     @Test
     public void testToString() {
