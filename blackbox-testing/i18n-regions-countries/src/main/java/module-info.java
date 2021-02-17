@@ -2,7 +2,6 @@ import org.meeuw.i18n.test.some.SomeRegionProvider;
 
 /**
  * @author Michiel Meeuwissen
- * @since ...
  */
 open module org.meeuw.i18n.test.countries {
     requires org.meeuw.i18n.countries;
