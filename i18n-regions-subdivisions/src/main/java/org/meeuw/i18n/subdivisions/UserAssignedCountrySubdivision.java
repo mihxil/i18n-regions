@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ForkJoinPool;
 import java.util.logging.Logger;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -35,9 +34,9 @@ public class UserAssignedCountrySubdivision implements CountrySubdivision {
                 try {
                     //logger.info("Loading " + resource);
                     properties.load(inputStream);
-                    ForkJoinPool.commonPool().execute(() -> {
+                    new Thread(() -> {
                         logger.fine(() -> "Loaded " + resource);
-                    });
+                    }).start();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
