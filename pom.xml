@@ -205,7 +205,7 @@
             <configuration>
               <append>true</append>
               <excludes>
-                <exclude>org/meeuw/i18n/test/**</exclude>
+                <exclude>org/meeuw/i18n/test/*</exclude>
               </excludes>
             </configuration>
           </execution>
