@@ -18,12 +18,14 @@ jobs:
       with:
         java-version: 11
     - name: Build with Maven
-      run: OSSRH_PASSWORD=${{ secrets.OSSRH_PASSWORD }} mvn -B deploy -s $GITHUB_WORKSPACE/.github-settings.xml --file pom.xml
+      run: OSSRH_PASSWORD=${{ secrets.OSSRH_PASSWORD }} mvn -B deploy -s $GITHUB_WORKSPACE/.github/settings.xml --file pom.xml
+    - name: Build BOM with Maven
+      run: OSSRH_PASSWORD=${{ secrets.OSSRH_PASSWORD }} mvn -B clean deploy -s $GITHUB_WORKSPACE/.github/settings.xml -f i18n-regions-bom
     - name: codecov
-      run: bash <(curl -s https://codecov.io/bash)      
+      run: bash <(curl -s https://codecov.io/bash)
     - name: Publish Test Report
       uses: scacap/action-surefire-report@v1
       if: always()
       with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-   
+
