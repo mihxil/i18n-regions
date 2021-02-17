@@ -6,7 +6,6 @@ module org.meeuw.i18n.countries {
     exports org.meeuw.i18n.countries.validation;
     exports org.meeuw.i18n.countries.validation.impl; // to hibernate validation
 
-
     requires static org.checkerframework.checker.qual;
     requires static java.annotation;
     requires static java.xml.bind;
