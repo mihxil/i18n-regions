@@ -62,6 +62,11 @@ public class CountrySubdivisionConstraintValidatorTest {
         assertThat(VALIDATOR.validate(new Netherlands(null))).hasSize(0);
     }
 
+    @Test
+    public void convert() {
+
+    }
+
 
 
     void testAsStreamFilter(

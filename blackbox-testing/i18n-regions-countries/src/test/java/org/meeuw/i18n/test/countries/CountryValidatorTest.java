@@ -18,6 +18,7 @@ import org.meeuw.i18n.regions.validation.RegionValidatorService;
 import org.meeuw.i18n.regions.validation.ValidRegion;
 import org.meeuw.i18n.test.some.SomeRegion;
 
+import com.neovisionaries.i18n.CountryCode;
 import com.neovisionaries.i18n.LanguageCode;
 
 import static com.neovisionaries.i18n.CountryCode.*;
@@ -83,9 +84,17 @@ public class CountryValidatorTest {
         //assertThat(VALIDATOR.validate(new CountryAndRegions(new SomeRegion("GB-ENG")))).hasSize(0);
         //assertThat(VALIDATOR.validate(new A(CountrySubdivision.of(GB, "NIR").orElse(null)))).hasSize(0);
 
+
+        {
+            assertThat(VALIDATOR.validate(new CountryAndRegionsOrUserDefined(Country.of(CS)))).hasSize(1);
+            assertThat(VALIDATOR.validate(new CountryAndRegionsOrUserDefined(UserAssignedCountry.ZZ))).hasSize(0);
+        }
+
+
         testAsStreamFilter(
             regionValidatorService.fromProperty(CountryAndRegions.class, "region"),
             CountryAndRegions::new, "TPTL", "GB-ENG");
+
 
     }
 
@@ -101,10 +110,10 @@ public class CountryValidatorTest {
             this(r.getCode());
         }
     }
+
+
     @Test
     public void combineValidRegionAndValidCountryString() throws NoSuchFieldException {
-
-
         {
             // CS is not an official country any more:
             assertThat(VALIDATOR.validate(new CountryAndRegionsAsString(Country.of(CS)))).hasSize(1);
@@ -188,14 +197,12 @@ public class CountryValidatorTest {
     @Test
     public void onlyIncludes() throws NoSuchFieldException {
         class ZZ {
-            public List<Country> region;
+            public final List<Country> region;
 
             ZZ(Region r) {
                 this.region = r instanceof  Country ? Collections.singletonList((Country) r) : null;
             }
-            public void setRegion(List<Country> regions) {
-                this.region = regions;
-            }
+
             @ValidRegion(classes = Country.class)
             @ValidCountry(value = 0, includes = "ZZ")
             @NotNull
@@ -247,6 +254,27 @@ public class CountryValidatorTest {
         testAsStreamFilter(
             regionValidatorService.fromProperty(Former.class, "region"),
             Former::new);
+    }
+
+    public static class CountryAndRegionsAsObject {
+        @ValidRegion(includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
+        @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.FORMER)
+        public final Object region;
+
+        CountryAndRegionsAsObject(Object r) {
+            this.region = r;
+        }
+
+
+    }
+    @Test
+    public void convert() {
+        assertThat(VALIDATOR.validate(new CountryAndRegionsAsObject(UserAssignedCountry.ZZ))).hasSize(1);
+        assertThat(VALIDATOR.validate(CountryCode.NL)).hasSize(0);
+        assertThat(VALIDATOR.validate(FormerlyAssignedCountryCode.CSXX)).hasSize(0);
+        assertThat(VALIDATOR.validate(new Locale("nl", "NL"))).hasSize(0);
+        assertThat(VALIDATOR.validate(new Locale("nl"))).hasSize(0);
+
     }
 
     void testAsStreamFilter(
