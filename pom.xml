@@ -46,7 +46,7 @@
   <properties>
     <junit.version>5.8.0-M1</junit.version>
     <java.target.version>8</java.target.version>
-    <checker.version>3.10.0</checker.version>
+    <checker.version>3.11.0</checker.version>
     <jacoco.version>0.8.6</jacoco.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -205,7 +205,7 @@
             <configuration>
               <append>true</append>
               <excludes>
-                <exclude>org/meeuw/i18n/test/*</exclude>
+                <exclude>org/meeuw/i18n/test/**/*</exclude>
               </excludes>
             </configuration>
           </execution>
@@ -386,7 +386,7 @@
       <dependency>
         <groupId>org.hibernate.validator</groupId>
         <artifactId>hibernate-validator</artifactId>
-        <version>7.0.1.Final</version>
+        <version>6.2.0.Final</version>
         <scope>test</scope>
       </dependency>
 
