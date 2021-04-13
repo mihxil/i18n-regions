@@ -18,9 +18,7 @@ Change pom.xml to refer to this new bom.
 Then make the actual release
 [source,bash]
 ----
-mvn release:branch -DbranchName=1.1-SNAPSHOT -DdevelopmentVersion=1.2-SNAPSHOT
-git checkout 1.1-SNAPSHOT
-mvn -Pdeploy release:prepare release:perform -DreleaseVersion=1.1.0 -DdevelopmentVersion=1.1.1-SNAPSHOT
+./release.sh
 ----
 
 In case sonatype a bit down, or we need to have snapshots in vpro nexus
@@ -31,5 +29,5 @@ mvn -P'!blackboxtesting' -DaltDeploymentRepository=nexusvpro::default::https://n
 
 mvn -f i18n-regions-bom -P'deploy' -DaltDeploymentRepository=nexusvpro::default::https://nexus.vpro.nl/content/repositories/snapshots  deploy
 
-mvn -P'!blackboxtesting' -DaltDeploymentRepository=nexusvpro::default::https://nexus.vpro.nl/content/repositories/releases  deploy
+mvn -P'!blackboxtesting' -DaltDeploymentRepository=nexusvpro::https://nexus.vpro.nl/content/repositories/releases  deploy
 ----
