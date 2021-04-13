@@ -46,7 +46,7 @@
   <properties>
     <junit.version>5.8.0-M1</junit.version>
     <java.target.version>8</java.target.version>
-    <checker.version>3.11.0</checker.version>
+    <checker.version>3.12.0</checker.version>
     <jacoco.version>0.8.6</jacoco.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -383,6 +383,8 @@
         <version>3.0.0</version>
         <scope>test</scope>
       </dependency>
+
+      <!-- not ready for valiadtor 7 yet. Namespaces, package names changes. -->
       <dependency>
         <groupId>org.hibernate.validator</groupId>
         <artifactId>hibernate-validator</artifactId>
