@@ -3,14 +3,15 @@ Release bom first. Change pom.xml with needed new versions.
 [source,bash]
 ----
 ./release-bom.sh
-git commit -m 'released bom' ./i18n-regions-bom
+git commit -m 'released bom' ./i18n-regions-bom/pom.xml pom.xml
 git push
 ----
 
 Then:
 [source,bash]
 ----
- cd i18n-regions-bom; mvn -Pdeploy deploy
+export GPG_TTY=$(tty)
+cd i18n-regions-bom; mvn -Pdeploy deploy
 ----
 Change pom.xml to refer to this new bom.
 
