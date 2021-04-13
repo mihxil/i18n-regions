@@ -20,6 +20,6 @@ echo "$SNAPSHOT_VERSION -> $DEVELOPMENT_VERSION, $TARGET_VERSION, $BRANCH_DEVELO
 mvn release:branch -DbranchName=$SNAPSHOT_VERSION -DdevelopmentVersion=$DEVELOPMENT_VERSION
 git checkout $SNAPSHOT_VERSION
 git branch -l
-echo mvn -Pdeploy release:prepare release:perform -DreleaseVersion=$TARGET_VERSION -DdevelopmentVersion=1.1.1-SNAPSHOT
+echo mvn -Pdeploy release:prepare release:perform -DreleaseVersion=$TARGET_VERSION -DdevelopmentVersion=$BRANCH_DEVELOPMENT_VERSION
 
 
