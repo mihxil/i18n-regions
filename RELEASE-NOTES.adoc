@@ -1,6 +1,9 @@
 = Release notes
 :toc:
 
+== 1.2
+Updated to i18n 1.28 (support for Northern Ireland)
+
 == 1.1
 
 The main reason for this release was lowering some log statement. We log with jul, but it is a bit cumbersome to configure it for everytime. We just lowered to log to FINE.
