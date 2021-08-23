@@ -33,6 +33,7 @@ public interface RegionProvider<T extends Region> {
     default Optional<T> getByCode(@NonNull String code, boolean lenient) {
         return values().filter(r -> r.getCode().equals(code)).findFirst();
     }
+
     default Optional<T> getByCode(@NonNull String code) {
         return getByCode(code, true);
     }
