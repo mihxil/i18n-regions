@@ -4,7 +4,6 @@ import java.util.*;
 
 import javax.validation.*;
 
-
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -47,6 +46,12 @@ public class LanguageValidatorTest {
     }
 
     @Test
+    public void nullIsValid() {
+        assertTrue(languageValidator.isValid(null, null));
+
+    }
+
+    @Test
     @Disabled("fails. 'act' is somewhy not a known language")
     void achterhoeks() {
         assertTrue(languageValidator.isValid(new Locale("act"), null));
@@ -65,6 +70,32 @@ public class LanguageValidatorTest {
         a.language = language;
         Set<ConstraintViolation<WithLanguageFields>> constraintViolations = testValidate(a, 1);
         assertThat(constraintViolations.iterator().next().getMessage()).isEqualTo(language + " is een ongeldige ISO639 taalcode");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+        "ZZ",
+        "nl-UU",// UU is not a valid country
+        "nl-be"// case sensitive
+
+    })
+    public void testValidateInvalidNotForXml(String language) {
+        WithLanguageFields a = new WithLanguageFields();
+        a.notForXml = language;
+        Set<ConstraintViolation<WithLanguageFields>> constraintViolations = testValidate(a, 1);
+        assertThat(constraintViolations.iterator().next().getMessage()).isEqualTo(language + " is een ongeldige ISO639 taalcode");
+    }
+     @ParameterizedTest
+    @ValueSource(strings = {
+        "zh",
+        "nl-NL-INFORMAL",// UU is not a valid country
+        "nl-BE"// case sensitaive
+
+    })
+    public void testValidateValidNotForXml(String language) {
+        WithLanguageFields a = new WithLanguageFields();
+        a.notForXml = language;
+        Set<ConstraintViolation<WithLanguageFields>> constraintViolations = testValidate(a, 0);
     }
 
 
@@ -102,7 +133,7 @@ public class LanguageValidatorTest {
         }
         {
             WithLanguageFields a = new WithLanguageFields();
-            a.object = Arrays.asList("nl-NL", "nl-BE");
+            a.object = Arrays.asList("nl-NL", "nl-be");
             testValidate(a, 0);
         }
     }

@@ -81,6 +81,10 @@ public class RegionService {
         return getByCode(code, true, clazz);
     }
 
+
+    /**
+     *
+     */
     public  Optional<Region> getByCode(@NonNull String s, boolean lenient) {
         return getByCode(s, lenient, Region.class);
     }
