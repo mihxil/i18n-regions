@@ -1,5 +1,6 @@
 package org.meeuw.i18n.regions.validation.impl;
 
+
 import java.util.*;
 
 import javax.validation.ConstraintValidator;
@@ -12,6 +13,7 @@ import org.meeuw.i18n.regions.validation.Language;
 
 import com.neovisionaries.i18n.LanguageAlpha3Code;
 import com.neovisionaries.i18n.LanguageCode;
+
 
 
 /**
@@ -66,8 +68,16 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
             return true;
         } else {
             try {
-                Locale locale = toLocale(value);
-                return isValid(locale);
+                if (value instanceof Locale) {
+                    return isValid((Locale) value);
+                } else {
+                    if (annotation.forXml()) {
+                        return isValid(Locale.forLanguageTag(value.toString()));
+                    } else {
+                        String[] split = splitAdapt(String.valueOf(value), annotation.lenientCountry());
+                        return isValid(split[0], split[1], split[2]);
+                    }
+                }
             } catch (IllegalArgumentException iae) {
                 return false;
             }
@@ -75,46 +85,49 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
     }
 
 
-    protected Locale toLocale(Object o) {
-        if (o instanceof Locale) {
-            return (Locale) o;
-        } else {
-            if (annotation.forXml()) {
-                return Locale.forLanguageTag(o.toString());
-            } else {
-                return adapt(o.toString(), false);
-            }
-        }
+    public static Locale adapt(@Nullable String v, boolean lenient) {
+        return toLocale(splitAdapt(v, lenient));
     }
 
-    public static Locale adapt(String v, boolean lenient) {
+    private static Locale toLocale(String@Nullable[] split){
+        if (split == null) {
+            return null;
+        }
+        return new Locale(split[0], split[1], split[2]);
+    }
+
+    @Nullable
+    private static String[] splitAdapt(@Nullable String v, boolean lenient) {
         if (v == null) {
             return null;
         }
+
         String[] split = v.split("[_-]", 3);
         LanguageCode languageCode = LanguageCode.getByCode(split[0], ! lenient);
         if (languageCode == null && ! lenient) {
             throw new IllegalArgumentException("Not a valid language " + split[0]);
         }
         String language = languageCode == null ? split[0] : languageCode.name().toLowerCase();
-
         switch (split.length) {
             case 1:
-                return new Locale(language);
+                return new String[]{language, "", ""};
             case 2:
-                return new Locale(language, split[1].toUpperCase());
+                return new String[]{language, lenient ? split[1].toUpperCase() : split[1], ""};
             default:
-                return new Locale(language, split[1].toUpperCase(), split[2]);
+                return new String[]{language, lenient ? split[1].toUpperCase() : split[1], split[2]};
         }
     }
-
     @RequiresNonNull("annotation")
-    protected boolean isValid(Locale value) {
-        if (! value.getCountry().isEmpty()) {
+    protected boolean isValid(Locale locale) {
+        return isValid(locale.getLanguage(), locale.getCountry(), locale.getVariant());
+    }
+    @RequiresNonNull("annotation")
+    protected boolean isValid(String language, String country, String variant) {
+        if (! country.isEmpty()) {
             if (! annotation.mayContainCountry()) {
                 return false;
             }
-            Optional<Region> byCode = RegionService.getInstance().getByCode(value.getCountry());
+            Optional<Region> byCode = RegionService.getInstance().getByCode(country, annotation.lenientCountry());
             if (! byCode.isPresent()) {
                 return false;
             } else {
@@ -124,12 +137,12 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
             }
 
         }
-        if (! value.getVariant().isEmpty() && ! annotation.mayContainVariant()) {
+        if (! variant.isEmpty() && ! annotation.mayContainVariant()) {
             return false;
         }
         return
-            VALID_ISO3_LANGUAGES.contains(value.getLanguage()) ||
-                VALID_ISO_LANGUAGES.contains(value.getLanguage());
+            VALID_ISO3_LANGUAGES.contains(language) ||
+                VALID_ISO_LANGUAGES.contains(language);
 
     }
 }

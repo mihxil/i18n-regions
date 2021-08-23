@@ -4,13 +4,21 @@ import org.meeuw.i18n.regions.validation.Language;
 
 /**
  * @author Michiel Meeuwissen
- * @since ...
  */
 public class WithLanguageFields {
     @Language
     public String language;
 
-    @Language(forXml = false)
+    @Language(
+        forXml = false,
+        lenientCountry = true
+    )
+    public String lenientCountry;
+
+    @Language(
+        forXml = false,
+        mayContainVariant = true
+    )
     public String notForXml;
 
     @Language(mayContainCountry = false)

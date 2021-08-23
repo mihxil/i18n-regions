@@ -51,4 +51,10 @@ public @interface Language {
      */
     boolean forXml() default true;
 
+    /**
+     * Will pass be passed as second argument to {@link RegionService#getByCode(String, boolean)}
+     * This may make the country code case insensitive (if not yet because of {@link #forXml()} and might e.g. also match the country codes on formerly assigned codes.
+     */
+    boolean lenientCountry() default false;
+
 }
