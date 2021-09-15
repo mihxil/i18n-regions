@@ -11,7 +11,7 @@ Then:
 [source,bash]
 ----
 export GPG_TTY=$(tty)
-cd i18n-regions-bom; mvn -Pdeploy deploy
+cd i18n-regions-bom; mvn -Pdeploy clean deploy
 ----
 Change pom.xml to refer to this new bom.
 
