@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.meeuw.i18n</groupId>
-  <version>1.3.0</version>
+  <version>1.4-SNAPSHOT</version>
   <artifactId>i18n-regions-bom</artifactId>
   <packaging>pom</packaging>
   <name>i18n-regions-bom</name>
