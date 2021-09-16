@@ -10,7 +10,7 @@ import com.neovisionaries.i18n.CountryCode;
 /**
  *  Provides all countries backed by {@link com.neovisionaries.i18n.CountryCode} but without an official code.
  *
- *  Normally the country does not exist, or does not exist any more.
+ *  Normally the country does not exist, or does not exist anymore.
  *
  *  *
  * @author Michiel Meeuwissen
