@@ -23,7 +23,7 @@ public class UserAssignedCountryProviderTest {
      * Also tests that all {@link UserAssignedCountry}s are working without causing exceptions.
      */
     @Test
-    void values() {
+    public void values() {
         Set<CountryCode> collect = Arrays.stream(CountryCode.values())
             .filter(a -> a.getAssignment() == CountryCode.Assignment.USER_ASSIGNED)
             .collect(Collectors.toSet());
