@@ -11,7 +11,7 @@ import com.neovisionaries.i18n.LanguageCode;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class UserAssignedCountryProviderTest {
+public class UserAssignedCountryProviderTest {
     final UserAssignedCountryProvider inst = new UserAssignedCountryProvider();
 
 
