@@ -35,7 +35,7 @@ public interface Country extends Region {
     Predicate<Region> IS_FORMER = c -> c instanceof FormerCountry;
 
     /**
-     * A usefull predicate, e.g. to filter streams of {@link RegionService#values()}
+     * A useful predicate, e.g. to filter streams of {@link RegionService#values()}
      *
      * Checks wether the region if a {@link UserAssignedCountry}
      */
