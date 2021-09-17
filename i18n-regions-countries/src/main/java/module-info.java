@@ -14,6 +14,7 @@ module org.meeuw.i18n.countries {
     requires transitive org.meeuw.i18n.formerlyassigned;
 
     requires static java.validation;
+    requires java.logging;
 
     uses RegionProvider;
 

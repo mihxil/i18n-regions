@@ -2,10 +2,9 @@ package org.meeuw.i18n.countries;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -16,23 +15,28 @@ import org.meeuw.i18n.regions.spi.RegionProvider;
 /**
  * @author Michiel Meeuwissen
  * @since 0.1
+ * @see UserAssignedCountry
  */
-public class UserAssignedCountryProvider implements RegionProvider<UserAssignedRegion> {
+public class UserAssignedCountryProvider implements RegionProvider<UserAssignedCountry> {
 
-    private static final Map<String, UserAssignedRegion> VALUES;
+    private static final Logger logger = Logger.getLogger(UserAssignedCountry.class.getName());
 
-    static {
+
+    private final Map<String, UserAssignedCountry> values = new ConcurrentHashMap<>();
+
+    {
         Map<String, org.meeuw.i18n.countries.UserAssignedCountry> v = new HashMap<>();
         for (Field f : org.meeuw.i18n.countries.UserAssignedCountry.class.getFields()) {
             if (Modifier.isStatic(f.getModifiers()) && org.meeuw.i18n.countries.UserAssignedCountry.class.isAssignableFrom(f.getType())) {
                 try {
-                    v.put(f.getName(), (org.meeuw.i18n.countries.UserAssignedCountry) f.get(null));
+                    UserAssignedCountry found = (org.meeuw.i18n.countries.UserAssignedCountry) f.get(null);
+                    UserAssignedCountry replaced = register(found);
+                    logger.fine("Registered " + found);
                 } catch (IllegalAccessException ignored) {
 
                 }
             }
         }
-        VALUES = Collections.unmodifiableMap(v);
     }
 
 
@@ -42,21 +46,29 @@ public class UserAssignedCountryProvider implements RegionProvider<UserAssignedR
     }
 
     @Override
-    public Optional<UserAssignedRegion> getByCode(@NonNull String code, boolean lenient) {
+    public Optional<UserAssignedCountry> getByCode(@NonNull String code, boolean lenient) {
         if (lenient && code != null) {
             code = code.toUpperCase();
         }
-        return Optional.ofNullable(VALUES.get(code));
+        return Optional.ofNullable(values.get(code));
     }
 
     @Override
-    public Class<UserAssignedRegion> getProvidedClass() {
-        return UserAssignedRegion.class;
+    public Class<UserAssignedCountry> getProvidedClass() {
+        return UserAssignedCountry.class;
     }
 
     @Override
-    public Stream<UserAssignedRegion> values() {
-        return VALUES.values().stream();
+    public Stream<UserAssignedCountry> values() {
+        return values.values().stream();
+    }
+
+    public UserAssignedCountry register(UserAssignedCountry country) {
+        UserAssignedCountry replaces = values.put(country.getCode(), country);
+        if (replaces != null) {
+            logger.info("Replaced user assigned country " + replaces + " with " + country);
+        }
+        return replaces;
     }
 
     @Override
