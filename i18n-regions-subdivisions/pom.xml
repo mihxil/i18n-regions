@@ -17,7 +17,6 @@
       <artifactId>i18n-regions</artifactId>
     </dependency>
 
-
     <dependency>
       <groupId>be.olsson</groupId>
       <artifactId>i18n-subdivisions</artifactId>
