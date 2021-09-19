@@ -27,6 +27,7 @@ jobs:
       - uses: codecov/codecov-action@v2
         with:
           directory: ./report-aggregation
+          working-directory: ./report-aggregation
           verbose: true
       - name: Publish Test Report
         uses: scacap/action-surefire-report@v1
