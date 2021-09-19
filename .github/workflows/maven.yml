@@ -20,10 +20,13 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - uses: s4u/maven-settings-action@v2
+        with:
+          servers: '[{"id": "ossrh", "username": "mihxil", "password": "${{secrets.OSSRH_PASSWORD}}"}]'
       - name: Build BOM with Maven
-        run: OSSRH_PASSWORD=${{ secrets.OSSRH_PASSWORD }} mvn -B clean deploy -s $GITHUB_WORKSPACE/.github/settings.xml -f i18n-regions-bom
+        run: (cd i18n-regions-bom ; mvn -B clean deploy)
       - name: Build with Maven
-        run: OSSRH_PASSWORD=${{ secrets.OSSRH_PASSWORD }} mvn -B deploy -s $GITHUB_WORKSPACE/.github/settings.xml --file pom.xml
+        run: mvn -B deploy
       - uses: codecov/codecov-action@v2
         with:
           directory: ./report-aggregation
