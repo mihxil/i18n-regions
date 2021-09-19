@@ -38,7 +38,7 @@ public class CurrentCountryProviderTest {
     @Test
     public void equalsAndHashCode() {
         Region nl = currentCountryProvider.getByCode("NL").orElseThrow();
-        Region be = currentCountryProvider.getByCode("BE").orElseThrow();;
+        Region be = currentCountryProvider.getByCodeOrNull("BE");
 
         assertThat(nl.equals(be)).isFalse();
         assertThat(nl.equals(nl)).isTrue();
