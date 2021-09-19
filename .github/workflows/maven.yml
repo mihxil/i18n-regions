@@ -29,8 +29,7 @@ jobs:
         run: mvn -B deploy
       - uses: codecov/codecov-action@v2
         with:
-          directory: ./report-aggregation
-          working-directory: ./report-aggregation
+          files: report-aggregation/target/site/jacoco-aggregate/jacoco.xml
           verbose: true
       - name: Publish Test Report
         uses: scacap/action-surefire-report@v1
