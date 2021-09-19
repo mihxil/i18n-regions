@@ -1,6 +1,7 @@
+---
 codecov:
   notify:
-    require_ci_to_pass: no
+    require_ci_to_pass: false
 
 coverage:
   precision: 2
@@ -8,19 +9,22 @@ coverage:
   range: "50...90"
 
   status:
-    project: yes
-    patch: yes
-    changes: no
+    project: true
+    patch: true
+    changes: false
 
 parsers:
   gcov:
     branch_detection:
-      conditional: yes
-      loop: yes
-      method: no
-      macro: no
+      conditional: true
+      loop: true
+      method: false
+      macro: false
 
 comment:
   layout: "header, diff"
   behavior: default
-  require_changes: no
+  require_changes: false
+
+ignore:
+  - "**/org/meeuw/i18n/test/**/*"         # glob accepted
