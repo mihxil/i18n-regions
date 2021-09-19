@@ -2,6 +2,7 @@ package org.meeuw.i18n.countries.persistence;
 
 import java.util.Locale;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.meeuw.i18n.regions.Region;
@@ -116,5 +117,11 @@ public class RegionToStringConverterTest {
         } else {
             assertThat(impl.convertToDatabaseColumn(region)).isEqualTo(code);
         }
+    }
+
+    @Test
+    public void convertNull() {
+        assertThat(impl.convertToDatabaseColumn(null)).isNull();
+        assertThat(impl.convertToEntityAttribute(null)).isNull();
     }
 }
