@@ -1,12 +1,12 @@
 package org.meeuw.i18n.test.countries;
 
+import java.lang.annotation.Retention;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
+import javax.validation.*;
 import javax.validation.constraints.NotNull;
 
 import org.junit.jupiter.api.Test;
@@ -22,6 +22,7 @@ import com.neovisionaries.i18n.CountryCode;
 import com.neovisionaries.i18n.LanguageCode;
 
 import static com.neovisionaries.i18n.CountryCode.*;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -43,6 +44,8 @@ public class CountryValidatorTest {
         @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.FORMER)
         public final Region region;
 
+
+
         public CountryAndRegions(Region r) {
             this.region = r;
         }
@@ -61,7 +64,7 @@ public class CountryValidatorTest {
 
 
     @Test
-    public void combineValidRegionAndValidCountry() throws NoSuchFieldException {
+    public void combineValidRegionAndValidCountry() {
 
         {
             // CS is not an official country any more:
@@ -93,7 +96,9 @@ public class CountryValidatorTest {
 
         testAsStreamFilter(
             regionValidatorService.fromProperty(CountryAndRegions.class, "region"),
-            CountryAndRegions::new, "TPTL", "GB-ENG");
+            CountryAndRegions::new,
+            31,
+            "TPTL", "GB-ENG");
 
 
     }
@@ -113,7 +118,7 @@ public class CountryValidatorTest {
 
 
     @Test
-    public void combineValidRegionAndValidCountryString() throws NoSuchFieldException {
+    public void combineValidRegionAndValidCountryString() {
         {
             // CS is not an official country any more:
             assertThat(VALIDATOR.validate(new CountryAndRegionsAsString(Country.of(CS)))).hasSize(1);
@@ -137,7 +142,9 @@ public class CountryValidatorTest {
 
         testAsStreamFilter(
             regionValidatorService.fromProperty(CountryAndRegionsAsString.class, "region"),
-            CountryAndRegionsAsString::new, "TPTL", "GB-ENG");
+            CountryAndRegionsAsString::new,
+            31,
+            "TPTL", "GB-ENG");
     }
 
    public static class CountryAndRegionsWithList {
@@ -195,7 +202,7 @@ public class CountryValidatorTest {
     }
 
     @Test
-    public void onlyIncludes() throws NoSuchFieldException {
+    public void onlyIncludes() {
         class ZZ {
             public final List<Country> region;
 
@@ -218,14 +225,16 @@ public class CountryValidatorTest {
         assertThat(VALIDATOR.validate(new ZZ(UserAssignedCountry.ZZ))).hasSize(0);
         testAsStreamFilter(
             regionValidatorService.fromProperty(ZZ.class, "region"),
-            ZZ::new);
+            ZZ::new,
+            314
+        );
     }
 
 
 
 
     @Test
-    public void testClasses() throws NoSuchFieldException {
+    public void testClasses() {
         class Former {
             @ValidRegion(classes = {FormerCountry.class})
             @NotNull
@@ -253,7 +262,9 @@ public class CountryValidatorTest {
 
         testAsStreamFilter(
             regionValidatorService.fromProperty(Former.class, "region"),
-            Former::new);
+            Former::new,
+            284
+            );
     }
 
     public static class CountryAndRegionsAsObject {
@@ -277,17 +288,53 @@ public class CountryValidatorTest {
 
     }
 
+
+    @ValidRegion(includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
+    @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.USER_ASSIGNED)
+    @Constraint(validatedBy = {})
+    @Retention(RUNTIME)
+    public @interface  MetaAnnotation {
+        String message() default "";
+        Class<?>[] groups() default {};
+        Class<? extends Payload>[] payload() default {};
+    }
+
+
+    public static class CountryAndRegionsMetaAnnotated {
+        @MetaAnnotation
+        public final Region region;
+
+        public CountryAndRegionsMetaAnnotated(Region r) {
+            this.region = r;
+        }
+    }
+
+    @Test
+    public void meta() {
+        assertThat(VALIDATOR.validate(new CountryAndRegionsAsObject(UserAssignedCountry.ZZ))).hasSize(1);
+
+        testAsStreamFilter(
+            regionValidatorService.fromProperty(CountryAndRegionsMetaAnnotated.class, "region"),
+            CountryAndRegionsMetaAnnotated::new,
+            54
+            );
+    }
+
+
+
     void testAsStreamFilter(
         Predicate<Object> predicate,
         Function<Region, Object> instantiator,
-        String... assertToContain) throws NoSuchFieldException {
+        int expectedInvalidCount,
+        String... assertToContain) {
 
         List<Region> validValues = RegionService.getInstance().values()
             .filter(predicate)
             .sorted(Regions.sortByName(LanguageCode.nl))
             .collect(Collectors.toList());
         for(Region r : validValues) {
-            assertThat(VALIDATOR.validate(instantiator.apply(r))).withFailMessage(r + " was supposed to be valid, but is invalid").hasSize(0);
+            assertThat(VALIDATOR.validate(instantiator.apply(r)))
+                .withFailMessage(r + " was supposed to be valid, but is invalid").hasSize(0);
         }
         for (String code : assertToContain) {
             assertThat(validValues.stream().filter(r -> r.getCode().equals(code)).findFirst()).isPresent();
@@ -296,8 +343,11 @@ public class CountryValidatorTest {
             .filter(predicate.negate())
             .sorted(Regions.sortByName(LanguageCode.nl))
             .collect(Collectors.toList());
+
+        assertThat(invalidValues).hasSize(expectedInvalidCount);
         for(Region r : invalidValues) {
-            assertThat(VALIDATOR.validate(instantiator.apply(r)).size()).withFailMessage(""+ r + " is valid, but expected to be invalid").isGreaterThan(0);
+            assertThat(VALIDATOR.validate(instantiator.apply(r)).size())
+                .withFailMessage(""+ r + " is valid, but expected to be invalid").isGreaterThan(0);
         }
         System.out.println(validValues.stream()
             .map(r -> Regions.toStringWithCode(r, LanguageCode.nl))
