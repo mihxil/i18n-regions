@@ -4,6 +4,8 @@ import java.time.Year;
 
 import org.junit.jupiter.api.Test;
 
+import com.neovisionaries.i18n.LanguageCode;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -12,12 +14,17 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 0.1
  */
 public class FormerCountryTest {
-
+    final FormerCountryProvider impl = new FormerCountryProvider();
     @Test
     public void getValidity() {
-        new FormerCountryProvider().values().forEach((country) -> {
-            // it wouldn't be former otherwise!
+        impl.values().forEach((country) -> {
+
+            System.out.println("" + country + " " + country.getName(LanguageCode.nl) + " < " + country.getFormerCodes() + " " + country.getNumeric());
+             // it wouldn't be former otherwise!
             assertThat(country.getValidity().contains(Year.now())).isFalse();
         });
     }
+
+
+
 }

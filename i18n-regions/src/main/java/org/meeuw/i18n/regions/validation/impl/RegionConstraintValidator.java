@@ -1,6 +1,7 @@
 package org.meeuw.i18n.regions.validation.impl;
 
 import java.util.*;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import javax.validation.ConstraintValidator;
@@ -9,8 +10,7 @@ import javax.validation.ConstraintValidatorContext;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.checker.optional.qual.MaybePresent;
-import org.meeuw.i18n.regions.Region;
-import org.meeuw.i18n.regions.RegionService;
+import org.meeuw.i18n.regions.*;
 import org.meeuw.i18n.regions.validation.ValidRegion;
 
 /**
@@ -61,8 +61,6 @@ public class RegionConstraintValidator implements ConstraintValidator<ValidRegio
     private boolean isValid(Region region, ValidationInfo validationInfo) {
         Optional<Boolean> aBoolean = defaultIsValid(region, validationInfo);
         return aBoolean.orElse(true);
-
-
     }
 
     private ConvertResult convert(Object o) {
@@ -115,11 +113,15 @@ public class RegionConstraintValidator implements ConstraintValidator<ValidRegio
         if (region == null) {
             return Optional.of(true);
         }
-        if (Arrays.asList(validationInfo.getExcludes()).contains(region)) {
-            return  Optional.of(false);
-        }
         if (Arrays.asList(validationInfo.getIncludes()).contains(region)) {
             return Optional.of(true);
+        }
+        if (Arrays.asList(validationInfo.getExcludes()).contains(region)) {
+            return Optional.of(false);
+        }
+        Optional<Boolean> userAssigned = validateUserAssigned(region, validationInfo);
+        if (userAssigned.isPresent()){
+            return userAssigned;
         }
         if (Stream.of(validationInfo.getClasses()).noneMatch((r) -> r.isInstance(region))) {
             return Optional.of(false);
@@ -127,6 +129,25 @@ public class RegionConstraintValidator implements ConstraintValidator<ValidRegio
 
         if (validationInfo.getTypes().length > 0) {
             if (Stream.of(validationInfo.getTypes()).noneMatch((t) -> region.getType() == t)) {
+                return Optional.of(false);
+            }
+        }
+        return Optional.empty();
+    }
+
+    private static Optional<Boolean> validateUserAssigned(Region region, ValidationInfo validationInfo) {
+        if (region instanceof UserAssignedRegion) {
+            for(Pattern exclude :  validationInfo.getExcludeAssigners()) {
+                if (exclude.matcher(((UserAssignedRegion) region).getAssignedBy()).matches()) {
+                    return Optional.of(false);
+                }
+            }
+            if (validationInfo.getIncludeAssigners().length > 0) {
+                for (Pattern include : validationInfo.getIncludeAssigners()) {
+                    if (include.matcher(((UserAssignedRegion) region).getAssignedBy()).matches()) {
+                        return Optional.of(true);
+                    }
+                }
                 return Optional.of(false);
             }
         }

@@ -321,6 +321,41 @@ public class CountryValidatorTest {
     }
 
 
+    @Test
+    public void userAssignedInclude() {
+        class A {
+            @ValidRegion(includeAssigners = {UserAssignedCountry.ASSIGNER_EU}, classes = {UserAssignedCountry.class})
+            public Region country;
+        }
+        List<Region> valids = new ArrayList<>();
+        RegionService.getInstance().values().filter(
+            regionValidatorService.fromProperty(A.class, "country")
+        ).forEach(c -> {
+            valids.add(c);
+            assertThat(c).isInstanceOf(UserAssignedCountry.class);
+            assertThat(((UserAssignedRegion)c).getAssignedBy()).isEqualTo(UserAssignedCountry.ASSIGNER_EU);
+        });
+        assertThat(valids.toString()).isEqualTo("[XI, XK, XU]");
+
+    }
+     @Test
+    public void userAssignedExclude() {
+        class A {
+            @ValidRegion(excludeAssigners = {UserAssignedCountry.ASSIGNER_WIPO}, classes = {UserAssignedCountry.class})
+            public Region country;
+        }
+        List<Region> valids = new ArrayList<>();
+        RegionService.getInstance().values().filter(
+            regionValidatorService.fromProperty(A.class, "country")
+        ).forEach(c -> {
+            valids.add(c);
+            assertThat(c).isInstanceOf(UserAssignedCountry.class);
+            assertThat(((UserAssignedRegion)c).getAssignedBy()).isNotEqualTo(UserAssignedCountry.ASSIGNER_WIPO);
+        });
+        assertThat(valids.toString()).isEqualTo("[ZZ, XI, XZ, XK, QU, XU, QO]");
+
+    }
+
 
     void testAsStreamFilter(
         Predicate<Object> predicate,

@@ -16,7 +16,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Michiel Meeuwissen
- * @since ...
  */
 public class RegionConstraintValidatorTest {
     private static final RegionValidatorService regionValidatorService = RegionValidatorService.getInstance();
@@ -157,5 +156,6 @@ public class RegionConstraintValidatorTest {
 
 
     }
+
 
 }

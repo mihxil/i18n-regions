@@ -49,6 +49,16 @@ public @interface ValidCountrySubdivision {
      */
     String[] includes() default {};
 
+     /**
+     * See {@link ValidRegion#excludeAssigners()}
+     */
+    String[] excludeAssigners() default {};
+
+     /**
+     * See {@link ValidRegion#includeAssigners()}
+     */
+    String[] includeAssigners() default {};
+
     String[] excludeCountries() default {};
 
     String[] includeCountries() default {};

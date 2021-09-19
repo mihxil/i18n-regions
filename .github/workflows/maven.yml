@@ -13,6 +13,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      MAVEN_OPTS: -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 11
@@ -29,5 +31,6 @@ jobs:
       uses: scacap/action-surefire-report@v1
       if: always()
       with:
+          report_paths: report-aggregation/target/site/jacoco-aggregate/jacoco.xml
           github_token: ${{ secrets.GITHUB_TOKEN }}
 

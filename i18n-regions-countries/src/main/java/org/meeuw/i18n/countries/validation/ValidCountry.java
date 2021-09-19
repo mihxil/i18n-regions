@@ -67,6 +67,17 @@ public @interface ValidCountry {
      */
     String[] excludes() default {};
 
+
+    /**
+     * See {@link ValidRegion#excludeAssigners()}
+     */
+    String[] excludeAssigners() default {};
+
+     /**
+     * See {@link ValidRegion#includeAssigners()}
+     */
+    String[] includeAssigners() default {};
+
     /**
      * See {@link ValidRegion#includes()}
      */

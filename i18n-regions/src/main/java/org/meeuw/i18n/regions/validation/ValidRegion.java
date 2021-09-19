@@ -45,6 +45,18 @@ public @interface ValidRegion {
     String[] excludes() default {};
 
     /**
+     * A list of assigners to excludes (only relevant if the type is {@link org.meeuw.i18n.regions.UserAssignedRegion}
+     * @since 1.4
+     */
+    String[] excludeAssigners() default {};
+
+    /**
+     * A list of assigners to include (only relevant if the type is {@link org.meeuw.i18n.regions.UserAssignedRegion}
+     * @since 1.4
+     */
+    String[] includeAssigners() default {};
+
+    /**
      * A list of codes to include. They are valid (unless they are also in {@link #excludes()}, regardless of {@link #classes()}
      */
     String[] includes() default {};

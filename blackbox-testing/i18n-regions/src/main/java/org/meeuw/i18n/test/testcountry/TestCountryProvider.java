@@ -6,7 +6,6 @@ import org.meeuw.i18n.regions.spi.RegionProvider;
 
 /**
  * @author Michiel Meeuwissen
- * @since ...
  */
 public class TestCountryProvider implements RegionProvider<TestCountry> {
 

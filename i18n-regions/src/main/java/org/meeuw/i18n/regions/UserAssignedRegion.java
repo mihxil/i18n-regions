@@ -28,7 +28,6 @@ public abstract class UserAssignedRegion implements Region {
     @Override
     public String getCode() {
         return code;
-
     }
 
     public String getAssignedBy() {

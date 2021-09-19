@@ -4,7 +4,6 @@ import org.meeuw.i18n.regions.Region;
 
 /**
  * @author Michiel Meeuwissen
- * @since ...
  */
 public class SomeRegion implements Region {
 
@@ -17,19 +16,16 @@ public class SomeRegion implements Region {
     @Override
     public String getCode() {
         return code;
-
     }
 
     @Override
     public Type getType() {
         return Type.SUBDIVISION;
-
     }
 
     @Override
     public String getName() {
         return getCode();
-
     }
 
     @Override
