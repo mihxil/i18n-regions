@@ -46,7 +46,7 @@
   <properties>
     <junit.version>5.8.1</junit.version>
     <java.target.version>8</java.target.version>
-    <checker.version>3.18.1</checker.version>
+    <checker.version>3.19.0</checker.version>
     <jacoco.version>0.8.7</jacoco.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
