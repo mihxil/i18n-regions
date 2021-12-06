@@ -317,7 +317,7 @@ public class CountryValidatorTest {
             regionValidatorService.fromProperty(CountryAndRegionsMetaAnnotated.class, "region"),
             CountryAndRegionsMetaAnnotated::new,
             54
-            );
+        );
     }
 
 
@@ -336,9 +336,9 @@ public class CountryValidatorTest {
             assertThat(((UserAssignedRegion)c).getAssignedBy()).isEqualTo(UserAssignedCountry.ASSIGNER_EU);
         });
         assertThat(valids.toString()).isEqualTo("[XI, XK, XU]");
-
     }
-     @Test
+
+    @Test
     public void userAssignedExclude() {
         class A {
             @ValidRegion(excludeAssigners = {UserAssignedCountry.ASSIGNER_WIPO}, classes = {UserAssignedCountry.class})

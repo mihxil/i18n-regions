@@ -19,7 +19,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Michiel Meeuwissen
- * @since ...
  */
 public class CountrySubdivisionConstraintValidatorTest {
 
@@ -34,7 +33,7 @@ public class CountrySubdivisionConstraintValidatorTest {
             this.region = r;
         }
     }
-     static class Netherlandss {
+    static class Netherlandss {
         @ValidCountrySubdivision(includeCountries = "NL")
         public final List<Region> region;
 
@@ -64,6 +63,17 @@ public class CountrySubdivisionConstraintValidatorTest {
 
     @Test
     public void convert() {
+        class A {
+            @ValidCountrySubdivision(includeCountries = "NL")
+            public final String region;
+
+            public A(String  r) {
+                this.region = r;
+            }
+        }
+        assertThat(VALIDATOR.validate(new A(null))).hasSize(0);
+        assertThat(VALIDATOR.validate(new A("NL-AA"))).hasSize(0);
+        assertThat(VALIDATOR.validate(new A("BE-AA"))).hasSize(1);
 
     }
 
