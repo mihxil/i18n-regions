@@ -1,9 +1,8 @@
 package org.meeuw.i18n.regions;
 
 import java.io.Serializable;
-import java.util.Locale;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
+import java.net.URI;
+import java.util.*;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -84,9 +83,12 @@ public interface Region extends Serializable {
         @NonNull StringBuilder builder,
         @NonNull Locale language) {
         builder.append(getName(language));
-
     }
 
+
+    default Optional<URI> getIcon() {
+        return Optional.empty();
+    }
 
     /**
      * Type of regions. For now this is small list, we may add all known 'subdivision' of countries.

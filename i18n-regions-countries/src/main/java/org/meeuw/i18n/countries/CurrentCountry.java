@@ -1,8 +1,14 @@
 package org.meeuw.i18n.countries;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
 import java.util.*;
+import java.util.logging.Logger;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.i18n.regions.Region;
 
 import com.neovisionaries.i18n.CountryCode;
 
@@ -16,6 +22,20 @@ public class CurrentCountry implements Country {
     private static final long serialVersionUID = 0L;
 
     private final CountryCode code;
+
+    public static final ThreadLocal<Boolean> ALWAYS_USE_CDN_FOR_ICONS = ThreadLocal.withInitial(() -> false);
+
+    static final String WEBJARS;
+    static final String CDNWEBJARS;
+
+
+    public static final boolean HAS_WEBJARS_JAR;
+    static {
+        Optional<String> localWebJars = getLocalWebJars();
+        CDNWEBJARS = getCdnWebJars();
+        WEBJARS = getLocalWebJars().orElse(CDNWEBJARS);
+        HAS_WEBJARS_JAR =  getLocalWebJars().isPresent();
+    }
 
     public CurrentCountry(@NonNull CountryCode code) {
         this.code = code;
@@ -37,7 +57,6 @@ public class CurrentCountry implements Country {
     @Override
     public int getNumeric() {
         return code.getNumeric();
-
     }
 
     @Override
@@ -90,6 +109,19 @@ public class CurrentCountry implements Country {
     }
 
     @Override
+    public Optional<URI> getIcon() {
+        if (getAssignment() == CountryCode.Assignment.OFFICIALLY_ASSIGNED) {
+            if (ALWAYS_USE_CDN_FOR_ICONS.get()) {
+                return Optional.of(URI.create(CDNWEBJARS + getCode().toLowerCase() + ".svg"));
+            } else {
+                return Optional.of(URI.create(WEBJARS + getCode().toLowerCase() + ".svg"));
+            }
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -102,5 +134,31 @@ public class CurrentCountry implements Country {
     @Override
     public int hashCode() {
         return Objects.hashCode(code);
+    }
+
+
+    static Optional<String> getLocalWebJars() {
+        URL url  = Country.class.getClassLoader().getResource("META-INF/maven/org.webjars.npm/flag-icon-css/pom.properties");
+        if (url != null) {
+            Properties prop = new Properties();
+            try (InputStream input = url.openStream()) {
+                prop.load(input);
+                return Optional.of("/webjars/flag-icon-css/" + prop.getProperty("version") + "/flags/4x3/");
+            } catch (IOException e) {
+                Logger.getLogger(Country.class.getName()).warning(e.getMessage());
+            }
+        }
+        return Optional.empty();
+    }
+
+    static String getCdnWebJars()  {
+        URL url  = Region.class.getClassLoader().getResource("META-INF/maven/org.meeuw.i18n/i18n-regions-countries/maven.properties");
+        Properties prop = new Properties();
+        try (InputStream input = url.openStream()) {
+            prop.load(input);
+        } catch (NullPointerException | IOException e) {
+            Logger.getLogger(Country.class.getName()).warning(e.getMessage());
+        }
+        return "https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/" + prop.getProperty("flag-icon-css.version")+ "/flags/4x3/";
     }
 }

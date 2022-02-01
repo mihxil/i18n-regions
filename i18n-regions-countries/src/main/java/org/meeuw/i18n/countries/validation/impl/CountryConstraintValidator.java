@@ -47,12 +47,10 @@ public class CountryConstraintValidator implements ConstraintValidator<ValidCoun
             return true;
         } else {
             Optional<Country> c = convert(region);
-            if (c.isPresent()) {
-                return isValid(c.get(), validationInfo);
-            } else {
-                // value is not a country, consider it valid, use @ValidRegion
-                return true;
-            }
+            // value is not a country, consider it valid, use @ValidRegion
+            return c
+                .map(country -> isValid(country, validationInfo))
+                .orElse(true);
         }
     }
 

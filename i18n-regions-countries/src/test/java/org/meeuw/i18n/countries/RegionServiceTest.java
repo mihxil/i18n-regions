@@ -1,5 +1,6 @@
 package org.meeuw.i18n.countries;
 
+import java.net.URI;
 import java.util.Locale;
 import java.util.Optional;
 
@@ -100,14 +101,12 @@ public class RegionServiceTest {
 
     @Test
     public void values() {
-
+        CurrentCountry.ALWAYS_USE_CDN_FOR_ICONS.set(true);
         RegionService.getInstance().values().forEach(r -> {
             StringBuilder build = new StringBuilder();
             r.toStringBuilder(build, LanguageCode.nl.toLocale());
             System.out.println(
-
-
-                r.getClass().getSimpleName() + ":" + r.getCode()  + " : " + r.getName() + ":" + r.getName(LanguageCode.nl) + ":" + build);
+                r.getClass().getSimpleName() + ":" + r.getCode()  + " : " + r.getName() + ":" + r.getName(LanguageCode.nl) + ":" + r.getIcon().map(URI::toString).orElse("none") + ": " + build);
         });
 
     }
