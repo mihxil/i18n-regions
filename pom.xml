@@ -48,13 +48,12 @@
     <java.target.version>8</java.target.version>
     <checker.version>3.21.1</checker.version>
     <jacoco.version>0.8.7</jacoco.version>
-
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
   <scm>
-    <connection>scm:git:git://github.com/mihxil/i18n-regions.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/mihxil/i18n-regions.git</developerConnection>
+    <connection>scm:git:${project.scm.url}.git</connection>
+    <developerConnection>scm:git:${project.scm.url}.git</developerConnection>
     <url>https://github.com/mihxil/i18n-regions</url>
     <tag>HEAD</tag>
   </scm>
@@ -103,7 +102,7 @@
 
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
+        <version>3.9.0</version>
         <configuration>
           <source>11</source>
           <target>11</target>
