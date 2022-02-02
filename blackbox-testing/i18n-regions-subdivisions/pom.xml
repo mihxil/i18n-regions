@@ -7,21 +7,11 @@
     <artifactId>i18n-regions-blackbox-testing</artifactId>
     <version>1.4-SNAPSHOT</version>
   </parent>
+
   <artifactId>i18n-regions-blackbox-testing-subdivisions</artifactId>
 
   <build>
-    <plugins>
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <configuration>
-          <append>true</append>
-          <excludes>
-            <exclude>org/meeuw/i18n/test/**</exclude>
-          </excludes>
-        </configuration>
-      </plugin>
-    </plugins>
+
   </build>
   <dependencies>
     <dependency>

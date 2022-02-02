@@ -356,6 +356,46 @@ public class CountryValidatorTest {
 
     }
 
+    @Test
+    public void codes() {
+        class A {
+            @ValidCountry(codes = {"NL", "BE"}, classes = {CurrentCountry.class})
+            public CountryCode country1;
+
+            @ValidRegion(codes = {"NL", "BE"}, classes = {CurrentCountry.class})
+            public CountryCode country2;
+            A(CountryCode c) {
+                this.country1 = c;
+                this.country2 = c;
+            }
+
+        }
+        assertThat(VALIDATOR.validate(new A(BE))).isEmpty();
+        assertThat(VALIDATOR.validate(new A(UK))).hasSize(2);
+
+    }
+
+
+    @Test
+    public void locales() {
+        class A {
+            @ValidRegion(codes = {"NL", "BE"}, classes = {CurrentCountry.class})
+            public Locale locale1;
+            @ValidCountry(codes = {"NL", "BE"}, classes = {CurrentCountry.class})
+            public Locale locale2;
+
+            A(Locale c) {
+                this.locale1 = c;
+                this.locale2 = c;
+            }
+
+        }
+        assertThat(VALIDATOR.validate(new A(new Locale("nl", "BE")))).isEmpty();
+        assertThat(VALIDATOR.validate(new A(new Locale("nl", "UK")))).hasSize(2);
+
+
+    }
+
 
     void testAsStreamFilter(
         Predicate<Object> predicate,

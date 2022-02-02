@@ -1,6 +1,7 @@
 package org.meeuw.i18n.regions.validation;
 
 import java.util.Collections;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -10,7 +11,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.regions.RegionService;
 
 /**
-
+ * Makes validation settings (via annotation) available as a {@link Predicate}.
  * @author Michiel Meeuwissen
  * @since 0.1
  */
@@ -79,9 +80,18 @@ public class RegionValidatorService {
         @NonNull Function<Object, ?> wrapper,
         @NonNull Class<?>... groups
     ) {
+        return o -> functionFromWrappedProperty(clazz, propertyName, wrapper, groups).apply(o).isEmpty();
+    }
+
+    public @NonNull Function<Object, Set<? extends ConstraintViolation<?>>> functionFromWrappedProperty(
+        @NonNull Class<?> clazz,
+        @NonNull String propertyName,
+        @NonNull Function<Object, ?> wrapper,
+        @NonNull Class<?>... groups
+    ) {
         return o -> {
             Object apply = wrapper.apply(o);
-            return VALIDATOR.validateValue(clazz, propertyName, apply, groups).isEmpty();
+            return VALIDATOR.validateValue(clazz, propertyName, apply, groups);
         };
     }
 

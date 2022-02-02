@@ -361,13 +361,14 @@
         <scope>import</scope>
       </dependency>
 
-      <!-- optional dependencies -->
       <dependency>
         <groupId>javax.annotation</groupId>
         <artifactId>javax.annotation-api</artifactId>
         <version>1.3.2</version>
-        <optional>true</optional>
       </dependency>
+
+      <!-- optional dependencies -->
+
       <dependency>
         <groupId>org.checkerframework</groupId>
         <artifactId>checker-qual</artifactId>
@@ -469,6 +470,11 @@
     <dependency>
       <groupId>javax.persistence</groupId>
       <artifactId>javax.persistence-api</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>javax.annotation</groupId>
+      <artifactId>javax.annotation-api</artifactId>
       <optional>true</optional>
     </dependency>
   </dependencies>
