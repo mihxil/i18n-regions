@@ -6,6 +6,8 @@ import java.util.Locale;
 import java.util.Objects;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.i18n.countries.Country;
+import org.meeuw.i18n.countries.CurrentCountry;
 
 /**
  * A subdivision of a country. Backend by {@link CountryCodeSubdivision}.
@@ -48,8 +50,8 @@ public class CountrySubdivisionWithCode implements CountrySubdivision {
     }
 
     @Override
-    public String getCountryCode() {
-        return code.getCountryCode().name();
+    public Country getCountry() {
+        return CurrentCountry.of(code.getCountryCode());
     }
 
     @Override

@@ -15,8 +15,10 @@ public class ValidationInfo extends org.meeuw.i18n.regions.validation.impl.Valid
     protected ValidationInfo(String[] excludes, String[] includes,
                              String[] excludeAssigners,
                              String[] includeAssigners,
-                             Class<?>[] classes, Region.Type[] types, int value) {
-        super(excludes, includes, excludeAssigners, includeAssigners, classes, types);
+                             Class<?>[] classes, Region.Type[] types,
+                             String[] codes,
+                             int value) {
+        super(excludes, includes, excludeAssigners, includeAssigners, classes, types, codes);
         this.value = value;
     }
 
@@ -26,6 +28,10 @@ public class ValidationInfo extends org.meeuw.i18n.regions.validation.impl.Valid
             annotation.includes(),
             annotation.excludeAssigners(),
             annotation.includeAssigners(),
-            annotation.classes(), annotation.types(), annotation.value());
+            annotation.classes(),
+            annotation.types(),
+            annotation.codes(),
+            annotation.value()
+        );
     }
 }

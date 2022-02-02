@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.meeuw.i18n.countries.CurrentCountry;
 import org.meeuw.i18n.regions.*;
 
 import com.neovisionaries.i18n.CountryCode;
@@ -46,7 +47,7 @@ public class RegionServiceTest {
         assertThat(eng.getName()).isEqualTo("England");
         assertThat(eng.getName(LanguageCode.nl)).isEqualTo("Engeland");
 
-        Region engOf = CountrySubdivision.of(CountryCode.GB, "ENG").orElseThrow();
+        Region engOf = CountrySubdivision.of(CurrentCountry.of(CountryCode.GB), "ENG").orElseThrow();
         assertThat(engOf).isEqualTo(eng);
 
         assertThat(Regions.toString(eng, LanguageCode.nl)).isEqualTo("Engeland (GB)");

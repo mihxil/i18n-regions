@@ -13,7 +13,6 @@
   <description>Provides the service loader for Regions, and some utilities to deal with regions generally</description>
 
   <dependencies>
-
     <dependency>
       <groupId>com.neovisionaries</groupId>
       <artifactId>nv-i18n</artifactId>

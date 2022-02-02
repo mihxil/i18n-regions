@@ -9,9 +9,7 @@ import org.meeuw.i18n.subdivisions.validation.ValidCountrySubdivision;
  */
 class ValidationInfo extends org.meeuw.i18n.regions.validation.impl.ValidationInfo {
 
-    final String[] includeCountries;
-
-    final String[] excludeCountries;
+    final org.meeuw.i18n.countries.validation.impl.ValidationInfo countryValidationInfo;
 
     protected ValidationInfo(
         String[] excludes,
@@ -20,11 +18,11 @@ class ValidationInfo extends org.meeuw.i18n.regions.validation.impl.ValidationIn
         String[] includeAssigners,
         Class<?>[] classes,
         Region.Type[] types,
-        String[] includeCountries,
-        String[] excludeCountries) {
-        super(excludes, includes, excludeAssigners, includeAssigners, classes, types);
-        this.includeCountries = includeCountries;
-        this.excludeCountries = excludeCountries;
+        String[] codes,
+        org.meeuw.i18n.countries.validation.impl.ValidationInfo countryValidationInfo
+        ) {
+        super(excludes, includes, excludeAssigners, includeAssigners, classes, types, codes);
+        this.countryValidationInfo = countryValidationInfo;
     }
 
     static ValidationInfo from(ValidCountrySubdivision annotation) {
@@ -33,6 +31,9 @@ class ValidationInfo extends org.meeuw.i18n.regions.validation.impl.ValidationIn
             annotation.excludeAssigners(),
             annotation.includeAssigners(),
             annotation.classes(),
-            annotation.types(), annotation.includeCountries(), annotation.excludeCountries());
+            annotation.types(),
+            annotation.codes(),
+            org.meeuw.i18n.countries.validation.impl.ValidationInfo.from(annotation.country())
+        );
     }
 }

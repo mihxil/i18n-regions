@@ -9,4 +9,6 @@ open module org.meeuw.i18n.test.subdivisions {
     requires java.validation;
     requires org.meeuw.i18n.regions;
     requires org.meeuw.i18n.subdivisions;
+    requires nv.i18n;
+    requires org.meeuw.i18n.countries;
 }

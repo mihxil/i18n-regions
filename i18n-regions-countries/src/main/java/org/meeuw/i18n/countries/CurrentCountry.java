@@ -37,6 +37,13 @@ public class CurrentCountry implements Country {
         HAS_WEBJARS_JAR =  getLocalWebJars().isPresent();
     }
 
+    public static CurrentCountry of(CountryCode code) {
+        if (code == null) {
+            return null;
+        }
+        return new CurrentCountry(code);
+    }
+
     public CurrentCountry(@NonNull CountryCode code) {
         this.code = code;
     }

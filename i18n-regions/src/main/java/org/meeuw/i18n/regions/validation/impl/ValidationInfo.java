@@ -23,13 +23,17 @@ public class ValidationInfo {
     final Class<?>[] classes;
     final Region.Type[] types;
 
+    final String[] codes;
+
+
     protected ValidationInfo(
         String[] excludes,
         String[] includes,
         String[] excludeAssigners,
         String[] includeAssigners,
         Class<?>[] classes,
-        Region.Type[] types) {
+        Region.Type[] types,
+        String[] codes) {
         this.excludes = Stream.of(excludes)
             .map(r -> RegionService.getInstance().getByCode(r, false).orElseThrow(() -> new IllegalStateException("No such region " + r)))
             .toArray(Region[]::new);
@@ -40,6 +44,7 @@ public class ValidationInfo {
         this.includeAssigners = Stream.of(includeAssigners).map(Pattern::compile).toArray(Pattern[]::new);
         this.classes = classes;
         this.types = types;
+        this.codes = codes;
     }
 
     public static ValidationInfo from(ValidRegion annotation) {
@@ -48,29 +53,58 @@ public class ValidationInfo {
             annotation.includes(),
             annotation.excludeAssigners(),
             annotation.includeAssigners(),
-            annotation.classes(), annotation.types());
+            annotation.classes(),
+            annotation.types(),
+            annotation.codes()
+        );
     }
 
+    /**
+     * @see ValidRegion#includes()
+     */
     public Region[] getIncludes() {
         return includes;
     }
 
+    /**
+     * @see ValidRegion#excludes()
+     */
     public Region[] getExcludes() {
         return excludes;
     }
 
+    /**
+     * @see ValidRegion#includeAssigners()
+     */
     public Pattern[] getIncludeAssigners() {
         return includeAssigners;
     }
 
+    /**
+     * @see ValidRegion#excludeAssigners()
+     */
     public Pattern[] getExcludeAssigners() {
         return excludeAssigners;
     }
 
+
+    /**
+     * @see ValidRegion#codes()
+     */
+    public String[] getCodes() {
+        return codes;
+    }
+
+    /**
+     * @see ValidRegion#classes()
+     */
     public Class<?>[] getClasses() {
         return classes;
     }
 
+    /**
+     * @see ValidRegion#types()
+     */
     public Region.Type[] getTypes() {
         return types;
     }

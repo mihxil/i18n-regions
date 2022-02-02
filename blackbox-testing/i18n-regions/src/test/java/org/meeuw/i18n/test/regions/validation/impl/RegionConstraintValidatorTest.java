@@ -8,11 +8,11 @@ import javax.validation.Validator;
 
 import org.junit.jupiter.api.Test;
 import org.meeuw.i18n.regions.Region;
-import org.meeuw.i18n.regions.RegionService;
 import org.meeuw.i18n.regions.validation.RegionValidatorService;
 import org.meeuw.i18n.regions.validation.ValidRegion;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.meeuw.i18n.regions.RegionService.getInstance;
 
 /**
  * @author Michiel Meeuwissen
@@ -60,7 +60,7 @@ public class RegionConstraintValidatorTest {
                 this.region = region;
             }
         }
-        A valid = new A(RegionService.getInstance().getByCode("NL").orElseThrow(IllegalStateException::new));
+        A valid = new A(getInstance().getByCode("NL").orElseThrow(IllegalStateException::new));
         assertThat(VALIDATOR.validate(valid)).hasSize(0);
 
 
@@ -73,7 +73,7 @@ public class RegionConstraintValidatorTest {
             }
         }
         {
-            B invalid = new B(RegionService.getInstance().getByCode("NL").orElseThrow(IllegalStateException::new));
+            B invalid = new B(getInstance().getByCode("NL").orElseThrow(IllegalStateException::new));
             assertThat(VALIDATOR.validate(invalid)).hasSize(1);
         }
         {
@@ -97,7 +97,7 @@ public class RegionConstraintValidatorTest {
             }
         }
         {
-            A listWithValid = new A(Arrays.asList(RegionService.getInstance().getByCode("NL").orElseThrow(IllegalStateException::new)));
+            A listWithValid = new A(Arrays.asList(getInstance().getByCode("NL").orElseThrow(IllegalStateException::new)));
             assertThat(VALIDATOR.validate(listWithValid)).hasSize(0);
         }
 
@@ -126,11 +126,14 @@ public class RegionConstraintValidatorTest {
             List<@ValidRegion(excludes = "UK")  Region> regions;
         }
 
-        Set<String> regions = RegionService.getInstance().values().filter(RegionValidatorService.getInstance().fromListProperty(A.class, "regions")).map(Region::getCode).collect(Collectors.toSet());
+        Set<String> regions = getInstance().values()
+            .filter(regionValidatorService.fromListProperty(A.class, "regions"))
+            .map(Region::getCode)
+            .collect(Collectors.toSet());
         assertThat(regions).contains("BE", "UK", "NL");
 
-         Set<String> ukExcludes = RegionService.getInstance().values()
-             .filter(RegionValidatorService.getInstance().fromListProperty(B.class, "regions"))
+         Set<String> ukExcludes = getInstance().values()
+             .filter(regionValidatorService.fromListProperty(B.class, "regions"))
              .map(Region::getCode)
              .collect(Collectors.toSet());
         assertThat(ukExcludes).doesNotContain("UK");
@@ -148,14 +151,33 @@ public class RegionConstraintValidatorTest {
             Set<@ValidRegion(excludes = "UK")  Region> regions;
         }
 
-        Set<String> regions = RegionService.getInstance().values().filter(RegionValidatorService.getInstance().fromListProperty(A.class, "regions")).map(Region::getCode).collect(Collectors.toSet());
+        Set<String> regions = getInstance().values()
+            .filter(regionValidatorService.fromListProperty(A.class, "regions"))
+            .map(Region::getCode)
+            .collect(Collectors.toSet());
         assertThat(regions).containsExactly("BE", "UK", "NL");
 
-         Set<String> ukExcludes = RegionService.getInstance().values().filter(RegionValidatorService.getInstance().fromListProperty(B.class, "regions")).map(Region::getCode).collect(Collectors.toSet());
+         Set<String> ukExcludes = getInstance().values()
+             .filter(regionValidatorService.fromListProperty(B.class, "regions"))
+             .map(Region::getCode)
+             .collect(Collectors.toSet());
         assertThat(ukExcludes).containsExactly("BE", "NL");
 
 
     }
 
+
+    @Test
+    void codes() {
+        class A {
+            List<@ValidRegion(codes = {"NL", "BE"}, excludes = {"BE"}) String> regions;
+        }
+        Set<String> list = getInstance().values()
+            .filter(regionValidatorService.fromListProperty(A.class, "regions")).map(Region::getCode).collect(Collectors.toSet());
+
+        assertThat(list).containsExactly("NL");
+
+
+    }
 
 }

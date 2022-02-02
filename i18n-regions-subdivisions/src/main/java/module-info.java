@@ -16,6 +16,7 @@ module org.meeuw.i18n.subdivisions {
     requires i18n.subdivisions;
     requires java.validation;
     requires java.logging;
+    requires org.meeuw.i18n.countries;
 
     provides RegionProvider with
 

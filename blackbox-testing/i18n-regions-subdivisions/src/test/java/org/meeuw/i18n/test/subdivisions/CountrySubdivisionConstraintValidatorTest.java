@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import javax.validation.*;
 
 import org.junit.jupiter.api.Test;
+import org.meeuw.i18n.countries.validation.ValidCountry;
 import org.meeuw.i18n.regions.*;
 import org.meeuw.i18n.regions.validation.RegionValidatorService;
 import org.meeuw.i18n.subdivisions.validation.ValidCountrySubdivision;
@@ -26,7 +27,7 @@ public class CountrySubdivisionConstraintValidatorTest {
     private static final Validator VALIDATOR = FACTORY.getValidator();
 
     static class Netherlands {
-        @ValidCountrySubdivision(includeCountries = "NL")
+        @ValidCountrySubdivision(country = @ValidCountry(codes = "NL"))
         public final Region region;
 
         public Netherlands(Region r) {
@@ -34,7 +35,7 @@ public class CountrySubdivisionConstraintValidatorTest {
         }
     }
     static class Netherlandss {
-        @ValidCountrySubdivision(includeCountries = "NL")
+        @ValidCountrySubdivision(country = @ValidCountry(codes = "NL"))
         public final List<Region> region;
 
         public Netherlandss(Region... r) {
@@ -44,16 +45,19 @@ public class CountrySubdivisionConstraintValidatorTest {
 
     @Test
     public void includeValidCountries() {
+        assertThat(RegionValidatorService.getInstance().fromProperty(Netherlands.class, "region").test("NL-DR")).isTrue();
         testAsStreamFilter(
             RegionValidatorService.getInstance().fromProperty(Netherlands.class, "region"),
-            Netherlands::new, "NL-DR");
+            Netherlands::new, "NL-DR"
+        );
     }
 
     @Test
     public void includeValidCountriess() {
         testAsStreamFilter(
             RegionValidatorService.getInstance().fromProperty(Netherlandss.class, "region"),
-            Netherlandss::new, "NL-DR");
+            Netherlandss::new, "NL-DR"
+        );
     }
 
     @Test
@@ -64,7 +68,7 @@ public class CountrySubdivisionConstraintValidatorTest {
     @Test
     public void convert() {
         class A {
-            @ValidCountrySubdivision(includeCountries = "NL")
+            @ValidCountrySubdivision(country = @ValidCountry(codes = "NL"))
             public final String region;
 
             public A(String  r) {
@@ -74,6 +78,7 @@ public class CountrySubdivisionConstraintValidatorTest {
         assertThat(VALIDATOR.validate(new A(null))).hasSize(0);
         assertThat(VALIDATOR.validate(new A("NL-AA"))).hasSize(0);
         assertThat(VALIDATOR.validate(new A("BE-AA"))).hasSize(1);
+        assertThat(VALIDATOR.validate(new A("FOOBAR-AA"))).hasSize(1);
 
     }
 
@@ -107,7 +112,5 @@ public class CountrySubdivisionConstraintValidatorTest {
             .map(r -> Regions.toStringWithCode(r, LanguageCode.nl))
             .collect(Collectors.joining("\n")));
     }
-
-
 
 }

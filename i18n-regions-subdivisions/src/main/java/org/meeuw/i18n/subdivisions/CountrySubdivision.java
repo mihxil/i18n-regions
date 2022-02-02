@@ -7,10 +7,10 @@ import java.util.Locale;
 import java.util.Optional;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.i18n.countries.Country;
+import org.meeuw.i18n.countries.CurrentCountry;
 import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.RegionService;
-
-import com.neovisionaries.i18n.CountryCode;
 
 /**
  * @author Michiel Meeuwissen
@@ -19,16 +19,25 @@ import com.neovisionaries.i18n.CountryCode;
 public interface CountrySubdivision extends Region {
 
     static Optional<? extends CountrySubdivision>  of(
-            @NonNull CountryCode countryCode,
+            @NonNull Country country,
             @NonNull String code) {
-        CountryCodeSubdivision subdivision = SubdivisionFactory.getSubdivision(countryCode, code);
-        if (subdivision != null) {
-            return Optional.of(new CountrySubdivisionWithCode(subdivision));
+        if (country instanceof CurrentCountry) {
+            CountryCodeSubdivision subdivision = SubdivisionFactory.getSubdivision(
+                ((CurrentCountry) country).getCountryCode(),
+                code
+            );
+            if (subdivision != null) {
+                return Optional.of(new CountrySubdivisionWithCode(subdivision));
+            }
         }
-        return UserAssignedCountrySubdivision.of(countryCode, code);
+        return UserAssignedCountrySubdivision.of(country, code);
     }
 
-    String getCountryCode();
+    Country getCountry();
+
+    default String getCountryCode() {
+        return getCountry().getCode();
+    }
 
     @Override
     default String getBundle() {

@@ -23,6 +23,7 @@ public class CountryConstraintValidator implements ConstraintValidator<ValidCoun
 
     private ValidationInfo validationInfo;
 
+
     @Override
     public void initialize(ValidCountry constraintAnnotation) {
         this.validationInfo = ValidationInfo.from(constraintAnnotation);
@@ -46,17 +47,20 @@ public class CountryConstraintValidator implements ConstraintValidator<ValidCoun
             }
             return true;
         } else {
-            Optional<Country> c = convert(region);
+            return isValid(region, validationInfo);
+        }
+    }
+
+    public static boolean isValid(Object region, ValidationInfo validationInfo) {
+          Optional<Country> c = convert(region);
             // value is not a country, consider it valid, use @ValidRegion
             return c
                 .map(country -> isValid(country, validationInfo))
                 .orElse(true);
-        }
     }
 
 
-
-    private boolean isValid(Country region, ValidationInfo validationInfo) {
+    public static boolean isValid(Country region, ValidationInfo validationInfo) {
 
         Optional<Boolean> aBoolean = RegionConstraintValidator.defaultIsValid(region, validationInfo);
         if (aBoolean.isPresent()) {
@@ -81,7 +85,7 @@ public class CountryConstraintValidator implements ConstraintValidator<ValidCoun
     }
 
 
-    private Optional<Country> convert(Object o) {
+    private static  Optional<Country> convert(Object o) {
         if (o instanceof Country) {
             return Optional.of((Country) o);
         } else if (o instanceof CountryCode) {

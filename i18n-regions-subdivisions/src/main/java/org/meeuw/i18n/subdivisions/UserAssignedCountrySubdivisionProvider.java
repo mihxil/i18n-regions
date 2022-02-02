@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.i18n.countries.CurrentCountry;
 import org.meeuw.i18n.regions.spi.RegionProvider;
 
 import com.neovisionaries.i18n.CountryCode;
@@ -31,7 +32,7 @@ public class UserAssignedCountrySubdivisionProvider implements RegionProvider<Us
             if (countryCode == null) {
                 return Optional.empty();
             }
-            return Optional.ofNullable(ofCountry(countryCode).get(countryAndSubDiversion[1]));
+            return Optional.ofNullable(ofCountry(CurrentCountry.of(countryCode)).get(countryAndSubDiversion[1]));
         }
     }
 
@@ -54,7 +55,9 @@ public class UserAssignedCountrySubdivisionProvider implements RegionProvider<Us
                         if (countryCode >= CountryCode.values().length) {
                             return false;
                         }
-                        Collection<UserAssignedCountrySubdivision> subdivisions = ofCountry(CountryCode.values()[countryCode++]).values();
+                        Collection<UserAssignedCountrySubdivision> subdivisions = ofCountry(
+                            CurrentCountry.of(CountryCode.values()[countryCode++])
+                        ).values();
 
                         spliterator = subdivisions.spliterator();
                     }

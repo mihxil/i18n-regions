@@ -94,4 +94,10 @@ public @interface ValidCountry {
     Class<? extends Country>[] classes() default {Country.class};
 
 
+    /**
+     * See {@link ValidRegion#codes()}
+     */
+    String[] codes() default {};
+
+
 }

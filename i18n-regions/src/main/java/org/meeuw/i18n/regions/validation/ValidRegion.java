@@ -20,7 +20,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * It recognized several types
  * If it is a Region or convertible to a region then it will be valid if the type and classes are as specified.
  *
- * Locale's are only validated if the 'country' part is filled, and then only be valid if the country is filled and recognized by the RegionsService and it's type is COUNTRY.
+ * Locales are only validated if the 'country' part is filled, and then only are valid if the country is filled and recognized by the RegionsService and its type is COUNTRY.
  *
  *
  * @author Michiel Meeuwissen
@@ -32,7 +32,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 public @interface ValidRegion {
 
-
     String message() default "{org.meeuw.i18n.regions.validation.region.message}";
 
     Class<?>[] groups() default {};
@@ -41,6 +40,8 @@ public @interface ValidRegion {
 
     /**
      * A list of codes to exclude. They are invalid regardless of {@link #classes()}
+     *
+     * So this provides a list of codes to consider invalid, regardless of other criteria.
      */
     String[] excludes() default {};
 
@@ -58,6 +59,8 @@ public @interface ValidRegion {
 
     /**
      * A list of codes to include. They are valid (unless they are also in {@link #excludes()}, regardless of {@link #classes()}
+     *
+     * So this provides a list of <em>extra</em> codes to consider valid
      */
     String[] includes() default {};
 
@@ -71,5 +74,11 @@ public @interface ValidRegion {
      * Defaults to {{@link Region}.class} (all regions are valid)
      */
     Class<? extends Region>[] classes() default {Region.class};
+
+
+    /**
+     * This defines the original list before any of the other criteria are applied. Unless it is empty (the default), which means <em>all</em> regions.
+     */
+    String[] codes() default {};
 
 }

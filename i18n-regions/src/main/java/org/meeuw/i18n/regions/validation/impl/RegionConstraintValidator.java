@@ -113,6 +113,11 @@ public class RegionConstraintValidator implements ConstraintValidator<ValidRegio
         if (region == null) {
             return Optional.of(true);
         }
+        if (validationInfo.getCodes().length > 0) {
+            if (! Arrays.asList(validationInfo.getCodes()).contains(region.getCode())) {
+                return Optional.of(false);
+            }
+        }
         if (Arrays.asList(validationInfo.getIncludes()).contains(region)) {
             return Optional.of(true);
         }

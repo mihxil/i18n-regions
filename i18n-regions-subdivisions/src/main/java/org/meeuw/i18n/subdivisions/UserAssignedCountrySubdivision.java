@@ -7,8 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-
-import com.neovisionaries.i18n.CountryCode;
+import org.meeuw.i18n.countries.Country;
 
 /**
  * @author Michiel Meeuwissen
@@ -20,60 +19,58 @@ public class UserAssignedCountrySubdivision implements CountrySubdivision {
 
     private static final long serialVersionUID = 0L;
 
-    private static final Map<CountryCode, Map<String, UserAssignedCountrySubdivision>> CACHE = new ConcurrentHashMap<>();
+    private static final Map<Country, Map<String, UserAssignedCountrySubdivision>> CACHE = new ConcurrentHashMap<>();
 
 
-    public static  Map<String, UserAssignedCountrySubdivision> ofCountry(@NonNull CountryCode countryCode) {
-        logger.fine("Getting " + countryCode);
-        return CACHE.computeIfAbsent(countryCode, (cc) -> {
-            Map<String, UserAssignedCountrySubdivision> value = new LinkedHashMap<>();
-            Properties properties = new Properties();
-            String resource = "/org/meeuw/i18n/subdivisions/subdivisions." + cc.getAlpha2() + ".properties";
-            InputStream inputStream = UserAssignedCountrySubdivision.class.getResourceAsStream(resource);
-            if (inputStream != null) {
-                try {
+    public static  Map<String, UserAssignedCountrySubdivision> ofCountry(@NonNull Country country) {
+        logger.fine("Getting " + country);
+        return CACHE.computeIfAbsent(country, (cc) -> {
+            final Map<String, UserAssignedCountrySubdivision> value = new LinkedHashMap<>();
+            final Properties properties = new Properties();
+            final String resource = "/org/meeuw/i18n/subdivisions/subdivisions." + cc.getCode() + ".properties";
+            try (InputStream inputStream = UserAssignedCountrySubdivision.class.getResourceAsStream(resource)) {
+                if (inputStream != null) {
                     //logger.info("Loading " + resource);
                     properties.load(inputStream);
                     new Thread(() -> {
                         logger.fine(() -> "Loaded " + resource);
                     }).start();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
                 }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
             properties.forEach((k, v) -> {
-                value.put((String) k , new UserAssignedCountrySubdivision(cc, (String) k, (String) v));
+                value.put((String) k, new UserAssignedCountrySubdivision(cc, (String) k, (String) v));
             });
             return Collections.unmodifiableMap(value);
         });
     }
-    public static Optional<UserAssignedCountrySubdivision> of(@NonNull CountryCode countryCode, String code) {
-        return Optional.ofNullable(ofCountry(countryCode).get(code));
+    public static Optional<UserAssignedCountrySubdivision> of(@NonNull Country country, String code) {
+        return Optional.ofNullable(ofCountry(country).get(code));
     }
 
-
-    private final CountryCode countryCode;
+    private final Country country;
     private final String code;
     private final String name;
 
 
     public UserAssignedCountrySubdivision(
-        @NonNull CountryCode countryCode,
+        @NonNull Country country,
         @NonNull String code,
         @NonNull String name) {
-        this.countryCode = countryCode;
+        this.country = country;
         this.code = code;
         this.name = name;
     }
 
     @Override
     public String getCode() {
-        return countryCode.getAlpha2() + "-" + code;
+        return country.getCode() + "-" + code;
     }
 
     @Override
     public Locale toLocale() {
-        return countryCode.toLocale();
+        return country.toLocale();
     }
 
     @Override
@@ -81,11 +78,12 @@ public class UserAssignedCountrySubdivision implements CountrySubdivision {
         return name;
     }
 
-
     @Override
-    public String getCountryCode() {
-        return countryCode.name();
+    public Country getCountry() {
+        return country;
     }
+
+
 
     @Override
     public String toString() {
@@ -99,13 +97,13 @@ public class UserAssignedCountrySubdivision implements CountrySubdivision {
 
         UserAssignedCountrySubdivision that = (UserAssignedCountrySubdivision) o;
 
-        if (countryCode != that.countryCode) return false;
+        if (! Objects.equals(country, that.country)) return false;
         return code.equals(that.code);
     }
 
     @Override
     public int hashCode() {
-        int result = countryCode.hashCode();
+        int result = country.hashCode();
         result = 31 * result + code.hashCode();
         return result;
     }

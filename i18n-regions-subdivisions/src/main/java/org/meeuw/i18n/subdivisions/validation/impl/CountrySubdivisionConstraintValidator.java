@@ -3,16 +3,16 @@ package org.meeuw.i18n.subdivisions.validation.impl;
 import be.olsson.i18n.subdivision.CountryCodeSubdivision;
 
 import java.util.Optional;
-import java.util.stream.Stream;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import org.meeuw.i18n.countries.Country;
+import org.meeuw.i18n.countries.validation.impl.CountryConstraintValidator;
 import org.meeuw.i18n.regions.RegionService;
-import org.meeuw.i18n.subdivisions.CountrySubdivision;
-import org.meeuw.i18n.subdivisions.CountrySubdivisionWithCode;
-import org.meeuw.i18n.subdivisions.validation.ValidCountrySubdivision;
 import org.meeuw.i18n.regions.validation.impl.RegionConstraintValidator;
+import org.meeuw.i18n.subdivisions.*;
+import org.meeuw.i18n.subdivisions.validation.ValidCountrySubdivision;
 
 /**
  * @author Michiel Meeuwissen
@@ -46,14 +46,29 @@ public class CountrySubdivisionConstraintValidator implements ConstraintValidato
             }
             return true;
         } else {
-            Optional<CountrySubdivision> c = convert(region);
-            if (c.isPresent()) {
-                return isValid(c.get(), validationInfo);
-            } else {
+            try {
+                Optional<CountrySubdivision> c = convert(region);
+                if (!c.isPresent() && region instanceof CharSequence) {
+                    // not found, but perhaps the _country_ was still valid
+                    Optional<CountrySubdivisionProvider.CountryAndSubdivisionCode> of = CountrySubdivisionProvider.CountryAndSubdivisionCode.of((String) region);
+                    if (of.isPresent() && of.get().getCountry() != null) {
+
+                        Optional<Boolean> countryValidation = isValid(of.get().getCountry(), validationInfo);
+                        if (countryValidation.isPresent() && !countryValidation.get()) {
+                            return false;
+                        }
+                    }
+                }
                 // Value could not be converted to a country subdivision, consider it valid.
                 // Use @RegionValidator to constrain that.
-                return true;
+                return c
+                    .map(countrySubdivision -> isValid(countrySubdivision, validationInfo))
+                    .orElse(true);
+            } catch (IllegalArgumentException iae) {
+                // The specified _country_ does not exist
+                return false;
             }
+
         }
     }
 
@@ -63,13 +78,15 @@ public class CountrySubdivisionConstraintValidator implements ConstraintValidato
         if (aBoolean.isPresent()) {
             return aBoolean.get();
         }
-        if (Stream.of(validationInfo.excludeCountries).anyMatch(c ->  region.getCountryCode().equals(c))) {
-            return false;
+        Optional<Boolean> countryValid = isValid(region.getCountry(), validationInfo);
+        return countryValid.orElse(false);
+    }
+
+    private Optional<Boolean> isValid(final Country country, ValidationInfo validationInfo) {
+        if (validationInfo.countryValidationInfo != null) {
+            return Optional.of(CountryConstraintValidator.isValid(country, validationInfo.countryValidationInfo));
         }
-        if (Stream.of(validationInfo.includeCountries).anyMatch(c ->  region.getCountryCode().equals(c))) {
-            return true;
-        }
-        return false;
+        return Optional.empty();
     }
 
 

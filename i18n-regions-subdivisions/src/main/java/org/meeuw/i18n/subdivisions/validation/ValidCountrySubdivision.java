@@ -1,16 +1,15 @@
 package org.meeuw.i18n.subdivisions.validation;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+import org.meeuw.i18n.countries.validation.ValidCountry;
 import org.meeuw.i18n.regions.Region;
+import org.meeuw.i18n.regions.validation.ValidRegion;
 import org.meeuw.i18n.subdivisions.CountrySubdivision;
 import org.meeuw.i18n.subdivisions.validation.impl.CountrySubdivisionConstraintValidator;
-import org.meeuw.i18n.regions.validation.ValidRegion;
 
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
@@ -54,16 +53,23 @@ public @interface ValidCountrySubdivision {
      */
     String[] excludeAssigners() default {};
 
-     /**
+    /**
      * See {@link ValidRegion#includeAssigners()}
      */
     String[] includeAssigners() default {};
 
-    String[] excludeCountries() default {};
-
-    String[] includeCountries() default {};
-
+    /**
+     * See {@link ValidRegion#classes()} ()}
+     */
     Class<? extends CountrySubdivision>[] classes() default {CountrySubdivision.class};
+
+    /**
+     * See {@link ValidRegion#codes()}
+     */
+    String[] codes() default {};
+
+
+    ValidCountry country();
 
 
 }
