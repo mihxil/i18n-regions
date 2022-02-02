@@ -50,8 +50,8 @@ public class RegionServiceTest {
         Region engOf = CountrySubdivision.of(CurrentCountry.of(CountryCode.GB), "ENG").orElseThrow();
         assertThat(engOf).isEqualTo(eng);
 
-        assertThat(Regions.toString(eng, LanguageCode.nl)).isEqualTo("Engeland (GB)");
-        assertThat(Regions.toStringWithCode(eng, LanguageCode.nl)).isEqualTo("GB-ENG:Engeland (GB)");
+        assertThat(Regions.toString(eng, LanguageCode.nl)).isEqualTo("Engeland (Verenigd Koninkrijk)");
+        assertThat(Regions.toStringWithCode(eng, LanguageCode.nl)).isEqualTo("GB-ENG:Engeland (Verenigd Koninkrijk)");
 
     }
 
