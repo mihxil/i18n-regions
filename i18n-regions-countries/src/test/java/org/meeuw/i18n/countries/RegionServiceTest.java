@@ -1,19 +1,19 @@
 package org.meeuw.i18n.countries;
 
 import java.net.URI;
-import java.util.Locale;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Stream;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.meeuw.i18n.regions.Region;
-import org.meeuw.i18n.regions.RegionService;
 import org.meeuw.i18n.regions.UserAssignedRegion;
 
 import com.neovisionaries.i18n.CountryCode;
 import com.neovisionaries.i18n.LanguageCode;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.meeuw.i18n.regions.RegionService.getInstance;
 
 /**
  * @author Michiel Meeuwissen
@@ -24,7 +24,7 @@ public class RegionServiceTest {
     @Test
     public void getCurrentByCode() {
 
-        Optional<Country> nl = RegionService.getInstance().getByCode("NL", Country.class);
+        Optional<Country> nl = getInstance().getByCode("NL", Country.class);
         Assertions.assertThat(nl).isPresent();
         assertThat(nl.get()).isInstanceOf(CurrentCountry.class);
         assertThat(nl.get().getCode()).isEqualTo("NL");
@@ -36,12 +36,12 @@ public class RegionServiceTest {
 
     @Test
     public void getCurrentByCodeAsCountry() {
-        Optional<CurrentCountry> nl = RegionService.getInstance().getByCode("NL", CurrentCountry.class);
+        Optional<CurrentCountry> nl = getInstance().getByCode("NL", CurrentCountry.class);
         assertThat(nl.get().getAlpha3()).isEqualTo("NLD");
     }
     @Test
     public void getFormerByCode() {
-        Region cshh = RegionService.getInstance().getByCode("CSHH").orElse(null);
+        Region cshh = getInstance().getByCode("CSHH").orElse(null);
         assertThat(cshh).isNotNull();
         assertThat(cshh).isInstanceOf(FormerCountry.class);
         assertThat(cshh.getCode()).isEqualTo("CSHH");
@@ -51,7 +51,7 @@ public class RegionServiceTest {
     }
     @Test
     public void getFormerByCodeAsCountry() {
-        Optional<Country> cshh = RegionService.getInstance().getByCode("CSHH", Country.class);
+        Optional<Country> cshh = getInstance().getByCode("CSHH", Country.class);
         assertThat(cshh.get().getCode()).isEqualTo("CSHH");
         assertThat(((FormerCountry) cshh.get()).getFormerCodes().get(0)).isEqualTo("CS");
     }
@@ -60,7 +60,7 @@ public class RegionServiceTest {
     @Test
     public void getCountryZZ() {
 
-        Region undefined = RegionService.getInstance().getByCode("ZZ").orElse(null);
+        Region undefined = getInstance().getByCode("ZZ").orElse(null);
         assertThat(undefined).isNotNull();
         assertThat(undefined).isInstanceOf(UserAssignedRegion.class);
         assertThat(undefined.getCode()).isEqualTo("ZZ");
@@ -73,7 +73,7 @@ public class RegionServiceTest {
     @Test
     public void getFormerCountryCS() {
 
-        Region cshh = RegionService.getInstance().getByCode("CS", FormerCountry.class).orElse(null);
+        Region cshh = getInstance().getByCode("CS", FormerCountry.class).orElse(null);
         assertThat(cshh).isNotNull();
         assertThat(cshh).isInstanceOf(FormerCountry.class);
         // It should find the country most recently assigned to 'CS'.
@@ -90,19 +90,31 @@ public class RegionServiceTest {
 
     @Test
     public void getEastTimor() {
-        Region tptl = RegionService.getInstance().getByCode("TPTL").orElse(null);
+        Region tptl = getInstance().getByCode("TPTL").orElse(null);
         assertThat(tptl).isNotNull();
         assertThat(tptl).isInstanceOf(FormerCountry.class);
         assertThat(tptl.getCode()).isEqualTo("TPTL");
         assertThat(tptl.getName()).isEqualTo("East Timor");
         assertThat(tptl.getName(new Locale("nl"))).isEqualTo("Oost Timor");
+    }
 
+    @Test
+    public void stream() {
+        Stream<? extends Region> values = getInstance().values(Region.Type.COUNTRY);
+
+        Spliterator<? extends Region> spliterator = values.spliterator();
+        assertThat(spliterator.estimateSize()).isEqualTo(Long.MAX_VALUE);
+        Spliterator<? extends Region> split = spliterator.trySplit();
+        assertThat(split).isNull();
+        spliterator.forEachRemaining(r -> {
+            System.out.println(r.toString());
+        });
     }
 
     @Test
     public void values() {
         CurrentCountry.ALWAYS_USE_CDN_FOR_ICONS.set(true);
-        RegionService.getInstance().values().forEach(r -> {
+        getInstance().values().forEach(r -> {
             StringBuilder build = new StringBuilder();
             r.toStringBuilder(build, LanguageCode.nl.toLocale());
             System.out.println(
