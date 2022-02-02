@@ -38,6 +38,8 @@ public class UserAssignedCountryProviderTest {
                 country.getAlpha3() + " " +
                 country.getNumeric()
             );
+            assertThat(inst.getProvidedClass().isInstance(country)).isTrue();
+            assertThat(inst.getByCode(country.getCode().toLowerCase(), true).get()).isSameAs(country);
             collect.removeIf(c -> c.equals(((Country) country).getCountryCode()));
         });
         assertThat(collect).isEmpty();;
