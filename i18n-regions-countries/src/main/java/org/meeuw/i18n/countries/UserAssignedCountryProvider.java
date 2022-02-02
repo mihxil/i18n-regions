@@ -66,7 +66,7 @@ public class UserAssignedCountryProvider implements RegionProvider<UserAssignedC
     public UserAssignedCountry register(UserAssignedCountry country) {
         UserAssignedCountry replaces = values.put(country.getCode(), country);
         if (replaces != null) {
-            logger.info("Replaced user assigned country " + replaces + " with " + country);
+            logger.info("Replaced user assigned country " + replaces + " (" + replaces.getName() + ") with " + country + " (" + country.getName() +")");
         }
         return replaces;
     }

@@ -52,7 +52,7 @@ public class FormerCountry implements Country {
 
     @Override
     public String toString() {
-        return code.toString();
+        return getCountryCode().toString();
     }
 
     @Override

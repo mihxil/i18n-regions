@@ -24,15 +24,26 @@ public class UserAssignedCountryProviderTest {
      */
     @Test
     public void values() {
+        inst.register(new UserAssignedCountry("PNK", "Pinkeltjesland", "Dick Laan"));
         Set<CountryCode> collect = Arrays.stream(CountryCode.values())
             .filter(a -> a.getAssignment() == CountryCode.Assignment.USER_ASSIGNED)
             .collect(Collectors.toSet());
         collect.remove(CountryCode.UNDEFINED);
         inst.values().forEach(country -> {
-            System.out.println("" + country + " " + ((Country) country).getCountryCode() + " " + country.getName() + " " + country.getName(LanguageCode.nl));
+            System.out.println("" + country + " " +
+                ((Country) country).getCountryCode() + " " +
+                country.getName() + " " +
+                country.getName(LanguageCode.nl) + " " +
+                country.getAlpha2() + " " +
+                country.getAlpha3() + " " +
+                country.getNumeric()
+            );
             collect.removeIf(c -> c.equals(((Country) country).getCountryCode()));
         });
         assertThat(collect).isEmpty();;
+
+        inst.register(new UserAssignedCountry("PNK", "Pinkelotjesland", "Dick Laan"));
+        assertThat(inst.getByCode("PNK").get().getName()).isEqualTo("Pinkelotjesland");
 
 
 
