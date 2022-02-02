@@ -62,7 +62,10 @@
   <build>
     <defaultGoal>install</defaultGoal>
     <plugins>
-
+      <plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.2.0</version>
+      </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>properties-maven-plugin</artifactId>
@@ -80,7 +83,6 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
         <version>3.0.0</version>
         <executions>
@@ -329,7 +331,6 @@
       </build>
     </profile>
   </profiles>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
