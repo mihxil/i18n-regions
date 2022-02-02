@@ -201,5 +201,14 @@ public class LanguageValidatorTest {
     void invalidA(String lang) {
         assertThat(VALIDATOR.validate(new C(lang))).hasSize(1);
     }
+    @Test
+    public void adapt() {
+        assertThat(LanguageValidator.adapt("nl-nl", true)).isEqualTo(new Locale("nl", "NL"));
+        assertThat(LanguageValidator.adapt("nl-NL", false)).isEqualTo(new Locale("nl", "NL"));
+        assertThat(LanguageValidator.adapt("nl-NL-informal", false)).isEqualTo(new Locale("nl", "NL", "informal"));
 
+
+        assertThat(LanguageValidator.adapt(null, true)).isNull();
+
+    }
 }
