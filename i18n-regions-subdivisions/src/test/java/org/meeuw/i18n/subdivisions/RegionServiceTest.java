@@ -16,6 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
+@SuppressWarnings("OptionalGetWithoutIsPresent")
 public class RegionServiceTest {
 
     @Test
@@ -59,14 +60,14 @@ public class RegionServiceTest {
     public void getCode() {
         Optional<Region> byCode = RegionService.getInstance().getByCode("NL-DR");
         assertThat(byCode).isPresent();
-        assertThat(byCode).containsInstanceOf(CountrySubdivisionWithCode.class);;
+        assertThat(byCode).containsInstanceOf(CountrySubdivisionWithCode.class);
         assertThat(((CountrySubdivisionWithCode) byCode.get()).getCountryCodeSubdivision().getCode()).isEqualTo("DR");
     }
 
     @Test
     public void getLocale() {
         Optional<Region> byCode = RegionService.getInstance().getByCode("NL-DR");
-        assertThat(byCode).containsInstanceOf(CountrySubdivisionWithCode.class);;
+        assertThat(byCode).containsInstanceOf(CountrySubdivisionWithCode.class);
         assertThat(((CountrySubdivisionWithCode) byCode.get()).toLocale().getCountry()).isEqualTo("NL");
     }
 
