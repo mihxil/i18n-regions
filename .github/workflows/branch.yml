@@ -1,0 +1,21 @@
+---
+name: 'create release branch'
+on:
+  workflow_dispatch:
+
+jobs:
+  branch:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    env:
+      MAVEN_OPTS: '-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn'
+    steps:
+      - uses: actions/checkout@v2
+      - name: Release branch with Maven
+        run: |
+          git config --global user.name 'github actions'
+          git config --global user.email 'github@meeuw.org'
+          VERSION=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout`
+          RELEASE_VERSION=`echo $VERSION | sed -r 's/-SNAPSHOT/.0-SNAPSHOT/'`
+          DEVELOPMENT_VERSION=`echo $VERSION | gawk 'match($1, /([0-9]+)\.([0-9]+)([\.-])(.*)/, a) {print a[1]"."(a[2]+1)a[3]a[4]}'`
+          mvn  -DupdateBranchVersions=true -DreleaseVersion=${RELEASE_VERSION} -DdevelopmentVersion=${DEVELOPMENT_VERSION} release:branch
