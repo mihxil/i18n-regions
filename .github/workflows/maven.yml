@@ -34,7 +34,9 @@ jobs:
       - name: Build and deploy BOM with Maven
         run: (cd i18n-regions-bom ; mvn -B -Pdeploy clean deploy)
       - name: Build and deploy with Maven
-        run: mvn -B -Pdeploy deploy
+        run: >
+          mvn -B test
+          mvn -B -DskipTests=true -P'deploy,!blackboxtesting' deploy
       - uses: codecov/codecov-action@v2
         with:
           files: report-aggregation/target/site/jacoco-aggregate/jacoco.xml

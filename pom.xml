@@ -16,9 +16,6 @@
     <module>i18n-regions-countries</module>
     <module>i18n-regions-continents</module>
     <module>i18n-regions-openlocationcode</module>
-    <module>blackbox-testing</module>
-    <module>report-aggregation</module>
-    <module>i18n-regions-bom</module>
   </modules>
 
   <licenses>
@@ -265,7 +262,7 @@
         <plugins>
           <plugin>
             <artifactId>maven-deploy-plugin</artifactId>
-            <version>3.0.0-M1</version>
+            <version>3.0.0-M2</version>
             <configuration>
               <skip>true</skip>
             </configuration>
