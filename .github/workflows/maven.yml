@@ -31,7 +31,6 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: bom changes
-      - uses: stefanzweifel/git-auto-commit-action@v4
       - name: Build BOM with Maven
         run: (cd i18n-regions-bom ; mvn -B -Pdeploy clean deploy)
       - name: Build with Maven
