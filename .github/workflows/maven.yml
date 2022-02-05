@@ -4,7 +4,7 @@ name: build
 
 on:
   push:
-    branches: [main, REL-*]
+    branches: ['*']
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -23,6 +23,10 @@ jobs:
       - uses: s4u/maven-settings-action@v2
         with:
           servers: '[{"id": "ossrh", "username": "mihxil", "password": "${{secrets.OSSRH_PASSWORD}}"}]'
+      - uses: crazy-max/ghaction-import-gpg@v3
+        with:
+          gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
+          passphrase: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
       - name: fix bom
         run: |
           sudo apt-get install libxml2-utils
@@ -31,7 +35,7 @@ jobs:
       - name: Build BOM with Maven
         run: (cd i18n-regions-bom ; mvn -B clean deploy)
       - name: Build with Maven
-        run: mvn -B deploy
+        run: mvn -B -Pdeploy deploy
       - uses: codecov/codecov-action@v2
         with:
           files: report-aggregation/target/site/jacoco-aggregate/jacoco.xml
