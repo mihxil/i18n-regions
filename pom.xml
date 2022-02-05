@@ -18,7 +18,6 @@
     <module>i18n-regions-openlocationcode</module>
     <module>blackbox-testing</module>
     <module>report-aggregation</module>
-    <module>i18n-regions-bom</module>
   </modules>
 
   <licenses>
