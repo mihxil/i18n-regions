@@ -12,6 +12,8 @@ import org.meeuw.i18n.countries.CurrentCountry;
 import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.RegionService;
 
+import com.neovisionaries.i18n.CountryCode;
+
 /**
  * @author Michiel Meeuwissen
  * @since 0.1
@@ -19,8 +21,8 @@ import org.meeuw.i18n.regions.RegionService;
 public interface CountrySubdivision extends Region {
 
     static Optional<? extends CountrySubdivision>  of(
-            @NonNull Country country,
-            @NonNull String code) {
+        @NonNull Country country,
+        @NonNull String code) {
         if (country instanceof CurrentCountry) {
             CountryCodeSubdivision subdivision = SubdivisionFactory.getSubdivision(
                 ((CurrentCountry) country).getCountryCode(),
@@ -31,6 +33,12 @@ public interface CountrySubdivision extends Region {
             }
         }
         return UserAssignedCountrySubdivision.of(country, code);
+    }
+
+    static Optional<? extends CountrySubdivision>  of(
+        @NonNull CountryCode country,
+        @NonNull String code) {
+        return of(CurrentCountry.of(country), code);
     }
 
     Country getCountry();
