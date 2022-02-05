@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.meeuw.i18n</groupId>
     <artifactId>i18n-regions-parent</artifactId>
-    <version>1.4.1</version>
+    <version>1.4.2-SNAPSHOT</version>
   </parent>
 
   <artifactId>i18n-regions-continents</artifactId>

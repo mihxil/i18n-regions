@@ -5,7 +5,7 @@
   <groupId>org.meeuw.i18n</groupId>
   <artifactId>i18n-regions-parent</artifactId>
   <packaging>pom</packaging>
-  <version>1.4.1</version>
+  <version>1.4.2-SNAPSHOT</version>
   <name>i18n-regions-parent</name>
   <description>Provides wrappers around ISO-codes for geographical regions</description>
   <url>https://github.com/mihxil/i18n-regions</url>
@@ -55,7 +55,7 @@
     <connection>scm:git:${project.scm.url}.git</connection>
     <developerConnection>scm:git:${project.scm.url}.git</developerConnection>
     <url>https://github.com/mihxil/i18n-regions</url>
-    <tag>1.4.1</tag>
+    <tag>1.4-SNAPSHOT</tag>
   </scm>
 
 
