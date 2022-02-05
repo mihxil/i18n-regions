@@ -115,6 +115,16 @@ public class CurrentCountry implements Country {
         return code.getAssignment();
     }
 
+    /**
+     * {@inheritDoc}
+     * <p>
+     * For countries, we provide urls to the SVG's at https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/, unless the corresponding `webjars` is on the class-path, in
+     * which case a non-absolute URI to those resources is returned.
+     * </p>
+     * <p>
+     * This only works for officially assigned countries, other ones return the empty optional.
+     * </p>
+     */
     @Override
     public Optional<URI> getIcon() {
         if (getAssignment() == CountryCode.Assignment.OFFICIALLY_ASSIGNED) {
@@ -144,6 +154,10 @@ public class CurrentCountry implements Country {
     }
 
 
+    /**
+     * Returns the base link to the locally installed webjars flag icons, if installed.
+     * Otherwise, returns the empty optional.
+     */
     static Optional<String> getLocalWebJars() {
         URL url  = Country.class.getClassLoader().getResource("META-INF/maven/org.webjars.npm/flag-icon-css/pom.properties");
         if (url != null) {
@@ -158,8 +172,13 @@ public class CurrentCountry implements Country {
         return Optional.empty();
     }
 
+    /**
+     * Returns the base link to the CDN webjars flag icons. The version of was determined at
+     * build time (and picked up from maven.properties.
+     */
     static String getCdnWebJars()  {
-        URL url  = Region.class.getClassLoader().getResource("META-INF/maven/org.meeuw.i18n/i18n-regions-countries/maven.properties");
+        URL url  = Region.class.getClassLoader()
+            .getResource("META-INF/maven/org.meeuw.i18n/i18n-regions-countries/maven.properties");
         Properties prop = new Properties();
         try (InputStream input = url.openStream()) {
             prop.load(input);

@@ -1,6 +1,10 @@
 import org.meeuw.i18n.continents.ContinentProvider;
 import org.meeuw.i18n.regions.spi.RegionProvider;
 
+/**
+ * Provides the {@link org.meeuw.i18n.regions.spi.RegionProvider} for the continents of the world
+ */
+
 module org.meeuw.i18n.continents {
 
     exports org.meeuw.i18n.continents;
@@ -11,7 +15,6 @@ module org.meeuw.i18n.continents {
     requires static java.annotation;
 
     provides RegionProvider with
-
         ContinentProvider;
 
 }

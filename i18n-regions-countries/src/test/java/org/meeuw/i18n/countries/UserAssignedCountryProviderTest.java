@@ -41,6 +41,7 @@ public class UserAssignedCountryProviderTest {
             assertThat(inst.getProvidedClass().isInstance(country)).isTrue();
             assertThat(inst.getByCode(country.getCode().toLowerCase(), true).get()).isSameAs(country);
             collect.removeIf(c -> c.equals(((Country) country).getCountryCode()));
+            assertThat(country.getCode().hashCode()).isEqualTo(country.hashCode());
         });
         assertThat(collect).isEmpty();;
 

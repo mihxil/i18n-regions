@@ -42,9 +42,13 @@ public interface Region extends Serializable {
     /**
      * The official name (in english) of the region
      */
-
     String getName();
 
+    /**
+     * The resource bundle associated with this region, to look up its name in other languages.
+     * This is used in the default implementaton of {@link #getName(Locale)}
+     * @see #getName(Locale)
+     */
     default String getBundle() {
         return getClass().getSimpleName();
     }
@@ -64,12 +68,18 @@ public interface Region extends Serializable {
         }
     }
 
+    /**
+     * Defaulting version of {@link #getName(Locale)}, the name of the region only considering the
+     * language, with considering any country or other variants of the language.
+     */
     default String getName(@NonNull LanguageCode languageCode) {
         return getName(languageCode.toLocale());
     }
 
     /**
-     * Return the name of the region in the locale of the language {@link #toLocale()}
+     * Return the name of the region in the locale of the region itself {@link #toLocale()}
+     *
+     * E.g. Germany will  be 'Deutschland', China will be '中国'.
      */
     default @Nullable String getLocalName() {
         Locale locale = toLocale();
@@ -85,6 +95,9 @@ public interface Region extends Serializable {
         builder.append(getName(language));
     }
 
+    /**
+     * To a region optionally an 'icon' may be associated. This is an URI, representing an URl to a picture of a flag or so. The URI may not be absolute, in which case it may e.g. refer to a webjars, and may have to be prefixed by the web application's context 'context' to be useable.
+     */
 
     default Optional<URI> getIcon() {
         return Optional.empty();

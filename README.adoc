@@ -5,7 +5,7 @@
 image:https://github.com/mihxil/i18n-regions/workflows/build/badge.svg?[Build Status,link=https://github.com/mihxil/i18n-regions/actions?query=workflow%3Abuild]
 image:https://img.shields.io/maven-central/v/org.meeuw.i18n/i18n-regions.svg?label=Maven%20Central[Maven Central,link=https://search.maven.org/search?q=g:%22org.meeuw.i18n%22]
 image:https://img.shields.io/nexus/s/https/oss.sonatype.org/org.meeuw.i18n/i18n-regions.svg[snapshots,link=https://oss.sonatype.org/content/repositories/snapshots/org/meeuw/i18n/]
-image:http://www.javadoc.io/badge/org.meeuw.i18n/i18n-regions.svg?color=blue[javadoc,link=http://www.javadoc.io/doc/org.meeuw.i18n/i18n-regions]
+image:https://www.javadoc.io/badge/org.meeuw.i18n/i18n-regions.svg?color=blue[javadoc,link=https://www.javadoc.io/doc/org.meeuw.i18n/]
 image:https://codecov.io/gh/mihxil/i18n-regions/branch/main/graph/badge.svg[codecov,link=https://codecov.io/gh/mihxil/i18n-regions]
 
 
@@ -20,7 +20,7 @@ Using `CountryCode` as a value in your application has several drawbacks:
 . It for example does not contain 'former countries', so e.g. the birth country of a person, or the country of a movie cannot be stored as a 'CountryCode'.
 . It's only applicable to countries, no other regions.
 
-I decided to wrap `CountryCode` in a class `CurrentCountry`, which implements a `Region` interface, which makes it possible to make other implementation of `Region` too, and to address all the above issues. You have to use `Region` instead of `CountryCode` as the type of your variable then.
+I decided to wrap `CountryCode` in a class `CurrentCountry`, which implements a `Region` interface (actually it implements the `Country` extension) , which makes it possible to make other implementations of `Region` too, and to address all the above issues. You have to use `Region`  (or `Country`) instead of `CountryCode` as the type of your variable then.
 
 == Architecture
 

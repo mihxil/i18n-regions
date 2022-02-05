@@ -25,8 +25,17 @@ jobs:
           servers: '[{"id": "ossrh", "username": "mihxil", "password": "${{secrets.OSSRH_PASSWORD}}"}]'
       - name: Build BOM with Maven
         run: (cd i18n-regions-bom ; mvn -B clean deploy)
+      - name: show_version
+        run: |
+          BOM_VERSION=`xmllint  --noout  --shell   i18n-regions-bom/pom.xml << EOF |  grep -E -v '^(\/|text).*' | sed s/-SNAPSHOT/.0/ \
+            setns x=$NS;
+            cd //x:project/x:version/text();
+            cat . ;
+          EOF` \
+          echo  $BOM_VERSION
       - name: Build with Maven
         run: mvn -B deploy
+
       - uses: codecov/codecov-action@v2
         with:
           files: report-aggregation/target/site/jacoco-aggregate/jacoco.xml

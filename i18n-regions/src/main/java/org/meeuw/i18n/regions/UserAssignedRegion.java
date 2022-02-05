@@ -1,9 +1,6 @@
 package org.meeuw.i18n.regions;
 
-import java.util.Locale;
-
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * User assigned regions have a method {@link #getAssignedBy()}
@@ -32,12 +29,6 @@ public abstract class UserAssignedRegion implements Region {
 
     public String getAssignedBy() {
         return assignedBy;
-    }
-
-    @Override
-    @Nullable
-    public Locale toLocale() {
-        return null;
     }
 
     @Override
