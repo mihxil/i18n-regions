@@ -33,6 +33,11 @@ jobs:
         with:
           gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
           passphrase: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
+      - name: fix bom
+        run: ./github/fix-bom.sh -B -R
+      - uses: stefanzweifel/git-auto-commit-action@v4
+      - name: Build BOM with Maven
+        run: (cd i18n-regions-bom ; mvn -B clean deploy)
       - name: Release
         run: |
           git config --global user.name 'github actions'

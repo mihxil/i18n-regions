@@ -1,30 +1,42 @@
 #!/usr/bin/env bash
+batch='false'
+release='cat'
+while getopts 'BR' flag; do
+    case "${flag}" in
+        B) batch=true ;;
+        R) release='sed s/-SNAPSHOT//' ;;
+    esac
+done
 
 NS=http://maven.apache.org/POM/4.0.0
 
-# Determin version of bom to be released
 
+# Determine version of bom to be released
 # get from pom.xml
-BOM_VERSION=`xmllint  --noout  --shell   i18n-regions-bom/pom.xml << EOF |  grep -E -v '^(\/|text).*' | sed s/-SNAPSHOT/.0/
+BOM_VERSION=`xmllint  --noout  --shell   pom.xml << EOF |  grep -E -v '^(\/|text).*'  | ${release}
  setns x=$NS
  cd //x:project/x:version/text()
  cat .
 EOF
 `
-# ask user
-read -p "bom version ($BOM_VERSION): " user_bom
-echo $user_bom
-if [ ! -z "$user_bom" ] ; then
-  BOM_VERSION=$user_bom
+if ! ${batch}; then
+	# ask user
+	read -p "bom version ($BOM_VERSION): " user_bom
+	echo $user_bom
+	if [ ! -z "$user_bom" ] ; then
+	  BOM_VERSION=$user_bom
+	fi
 fi
 
-# determin version of project to be released
+# determine version of project to be released
 VERSION=${BOM_VERSION}
 
-# ask user
-read -p "version ($VERSION): " user_version
-if [ ! -z "$user_version" ] ; then
-  VERSION=$user_version
+if ! ${batch}; then
+	# ask user
+	read -p "version ($VERSION): " user_version
+	if [ ! -z "$user_version" ] ; then
+	  VERSION=$user_version
+	fi
 fi
 echo $BOM_VERSION / $VERSION
 

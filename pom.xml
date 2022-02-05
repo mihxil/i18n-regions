@@ -358,7 +358,7 @@
       <dependency>
         <groupId>org.meeuw.i18n</groupId>
         <artifactId>i18n-regions-bom</artifactId>
-        <version>${project.version}</version>
+        <version>1.4</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
