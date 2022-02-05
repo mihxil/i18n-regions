@@ -4,7 +4,7 @@ name: build
 
 on:
   push:
-    branches: ['*']
+    branches: [main, "[0-9.]+-SNAPSHOT"]
   pull_request:
     branches: [main]
   workflow_dispatch:
