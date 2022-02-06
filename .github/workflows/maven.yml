@@ -4,7 +4,7 @@ name: build
 
 on:
   push:
-    branches: [main, "[0-9.]+-SNAPSHOT"]
+    branches: [main, "[0-9]+.[0-9]+-SNAPSHOT"]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -23,18 +23,24 @@ jobs:
       - uses: s4u/maven-settings-action@v2
         with:
           servers: '[{"id": "ossrh", "username": "mihxil", "password": "${{secrets.OSSRH_PASSWORD}}"}]'
-      - name: fix bom
+      - uses: crazy-max/ghaction-import-gpg@v3
+        with:
+          gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
+          passphrase: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
+      - name: Fix bom
         run: |
           sudo apt-get install libxml2-utils
           .github/fix-bom.sh -B
-      - name: commit changes in bom
+      - name: Commit changes in bom if necessary
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: bom changes
-      - name: Build BOM with Maven
+      - name: Build and deploy BOM with Maven
         run: (cd i18n-regions-bom ; mvn -B -Pdeploy clean deploy)
-      - name: Build with Maven
-        run: mvn -B -Pdeploy deploy
+      - name: Build and deploy with Maven
+        run: |
+          mvn -B test
+          mvn -B -DskipTests=true -P'deploy,!blackboxtesting' deploy
       - uses: codecov/codecov-action@v2
         with:
           files: report-aggregation/target/site/jacoco-aggregate/jacoco.xml
