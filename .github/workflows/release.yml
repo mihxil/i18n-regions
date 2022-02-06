@@ -33,11 +33,11 @@ jobs:
         with:
           gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
           passphrase: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
-      - name: fix bom
+      - name: Fix bom
         run: |
           sudo apt-get install libxml2-utils
           .github/fix-bom.sh -B -R
-      - name: commit changes in bom
+      - name: Commit changes in bom if necessary
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: bom changes
@@ -50,4 +50,4 @@ jobs:
           git config --global user.email 'github@meeuw.org'
           mvn --batch-mode  -Darguments=-DskipTests  -DpushChanges=false release:prepare
           git push --atomic -v --follow-tags
-          mvn -Pdeploy --batch-mode -Darguments=-DskipTests release:perform
+          mvn -P'deploy,!blackboxtesting' --batch-mode -Darguments=-DskipTests release:perform
