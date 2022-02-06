@@ -16,8 +16,6 @@
     <module>i18n-regions-countries</module>
     <module>i18n-regions-continents</module>
     <module>i18n-regions-openlocationcode</module>
-    <module>blackbox-testing</module>
-    <module>report-aggregation</module>
   </modules>
 
   <licenses>
