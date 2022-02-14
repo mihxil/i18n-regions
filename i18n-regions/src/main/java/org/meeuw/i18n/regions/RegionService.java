@@ -54,11 +54,15 @@ public class RegionService {
     public <T extends Region> Optional<T> getByCode(@NonNull String code, boolean lenient, @NonNull Class<T> clazz, @NonNull Predicate<Region> checker) {
         for (RegionProvider<?> provider : getProviders()) {
             if (provider.canProvide(clazz)) {
-                Optional<? extends Region> byCode = provider.getByCode(code, lenient);
-                if (byCode.isPresent()) {
-                    if (clazz.isInstance(byCode.get()) && checker.test(byCode.get())) {
-                        return (Optional<T>) byCode;
+                try {
+                    Optional<? extends Region> byCode = provider.getByCode(code, lenient);
+                    if (byCode.isPresent()) {
+                        if (clazz.isInstance(byCode.get()) && checker.test(byCode.get())) {
+                            return (Optional<T>) byCode;
+                        }
                     }
+                } catch (Exception e) {
+                    logger.warning(() -> "Exception from " + provider + " for code " + code);
                 }
             }
 

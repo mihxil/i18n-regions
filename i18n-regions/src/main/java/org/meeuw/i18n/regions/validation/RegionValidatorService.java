@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 
 import javax.validation.*;
 
@@ -16,11 +17,26 @@ import org.meeuw.i18n.regions.RegionService;
  * @since 0.1
  */
 public class RegionValidatorService {
-    private static final ValidatorFactory FACTORY = Validation.byDefaultProvider()
-        .configure()
-        .buildValidatorFactory();
+    private static final Logger logger = Logger.getLogger(RegionValidatorService.class.getName());
 
-    private final Validator VALIDATOR = FACTORY.getValidator();
+
+
+    private final static Validator VALIDATOR;
+
+    static {
+        Validator proposal;
+        try {
+            ValidatorFactory factory = Validation.byDefaultProvider()
+                .configure()
+                .buildValidatorFactory();
+
+            proposal = factory.getValidator();
+        } catch (Exception e) {
+            logger.warning(e.getMessage());
+            proposal = null;
+        }
+        VALIDATOR = proposal;
+    }
 
     private static final RegionValidatorService INSTANCE = new RegionValidatorService();
 
