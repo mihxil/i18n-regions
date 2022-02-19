@@ -13,6 +13,11 @@ import org.meeuw.i18n.regions.UserAssignedRegion;
 import org.meeuw.i18n.regions.spi.RegionProvider;
 
 /**
+ * Provides all {@link UserAssignedCountry}'s.
+ *
+ * They can be added on the fly via {@link #register(UserAssignedCountry)} (there are, after all, <em>user defined</em>).
+ *
+ *
  * @author Michiel Meeuwissen
  * @since 0.1
  * @see UserAssignedCountry
@@ -65,6 +70,11 @@ public class UserAssignedCountryProvider implements RegionProvider<UserAssignedC
         return values.values().stream();
     }
 
+    /**
+     * Registers a new {@link UserAssignedCountry}.
+     *
+     * @return The previously assigned user assigned country with the same code or <code>null</code>
+     */
     public UserAssignedCountry register(UserAssignedCountry country) {
         UserAssignedCountry replaces = values.put(country.getCode(), country);
         if (replaces != null) {

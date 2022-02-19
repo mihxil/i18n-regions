@@ -6,13 +6,16 @@ import org.meeuw.i18n.regions.UserAssignedRegion;
 import com.neovisionaries.i18n.CountryCode;
 
 /**
- * Wraps all 'User defined' {@link CountryCode}, assigns to each a {@link #getAssignedBy()}.
+ * Wraps all 'User defined' {@link CountryCode} (except {@link CountryCode#UNDEFINED} and assigns to each a {@link #getAssignedBy()}.
  *
- * Adds a few others.
+ * Adds a few others, too.
+ *
+ * These are just the static constants in this class, which are automatically registered via {@link UserAssignedCountryProvider#register(UserAssignedCountry)}.
  *
  * http://en.wikipedia.org/wiki/ISO_3166-2
  * <a href="https://docs.google.com/spreadsheet/ccc?key=0Ajm-SImXl8LzdGVkU3ZJRV9JS3ZIVDZNNTd6eTVLSGc&amp;usp=sharing#gid=0">this doc</a>
  * @author Michiel Meeuwissen
+ * @see UserAssignedCountryProvider
  * @since 0.1
  */
 @SuppressWarnings("unused")
@@ -30,6 +33,7 @@ public class UserAssignedCountry extends UserAssignedRegion implements Country {
     public static final UserAssignedCountry ZZ = new UserAssignedCountry("ZZ", "Unknown or Invalid Territory", ASSIGNER_UNICODE);
     public static final UserAssignedCountry XN = new UserAssignedCountry("XN", "Nordic Patent Institute",      ASSIGNER_WIPO);
 
+    // There are the ones present in nv-18n
     public static final UserAssignedCountry XK = new UserAssignedCountry(CountryCode.XK,  ASSIGNER_EU);
     public static final UserAssignedCountry XI = new UserAssignedCountry(CountryCode.XI, ASSIGNER_EU);
     public static final UserAssignedCountry XU = new UserAssignedCountry(CountryCode.XU, ASSIGNER_EU);

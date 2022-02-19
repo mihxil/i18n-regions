@@ -23,7 +23,7 @@ public class UserAssignedCountryProviderTest {
      * Also tests that all {@link UserAssignedCountry}s are working without causing exceptions.
      */
     @Test
-    public void values() {
+    public void valuesAndRegister() {
         inst.register(new UserAssignedCountry("PNK", "Pinkeltjesland", "Dick Laan"));
         Set<CountryCode> collect = Arrays.stream(CountryCode.values())
             .filter(a -> a.getAssignment() == CountryCode.Assignment.USER_ASSIGNED)
@@ -47,8 +47,18 @@ public class UserAssignedCountryProviderTest {
 
         inst.register(new UserAssignedCountry("PNK", "Pinkelotjesland", "Dick Laan"));
         assertThat(inst.getByCode("PNK").get().getName()).isEqualTo("Pinkelotjesland");
+    }
 
-
+    /**
+     * Make sure that all 'USER_ASSIGNED' codes
+     */
+    @Test
+    public void nv18n() {
+        Arrays.stream(CountryCode.values()).filter(c -> c.getAssignment() == CountryCode.Assignment.USER_ASSIGNED).forEach(c -> {
+            if (c != CountryCode.UNDEFINED) {
+                assertThat(inst.getByCode(c.name())).withFailMessage("Not found " + c).isPresent();
+            }
+        });
 
     }
 }
