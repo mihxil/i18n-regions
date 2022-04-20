@@ -13,6 +13,7 @@
 
   <properties>
     <flag-icon-css.version>3.5.0</flag-icon-css.version>
+    <!-- Upgrading breaks CDN fall back. See : https://github.com/lipis/flag-icons/issues/938 -->
   </properties>
 
 
@@ -28,8 +29,8 @@
     </dependency>
 
     <dependency>
-      <groupId>javax.validation</groupId>
-      <artifactId>validation-api</artifactId>
+      <groupId>jakarta.validation</groupId>
+      <artifactId>jakarta.validation-api</artifactId>
       <optional>true</optional>
     </dependency>
      <dependency>
@@ -38,8 +39,8 @@
       <optional>true</optional>
     </dependency>
     <dependency>
-      <groupId>javax.annotation</groupId>
-      <artifactId>javax.annotation-api</artifactId>
+      <groupId>jakarta.annotation</groupId>
+      <artifactId>jakarta.annotation-api</artifactId>
       <optional>true</optional>
     </dependency>
 
@@ -49,14 +50,14 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>javax.el</groupId>
-      <artifactId>javax.el-api</artifactId>
+      <groupId>jakarta.el</groupId>
+      <artifactId>jakarta.el-api</artifactId>
       <scope>test</scope>
     </dependency>
-     <dependency>
-       <groupId>org.glassfish.web</groupId>
-       <artifactId>javax.el</artifactId>
-       <scope>test</scope>
+    <dependency>
+      <groupId>org.glassfish</groupId>
+      <artifactId>jakarta.el</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.webjars.npm</groupId>
