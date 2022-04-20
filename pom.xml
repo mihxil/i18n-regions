@@ -114,6 +114,7 @@
           <compilerArgs>
             <arg>-AprintErrorStack</arg>
             <arg>-Awarns</arg>
+            <args>-Xpkginfo:always</args>
           </compilerArgs>
         </configuration>
         <executions>
@@ -137,6 +138,9 @@
               </excludes>
               <source>${java.target.version}</source>
               <release>${java.target.version}</release>
+              <compilerArgs>
+                <args>-Xpkginfo:always</args>
+              </compilerArgs>
             </configuration>
           </execution>
           <execution>
@@ -404,8 +408,7 @@
         <version>3.0.2</version>
         <scope>test</scope>
       </dependency>
-
-      <!-- not ready for valiadtor 7 yet. Namespaces, package names changes. -->
+      <!-- not ready for validotor 7 yet. Namespaces, package names changes. -->
       <dependency>
         <groupId>org.hibernate.validator</groupId>
         <artifactId>hibernate-validator</artifactId>
