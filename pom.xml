@@ -44,7 +44,7 @@
   <properties>
     <junit.version>5.8.2</junit.version>
     <java.target.version>8</java.target.version>
-    <checker.version>3.21.4</checker.version>
+    <checker.version>3.22.0</checker.version>
     <jacoco.version>0.8.8</jacoco.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -140,6 +140,7 @@
               <release>${java.target.version}</release>
               <compilerArgs>
                 <args>-Xpkginfo:always</args>
+                <!--make sure that package-info is always created, otherwise it may be skipped (i think if there are no annotations)  -->
               </compilerArgs>
             </configuration>
           </execution>

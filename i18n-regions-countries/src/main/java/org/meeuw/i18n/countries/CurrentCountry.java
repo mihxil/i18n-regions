@@ -185,6 +185,6 @@ public class CurrentCountry implements Country {
         } catch (NullPointerException | IOException e) {
             Logger.getLogger(Country.class.getName()).warning(e.getMessage());
         }
-        return "https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/" + prop.getProperty("flag-icon-css.version")+ "/flags/4x3/";
+        return "https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/" + prop.getProperty("flag-icon.version")+ "/flags/4x3/";
     }
 }
