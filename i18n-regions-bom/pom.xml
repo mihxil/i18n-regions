@@ -14,7 +14,7 @@
   <properties>
     <i18n-regions.version>1.6-SNAPSHOT</i18n-regions.version>
     <nv-i18n.version>1.29</nv-i18n.version>
-    <i18n-subdivisions.version>0.2</i18n-subdivisions.version>
+    <i18n-subdivisions.version>0.3-SNAPSHOT</i18n-subdivisions.version>
     <i18n-formerly-assigned.version>0.7</i18n-formerly-assigned.version>
   </properties>
 
@@ -83,8 +83,8 @@
         <version>${i18n-formerly-assigned.version}</version>
       </dependency>
       <dependency>
-        <groupId>be.olsson</groupId>
-        <artifactId>i18n-subdivisions</artifactId>
+        <groupId>org.meeuw.i18n</groupId>
+        <artifactId>i18n-subdivision-enums</artifactId>
         <version>${i18n-subdivisions.version}</version>
       </dependency>
     </dependencies>

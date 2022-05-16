@@ -13,7 +13,7 @@ module org.meeuw.i18n.subdivisions {
     requires transitive org.meeuw.i18n.regions;
 
     requires static org.checkerframework.checker.qual;
-    requires i18n.subdivisions;
+    requires org.meeuw.i18n.subdivision_enums;
     requires java.validation;
     requires java.logging;
     requires org.meeuw.i18n.countries;

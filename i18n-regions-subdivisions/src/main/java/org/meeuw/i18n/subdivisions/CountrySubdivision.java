@@ -1,8 +1,5 @@
 package org.meeuw.i18n.subdivisions;
 
-import be.olsson.i18n.subdivision.CountryCodeSubdivision;
-import be.olsson.i18n.subdivision.SubdivisionFactory;
-
 import java.util.Locale;
 import java.util.Optional;
 
@@ -11,6 +8,8 @@ import org.meeuw.i18n.countries.Country;
 import org.meeuw.i18n.countries.CurrentCountry;
 import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.RegionService;
+import org.meeuw.i18n.subdivision.CountryCodeSubdivision;
+import org.meeuw.i18n.subdivision.SubdivisionFactory;
 
 import com.neovisionaries.i18n.CountryCode;
 

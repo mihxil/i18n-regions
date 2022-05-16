@@ -1,6 +1,6 @@
 package org.meeuw.i18n.subdivisions;
 
-import be.olsson.i18n.subdivision.CountryCodeSubdivision;
+import org.meeuw.i18n.subdivision.CountryCodeSubdivision;
 
 import java.util.Locale;
 import java.util.Objects;
