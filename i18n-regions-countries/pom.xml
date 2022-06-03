@@ -12,7 +12,7 @@
   <description>Provides countries as region objects. This includes all current countries, and also formerly existing modern countries, was well as some 'user defined' countries.</description>
 
   <properties>
-    <flag-icon-css.version>6.3.0</flag-icon-css.version>
+    <flag-icons.version>6.3.0</flag-icons.version>
   </properties>
 
 
@@ -61,7 +61,7 @@
     <dependency>
       <groupId>org.webjars.npm</groupId>
       <artifactId>flag-icons</artifactId>
-      <version>${flag-icon-css.version}</version>
+      <version>${flag-icons.version}</version>
       <!-- if present, it will be used -->
       <!-- otherwise cdnjs.cloudflare.com will be used -->
       <optional>true</optional>

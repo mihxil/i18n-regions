@@ -159,7 +159,7 @@ public class CurrentCountry implements Country {
      * Otherwise, returns the empty optional.
      */
     static Optional<String> getLocalWebJars() {
-        URL url  = Country.class.getClassLoader().getResource("META-INF/maven/org.webjars.npm/flag-icon-css/pom.properties");
+        URL url  = Country.class.getClassLoader().getResource("META-INF/maven/org.webjars.npm/flag-icons/pom.properties");
         if (url != null) {
             Properties prop = new Properties();
             try (InputStream input = url.openStream()) {
