@@ -2,7 +2,6 @@ package org.meeuw.i18n.subdivisions;
 
 import java.util.Optional;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.meeuw.i18n.countries.CurrentCountry;
 import org.meeuw.i18n.regions.*;
@@ -17,6 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 0.1
  */
 @SuppressWarnings("OptionalGetWithoutIsPresent")
+
 public class SubDivisionsRegionServiceTest {
 
     @Test
@@ -30,14 +30,13 @@ public class SubDivisionsRegionServiceTest {
     }
 
     @Test
-    @Disabled("This is missing in subdivision, make pull request")
     public void getCountrySubDivisionGreatBritain() {
 
         Region gbn = RegionService.getInstance().getByCode("GB-GBN").orElse(null);
         assertThat(gbn).isNotNull();
         assertThat(gbn).isInstanceOf(CountrySubdivisionWithCode.class);
-        assertThat(gbn.getCode()).isEqualTo("NL-UT");
-        assertThat(gbn.getName()).isEqualTo("Utrecht");
+        assertThat(gbn.getCode()).isEqualTo("GB-GBN");
+        assertThat(gbn.getName()).isEqualTo("Great Britain");
     }
 
 
@@ -48,11 +47,16 @@ public class SubDivisionsRegionServiceTest {
         assertThat(eng.getName()).isEqualTo("England");
         assertThat(eng.getName(LanguageCode.nl)).isEqualTo("Engeland");
 
+        RegionService.getInstance().values().filter(r -> r.getCode().startsWith("GB-")).forEach(gb -> {
+            System.out.println(gb + ":" + gb.getLocalName());
+        });
+
         Region engOf = CountrySubdivision.of(CurrentCountry.of(CountryCode.GB), "ENG").orElseThrow();
         assertThat(engOf).isEqualTo(eng);
 
         assertThat(Regions.toString(eng, LanguageCode.nl)).isEqualTo("Engeland (Verenigd Koninkrijk)");
         assertThat(Regions.toStringWithCode(eng, LanguageCode.nl)).isEqualTo("GB-ENG:Engeland (Verenigd Koninkrijk)");
+
 
     }
 

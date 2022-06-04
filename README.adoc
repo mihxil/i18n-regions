@@ -49,8 +49,8 @@ all countries implement an interface link:i18n-regions-countries/src/main/java/o
 These are provided in https://search.maven.org/search?q=g:org.meeuw.i18n%20AND%20a:i18n-regions-subdivisions&core=gav[`org.meeuw.i18n:i18n-regions-subdivisions`]
 
 - For subdivision of countries link:i18n-regions-subdivisions/src/main/java/org/meeuw/i18n/subdivisions/CountrySubdivision.java[`org.meeuw.i18n.subdivisions.CountrySubdivision`], which is backed by
-`be.olsson.i18n.subdivision.CountryCodeSubdivision` (from https://github.com/tobias-/i18n-subdivisions)
-- In case there are missing country subdivision they can easily be added via `subdivision.&lt;country code&gt;.properties`. E.g. link:i18n-regions-subdivisions/src/main/resources/org/meeuw/i18n/subdivisions/subdivisions.GB.properties[`subdivisions.GB.properties`] provides some which were obviously missing from Great Britain otherwise.
+`org.meeuw.i18n.subdivision.subdivision.CountryCodeSubdivision` (from https://github.com/mihxil/i18n-subdivisions)
+- In case there are missing country subdivision they can easily be added via `subdivision.&lt;country code&gt;.properties`. (E.g. this used to be the case for GB, link:i18n-regions-subdivisions/src/main/resources/org/meeuw/i18n/subdivisions/subdivisions.GB.properties[`subdivisions.GB.properties`] provides some which were obviously missing from Great Britain otherwise)
 
 === Continents
 
