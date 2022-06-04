@@ -3,7 +3,7 @@
   <parent>
     <groupId>org.meeuw.i18n</groupId>
     <artifactId>i18n-regions-parent</artifactId>
-    <version>1.6.0-SNAPSHOT</version>
+    <version>1.7-SNAPSHOT</version>
   </parent>
   <artifactId>report-aggregation</artifactId>
   <packaging>pom</packaging>
