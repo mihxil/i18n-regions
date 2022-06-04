@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 0.1
  */
 @SuppressWarnings("OptionalGetWithoutIsPresent")
-public class RegionServiceTest {
+public class SubDivisionsRegionServiceTest {
 
     @Test
     public void getCountrySubDivisionUtrecht() {

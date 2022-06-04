@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-public class RegionServiceTest {
+public class ContinentsRegionServiceTest {
 
      @Test
      public void getContinent() {
