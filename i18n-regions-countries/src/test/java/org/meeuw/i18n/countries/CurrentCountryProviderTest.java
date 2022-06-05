@@ -1,5 +1,10 @@
 package org.meeuw.i18n.countries;
 
+import java.io.IOException;
+import java.net.URI;
+
+import javax.net.ssl.HttpsURLConnection;
+
 import org.junit.jupiter.api.Test;
 import org.meeuw.i18n.regions.Region;
 
@@ -24,7 +29,7 @@ public class CurrentCountryProviderTest {
     }
 
     @Test
-    public void properties() {
+    public void properties() throws IOException {
         CurrentCountry nl = currentCountryProvider.getByCode("NL", true).orElseThrow();
 
         assertThat(nl.getCode()).isEqualTo(CountryCode.NL.getAlpha2());
@@ -32,6 +37,19 @@ public class CurrentCountryProviderTest {
         assertThat(nl.getAlpha3()).isEqualTo("NLD");
         assertThat(nl.getNumeric()).isEqualTo(528);
         assertThat(nl.getCountryCode()).isEqualTo(CountryCode.NL);
+        {
+            CurrentCountry.ALWAYS_USE_CDN_FOR_ICONS.set(false);
+            URI icon = nl.getIcon().orElse(null);
+            assertThat(icon).isNotNull();
+            assertThat(getClass().getClassLoader().getResourceAsStream("META-INF/resources" + icon.toString())).isNotNull();
+        }
+        {
+            CurrentCountry.ALWAYS_USE_CDN_FOR_ICONS.set(true);
+            URI icon = nl.getIcon().orElse(null);
+            HttpsURLConnection con = (HttpsURLConnection) icon.toURL().openConnection();
+            assertThat(con.getResponseCode()).isEqualTo(200);
+        }
+
     }
 
     @SuppressWarnings({"ConstantConditions", "EqualsWithItself"})
