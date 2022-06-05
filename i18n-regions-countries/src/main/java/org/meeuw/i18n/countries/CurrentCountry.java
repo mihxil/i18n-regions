@@ -118,7 +118,7 @@ public class CurrentCountry implements Country {
     /**
      * {@inheritDoc}
      * <p>
-     * For countries, we provide urls to the SVG's at https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/, unless the corresponding `webjars` is on the class-path, in
+     * For countries, we provide urls to the SVG's at <a href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/">cdnjs.cloudflare.com/ajax/libs/flag-icon-css/</a>, unless the corresponding `webjars` is on the class-path, in
      * which case a non-absolute URI to those resources is returned.
      * </p>
      * <p>
