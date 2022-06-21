@@ -44,7 +44,7 @@
   <properties>
     <junit.version>5.9.0-M1</junit.version>
     <java.target.version>8</java.target.version>
-    <checker.version>3.22.1</checker.version>
+    <checker.version>3.22.2</checker.version>
     <jacoco.version>0.8.8</jacoco.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -171,7 +171,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-release-plugin</artifactId>
-        <version>3.0.0-M5</version>
+        <version>3.0.0-M6</version>
         <configuration>
           <branchName>${project.version}</branchName>
           <tagNameFormat>@{project.version}</tagNameFormat>
@@ -179,7 +179,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M6</version>
+        <version>3.0.0-M7</version>
       </plugin>
       <plugin>
         <artifactId>maven-deploy-plugin</artifactId>
