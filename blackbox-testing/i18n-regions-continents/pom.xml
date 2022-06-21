@@ -5,12 +5,12 @@
   <parent>
     <groupId>org.meeuw.i18n</groupId>
     <artifactId>i18n-regions-blackbox-testing</artifactId>
-    <version>1.6.1</version>
+    <version>1.6.2-SNAPSHOT</version>
   </parent>
 
   <artifactId>i18n-regions-blackbox-testing-continents</artifactId>
 
   <scm>
-    <tag>1.6.1</tag>
+    <tag>1.6-SNAPSHOT</tag>
   </scm>
 </project>
