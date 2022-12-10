@@ -9,7 +9,7 @@
 
   <properties>
     <meeuw.i18n.version>1.0-SNAPSHOT</meeuw.i18n.version>
-    <spring.version>5.2.1.RELEASE</spring.version>
+    <spring.version>6.0.0</spring.version>
   </properties>
 
   <dependencies>
