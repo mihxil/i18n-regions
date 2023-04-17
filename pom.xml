@@ -44,8 +44,8 @@
   <properties>
     <junit.version>5.9.2</junit.version>
     <java.target.version>8</java.target.version>
-    <checker.version>3.30.0</checker.version>
-    <jacoco.version>0.8.8</jacoco.version>
+    <checker.version>3.33.0</checker.version>
+    <jacoco.version>0.8.9</jacoco.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -171,7 +171,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-release-plugin</artifactId>
-        <version>3.0.0-M6</version>
+        <version>3.0.0</version>
         <configuration>
           <branchName>${project.version}</branchName>
           <tagNameFormat>@{project.version}</tagNameFormat>
@@ -179,19 +179,19 @@
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M7</version>
+        <version>3.0.0</version>
       </plugin>
       <plugin>
         <artifactId>maven-deploy-plugin</artifactId>
-        <version>3.0.0-M2</version>
+        <version>3.1.1</version>
       </plugin>
        <plugin>
         <artifactId>maven-install-plugin</artifactId>
-        <version>3.0.0-M1</version>
+        <version>3.1.1</version>
       </plugin>
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>
-        <version>3.2.0</version>
+        <version>3.3.1</version>
       </plugin>
       <!--  <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -266,7 +266,7 @@
         <plugins>
           <plugin>
             <artifactId>maven-deploy-plugin</artifactId>
-            <version>3.0.0-M2</version>
+            <version>3.1.1</version>
             <configuration>
               <skip>true</skip>
             </configuration>
@@ -309,7 +309,7 @@
           </plugin>
           <plugin>
             <artifactId>maven-javadoc-plugin</artifactId>
-            <version>3.3.2</version>
+            <version>3.5.0</version>
             <configuration>
               <doclint>none</doclint>
               <additionalOptions>
