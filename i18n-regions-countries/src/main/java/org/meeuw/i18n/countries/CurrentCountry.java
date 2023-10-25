@@ -166,7 +166,7 @@ public class CurrentCountry implements Country {
                 prop.load(input);
                 return Optional.of("/webjars/flag-icons/" + prop.getProperty("version") + "/flags/4x3/");
             } catch (IOException e) {
-                Logger.getLogger(Country.class.getName()).warning(e.getMessage());
+                Logger.getLogger(Country.class.getName()).warning(url + ":" + e.getMessage());
             }
         }
         return Optional.empty();
@@ -180,10 +180,13 @@ public class CurrentCountry implements Country {
         URL url  = Region.class.getClassLoader()
             .getResource("META-INF/maven/org.meeuw.i18n/i18n-regions-countries/maven.properties");
         Properties prop = new Properties();
-        try (InputStream input = url.openStream()) {
-            prop.load(input);
-        } catch (NullPointerException | IOException e) {
-            Logger.getLogger(Country.class.getName()).warning(e.getMessage());
+        if (url != null) {
+
+            try (InputStream input = url.openStream()) {
+                prop.load(input);
+            } catch (NullPointerException | IOException e) {
+                Logger.getLogger(Country.class.getName()).warning(url + ":" + e.getClass() + ":" + e.getMessage());
+            }
         }
         return "https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/" + prop.getProperty("flag-icons.version")+ "/flags/4x3/";
     }

@@ -99,6 +99,16 @@ public class RegionServiceTest {
     }
 
     @Test
+    public void getSaintHelena() {
+
+        Region sh = getInstance().getByCode("sh").orElse(null);
+        assertThat(sh).isNotNull();
+        assertThat(sh).isInstanceOf(CurrentCountry.class);
+
+    }
+
+
+    @Test
     public void stream() {
         Stream<? extends Region> values = getInstance().values(Region.Type.COUNTRY);
 
