@@ -2,6 +2,8 @@ package org.meeuw.i18n.regions.validation.impl;
 
 
 import java.util.*;
+import java.util.logging.Logger;
+import java.util.spi.LocaleNameProvider;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -15,18 +17,21 @@ import com.neovisionaries.i18n.LanguageAlpha3Code;
 import com.neovisionaries.i18n.LanguageCode;
 
 
-
 /**
  * @author Michiel Meeuwissen
  * @since 3.0
  */
 public class LanguageValidator implements ConstraintValidator<Language, Object> {
 
-    public static final String[] LEGACY = {"iw", "ji", "in", "jw"};
+    private static final Logger logger = Logger.getLogger(LanguageValidator.class.getName());
+
+    public static final String[] LEGACY = {"iw", "ji", "in", "jw", "sh"};
 
     // http://www-01.sil.org/iso639-3/documentation.asp?id=zxx
     private static final Set<String> VALID_ISO_LANGUAGES = new HashSet<>();
     private static final Set<String> VALID_ISO3_LANGUAGES = new HashSet<>();
+
+    private static final Set<String> RECOGNIZED_LANGUAGES = new HashSet<>();
 
     static {
         VALID_ISO_LANGUAGES.addAll(Arrays.asList(Locale.getISOLanguages()));
@@ -37,6 +42,20 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
             }
             VALID_ISO_LANGUAGES.addAll(Arrays.asList(LEGACY));
         }
+        ServiceLoader<LocaleNameProvider> providers = ServiceLoader.load(LocaleNameProvider.class);
+        providers.stream().forEach(p -> {
+            Arrays.stream(p.get().getAvailableLocales())
+                .map(Locale::getLanguage)
+                .filter(l -> ! VALID_ISO_LANGUAGES.contains(l))
+                .filter(l -> ! VALID_ISO3_LANGUAGES.contains(l))
+                .filter(l -> ! RECOGNIZED_LANGUAGES.contains(l))
+                .forEach(RECOGNIZED_LANGUAGES::add
+            );
+        });
+        if (!RECOGNIZED_LANGUAGES.isEmpty()) {
+            logger.config(() -> "Recognized more languages: " + RECOGNIZED_LANGUAGES);
+        }
+
     }
 
     @MonotonicNonNull
@@ -142,7 +161,8 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
         }
         return
             VALID_ISO3_LANGUAGES.contains(language) ||
-                VALID_ISO_LANGUAGES.contains(language);
+                VALID_ISO_LANGUAGES.contains(language) ||
+            RECOGNIZED_LANGUAGES.contains(language);
 
     }
 }

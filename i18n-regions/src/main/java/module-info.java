@@ -16,5 +16,6 @@ module org.meeuw.i18n.regions {
     requires java.logging;
 
     uses org.meeuw.i18n.regions.spi.RegionProvider;
+    uses java.util.spi.LocaleNameProvider;
 
 }

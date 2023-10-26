@@ -34,7 +34,7 @@ public class LanguageValidatorTest {
     private final LanguageValidator languageValidator = new LanguageValidator();
 
     @ParameterizedTest
-    @ValueSource(strings = {"nl", "zxx", "jw", "dut"})
+    @ValueSource(strings = {"nl", "zxx", "jw", "dut", "sh"})
     public void testIsValid(String lang) {
         assertTrue(languageValidator.isValid(new Locale(lang), null));
     }
@@ -209,6 +209,12 @@ public class LanguageValidatorTest {
 
 
         assertThat(LanguageValidator.adapt(null, true)).isNull();
+
+    }
+
+    @Test
+    public void testWithSil() {
+        //https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3_Name_Index.tab
 
     }
 }
