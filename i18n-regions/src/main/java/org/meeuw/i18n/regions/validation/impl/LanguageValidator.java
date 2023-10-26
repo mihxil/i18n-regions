@@ -53,6 +53,7 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
             );
         });
         if (!RECOGNIZED_LANGUAGES.isEmpty()) {
+            // TODO: never triggers, why not?
             logger.config(() -> "Recognized more languages: " + RECOGNIZED_LANGUAGES);
         }
 
