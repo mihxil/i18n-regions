@@ -44,6 +44,26 @@ It provides:
 
 all countries implement an interface link:i18n-regions-countries/src/main/java/org/meeuw/i18n/countries/Country.java[`org.meeuw.i18n.countries.Country`]
 
+==== Example code
+[source,java]
+----
+// get one country
+CurrentCountry netherlands = org.meeuw.i18n.regions.RegionService.getInstance().getByCode("NL", CurrentCountry.class).orElseThrow();
+com.neovisionaries.i18n.CountryCode code = netherlands.getCode();
+
+// link to flag image:
+Optional<URI> icon = netherlands.getIcon();
+
+String nameInLocalLanguage = netherlands.getLocalName();
+
+
+// stream all available countries:
+
+Stream<? extends Region> values = org.meeuw.i18n.regions.RegionService.getInstance().values(Region.Type.COUNTRY);
+
+
+----
+
 === Subdivisions of countries
 
 These are provided in https://search.maven.org/search?q=g:org.meeuw.i18n%20AND%20a:i18n-regions-subdivisions&core=gav[`org.meeuw.i18n:i18n-regions-subdivisions`]
@@ -55,6 +75,15 @@ These are provided in https://search.maven.org/search?q=g:org.meeuw.i18n%20AND%2
 === Continents
 
 A list of codes for the continents is provided in https://search.maven.org/search?q=g:org.meeuw.i18n%20AND%20a:i18n-regions-continents&core=ga[`org.meeuw.i18n:i18n-regions-continents`]
+
+==== Example code
+[source,java]
+----
+// stream all available continents:
+
+Stream<? extends Continent> values = org.meeuw.i18n.regions.RegionService.getInstance().values(Continent.class);
+assertThat(values).hasSize(7);
+----
 
 === More
 
