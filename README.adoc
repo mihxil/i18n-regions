@@ -64,6 +64,8 @@ Stream<? extends Region> values = org.meeuw.i18n.regions.RegionService.getInstan
 
 ----
 
+NOTE: It is possible that https://github.com/TakahikoKawasaki/nv-i18n becomes abandoned. In that case we might create a new enum for all codes. May be it can be auto created using online resources.
+
 === Subdivisions of countries
 
 These are provided in https://search.maven.org/search?q=g:org.meeuw.i18n%20AND%20a:i18n-regions-subdivisions&core=gav[`org.meeuw.i18n:i18n-regions-subdivisions`]
