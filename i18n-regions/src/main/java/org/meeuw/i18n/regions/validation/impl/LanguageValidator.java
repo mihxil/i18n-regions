@@ -9,9 +9,9 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.checkerframework.checker.nullness.qual.*;
+import org.meeuw.i18n.languages.ISO_639_3;
 import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.RegionService;
-import org.meeuw.i18n.languages.ISO_639_3;
 import org.meeuw.i18n.regions.validation.Language;
 
 import com.neovisionaries.i18n.LanguageCode;
@@ -28,14 +28,16 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
     public static final String[] LEGACY = {"jw"}; // javanese?
 
     // http://www-01.sil.org/iso639-3/documentation.asp?id=zxx
-    private static final Set<String> VALID_ISO_LANGUAGES = new HashSet<>();
+    private static final Set<String> VALID_ISO_LANGUAGES;
 
     private static final Set<String> EXTRA_RECOGNIZED = ConcurrentHashMap.newKeySet();;
 
 
     static {
-        VALID_ISO_LANGUAGES.addAll(Arrays.asList(Locale.getISOLanguages()));
-        VALID_ISO_LANGUAGES.addAll(Arrays.asList(LEGACY));
+        Set<String> valid = new HashSet<>();
+        valid.addAll(Arrays.asList(Locale.getISOLanguages()));
+        valid.addAll(Arrays.asList(LEGACY));
+        VALID_ISO_LANGUAGES = Collections.unmodifiableSet(valid);
     }
 
     @MonotonicNonNull
