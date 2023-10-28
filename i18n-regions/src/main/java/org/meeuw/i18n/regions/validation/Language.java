@@ -1,14 +1,14 @@
 package org.meeuw.i18n.regions.validation;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
 import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.RegionService;
+import org.meeuw.i18n.languages.Scope;
+import org.meeuw.i18n.languages.Type;
 import org.meeuw.i18n.regions.validation.impl.LanguageValidator;
 
 import static java.lang.annotation.ElementType.*;
@@ -34,8 +34,8 @@ public @interface Language {
     Class<? extends Payload>[] payload() default {};
 
     /**
-     * Wether the locale may contain a country.
-     *
+     * Whether the locale may contain a country.
+     * <p>
      * If so the country must then be found by {@link RegionService} and its type must be {@link Region.Type#COUNTRY}.
      */
 
@@ -47,14 +47,25 @@ public @interface Language {
     boolean mayContainVariant() default false;
 
     /**
-     * xml:lang uses '-' between language and country and is basicly case insensitive
+     * xml:lang uses '-' between language and country and is basically case-insensitive
      */
     boolean forXml() default true;
 
     /**
      * Will pass be passed as second argument to {@link RegionService#getByCode(String, boolean)}
-     * This may make the country code case insensitive (if not yet because of {@link #forXml()} and might e.g. also match the country codes on formerly assigned codes.
+     * This may make the country code case-insensitive (if not yet because of {@link #forXml()} and might e.g. also match the country codes on formerly assigned codes.
      */
     boolean lenientCountry() default false;
+
+
+    /***
+     * If the language is  not directly recognized, we'll check if the JVM can produce a display language for it.
+     */
+    boolean lenientLanguage() default false;
+
+    Type[] type() default {};
+
+    Scope[] scope() default {};
+
 
 }

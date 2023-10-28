@@ -2,8 +2,8 @@ package org.meeuw.i18n.regions.validation.impl;
 
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
-import java.util.spi.LocaleNameProvider;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -11,9 +11,9 @@ import javax.validation.ConstraintValidatorContext;
 import org.checkerframework.checker.nullness.qual.*;
 import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.RegionService;
+import org.meeuw.i18n.languages.ISO_639_3;
 import org.meeuw.i18n.regions.validation.Language;
 
-import com.neovisionaries.i18n.LanguageAlpha3Code;
 import com.neovisionaries.i18n.LanguageCode;
 
 
@@ -25,38 +25,17 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
 
     private static final Logger logger = Logger.getLogger(LanguageValidator.class.getName());
 
-    public static final String[] LEGACY = {"iw", "ji", "in", "jw", "sh"};
+    public static final String[] LEGACY = {"jw"}; // javanese?
 
     // http://www-01.sil.org/iso639-3/documentation.asp?id=zxx
     private static final Set<String> VALID_ISO_LANGUAGES = new HashSet<>();
-    private static final Set<String> VALID_ISO3_LANGUAGES = new HashSet<>();
 
-    private static final Set<String> RECOGNIZED_LANGUAGES = new HashSet<>();
+    private static final Set<String> EXTRA_RECOGNIZED = ConcurrentHashMap.newKeySet();;
+
 
     static {
         VALID_ISO_LANGUAGES.addAll(Arrays.asList(Locale.getISOLanguages()));
-        for (LanguageAlpha3Code cod : LanguageAlpha3Code.values()) {
-            VALID_ISO3_LANGUAGES.add(cod.toString());
-            if (cod.getAlpha2() != null) {
-                VALID_ISO_LANGUAGES.add(cod.getAlpha2().name());
-            }
-            VALID_ISO_LANGUAGES.addAll(Arrays.asList(LEGACY));
-        }
-        ServiceLoader<LocaleNameProvider> providers = ServiceLoader.load(LocaleNameProvider.class);
-        for (LocaleNameProvider provider : providers) {
-            Arrays.stream(provider.getAvailableLocales())
-                .map(Locale::getLanguage)
-                .filter(l -> !VALID_ISO_LANGUAGES.contains(l))
-                .filter(l -> !VALID_ISO3_LANGUAGES.contains(l))
-                .filter(l -> !RECOGNIZED_LANGUAGES.contains(l))
-                .forEach(RECOGNIZED_LANGUAGES::add
-                );
-        }
-        if (!RECOGNIZED_LANGUAGES.isEmpty()) {
-            // TODO: never triggers, why not?
-            logger.config(() -> "Recognized more languages: " + RECOGNIZED_LANGUAGES);
-        }
-
+        VALID_ISO_LANGUAGES.addAll(Arrays.asList(LEGACY));
     }
 
     @MonotonicNonNull
@@ -73,6 +52,7 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
     public boolean isValid(@Nullable Object value, @Nullable ConstraintValidatorContext context) {
         return isValid(value);
     }
+
     @RequiresNonNull("annotation")
     private boolean isValid(@Nullable Object value) {
         if (value == null) {
@@ -160,10 +140,38 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
         if (! variant.isEmpty() && ! annotation.mayContainVariant()) {
             return false;
         }
-        return
-            VALID_ISO3_LANGUAGES.contains(language) ||
-                VALID_ISO_LANGUAGES.contains(language) ||
-            RECOGNIZED_LANGUAGES.contains(language);
+        boolean recognized  = VALID_ISO_LANGUAGES.contains(language) ||
+            (annotation.lenientLanguage() && EXTRA_RECOGNIZED.contains(language));
+
+        if (! recognized) {
+            Optional<ISO_639_3> iso3 = ISO_639_3.getByCode(language);
+            if (iso3.isPresent()){
+                return true;
+            }
+            Optional<ISO_639_3> isoPart1 = ISO_639_3.getByPart1(language);
+            if (isoPart1.isPresent()){
+                return true;
+            }
+
+            Optional<ISO_639_3> isoPart2B = ISO_639_3.getByPart2B(language);
+            if (isoPart2B.isPresent()){
+                return true;
+            }
+
+            Optional<ISO_639_3> isoPartT = ISO_639_3.getByPart2T(language);
+            if (isoPartT.isPresent()){
+                return true;
+            }
+            if (annotation.lenientLanguage()) {
+                String displayLanguage = new Locale(language).getDisplayLanguage();
+                if (!language.equals(displayLanguage)) { // last fall back is iso code itself.
+                    logger.info("Not a recognized language " + language + " -> " + displayLanguage + ", so recognized by the JMS. Will follow that");
+                    EXTRA_RECOGNIZED.add(language);
+                    return true;
+                }
+            }
+        }
+        return recognized;
 
     }
 }

@@ -5,6 +5,7 @@ module org.meeuw.i18n.regions {
     exports org.meeuw.i18n.regions.validation.impl;
     exports org.meeuw.i18n.regions.spi;
     exports org.meeuw.i18n.regions;
+    exports org.meeuw.i18n.languages;
 
 
     requires static java.validation;
@@ -17,5 +18,6 @@ module org.meeuw.i18n.regions {
 
     uses org.meeuw.i18n.regions.spi.RegionProvider;
     uses java.util.spi.LocaleNameProvider;
+    uses java.util.spi.LocaleServiceProvider;
 
 }

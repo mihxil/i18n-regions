@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.meeuw.i18n.languages.Type;
 import org.meeuw.i18n.regions.validation.Language;
 import org.meeuw.i18n.regions.validation.RegionValidatorService;
 import org.meeuw.i18n.regions.validation.impl.LanguageValidator;
@@ -22,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Michiel Meeuwissen
  * @since 0.3
  */
+@Language(type = Type.A)
 public class LanguageValidatorTest {
     private static final RegionValidatorService regionValidatorService = RegionValidatorService.getInstance();
     private static final Validator VALIDATOR = regionValidatorService.getValidator();
@@ -32,12 +34,20 @@ public class LanguageValidatorTest {
     }
 
     private final LanguageValidator languageValidator = new LanguageValidator();
+    {
+        languageValidator.initialize(LanguageValidatorTest.class.getAnnotation(Language.class));
+    }
 
     @ParameterizedTest
-    @ValueSource(strings = {"nl", "zxx", "jw", "dut", "sh"})
+    @ValueSource(strings = {"nl", "zxx", "jw", "iw", "dut", "sh", "iw", "ji", "in"})
     public void testIsValid(String lang) {
+        String displayName = new Locale(lang).getDisplayLanguage();
+        System.out.println(lang + ":" + displayName);
         assertTrue(languageValidator.isValid(new Locale(lang), null));
+
     }
+
+
 
     @ParameterizedTest
     @ValueSource(strings = {"cz"})
@@ -48,11 +58,9 @@ public class LanguageValidatorTest {
     @Test
     public void nullIsValid() {
         assertTrue(languageValidator.isValid(null, null));
-
     }
 
     @Test
-    @Disabled("fails. 'act' is somewhy not a known language")
     void achterhoeks() {
         assertTrue(languageValidator.isValid(new Locale("act"), null));
     }
