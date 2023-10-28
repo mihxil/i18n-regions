@@ -42,7 +42,7 @@ jobs:
         run: (cd i18n-regions-bom ; mvn -B -Pdeploy clean deploy)
         env:
           SONATYPE_USERNAME: mihxil
-          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+          SONATYPE_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
           GPG_SECRET_KEY_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
       - name: Build and deploy with Maven
         run: |
@@ -50,7 +50,7 @@ jobs:
           mvn -B -DskipTests=true -P'deploy,!blackboxtesting' deploy
         env:
           SONATYPE_USERNAME: mihxil
-          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+          SONATYPE_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
           GPG_SECRET_KEY_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
       - uses: codecov/codecov-action@v3.1.4
         with:
