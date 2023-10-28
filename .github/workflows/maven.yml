@@ -16,27 +16,26 @@ jobs:
       MAVEN_OPTS: -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
     steps:
       - name: Cancel previous Action
-        uses: styfle/cancel-workflow-action@0.9.1
+        uses: styfle/cancel-workflow-action@0.12.0
         continue-on-error: true  # for act
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4.1.1
       - name: Set up JDK 11
         uses: actions/setup-java@v3
         with:
           java-version: 11
           distribution: 'temurin'
-      - uses: s4u/maven-settings-action@v2
-        with:
-          servers: '[{"id": "ossrh", "username": "mihxil", "password": "${{secrets.OSSRH_PASSWORD}}"}]'
-      - uses: crazy-max/ghaction-import-gpg@v4
-        with:
-          gpg_private_key: ${{ secrets.GPG_SECRET_KEY }}
-          passphrase: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
+          cache: 'maven'
+          server-id: ossrh
+          server-username: SONATYPE_USERNAME
+          server-password: SONATYPE_PASSWORD
+          gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
+          gpg-passphrase: GPG_SECRET_KEY_PASSPHRASE
       - name: Fix bom
         run: |
           sudo apt-get install libxml2-utils
           .github/fix-bom.sh -B
       - name: Commit changes in bom if necessary
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: bom changes
       - name: Build and deploy BOM with Maven
@@ -45,12 +44,17 @@ jobs:
         run: |
           mvn -B test
           mvn -B -DskipTests=true -P'deploy,!blackboxtesting' deploy
-      - uses: codecov/codecov-action@v2
+        env:
+          SONATYPE_USERNAME: mihxil
+          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+          GPG_SECRET_KEY_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
+      - uses: codecov/codecov-action@v3.1.4
         with:
           files: report-aggregation/target/site/jacoco-aggregate/jacoco.xml
           verbose: true
-      - name: Publish Test Report
-        uses: scacap/action-surefire-report@v1
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2.10.0
         if: always()
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          check_name: Tests results jav
+          junit_files: "**/target/surefire-reports/*.xml"
