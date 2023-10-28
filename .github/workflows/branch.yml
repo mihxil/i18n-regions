@@ -10,7 +10,7 @@ jobs:
     env:
       MAVEN_OPTS: '-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn'
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Release branch with Maven
         run: |
           git config --global user.name 'github actions'
