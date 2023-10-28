@@ -2,6 +2,8 @@ package org.meeuw.i18n.continents;
 
 import java.util.Locale;
 
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.Test;
 import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.RegionService;
@@ -50,11 +52,16 @@ public class ContinentsRegionServiceTest {
     }
     @Test
     public void values() {
-
         RegionService.getInstance().values().forEach(r -> {
             System.out.println(r.getClass().getSimpleName() + ":" + r.getCode()  + " : " + r.getName() + ":" + r.getName(LanguageCode.nl));
         });
 
+    }
+
+    @Test
+    public void valuesAsType() {
+        Stream<? extends Continent> values = org.meeuw.i18n.regions.RegionService.getInstance().values(Continent.class);
+        assertThat(values).hasSize(7);
     }
 
 }

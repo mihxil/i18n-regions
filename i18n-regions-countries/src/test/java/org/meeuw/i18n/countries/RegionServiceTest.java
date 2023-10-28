@@ -23,6 +23,12 @@ public class RegionServiceTest {
 
     @Test
     public void getCurrentByCode() {
+        CurrentCountry netherlands = org.meeuw.i18n.regions.RegionService.getInstance().getByCode("NL", CurrentCountry.class).orElseThrow();
+        CountryCode countryCode = netherlands.getCountryCode();
+        Optional<URI> icon = netherlands.getIcon();
+        String nameInLocalLanguage = netherlands.getLocalName();
+
+
 
         Optional<Country> nl = getInstance().getByCode("NL", Country.class);
         Assertions.assertThat(nl).isPresent();
@@ -73,7 +79,7 @@ public class RegionServiceTest {
     @Test
     public void getFormerCountryCS() {
 
-        Region cshh = getInstance().getByCode("CS", FormerCountry.class).orElse(null);
+        FormerCountry cshh = getInstance().getByCode("CS", FormerCountry.class).orElse(null);
         assertThat(cshh).isNotNull();
         assertThat(cshh).isInstanceOf(FormerCountry.class);
         // It should find the country most recently assigned to 'CS'.
@@ -100,11 +106,9 @@ public class RegionServiceTest {
 
     @Test
     public void getSaintHelena() {
-
         Region sh = getInstance().getByCode("sh").orElse(null);
         assertThat(sh).isNotNull();
         assertThat(sh).isInstanceOf(CurrentCountry.class);
-
     }
 
 
