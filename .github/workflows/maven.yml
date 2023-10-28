@@ -40,6 +40,10 @@ jobs:
           commit_message: bom changes
       - name: Build and deploy BOM with Maven
         run: (cd i18n-regions-bom ; mvn -B -Pdeploy clean deploy)
+        env:
+          SONATYPE_USERNAME: mihxil
+          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+          GPG_SECRET_KEY_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
       - name: Build and deploy with Maven
         run: |
           mvn -B test
