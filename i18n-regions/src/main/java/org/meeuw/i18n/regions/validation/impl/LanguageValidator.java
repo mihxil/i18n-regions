@@ -43,15 +43,15 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
             VALID_ISO_LANGUAGES.addAll(Arrays.asList(LEGACY));
         }
         ServiceLoader<LocaleNameProvider> providers = ServiceLoader.load(LocaleNameProvider.class);
-        providers.stream().forEach(p -> {
-            Arrays.stream(p.get().getAvailableLocales())
+        for (LocaleNameProvider provider : providers) {
+            Arrays.stream(provider.getAvailableLocales())
                 .map(Locale::getLanguage)
-                .filter(l -> ! VALID_ISO_LANGUAGES.contains(l))
-                .filter(l -> ! VALID_ISO3_LANGUAGES.contains(l))
-                .filter(l -> ! RECOGNIZED_LANGUAGES.contains(l))
+                .filter(l -> !VALID_ISO_LANGUAGES.contains(l))
+                .filter(l -> !VALID_ISO3_LANGUAGES.contains(l))
+                .filter(l -> !RECOGNIZED_LANGUAGES.contains(l))
                 .forEach(RECOGNIZED_LANGUAGES::add
-            );
-        });
+                );
+        }
         if (!RECOGNIZED_LANGUAGES.isEmpty()) {
             // TODO: never triggers, why not?
             logger.config(() -> "Recognized more languages: " + RECOGNIZED_LANGUAGES);
