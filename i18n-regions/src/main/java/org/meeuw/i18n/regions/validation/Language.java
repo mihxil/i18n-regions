@@ -42,7 +42,7 @@ public @interface Language {
     boolean mayContainCountry() default true;
 
      /**
-     * Wether the local may contain a variant
+     * Whether the local may contain a variant
      */
     boolean mayContainVariant() default false;
 
@@ -66,6 +66,19 @@ public @interface Language {
     Type[] type() default {};
 
     Scope[] scope() default {};
+
+
+    /**
+     * The default is to accept both ISO-639-1 and ISO-639-3 codes. If you want to restrict to ISO-639-1 only, set this to false.
+     */
+    boolean iso639_3() default true;
+
+    /**
+     * The default is to accept also part 2 codes.
+     */
+    boolean iso639_2() default true;
+
+
 
 
 }

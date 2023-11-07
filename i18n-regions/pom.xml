@@ -28,6 +28,11 @@
       <artifactId>jakarta.validation-api</artifactId>
       <optional>true</optional>
     </dependency>
+    <dependency>
+      <groupId>org.meeuw.i18n</groupId>
+      <artifactId>i18n-iso-639-3</artifactId>
+      <version>0.2-SNAPSHOT</version>
+    </dependency>
 
 
     <!-- test dependencies -->

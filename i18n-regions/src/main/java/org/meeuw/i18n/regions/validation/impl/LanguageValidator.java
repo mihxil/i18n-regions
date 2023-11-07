@@ -1,6 +1,5 @@
 package org.meeuw.i18n.regions.validation.impl;
 
-
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
@@ -9,12 +8,10 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.checkerframework.checker.nullness.qual.*;
-import org.meeuw.i18n.languages.ISO_639_3;
+import org.meeuw.i18n.languages.LanguageCode;
 import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.RegionService;
 import org.meeuw.i18n.regions.validation.Language;
-
-import com.neovisionaries.i18n.LanguageCode;
 
 
 /**
@@ -105,11 +102,12 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
         }
 
         String[] split = v.split("[_-]", 3);
-        LanguageCode languageCode = LanguageCode.getByCode(split[0], ! lenient);
+
+        LanguageCode languageCode = LanguageCode.get(split[0]).orElse(null);
         if (languageCode == null && ! lenient) {
             throw new IllegalArgumentException("Not a valid language " + split[0]);
         }
-        String language = languageCode == null ? split[0] : languageCode.name().toLowerCase();
+        String language = languageCode == null ? split[0] : languageCode.getCode().toLowerCase();
         switch (split.length) {
             case 1:
                 return new String[]{language, "", ""};
@@ -146,23 +144,26 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
             (annotation.lenientLanguage() && EXTRA_RECOGNIZED.contains(language));
 
         if (! recognized) {
-            Optional<ISO_639_3> iso3 = ISO_639_3.getByCode(language);
+            Optional<LanguageCode> iso3 = LanguageCode.getByPart1(language);
             if (iso3.isPresent()){
                 return true;
             }
-            Optional<ISO_639_3> isoPart1 = ISO_639_3.getByPart1(language);
-            if (isoPart1.isPresent()){
-                return true;
+            if (annotation.iso639_3()) {
+                Optional<LanguageCode> isoPart1 = LanguageCode.getByCode(language);
+                if (isoPart1.isPresent()){
+                    return true;
+                }
             }
+            if (annotation.iso639_2()) {
+                Optional<LanguageCode> isoPart2B = LanguageCode.getByPart2B(language);
+                if (isoPart2B.isPresent()) {
+                    return true;
+                }
 
-            Optional<ISO_639_3> isoPart2B = ISO_639_3.getByPart2B(language);
-            if (isoPart2B.isPresent()){
-                return true;
-            }
-
-            Optional<ISO_639_3> isoPartT = ISO_639_3.getByPart2T(language);
-            if (isoPartT.isPresent()){
-                return true;
+                Optional<LanguageCode> isoPart2T = LanguageCode.getByPart2T(language);
+                if (isoPart2T.isPresent()) {
+                    return true;
+                }
             }
             if (annotation.lenientLanguage()) {
                 String displayLanguage = new Locale(language).getDisplayLanguage();
