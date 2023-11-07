@@ -16,6 +16,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * A validator for language codes (or {@link java.util.Locale}s (which also is a container for language codes)
+ * <p>
+ * This depends on {@link org.meeuw.i18n.languages.LanguageCode} for a list of all recognized ISO-639-3 codes.
  *
  * @author Michiel Meeuwissen
  * @since 0.3
@@ -78,7 +80,7 @@ public @interface Language {
      */
     boolean iso639_2() default true;
 
-
+    boolean requireLowerCase() default true;
 
 
 }

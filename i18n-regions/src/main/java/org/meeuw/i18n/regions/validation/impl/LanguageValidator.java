@@ -73,7 +73,13 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
                     if (annotation.forXml()) {
                         return isValid(Locale.forLanguageTag(value.toString()));
                     } else {
-                        String[] split = splitAdapt(String.valueOf(value), annotation.lenientCountry());
+                        String stringValue = String.valueOf(value);
+                        String[] split = splitAdapt(stringValue, annotation.lenientCountry());
+                        if (annotation.requireLowerCase()) {
+                            if (! stringValue.startsWith(split[0].toLowerCase())) {
+                                return false;
+                            }
+                        }
                         return isValid(split[0], split[1], split[2]);
                     }
                 }
@@ -144,8 +150,9 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
             (annotation.lenientLanguage() && EXTRA_RECOGNIZED.contains(language));
 
         if (! recognized) {
+
             Optional<LanguageCode> iso3 = LanguageCode.getByPart1(language);
-            if (iso3.isPresent()){
+            if (iso3.isPresent()) {
                 return true;
             }
             if (annotation.iso639_3()) {
