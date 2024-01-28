@@ -226,12 +226,15 @@ Find my findings link:TESTING-WITH-JPMS.adoc[here]
 
 
 |===
-|Version |
+|Version | |
 
-|1.7
-|javax, java 8
-|
-| 2.0
+|1.x
+|javax, java 8 (though with module-info)
+| &le; 2024
+
+
+| 2.x
 | jakarta, java 11
+| &ge; 2024
 |===
 
