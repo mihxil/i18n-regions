@@ -3,7 +3,7 @@ module org.meeuw.springutils {
 
     requires spring.web;
 
-    requires static javax.servlet.api;
+    requires static jakarta.servlet;
 
     requires org.apache.commons.lang3;
     requires spring.core;
