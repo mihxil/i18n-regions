@@ -21,7 +21,7 @@ jobs:
             fi
       - uses: actions/checkout@v4
         if: ${{ env.valid_branch }} == 'true'
-      - uses: actions/setup-java@v3
+      - uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: 11
