@@ -117,50 +117,10 @@
             <args>-Xpkginfo:always</args>
           </compilerArgs>
         </configuration>
-        <executions>
-          <execution>
-            <id>default-compile</id>
-            <configuration>
-              <!-- compile everything to ensure module-info contains right entries -->
-              <source>11</source>
-              <release>11</release>
-            </configuration>
-          </execution>
-          <execution>
-            <id>base-compile</id>
-            <goals>
-              <goal>compile</goal>
-            </goals>
-            <!-- recompile everything for target VM except the module-info.java -->
-            <configuration>
-              <excludes>
-                <exclude>module-info.java</exclude>
-              </excludes>
-              <source>${java.target.version}</source>
-              <release>${java.target.version}</release>
-              <compilerArgs>
-                <args>-Xpkginfo:always</args>
-                <!--make sure that package-info is always created, otherwise it may be skipped (i think if there are no annotations)  -->
-              </compilerArgs>
-            </configuration>
-          </execution>
-          <execution>
-            <id>test-compile</id>
-            <phase>process-test-sources</phase>
-            <goals>
-              <goal>testCompile</goal>
-            </goals>
-            <configuration>
-              <source>11</source>
-              <release>11</release>
-            </configuration>
-          </execution>
-        </executions>
-
       </plugin>
       <plugin>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>3.2.2</version>
+        <version>3.3.0</version>
         <configuration>
           <archive>
             <manifestEntries>
@@ -179,7 +139,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0</version>
+        <version>3.2.5</version>
       </plugin>
       <plugin>
         <artifactId>maven-deploy-plugin</artifactId>
@@ -309,7 +269,7 @@
           </plugin>
           <plugin>
             <artifactId>maven-javadoc-plugin</artifactId>
-            <version>3.5.0</version>
+            <version>3.6.3</version>
             <configuration>
               <doclint>none</doclint>
               <additionalOptions>
