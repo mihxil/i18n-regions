@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import javax.annotation.Priority;
+import jakarta.annotation.Priority;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode;

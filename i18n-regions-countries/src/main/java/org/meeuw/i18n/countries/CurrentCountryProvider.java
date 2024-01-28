@@ -3,7 +3,7 @@ package org.meeuw.i18n.countries;
 import java.util.Collections;
 import java.util.HashSet;
 
-import javax.annotation.Priority;
+import jakarta.annotation.Priority;
 
 import com.neovisionaries.i18n.CountryCode;
 
