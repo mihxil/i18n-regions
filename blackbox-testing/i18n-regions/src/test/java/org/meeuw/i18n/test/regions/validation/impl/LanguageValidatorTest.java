@@ -2,7 +2,7 @@ package org.meeuw.i18n.test.regions.validation.impl;
 
 import java.util.*;
 
-import javax.validation.*;
+import jakarta.validation.*;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

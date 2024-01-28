@@ -220,3 +220,18 @@ Release notes can be found link:RELEASE-NOTES.adoc[here].
 
 == Testing and JPMS
 Find my findings link:TESTING-WITH-JPMS.adoc[here]
+
+
+== Versions
+
+
+|===
+|Version |
+
+|1.7
+|javax, java 8
+|
+| 2.0
+| jakarta, java 11
+|===
+

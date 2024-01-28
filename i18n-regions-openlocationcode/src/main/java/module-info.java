@@ -9,8 +9,8 @@ module org.meeuw.i18n.openlocationcode {
     requires transitive org.meeuw.i18n.regions;
 
     requires static org.checkerframework.checker.qual;
-    requires static java.validation;
-    requires static java.annotation;
+    requires static jakarta.validation;
+    requires static jakarta.annotation;
 
     requires java.logging;
     requires openlocationcode;

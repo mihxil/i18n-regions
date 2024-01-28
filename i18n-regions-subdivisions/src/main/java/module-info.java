@@ -14,7 +14,7 @@ module org.meeuw.i18n.subdivisions {
 
     requires static org.checkerframework.checker.qual;
     requires org.meeuw.i18n.subdivision_enums;
-    requires java.validation;
+    requires jakarta.validation;
     requires java.logging;
     requires org.meeuw.i18n.countries;
 

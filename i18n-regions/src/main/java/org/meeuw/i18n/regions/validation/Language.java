@@ -2,8 +2,8 @@ package org.meeuw.i18n.regions.validation;
 
 import java.lang.annotation.*;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 
 import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.RegionService;

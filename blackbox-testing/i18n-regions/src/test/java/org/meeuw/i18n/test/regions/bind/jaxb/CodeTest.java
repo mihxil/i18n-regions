@@ -3,9 +3,9 @@ package org.meeuw.i18n.test.regions.bind.jaxb;
 import java.io.StringReader;
 import java.io.StringWriter;
 
-import javax.xml.bind.JAXB;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.JAXB;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 import org.junit.jupiter.api.Test;
 import org.meeuw.i18n.regions.Region;

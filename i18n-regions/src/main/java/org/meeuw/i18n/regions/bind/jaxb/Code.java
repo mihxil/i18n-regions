@@ -2,7 +2,7 @@ package org.meeuw.i18n.regions.bind.jaxb;
 
 import java.util.Optional;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.meeuw.i18n.regions.Region;

@@ -2,8 +2,8 @@ package org.meeuw.i18n.countries.validation;
 
 import java.lang.annotation.*;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 
 import org.meeuw.i18n.countries.Country;
 import org.meeuw.i18n.countries.validation.impl.CountryConstraintValidator;
@@ -15,7 +15,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 
 /**
- * A javax.validation annotation that can be used to restrict the values of a {@link Country} value.
+ * A jakarta.validation annotation that can be used to restrict the values of a {@link Country} value.
  *
  * For example
  * <pre>

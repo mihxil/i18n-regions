@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 
 import java.util.logging.Logger;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.regions.Region;

@@ -7,11 +7,11 @@ module org.meeuw.i18n.regions {
     exports org.meeuw.i18n.regions;
 
 
-    requires static java.validation;
-    requires static java.xml.bind;
+    requires static jakarta.validation;
+    requires static jakarta.xml.bind;
     requires static org.checkerframework.checker.qual;
-    requires static java.persistence;
-    requires static java.annotation;
+    requires static jakarta.persistence;
+    requires static jakarta.annotation;
     requires transitive nv.i18n;
     requires java.logging;
     requires org.meeuw.i18n.languages;

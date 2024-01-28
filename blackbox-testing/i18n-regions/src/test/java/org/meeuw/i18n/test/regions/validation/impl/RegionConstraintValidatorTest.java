@@ -3,8 +3,8 @@ package org.meeuw.i18n.test.regions.validation.impl;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validator;
 
 import org.junit.jupiter.api.Test;
 import org.meeuw.i18n.regions.Region;

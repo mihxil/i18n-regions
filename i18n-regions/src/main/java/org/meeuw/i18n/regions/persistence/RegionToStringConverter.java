@@ -1,7 +1,7 @@
 package org.meeuw.i18n.regions.persistence;
 
-import javax.persistence.AttributeConverter;
-import javax.persistence.Converter;
+import jakarta.persistence.AttributeConverter;
+import jakarta.persistence.Converter;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.meeuw.i18n.regions.Region;

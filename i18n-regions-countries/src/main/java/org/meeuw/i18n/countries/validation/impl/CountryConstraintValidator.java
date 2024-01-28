@@ -3,8 +3,8 @@ package org.meeuw.i18n.countries.validation.impl;
 import java.util.Locale;
 import java.util.Optional;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 import org.meeuw.i18n.regions.RegionService;
 import org.meeuw.i18n.countries.Country;

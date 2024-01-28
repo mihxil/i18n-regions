@@ -6,7 +6,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import javax.validation.*;
+import jakarta.validation.*;
 
 import org.junit.jupiter.api.Test;
 import org.meeuw.i18n.countries.validation.ValidCountry;

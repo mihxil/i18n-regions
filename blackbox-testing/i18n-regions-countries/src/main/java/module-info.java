@@ -5,7 +5,7 @@ import org.meeuw.i18n.test.some.SomeRegionProvider;
  */
 open module org.meeuw.i18n.test.countries {
     requires org.meeuw.i18n.countries;
-    requires java.validation;
+    requires jakarta.validation;
 
     exports org.meeuw.i18n.test.some;
 
