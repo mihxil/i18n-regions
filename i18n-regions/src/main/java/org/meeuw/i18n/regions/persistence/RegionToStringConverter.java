@@ -9,9 +9,9 @@ import org.meeuw.i18n.regions.RegionService;
 
 /**
  * How to persist.
- *
+ * <p>
  * Uses the iso code.
- *
+ * <p>
  * TODO, we might need to prefix other region than Countries, because their codes may not be unique.
  * @author Michiel Meeuwissen
  * @since 0.1

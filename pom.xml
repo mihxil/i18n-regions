@@ -406,27 +406,27 @@
       <dependency>
         <groupId>org.glassfish.jaxb</groupId>
         <artifactId>jaxb-runtime</artifactId>
-        <version>3.0.2</version>
+        <version>4.0.4</version>
         <scope>test</scope>
       </dependency>
-      <!-- not ready for validotor 7 yet. Namespaces, package names changes. -->
+
       <dependency>
         <groupId>org.hibernate.validator</groupId>
         <artifactId>hibernate-validator</artifactId>
-        <version>6.2.5.Final</version>
+        <version>8.0.1.Final</version>
         <scope>test</scope>
       </dependency>
 
       <dependency>
         <groupId>jakarta.el</groupId>
         <artifactId>jakarta.el-api</artifactId>
-        <version>3.0.3</version>
+        <version>5.0.1</version>
         <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.glassfish</groupId>
         <artifactId>jakarta.el</artifactId>
-        <version>3.0.4</version>
+        <version>4.0.2</version>
         <scope>test</scope>
       </dependency>
       <dependency>
