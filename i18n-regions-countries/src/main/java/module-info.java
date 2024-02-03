@@ -10,7 +10,7 @@ module org.meeuw.i18n.countries {
     requires static jakarta.annotation;
     requires static jakarta.xml.bind;
     requires static jakarta.validation;
-    requires transitive jakarta.persistence;
+    requires static jakarta.persistence;
 
 
     requires transitive org.meeuw.i18n.regions;
