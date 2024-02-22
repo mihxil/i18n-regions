@@ -1,16 +1,15 @@
 package org.meeuw.i18n.regions;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.neovisionaries.i18n.LanguageCode;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.net.URI;
 import java.util.*;
-
-import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.meeuw.i18n.regions.bind.jaxb.Code;
-
-import com.neovisionaries.i18n.LanguageCode;
 
 /**
  * The region interface represents a certain geographical region. E.g. a Country.
@@ -24,6 +23,7 @@ public interface Region extends Serializable {
     /**
      * The code for the region. For countries: <a href="https://en.wikipedia.org/wiki/ISO_3166">ISO 3166</a>.
      */
+    @JsonValue
     String getCode();
 
     /**
@@ -151,6 +151,11 @@ public interface Region extends Serializable {
         NATION*/
     }
 
+    
+    @JsonCreator
+    static Region of(String code) {
+        return RegionService.getInstance().getByCode(code, true).orElseThrow();
+    }
 
 
 }
