@@ -23,6 +23,11 @@ module org.meeuw.i18n.regions {
     
     // to validation implementations
     opens org.meeuw.i18n.regions.validation.impl;
+    
 
-
+    exports org.meeuw.i18n.regions.validation.impl to 
+        org.meeuw.i18n.countries, // countries validation
+        org.meeuw.i18n.subdivisions, // subdivisions validation
+        org.meeuw.i18n.test.regions; // and testing
+    
 }

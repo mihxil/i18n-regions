@@ -70,9 +70,9 @@ public class LanguageValidatorTest {
         "nl-UU"// UU is not a valid country
     })
     public void testValidateInvalid(String language) {
-        WithLanguageFields a = new WithLanguageFields();
+        WithLanguageFieldsDeprecated a = new WithLanguageFieldsDeprecated();
         a.language = language;
-        Set<ConstraintViolation<WithLanguageFields>> constraintViolations = testValidate(a, 1);
+        Set<ConstraintViolation<WithLanguageFieldsDeprecated>> constraintViolations = testValidate(a, 1);
         assertThat(constraintViolations.iterator().next().getMessage()).isEqualTo(language + " is een ongeldige ISO639 taalcode");
     }
 
@@ -84,9 +84,9 @@ public class LanguageValidatorTest {
 
     })
     public void testValidateInvalidNotForXml(String language) {
-        WithLanguageFields a = new WithLanguageFields();
+        WithLanguageFieldsDeprecated a = new WithLanguageFieldsDeprecated();
         a.notForXml = language;
-        Set<ConstraintViolation<WithLanguageFields>> constraintViolations = testValidate(a, 1);
+        Set<ConstraintViolation<WithLanguageFieldsDeprecated>> constraintViolations = testValidate(a, 1);
         assertThat(constraintViolations.iterator().next().getMessage()).isEqualTo(language + " is een ongeldige ISO639 taalcode");
     }
      @ParameterizedTest
@@ -97,31 +97,31 @@ public class LanguageValidatorTest {
 
     })
     public void testValidateValidNotForXml(String language) {
-        WithLanguageFields a = new WithLanguageFields();
+        WithLanguageFieldsDeprecated a = new WithLanguageFieldsDeprecated();
         a.notForXml = language;
-        Set<ConstraintViolation<WithLanguageFields>> constraintViolations = testValidate(a, 0);
+        Set<ConstraintViolation<WithLanguageFieldsDeprecated>> constraintViolations = testValidate(a, 0);
     }
 
 
     @Test
     public void testWithCountry() {
         {
-            WithLanguageFields a = new WithLanguageFields();
+            WithLanguageFieldsDeprecated a = new WithLanguageFieldsDeprecated();
             a.language = "nl-NL";
             testValidate(a, 0);
         }
         {
-            WithLanguageFields a = new WithLanguageFields();
+            WithLanguageFieldsDeprecated a = new WithLanguageFieldsDeprecated();
             a.languageNoCountry = "nl-NL";
             testValidate(a, 1);
         }
         {
-            WithLanguageFields a = new WithLanguageFields();
+            WithLanguageFieldsDeprecated a = new WithLanguageFieldsDeprecated();
             a.language = "nl-NL-INFORMAL";
             testValidate(a, 1);
         }
         {
-            WithLanguageFields a = new WithLanguageFields();
+            WithLanguageFieldsDeprecated a = new WithLanguageFieldsDeprecated();
             a.languageWithVariant = "nl-NL-INFORMAL";
             testValidate(a, 0);
         }
@@ -131,19 +131,19 @@ public class LanguageValidatorTest {
     @Test
     void testObject() {
         {
-            WithLanguageFields a = new WithLanguageFields();
+            WithLanguageFieldsDeprecated a = new WithLanguageFieldsDeprecated();
             a.object = Arrays.asList("ZZ");
             testValidate(a, 1);
         }
         {
-            WithLanguageFields a = new WithLanguageFields();
+            WithLanguageFieldsDeprecated a = new WithLanguageFieldsDeprecated();
             a.object = Arrays.asList("nl-NL", "nl-be");
             testValidate(a, 0);
         }
     }
 
-    private Set<ConstraintViolation<WithLanguageFields>> testValidate(WithLanguageFields value, int expectedSize) {
-        Set<ConstraintViolation<WithLanguageFields>> validate = validator.validate(value);
+    private Set<ConstraintViolation<WithLanguageFieldsDeprecated>> testValidate(WithLanguageFieldsDeprecated value, int expectedSize) {
+        Set<ConstraintViolation<WithLanguageFieldsDeprecated>> validate = validator.validate(value);
         System.out.println("" + validate);
         assertThat(validate).hasSize(expectedSize);
         return validate;
