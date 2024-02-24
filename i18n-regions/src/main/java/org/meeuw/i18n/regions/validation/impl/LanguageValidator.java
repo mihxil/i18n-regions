@@ -1,14 +1,12 @@
 package org.meeuw.i18n.regions.validation.impl;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Logger;
-
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-
+import java.util.Locale;
+import java.util.Optional;
+import java.util.logging.Logger;
 import org.checkerframework.checker.nullness.qual.*;
-import org.meeuw.i18n.languages.LanguageCode;
+import org.meeuw.i18n.languages.validation.LanguageValidationInfo;
 import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.RegionService;
 import org.meeuw.i18n.regions.validation.Language;
@@ -18,25 +16,11 @@ import org.meeuw.i18n.regions.validation.Language;
  * @author Michiel Meeuwissen
  * @since 3.0
  */
+@Deprecated
 public class LanguageValidator implements ConstraintValidator<Language, Object> {
 
     private static final Logger logger = Logger.getLogger(LanguageValidator.class.getName());
-
-    public static final String[] LEGACY = {"jw"}; // javanese?
-
-    // http://www-01.sil.org/iso639-3/documentation.asp?id=zxx
-    private static final Set<String> VALID_ISO_LANGUAGES;
-
-    private static final Set<String> EXTRA_RECOGNIZED = ConcurrentHashMap.newKeySet();;
-
-
-    static {
-        Set<String> valid = new HashSet<>();
-        valid.addAll(Arrays.asList(Locale.getISOLanguages()));
-        valid.addAll(Arrays.asList(LEGACY));
-        VALID_ISO_LANGUAGES = Collections.unmodifiableSet(valid);
-    }
-
+    
     @MonotonicNonNull
     Language annotation;
 
@@ -68,19 +52,20 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
         } else {
             try {
                 if (value instanceof Locale) {
-                    return isValid((Locale) value);
+                    return isValid((Locale) value, value.toString());
                 } else {
+                    String svalue = String.valueOf(value);
                     if (annotation.forXml()) {
-                        return isValid(Locale.forLanguageTag(value.toString()));
+                        return isValid(Locale.forLanguageTag(svalue), svalue);
                     } else {
-                        String stringValue = String.valueOf(value);
-                        String[] split = splitAdapt(stringValue, annotation.lenientCountry());
+
+                        String[] split = splitAdapt(svalue, annotation.lenientCountry());
                         if (annotation.requireLowerCase()) {
-                            if (! stringValue.startsWith(split[0].toLowerCase())) {
+                            if (! svalue.startsWith(split[0].toLowerCase())) {
                                 return false;
                             }
                         }
-                        return isValid(split[0], split[1], split[2]);
+                        return isValid(split[0], split[1], split[2], svalue);
                     }
                 }
             } catch (IllegalArgumentException iae) {
@@ -109,11 +94,9 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
 
         String[] split = v.split("[_-]", 3);
 
-        LanguageCode languageCode = LanguageCode.get(split[0]).orElse(null);
-        if (languageCode == null && ! lenient) {
-            throw new IllegalArgumentException("Not a valid language " + split[0]);
-        }
-        String language = languageCode == null ? split[0] : languageCode.getCode().toLowerCase();
+        String languageCode = split[0]; 
+
+        String language = languageCode == null ? split[0] : languageCode.toLowerCase();
         switch (split.length) {
             case 1:
                 return new String[]{language, "", ""};
@@ -124,11 +107,11 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
         }
     }
     @RequiresNonNull("annotation")
-    protected boolean isValid(Locale locale) {
-        return isValid(locale.getLanguage(), locale.getCountry(), locale.getVariant());
+    protected boolean isValid(Locale locale, String value) {
+        return isValid(locale.getLanguage(), locale.getCountry(), locale.getVariant(),  value);
     }
     @RequiresNonNull("annotation")
-    protected boolean isValid(String language, String country, String variant) {
+    protected boolean isValid(String language, String country, String variant, String value) {
         if (! country.isEmpty()) {
             if (! annotation.mayContainCountry()) {
                 return false;
@@ -141,47 +124,21 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
                     return false;
                 }
             }
-
         }
-        if (! variant.isEmpty() && ! annotation.mayContainVariant()) {
-            return false;
-        }
-        boolean recognized  = VALID_ISO_LANGUAGES.contains(language) ||
-            (annotation.lenientLanguage() && EXTRA_RECOGNIZED.contains(language));
-
-        if (! recognized) {
-
-            Optional<LanguageCode> iso3 = LanguageCode.getByPart1(language);
-            if (iso3.isPresent()) {
-                return true;
-            }
-            if (annotation.iso639_3()) {
-                Optional<LanguageCode> isoPart1 = LanguageCode.getByCode(language);
-                if (isoPart1.isPresent()){
-                    return true;
-                }
-            }
-            if (annotation.iso639_2()) {
-                Optional<LanguageCode> isoPart2B = LanguageCode.getByPart2B(language);
-                if (isoPart2B.isPresent()) {
-                    return true;
-                }
-
-                Optional<LanguageCode> isoPart2T = LanguageCode.getByPart2T(language);
-                if (isoPart2T.isPresent()) {
-                    return true;
-                }
-            }
-            if (annotation.lenientLanguage()) {
-                String displayLanguage = new Locale(language).getDisplayLanguage();
-                if (!language.equals(displayLanguage)) { // last fall back is iso code itself.
-                    logger.info("Not a recognized language " + language + " -> " + displayLanguage + ", so recognized by the JMS. Will follow that");
-                    EXTRA_RECOGNIZED.add(language);
-                    return true;
-                }
-            }
-        }
-        return recognized;
-
+        
+        LanguageValidationInfo info = new LanguageValidationInfo(
+            annotation.lenientLanguage(),
+            null,
+            null,
+            annotation.iso639_3(), 
+            false,
+            annotation.iso639_2(), 
+            annotation.requireLowerCase(),
+            annotation.forXml(), 
+            annotation.mayContainCountry(),
+            annotation.mayContainVariant());
+        
+        
+        return org.meeuw.i18n.languages.validation.impl.LanguageValidator.isValid(info, value);
     }
 }

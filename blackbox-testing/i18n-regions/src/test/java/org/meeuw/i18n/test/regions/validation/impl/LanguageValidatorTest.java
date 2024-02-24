@@ -1,29 +1,25 @@
 package org.meeuw.i18n.test.regions.validation.impl;
 
-import java.util.*;
-
+import com.neovisionaries.i18n.LanguageAlpha3Code;
 import jakarta.validation.*;
-
+import java.util.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.meeuw.i18n.languages.Type;
 import org.meeuw.i18n.regions.validation.Language;
 import org.meeuw.i18n.regions.validation.RegionValidatorService;
 import org.meeuw.i18n.regions.validation.impl.LanguageValidator;
-
-import com.neovisionaries.i18n.LanguageAlpha3Code;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * @author Michiel Meeuwissen
  * @since 0.3
  */
-@Language(type = Type.A)
+@Language()
+@Deprecated
 public class LanguageValidatorTest {
     private static final RegionValidatorService regionValidatorService = RegionValidatorService.getInstance();
     private static final Validator VALIDATOR = regionValidatorService.getValidator();

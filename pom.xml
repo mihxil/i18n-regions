@@ -354,8 +354,22 @@
         <version>3.0.2</version>
         <optional>true</optional>
       </dependency>
-
-
+      
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>2.16.1</version>
+        <optional>true</optional>
+      </dependency>
+      
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-core</artifactId>
+        <version>2.16.1</version>
+        <optional>true</optional>
+      </dependency>
+      
+      
       <!-- test dependencies -->
       <dependency>
         <groupId>org.assertj</groupId>
@@ -424,16 +438,6 @@
     <dependency>
       <groupId>org.checkerframework</groupId>
       <artifactId>checker-qual</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.persistence</groupId>
-      <artifactId>jakarta.persistence-api</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.annotation</groupId>
-      <artifactId>jakarta.annotation-api</artifactId>
       <optional>true</optional>
     </dependency>
   </dependencies>

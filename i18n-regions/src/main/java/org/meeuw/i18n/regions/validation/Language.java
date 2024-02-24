@@ -7,8 +7,6 @@ import jakarta.validation.Payload;
 
 import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.RegionService;
-import org.meeuw.i18n.languages.Scope;
-import org.meeuw.i18n.languages.Type;
 import org.meeuw.i18n.regions.validation.impl.LanguageValidator;
 
 import static java.lang.annotation.ElementType.*;
@@ -21,8 +19,9 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *
  * @author Michiel Meeuwissen
  * @since 0.3
+ * @deprecated
  */
-
+@Deprecated
 @Target({FIELD, METHOD, TYPE_PARAMETER, TYPE_USE})
 @Retention(RUNTIME)
 @Constraint(validatedBy = LanguageValidator.class)
@@ -64,12 +63,7 @@ public @interface Language {
      * If the language is  not directly recognized, we'll check if the JVM can produce a display language for it.
      */
     boolean lenientLanguage() default false;
-
-    Type[] type() default {};
-
-    Scope[] scope() default {};
-
-
+    
     /**
      * The default is to accept both ISO-639-1 and ISO-639-3 codes. If you want to restrict to ISO-639-1 only, set this to false.
      */
