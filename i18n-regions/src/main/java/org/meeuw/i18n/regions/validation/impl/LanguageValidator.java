@@ -6,6 +6,8 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.logging.Logger;
 import org.checkerframework.checker.nullness.qual.*;
+import org.meeuw.i18n.languages.Scope;
+import org.meeuw.i18n.languages.Type;
 import org.meeuw.i18n.languages.validation.LanguageValidationInfo;
 import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.RegionService;
@@ -128,8 +130,8 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
         
         LanguageValidationInfo info = new LanguageValidationInfo(
             annotation.lenientLanguage(),
-            null,
-            null,
+            Type.values(),
+            Scope.values(),
             annotation.iso639_3(), 
             false,
             annotation.iso639_2(),
