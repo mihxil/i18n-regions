@@ -38,8 +38,8 @@
     </dependency>
     <dependency>
       <groupId>org.meeuw.i18n</groupId>
-      <artifactId>i18n-iso-639-3</artifactId>
-      <version>3.0</version>
+      <artifactId>i18n-iso-639</artifactId>
+      <version>3.1-SNAPSHOT</version>
     </dependency>
     
     <dependency>
