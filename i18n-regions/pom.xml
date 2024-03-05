@@ -13,14 +13,14 @@
   <description>Provides the service loader for Regions, and some utilities to deal with regions generally</description>
 
   <dependencies>
-    
+
     <!-- this project seems to be abonded, we use it only for a list of country codes. Perhaps we shoudl simply drop it -->
     <dependency>
       <groupId>com.neovisionaries</groupId>
       <artifactId>nv-i18n</artifactId>
     </dependency>
 
-    
+
     <!-- all optional -->
     <dependency>
       <groupId>jakarta.xml.bind</groupId>
@@ -41,7 +41,7 @@
       <artifactId>i18n-iso-639</artifactId>
       <version>3.1-SNAPSHOT</version>
     </dependency>
-    
+
     <dependency>
       <groupId>jakarta.annotation</groupId>
       <artifactId>jakarta.annotation-api</artifactId>
@@ -50,12 +50,12 @@
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
     </dependency>
-      
+
       <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-core</artifactId>
       </dependency>
-    
+
     <!-- test dependencies -->
     <dependency>
       <groupId>org.hibernate.validator</groupId>
