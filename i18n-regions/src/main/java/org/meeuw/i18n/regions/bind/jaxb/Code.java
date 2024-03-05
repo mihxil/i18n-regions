@@ -19,6 +19,10 @@ import org.meeuw.i18n.regions.RegionService;
 public class Code extends XmlAdapter<String, Region> {
     @Override
     public Region unmarshal(String v) {
+        if (v == null || v.isEmpty()) {
+            // be lenient about this.
+            return null;
+        }
         return RegionService.getInstance().getByCode(v, true)
             .orElseThrow(() -> new IllegalArgumentException("No such region " + v));
     }
