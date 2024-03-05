@@ -78,5 +78,16 @@ public interface Country extends Region {
 
 
 
+    @JsonCreator
+    static Country of(String code) {
+        if (code == null || code.isEmpty()) {
+            // be lenient about this too.
+            // we'd perhaps like to access ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, but in that case we propbable need custom deserializer?
+            return null;
+        }
+        return RegionService.getInstance()
+            .getByCode(code, true, Country.class).orElseThrow();
+    }
+
 
 }

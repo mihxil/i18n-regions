@@ -17,6 +17,7 @@ module org.meeuw.i18n.countries {
     requires static java.persistence;
 
     requires java.logging;
+    requires static com.fasterxml.jackson.annotation;
 
     uses RegionProvider;
 
