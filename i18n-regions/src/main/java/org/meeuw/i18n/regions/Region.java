@@ -10,6 +10,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.meeuw.i18n.regions.bind.jaxb.Code;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.neovisionaries.i18n.LanguageCode;
 
 /**
@@ -151,6 +152,17 @@ public interface Region extends Serializable {
         NATION*/
     }
 
+
+
+    @JsonCreator
+    static Region of(String code) {
+        if (code == null || code.isEmpty()) {
+            // be lenient about this too.
+            // we'd perhaps like to access ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, but in that case we propbable need custom deserializer?
+            return null;
+        }
+        return RegionService.getInstance().getByCode(code, true).orElseThrow();
+    }
 
 
 }

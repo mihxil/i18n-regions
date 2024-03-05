@@ -29,6 +29,12 @@
       <optional>true</optional>
     </dependency>
     <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.16.1</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
       <groupId>org.meeuw.i18n</groupId>
       <artifactId>i18n-iso-639</artifactId>
       <version>1.1-SNAPSHOT</version>
