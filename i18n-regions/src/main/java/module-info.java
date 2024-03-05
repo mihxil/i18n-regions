@@ -12,6 +12,8 @@ module org.meeuw.i18n.regions {
     requires static org.checkerframework.checker.qual;
     requires static java.persistence;
     requires static java.annotation;
+    requires static com.fasterxml.jackson.databind;
+
     requires transitive nv.i18n;
     requires java.logging;
     requires org.meeuw.i18n.languages;
