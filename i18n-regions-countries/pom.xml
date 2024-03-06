@@ -41,7 +41,12 @@
       <optional>true</optional>
       <version>2.16.1</version>
     </dependency>
-
+    <dependency>
+      <groupId>org.meeuw.i18n</groupId>
+      <artifactId>i18n-iso-639</artifactId>
+      <version>1.1</version>
+      <optional>true</optional>
+    </dependency>
     <dependency>
       <groupId>org.hibernate.validator</groupId>
       <artifactId>hibernate-validator</artifactId>
