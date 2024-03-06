@@ -12,10 +12,8 @@
   <description>Provides countries as region objects. This includes all current countries, and also formerly existing modern countries, was well as some 'user defined' countries.</description>
 
   <properties>
-    <flag-icons.version>6.15.0</flag-icons.version>
+    <flag-icons.version>7.2.0</flag-icons.version>
   </properties>
-
-
 
   <dependencies>
     <dependency>
@@ -38,9 +36,10 @@
       <optional>true</optional>
     </dependency>
     <dependency>
-      <groupId>jakarta.annotation</groupId>
-      <artifactId>jakarta.annotation-api</artifactId>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
       <optional>true</optional>
+      <version>2.16.1</version>
     </dependency>
 
     <dependency>

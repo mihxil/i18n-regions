@@ -9,12 +9,15 @@ module org.meeuw.i18n.countries {
     requires static org.checkerframework.checker.qual;
     requires static java.annotation;
     requires static java.xml.bind;
+    requires static java.validation;
+    requires static java.persistence;
+
+
     requires transitive org.meeuw.i18n.regions;
     requires transitive nv.i18n;
     requires transitive org.meeuw.i18n.formerlyassigned;
 
-    requires static java.validation;
-    requires static java.persistence;
+
 
     requires java.logging;
     requires static com.fasterxml.jackson.annotation;

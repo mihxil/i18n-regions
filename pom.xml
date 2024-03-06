@@ -335,7 +335,7 @@
       <dependency>
         <groupId>org.meeuw.i18n</groupId>
         <artifactId>i18n-regions</artifactId>
-         <version>${project.version}</version>
+        <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>org.meeuw.i18n</groupId>
