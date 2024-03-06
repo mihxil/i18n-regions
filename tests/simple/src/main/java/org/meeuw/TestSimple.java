@@ -1,9 +1,9 @@
 package org.meeuw;
 
-import org.meeuw.i18n.RegionService;
-
 import java.lang.annotation.Annotation;
 import java.util.Locale;
+
+import org.meeuw.i18n.regions.RegionService;
 
 /**
  * Use e.g.  java -Dfile.encoding=UTF-8 -jar  target/i18n-regions-tests-simple-0.1-SNAPSHOT.jar   nl
