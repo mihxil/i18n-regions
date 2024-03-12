@@ -8,6 +8,9 @@ open module org.meeuw.i18n.test.regions {
     exports org.meeuw.i18n.test.testcountry;
     requires transitive org.meeuw.i18n.regions;
 
+    requires static org.meeuw.i18n.languages;
+
+
     requires java.xml.bind;
     requires java.validation;
 

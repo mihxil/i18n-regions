@@ -11,6 +11,7 @@ module org.meeuw.i18n.countries {
     requires static java.xml.bind;
     requires static java.validation;
     requires static java.persistence;
+    requires static org.meeuw.i18n.languages;
 
 
     requires transitive org.meeuw.i18n.regions;

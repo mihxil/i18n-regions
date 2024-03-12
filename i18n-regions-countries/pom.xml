@@ -45,7 +45,7 @@
       <groupId>org.meeuw.i18n</groupId>
       <artifactId>i18n-iso-639</artifactId>
       <version>1.2-SNAPSHOT</version>
-      <optional>true</optional>
+      <optional>false</optional>
     </dependency>
     <dependency>
       <groupId>org.hibernate.validator</groupId>
