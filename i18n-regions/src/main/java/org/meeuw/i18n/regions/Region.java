@@ -1,5 +1,7 @@
 package org.meeuw.i18n.regions;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 import java.io.Serializable;
 import java.net.URI;
 import java.util.*;
@@ -25,6 +27,7 @@ public interface Region extends Serializable {
     /**
      * The code for the region. For countries: <a href="https://en.wikipedia.org/wiki/ISO_3166">ISO 3166</a>.
      */
+    @JsonValue
     String getCode();
 
     /**
