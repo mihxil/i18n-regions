@@ -161,7 +161,7 @@ public interface Region extends Serializable {
             // we'd perhaps like to access ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, but in that case we propbable need custom deserializer?
             return null;
         }
-        return RegionService.getInstance().getByCode(code, true).orElseThrow();
+        return RegionService.getInstance().getByCode(code, true).orElseThrow(IllegalArgumentException::new);
     }
 
 
