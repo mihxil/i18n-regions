@@ -236,5 +236,19 @@ Find my findings link:TESTING-WITH-JPMS.adoc[here]
 | 2.x
 | jakarta, java 11
 | &ge; 2024
+
+| 2.2
+| deprecating use of neovisionaries for languages, in favour of `org.meeuw.i18n:i18n-iso-639`
+| july 2024
+
+| 2.3
+| deprecating use of neovisionaries for current countries. Just scrape them from wikipedia or so
+| TODO ?
+
+| 3.x
+| drop dependency on neovisionaries
+| TODO ?
+
+
 |===
 

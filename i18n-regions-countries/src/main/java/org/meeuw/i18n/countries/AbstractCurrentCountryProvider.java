@@ -44,6 +44,5 @@ public abstract class AbstractCurrentCountryProvider implements RegionProvider<C
     @Override
     public String toString() {
         return getClass().getSimpleName() + " (" + values().count() + " countries)";
-
     }
 }
