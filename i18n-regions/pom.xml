@@ -41,7 +41,7 @@
     <dependency>
       <groupId>org.meeuw.i18n</groupId>
       <artifactId>i18n-iso-639</artifactId>
-      <version>3.2-SNAPSHOT</version>
+      <version>3.3</version>
     </dependency>
 
     <dependency>
