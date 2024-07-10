@@ -41,7 +41,7 @@ jobs:
       - name: Build and deploy BOM with Maven
         run: (cd i18n-regions-bom ; mvn -B -Pdeploy clean deploy)
         env:
-          SONATYPE_USERNAME: mihxil
+          SONATYPE_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
           GPG_SECRET_KEY_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
       - name: Build and deploy with Maven
@@ -49,15 +49,15 @@ jobs:
           mvn -B test
           mvn -B -DskipTests=true -P'deploy,!blackboxtesting' deploy
         env:
-          SONATYPE_USERNAME: mihxil
+          SONATYPE_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
           GPG_SECRET_KEY_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
-      - uses: codecov/codecov-action@v3.1.5
+      - uses: codecov/codecov-action@v4
         with:
           files: report-aggregation/target/site/jacoco-aggregate/jacoco.xml
           verbose: true
       - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2.12.0
+        uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
           check_name: Tests results
