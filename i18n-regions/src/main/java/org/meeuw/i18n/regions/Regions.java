@@ -4,8 +4,7 @@ import java.util.Comparator;
 import java.util.Locale;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-
-import com.neovisionaries.i18n.LanguageCode;
+import org.meeuw.i18n.languages.LanguageCode;
 
 /**
  * Utilities related to {@link Region}s.
@@ -27,12 +26,24 @@ public class Regions {
         return Comparator.comparing(o -> o.getName(locale));
     }
 
-      /**
-       * As {@link #sortByName(Locale)}, but with a {@link LanguageCode } argument.
-       */
-    public static Comparator<Region> sortByName(LanguageCode language) {
+    /**
+     * As {@link #sortByName(Locale)}, but with a {@link com.neovisionaries.i18n.LanguageCode } argument.
+     * @deprecated
+     * @see #sortByName(LanguageCode) 
+     */
+    @Deprecated
+    public static Comparator<Region> sortByName(com.neovisionaries.i18n.LanguageCode language) {
         return sortByName(language.toLocale());
     }
+
+
+    /**
+     * As {@link #sortByName(Locale)}, but with a {@link LanguageCode } argument.
+     */
+    public static Comparator<Region> sortByName(@NonNull LanguageCode language) {
+        return sortByName(language.toLocale());
+    }
+
 
     /**
      * Utility for {@link Region#toStringBuilder(StringBuilder, Locale)} without the hassle of creating a {@link StringBuilder}
@@ -46,13 +57,26 @@ public class Regions {
     }
 
     /**
+     * As {@link #toString(Region, Locale)}, but with a {@link com.neovisionaries.i18n.LanguageCode} argument.
+     * @deprecated
+     */
+    @Deprecated
+    public static String toString(
+        @NonNull  Region region,
+        com.neovisionaries.i18n. @NonNull  LanguageCode language) {
+        return toString(region, language.toLocale());
+    }
+
+    /**
      * As {@link #toString(Region, Locale)}, but with a {@link LanguageCode} argument.
+     *
      */
     public static String toString(
         @NonNull  Region region,
-        @NonNull  LanguageCode language) {
+        @NonNull LanguageCode language) {
         return toString(region, language.toLocale());
     }
+
 
     /**
      * As {@link Region#toStringBuilder(StringBuilder, Locale)} but  prefixed with the code.
@@ -70,12 +94,26 @@ public class Regions {
 
     /**
      * As {@link #toStringWithCode(Region, Locale)} but with a {@link LanguageCode} argument.
+     * @deprecated
      */
+    @Deprecated
+    public static String toStringWithCode(
+        @NonNull Region region,
+        com.neovisionaries.i18n. @NonNull LanguageCode  language) {
+        return toStringWithCode(region, language.toLocale());
+    }
+
+       /**
+     * As {@link #toStringWithCode(Region, Locale)} but with a {@link LanguageCode} argument.
+     * @deprecated
+     */
+    @Deprecated
     public static String toStringWithCode(
         @NonNull Region region,
         @NonNull LanguageCode language) {
         return toStringWithCode(region, language.toLocale());
     }
+
 
 
 

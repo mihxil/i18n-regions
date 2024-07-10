@@ -8,11 +8,13 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.meeuw.i18n.languages.LanguageCode;
 import org.meeuw.i18n.regions.bind.jaxb.Code;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import com.neovisionaries.i18n.LanguageCode;
+
+;
 
 /**
  * The region interface represents a certain geographical region. E.g. a Country.
@@ -74,10 +76,21 @@ public interface Region extends Serializable {
     /**
      * Defaulting version of {@link #getName(Locale)}, the name of the region only considering the
      * language, with considering any country or other variants of the language.
+     * @deprecated
+     */
+    @Deprecated
+    default String getName(com.neovisionaries.i18n.@NonNull LanguageCode languageCode) {
+        return getName(languageCode.toLocale());
+    }
+
+       /**
+     * Defaulting version of {@link #getName(Locale)}, the name of the region only considering the
+     * language, with considering any country or other variants of the language.
      */
     default String getName(@NonNull LanguageCode languageCode) {
         return getName(languageCode.toLocale());
     }
+
 
     /**
      * Return the name of the region in the locale of the region itself {@link #toLocale()}
