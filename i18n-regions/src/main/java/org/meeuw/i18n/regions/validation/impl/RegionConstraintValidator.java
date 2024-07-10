@@ -71,6 +71,7 @@ public class RegionConstraintValidator implements ConstraintValidator<ValidRegio
         } else if (o instanceof CharSequence) {
             return ConvertResult.of(RegionService.getInstance().getByCode(o.toString(), false));
         } else if (o instanceof CountryCode) {
+            // deprecated!
             return ConvertResult.of(RegionService.getInstance().getByCode(((CountryCode) o).name(), false));
 
         } else if (o instanceof Locale){
