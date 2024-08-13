@@ -67,6 +67,8 @@ public class CurrentCountryProviderTest {
         assertThat(nl.equals(null)).isFalse();
         assertThat(nl.equals(new Object())).isFalse();
         assertThat(nl.hashCode()).isEqualTo(nl.hashCode());
+
+        assertThat(nl.hashCode()).isEqualTo(1325056130);
     }
 
 }
