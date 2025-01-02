@@ -43,6 +43,12 @@ public class RegionsController {
                 .orElseThrow(IllegalArgumentException::new);
             writer.println("<h1>" + r.getName() + ": " + r.getName(language) + "</h1>");
             writer.println("<p>code:" + r.getCode() + "</p>");
+            r.getEmoji().ifPresent(e -> {
+                    writer.println("<p>emoji:" + e + "</p>");
+                });
+            r.getIcon().ifPresent(icon -> {
+                    writer.println("<p>icon:<img width='100' src='" + icon + "' /></p>");
+            });
             writer.println("<p>class: <a href='/type/" + r.getClass().getName() + "'>" + r.getClass().getName() + "</a></p>");
             ul(writer, () -> {
                 for (Class<?> i : ClassUtils.getAllInterfaces(r.getClass())) {

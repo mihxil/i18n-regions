@@ -8,8 +8,8 @@
   <version>0.1-SNAPSHOT</version>
 
   <properties>
-    <meeuw.i18n.version>2.0-SNAPSHOT</meeuw.i18n.version>
-    <spring.version>6.1.3</spring.version>
+    <meeuw.i18n.version>2.2-SNAPSHOT</meeuw.i18n.version>
+    <spring.version>6.2.1</spring.version>
   </properties>
 
   <dependencies>
@@ -26,7 +26,7 @@
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
-      <version>3.14.0</version>
+      <version>3.17.0</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
