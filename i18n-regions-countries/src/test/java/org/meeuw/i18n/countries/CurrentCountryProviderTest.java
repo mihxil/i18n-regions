@@ -1,7 +1,8 @@
 package org.meeuw.i18n.countries;
 
 import java.io.IOException;
-import java.net.*;
+import java.net.URI;
+import java.net.UnknownHostException;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -10,7 +11,6 @@ import org.meeuw.i18n.regions.Region;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -32,7 +32,7 @@ public class CurrentCountryProviderTest {
     @Test
     public void emoji() {
         CurrentCountry af = currentCountryProvider.getByCode("AF").orElseThrow();
-        assertThat(af.getEmoji()).isEqualTo("\uD83C\uDDE6\uD83C\uDDEB");
+        assertThat(af.getEmoji()).contains("\uD83C\uDDE6\uD83C\uDDEB");
     }
 
     @Test
@@ -44,7 +44,7 @@ public class CurrentCountryProviderTest {
         assertThat(nl.getAlpha3()).isEqualTo("NLD");
         assertThat(nl.getNumeric()).isEqualTo(528);
         assertThat(nl.getCountryCode()).isEqualTo(CountryCode.NL);
-        assertThat(nl.getEmoji()).isEqualTo("\uD83C\uDDF3\uD83C\uDDF1");
+        assertThat(nl.getEmoji()).contains("\uD83C\uDDF3\uD83C\uDDF1");
 
         {
             CurrentCountry.ALWAYS_USE_CDN_FOR_ICONS.set(false);

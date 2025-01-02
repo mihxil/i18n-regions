@@ -110,14 +110,15 @@ public class CurrentCountry implements Country {
      * Countries can also be represented as unicode 'emojis'. In non-windows this will be shown as a little flag too.
      * @since 2.2
      */
-    public String getEmoji() {
+    @Override
+    public Optional<String> getEmoji() {
         StringBuilder builder = new StringBuilder();
         for (char c : getAlpha2().toCharArray()) {
             int target = A - 'A' + c;
             char[] chars = Character.toChars(target);
             builder.append(chars);
         }
-        return builder.toString();
+        return Optional.of(builder.toString());
     }
 
     @Override

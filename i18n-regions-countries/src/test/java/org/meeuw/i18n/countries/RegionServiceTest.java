@@ -142,7 +142,13 @@ public class RegionServiceTest {
             StringBuilder build = new StringBuilder();
             r.toStringBuilder(build, LanguageCode.nl.toLocale());
             System.out.println(
-                r.getClass().getSimpleName() + ":" + r.getCode()  + " : " + r.getName() + ":" + r.getName(ISO_639_1_Code.nl) + ":" + r.getIcon().map(URI::toString).orElse("none") + ": " + build);
+                r.getClass().getSimpleName() +
+                    ":" + r.getCode()  +
+                    " : " + r.getName() +
+                    ":" + r.getName(ISO_639_1_Code.nl) +
+                    ":" + r.getIcon().map(URI::toString).orElse("none") +
+                    ":" + r.getEmoji().orElse("<>") +
+                    ": " + build);
         });
 
     }

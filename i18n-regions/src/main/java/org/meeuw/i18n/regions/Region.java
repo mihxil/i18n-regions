@@ -120,6 +120,13 @@ public interface Region extends Serializable {
     }
 
     /**
+     * @since 2.2
+    */
+    default Optional<String> getEmoji() {
+        return Optional.empty();
+    }
+
+    /**
      * Type of regions. For now this is small list, we may add all known 'subdivision' of countries.
      */
     enum Type {
