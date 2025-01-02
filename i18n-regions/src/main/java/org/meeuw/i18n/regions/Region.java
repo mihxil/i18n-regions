@@ -119,11 +119,25 @@ public interface Region extends Serializable {
         return Optional.empty();
     }
 
+    int A = Character.codePointOf("Regional Indicator Symbol Letter A");
+
     /**
+     * Countries can also be represented as unicode 'emojis'. In non-windows this will be shown as a little flag too.
      * @since 2.2
     */
     default Optional<String> getEmoji() {
-        return Optional.empty();
+        if (getCode().length() == 2) {
+            StringBuilder builder = new StringBuilder();
+            for (char c : getCode().toCharArray()) {
+                int target = A - 'A' + c;
+                char[] chars = Character.toChars(target);
+                builder.append(chars);
+            }
+            String string = builder.toString();
+            return Optional.of(string);
+        } else {
+            return Optional.empty();
+        }
     }
 
     /**
