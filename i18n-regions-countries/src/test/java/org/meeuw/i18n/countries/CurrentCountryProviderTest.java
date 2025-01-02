@@ -10,6 +10,7 @@ import org.meeuw.i18n.regions.Region;
 
 import com.neovisionaries.i18n.CountryCode;
 
+import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -29,6 +30,12 @@ public class CurrentCountryProviderTest {
     }
 
     @Test
+    public void emoji() {
+        CurrentCountry af = currentCountryProvider.getByCode("AF").orElseThrow();
+        assertThat(af.getEmoji()).isEqualTo("\uD83C\uDDE6\uD83C\uDDEB");
+    }
+
+    @Test
     public void properties() throws IOException {
         CurrentCountry nl = currentCountryProvider.getByCode("NL", true).orElseThrow();
 
@@ -37,6 +44,8 @@ public class CurrentCountryProviderTest {
         assertThat(nl.getAlpha3()).isEqualTo("NLD");
         assertThat(nl.getNumeric()).isEqualTo(528);
         assertThat(nl.getCountryCode()).isEqualTo(CountryCode.NL);
+        assertThat(nl.getEmoji()).isEqualTo("\uD83C\uDDF3\uD83C\uDDF1");
+
         {
             CurrentCountry.ALWAYS_USE_CDN_FOR_ICONS.set(false);
             URI icon = nl.getIcon().orElse(null);
@@ -48,6 +57,7 @@ public class CurrentCountryProviderTest {
             CurrentCountry.ALWAYS_USE_CDN_FOR_ICONS.set(true);
             URI icon = nl.getIcon().orElse(null);
             HttpsURLConnection con = (HttpsURLConnection) icon.toURL().openConnection();
+            System.out.println(icon);
             assertThat(con.getResponseCode()).isEqualTo(200);
         } catch (UnknownHostException se) {
             // TODO use wiremock
@@ -68,7 +78,7 @@ public class CurrentCountryProviderTest {
         assertThat(nl.equals(new Object())).isFalse();
         assertThat(nl.hashCode()).isEqualTo(nl.hashCode());
 
-        assertThat(nl.hashCode()).isEqualTo(1325056130);
+        assertThat(nl.hashCode()).isEqualTo(2494);
     }
 
 }

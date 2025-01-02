@@ -103,6 +103,23 @@ public class CurrentCountry implements Country {
         return code.toString();
     }
 
+
+    private static final int A = Character.codePointOf("Regional Indicator Symbol Letter A");
+
+    /**
+     * Countries can also be represented as unicode 'emojis'. In non-windows this will be shown as a little flag too.
+     * @since 2.2
+     */
+    public String getEmoji() {
+        StringBuilder builder = new StringBuilder();
+        for (char c : getAlpha2().toCharArray()) {
+            int target = A - 'A' + c;
+            char[] chars = Character.toChars(target);
+            builder.append(chars);
+        }
+        return builder.toString();
+    }
+
     @Override
     public void toStringBuilder(@NonNull StringBuilder builder, @NonNull Locale locale) {
         Country.super.toStringBuilder(builder, locale);
@@ -150,7 +167,7 @@ public class CurrentCountry implements Country {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(code);
+        return Objects.hashCode(code.name());
     }
 
 
@@ -188,6 +205,10 @@ public class CurrentCountry implements Country {
                 Logger.getLogger(Country.class.getName()).warning(url + ":" + e.getClass() + ":" + e.getMessage());
             }
         }
-        return "https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/" + prop.getProperty("flag-icons.version")+ "/flags/4x3/";
+        String version = prop.getProperty("flag-icons.version");
+        if (version == null) {
+            throw new IllegalStateException("No version found in  " + prop);
+        }
+        return "https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/" + version + "/flags/4x3/";
     }
 }
