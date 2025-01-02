@@ -104,23 +104,6 @@ public class CurrentCountry implements Country {
     }
 
 
-    private static final int A = Character.codePointOf("Regional Indicator Symbol Letter A");
-
-    /**
-     * Countries can also be represented as unicode 'emojis'. In non-windows this will be shown as a little flag too.
-     * @since 2.2
-     */
-    @Override
-    public Optional<String> getEmoji() {
-        StringBuilder builder = new StringBuilder();
-        for (char c : getAlpha2().toCharArray()) {
-            int target = A - 'A' + c;
-            char[] chars = Character.toChars(target);
-            builder.append(chars);
-        }
-        return Optional.of(builder.toString());
-    }
-
     @Override
     public void toStringBuilder(@NonNull StringBuilder builder, @NonNull Locale locale) {
         Country.super.toStringBuilder(builder, locale);

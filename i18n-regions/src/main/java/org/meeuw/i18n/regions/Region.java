@@ -112,18 +112,32 @@ public interface Region extends Serializable {
     }
 
     /**
-     * To a region optionally an 'icon' may be associated. This is an URI, representing an URl to a picture of a flag or so. The URI may not be absolute, in which case it may e.g. refer to a webjars, and may have to be prefixed by the web application's context 'context' to be useable.
+     * To a region optionally an 'icon' may be associated. This is a URI, representing a URL to a picture of a flag or so. The URI may not be absolute, in which case it may e.g. refer to a webjars, and may have to be prefixed by the web application's context 'context' to be useable.
      */
 
     default Optional<URI> getIcon() {
         return Optional.empty();
     }
 
+    int A = Character.codePointOf("Regional Indicator Symbol Letter A");
+
     /**
+     * Countries can also be represented as unicode 'emojis'. In non-windows this will be shown as a little flag too.
      * @since 2.2
     */
     default Optional<String> getEmoji() {
-        return Optional.empty();
+        if (getCode().length() == 2) {
+            StringBuilder builder = new StringBuilder();
+            for (char c : getCode().toCharArray()) {
+                int target = A - 'A' + c;
+                char[] chars = Character.toChars(target);
+                builder.append(chars);
+            }
+            String string = builder.toString();
+            return Optional.of(string);
+        } else {
+            return Optional.empty();
+        }
     }
 
     /**
