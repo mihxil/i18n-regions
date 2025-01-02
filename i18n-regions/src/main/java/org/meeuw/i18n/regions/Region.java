@@ -112,7 +112,7 @@ public interface Region extends Serializable {
     }
 
     /**
-     * To a region optionally an 'icon' may be associated. This is an URI, representing an URl to a picture of a flag or so. The URI may not be absolute, in which case it may e.g. refer to a webjars, and may have to be prefixed by the web application's context 'context' to be useable.
+     * To a region optionally an 'icon' may be associated. This is a URI, representing a URL to a picture of a flag or so. The URI may not be absolute, in which case it may e.g. refer to a webjars, and may have to be prefixed by the web application's context 'context' to be useable.
      */
 
     default Optional<URI> getIcon() {
