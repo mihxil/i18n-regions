@@ -40,12 +40,12 @@ public class RegionsController {
         html(response, writer -> {
             Region r = RegionService.getInstance()
                 .getByCode(region)
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(() ->  new IllegalArgumentException("No region with code " + region));
             writer.println("<h1>" + r.getName() + ": " + r.getName(language) + "</h1>");
             writer.println("<p>code:" + r.getCode() + "</p>");
             r.getEmoji().ifPresent(e -> {
-                    writer.println("<p>emoji:" + e + "</p>");
-                });
+                writer.println("<p>emoji:" + e + "</p>");
+            });
             r.getIcon().ifPresent(icon -> {
                     writer.println("<p>icon:<img width='100' src='" + icon + "' /></p>");
             });

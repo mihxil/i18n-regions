@@ -17,8 +17,13 @@ public class TestSimple {
         Locale locale = arg1 == null ? Locale.getDefault() : new Locale(arg1);
         RegionService.getInstance().values().forEach(v -> {
 
+            v.getEmoji().ifPresent(e -> {
+                System.out.print(e + "\t");
+            });
             System.out.println(" " + v + ":" + v.getName() + ":" + v.getName(locale));
             System.out.println("class: " + v.getClass().getSimpleName());
+
+
             for (Annotation a : v.getClass().getAnnotations()) {
                 System.out.println(("annotation : " + a));
             }/*
