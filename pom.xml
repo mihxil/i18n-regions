@@ -44,7 +44,7 @@
   <properties>
     <junit.version>5.11.4</junit.version>
     <java.target.version>8</java.target.version>
-    <checker.version>3.48.3</checker.version>
+    <checker.version>3.48.4</checker.version>
     <jackson.version>2.18.2</jackson.version>
     <jacoco.version>0.8.12</jacoco.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -375,7 +375,7 @@
       <dependency>
         <groupId>org.assertj</groupId>
         <artifactId>assertj-core</artifactId>
-        <version>3.27.1</version>
+        <version>3.27.2</version>
         <scope>test</scope>
       </dependency>
       <dependency>
