@@ -12,6 +12,7 @@
 
   <properties>
     <meeuw.i18n.version>2.2-SNAPSHOT</meeuw.i18n.version>
+    <main.class>org.meeuw.TestSimple</main.class>
   </properties>
 
   <dependencies>
@@ -41,17 +42,24 @@
 
 
   <build>
-    <defaultGoal>install</defaultGoal>
+    <defaultGoal>package exec:java</defaultGoal>
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.5.0</version>
+        <configuration>
+          <mainClass>${main.class}</mainClass>
+        </configuration>
+      </plugin>
+      <plugin>
         <artifactId>maven-shade-plugin</artifactId>
-        <version>3.2.1</version>
+        <version>3.6.0</version>
         <configuration>
           <transformers>
             <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
               <manifestEntries>
-                <Main-Class>org.meeuw.TestSimple</Main-Class>
+                <Main-Class>${main.class}</Main-Class>
                 <X-Compile-Source-JDK>8</X-Compile-Source-JDK>
                 <X-Compile-Target-JDK>8</X-Compile-Target-JDK>
               </manifestEntries>
