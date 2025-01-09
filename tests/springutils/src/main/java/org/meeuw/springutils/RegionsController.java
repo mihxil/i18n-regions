@@ -12,10 +12,13 @@ import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.RegionService;
 import org.meeuw.i18n.regions.spi.RegionProvider;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 public class RegionsController {
+
 
     @RequestMapping(value = "/")
     public void index(
@@ -40,14 +43,14 @@ public class RegionsController {
         html(response, writer -> {
             Region r = RegionService.getInstance()
                 .getByCode(region)
-                .orElseThrow(() ->  new IllegalArgumentException("No region with code " + region));
+                .orElseThrow(() ->  new ResponseStatusException(HttpStatusCode.valueOf(404), "No region with code " + region));
             writer.println("<h1>" + r.getName() + ": " + r.getName(language) + "</h1>");
             writer.println("<p>code:" + r.getCode() + "</p>");
             r.getEmoji().ifPresent(e -> {
                 writer.println("<p>emoji:" + e + "</p>");
             });
             r.getIcon().ifPresent(icon -> {
-                    writer.println("<p>icon:<img width='100' src='" + icon + "' /></p>");
+                writer.println("<p>icon:<img width='100' src='" + icon + "' /></p>");
             });
             writer.println("<p>class: <a href='/type/" + r.getClass().getName() + "'>" + r.getClass().getName() + "</a></p>");
             ul(writer, () -> {
