@@ -13,7 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      MAVEN_OPTS: -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+      MAVEN_OPTS: -noProgessIndicator
     steps:
       - name: Cancel previous Action
         uses: styfle/cancel-workflow-action@0.12.1
