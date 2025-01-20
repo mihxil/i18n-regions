@@ -5,9 +5,9 @@ import org.meeuw.i18n.test.some.SomeRegionProvider;
  */
 open module org.meeuw.i18n.test.countries {
     requires org.meeuw.i18n.countries;
+    requires org.meeuw.i18n.languages;
     requires jakarta.validation;
 
-    exports org.meeuw.i18n.test.some;
 
 
     provides org.meeuw.i18n.regions.spi.RegionProvider with

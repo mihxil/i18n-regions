@@ -7,3 +7,5 @@
   org.meeuw.i18n.subdivisions=org.junit.jupiter.api
 --add-reads
   org.meeuw.i18n.subdivisions=org.assertj.core
+--add-reads
+  org.meeuw.i18n.subdivisions=org.meeuw.i18n.languages

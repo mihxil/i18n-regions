@@ -15,7 +15,6 @@ import static org.meeuw.i18n.languages.ISO_639_1_Code.nl;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-@SuppressWarnings("OptionalGetWithoutIsPresent")
 
 public class SubDivisionsRegionServiceTest {
 

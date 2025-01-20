@@ -10,6 +10,7 @@ open module org.meeuw.i18n.test.regions {
 
     requires jakarta.xml.bind;
     requires jakarta.validation;
+    requires org.meeuw.i18n.languages;
 
     provides RegionProvider with
 

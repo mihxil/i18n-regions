@@ -11,6 +11,7 @@ module org.meeuw.i18n.countries {
     requires static jakarta.validation;
     requires static jakarta.annotation;
     requires static com.fasterxml.jackson.annotation;
+    requires static org.meeuw.i18n.languages;
 
 
 
@@ -19,9 +20,8 @@ module org.meeuw.i18n.countries {
 
     requires transitive org.meeuw.i18n.formerlyassigned;
 
-
-
     requires java.logging;
+
 
 
     uses RegionProvider;
