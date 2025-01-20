@@ -30,6 +30,12 @@
     <dependency>
       <groupId>jakarta.validation</groupId>
       <artifactId>jakarta.validation-api</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.meeuw.i18n</groupId>
+      <artifactId>i18n-iso-639</artifactId>
+      <scope>test</scope>
     </dependency>
 
     <dependency>

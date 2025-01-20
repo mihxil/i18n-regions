@@ -321,6 +321,19 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson</groupId>
+        <artifactId>jackson-bom</artifactId>
+        <version>${jackson.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.meeuw.i18n</groupId>
+        <artifactId>i18n-iso-639</artifactId>
+        <version>3.7</version>
+      </dependency>
 
       <dependency>
         <groupId>jakarta.annotation</groupId>
@@ -329,47 +342,28 @@
       </dependency>
 
       <!-- optional dependencies -->
-
       <dependency>
         <groupId>org.checkerframework</groupId>
         <artifactId>checker-qual</artifactId>
         <version>${checker.version}</version>
-        <optional>true</optional>
       </dependency>
 
       <dependency>
         <groupId>jakarta.persistence</groupId>
         <artifactId>jakarta.persistence-api</artifactId>
         <version>3.1.0</version>
-        <optional>true</optional>
       </dependency>
       <dependency>
         <groupId>jakarta.xml.bind</groupId>
         <artifactId>jakarta.xml.bind-api</artifactId>
         <version>4.0.2</version>
-        <optional>true</optional>
+
       </dependency>
       <dependency>
         <groupId>jakarta.validation</groupId>
         <artifactId>jakarta.validation-api</artifactId>
         <version>3.0.2</version>
-        <optional>true</optional>
       </dependency>
-
-      <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-databind</artifactId>
-        <version>${jackson.version}</version>
-        <optional>true</optional>
-      </dependency>
-
-      <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-core</artifactId>
-        <version>${jackson.version}</version>
-        <optional>true</optional>
-      </dependency>
-
 
       <!-- test dependencies -->
       <dependency>

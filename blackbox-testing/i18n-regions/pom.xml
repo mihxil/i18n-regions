@@ -40,5 +40,9 @@
       <groupId>org.glassfish</groupId>
       <artifactId>jakarta.el</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.meeuw.i18n</groupId>
+      <artifactId>i18n-iso-639</artifactId>
+    </dependency>
   </dependencies>
 </project>

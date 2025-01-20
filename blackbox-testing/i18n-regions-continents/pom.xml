@@ -9,4 +9,10 @@
   </parent>
 
   <artifactId>i18n-regions-blackbox-testing-continents</artifactId>
+  <dependencies>
+    <dependency>
+      <groupId>org.meeuw.i18n</groupId>
+      <artifactId>i18n-iso-639</artifactId>
+    </dependency>
+  </dependencies>
 </project>

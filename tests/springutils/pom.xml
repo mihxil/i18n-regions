@@ -45,6 +45,11 @@
       <version>6.0.0</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>org.meeuw.i18n</groupId>
+      <artifactId>i18n-iso-639</artifactId>
+      <version>3.7</version>
+    </dependency>
 
   </dependencies>
   <build>

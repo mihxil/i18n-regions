@@ -6,8 +6,6 @@ import org.meeuw.i18n.test.some.SomeRegionProvider;
 open module org.meeuw.i18n.test.countries {
     requires org.meeuw.i18n.countries;
     requires jakarta.validation;
-    requires com.fasterxml.jackson.core;
-    requires com.fasterxml.jackson.databind;
 
     exports org.meeuw.i18n.test.some;
 
