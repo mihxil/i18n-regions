@@ -37,6 +37,7 @@
     <dependency>
       <groupId>jakarta.persistence</groupId>
       <artifactId>jakarta.persistence-api</artifactId>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.meeuw.i18n</groupId>
