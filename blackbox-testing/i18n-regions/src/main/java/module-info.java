@@ -6,6 +6,7 @@ import org.meeuw.i18n.regions.spi.RegionProvider;
  */
 open module org.meeuw.i18n.test.regions {
     exports org.meeuw.i18n.test.testcountry;
+
     requires transitive org.meeuw.i18n.regions;
 
     requires jakarta.xml.bind;
