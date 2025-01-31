@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="iso639 faulty json" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="org.meeuw.test.jackson.iso639" />
+    <module name="i18n-iso-639-test-jackson" />
+    <option name="PROGRAM_PARAMETERS" value="{\&quot;language\&quot;:\&quot;foobar\&quot;}" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="org.meeuw.test.jackson.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
