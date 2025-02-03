@@ -332,7 +332,7 @@
       <dependency>
         <groupId>org.meeuw.i18n</groupId>
         <artifactId>i18n-iso-639</artifactId>
-        <version>3.7</version>
+        <version>3.8</version>
       </dependency>
 
       <dependency>
