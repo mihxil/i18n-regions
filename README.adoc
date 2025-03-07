@@ -159,7 +159,7 @@ It can also be used on `java.util.Locale`, which contains a country component to
         @NotNull Locale> languages;
 ----
 
-(For completeness also link:i18n-regions/src/main/java/org/meeuw/i18n/regions/validation/Language.java[`@Language`] is provided).
+(For completeness also link:https://github.com/mihxil/i18n-iso-639/blob/main/src/main/java/org/meeuw/i18n/languages/validation/Language.java[i18n-regions/src/main/java/org/meeuw/i18n/regions/validation/Language.java][`@Language`] is used here from `i18n-iso639', to check the language parte).
 
 As a utility, there is `org.meeuw.i18n.regions.validation.RegionValidatorService` which can be used to filter a stream of regions  (e.g. `RegionService#values()`) based on the settings of these annotations.
 
