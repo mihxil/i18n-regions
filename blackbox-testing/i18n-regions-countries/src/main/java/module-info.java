@@ -1,16 +1,20 @@
+import org.meeuw.i18n.regions.spi.RegionProvider;
 import org.meeuw.i18n.test.some.SomeRegionProvider;
 
 /**
  * @author Michiel Meeuwissen
  */
 open module org.meeuw.i18n.test.countries {
-    requires org.meeuw.i18n.countries;
-    requires java.validation;
+    requires transitive org.meeuw.i18n.countries;
+    requires org.meeuw.i18n.languages;
 
-    exports org.meeuw.i18n.test.some;
+    requires jakarta.validation;
+    requires com.fasterxml.jackson.core;
+    requires com.fasterxml.jackson.databind;
 
+    uses RegionProvider;
 
-    provides org.meeuw.i18n.regions.spi.RegionProvider with
+    provides RegionProvider with
 
          SomeRegionProvider;
 

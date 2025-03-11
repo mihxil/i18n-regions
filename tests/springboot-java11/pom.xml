@@ -10,14 +10,14 @@
   <description>Spring boot application demoing stuff a bit</description>
 
   <properties>
-    <meeuw.i18n.version>1.0-SNAPSHOT</meeuw.i18n.version>
+    <meeuw.i18n.version>2.2-SNAPSHOT</meeuw.i18n.version>
     <java.version>11</java.version>
   </properties>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.2.1.RELEASE</version>
+    <version>3.4.1</version>
   </parent>
 
   <dependencies>
@@ -56,10 +56,8 @@
     </dependency>
   </dependencies>
 
-
-
   <build>
-    <defaultGoal>package</defaultGoal>
+    <defaultGoal>spring-boot:run</defaultGoal>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>

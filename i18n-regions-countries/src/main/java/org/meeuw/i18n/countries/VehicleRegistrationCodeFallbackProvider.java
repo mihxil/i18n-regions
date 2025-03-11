@@ -3,7 +3,7 @@ package org.meeuw.i18n.countries;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import javax.annotation.Priority;
+import jakarta.annotation.Priority;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.regions.spi.RegionProvider;

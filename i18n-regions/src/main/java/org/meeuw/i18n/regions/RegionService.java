@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-import javax.annotation.Priority;
+import jakarta.annotation.Priority;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.regions.spi.RegionProvider;

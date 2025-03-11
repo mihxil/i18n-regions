@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.meeuw.i18n.languages.ISO_639_1_Code;
 import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.UserAssignedRegion;
 
@@ -23,6 +24,12 @@ public class RegionServiceTest {
 
     @Test
     public void getCurrentByCode() {
+        CurrentCountry netherlands = org.meeuw.i18n.regions.RegionService.getInstance().getByCode("NL", CurrentCountry.class).orElseThrow();
+        CountryCode countryCode = netherlands.getCountryCode();
+        Optional<URI> icon = netherlands.getIcon();
+        String nameInLocalLanguage = netherlands.getLocalName();
+
+
 
         Optional<Country> nl = getInstance().getByCode("NL", Country.class);
         Assertions.assertThat(nl).isPresent();
@@ -73,7 +80,7 @@ public class RegionServiceTest {
     @Test
     public void getFormerCountryCS() {
 
-        Region cshh = getInstance().getByCode("CS", FormerCountry.class).orElse(null);
+        FormerCountry cshh = getInstance().getByCode("CS", FormerCountry.class).orElse(null);
         assertThat(cshh).isNotNull();
         assertThat(cshh).isInstanceOf(FormerCountry.class);
         // It should find the country most recently assigned to 'CS'.
@@ -99,6 +106,23 @@ public class RegionServiceTest {
     }
 
     @Test
+    public void getSaintHelena() {
+        Region sh = getInstance().getByCode("sh").orElse(null);
+        assertThat(sh).isNotNull();
+        assertThat(sh).isInstanceOf(CurrentCountry.class);
+    }
+
+
+    @Test
+    public void eastGermany() {
+        FormerCountry ddr = (FormerCountry) Country.getByCode("DDDE").orElse(null);
+        assertThat(ddr).isNotNull();
+        System.out.println("" + ddr.getValidity());
+    }
+
+
+
+    @Test
     public void stream() {
         Stream<? extends Region> values = getInstance().values(Region.Type.COUNTRY);
 
@@ -107,7 +131,7 @@ public class RegionServiceTest {
         Spliterator<? extends Region> split = spliterator.trySplit();
         assertThat(split).isNull();
         spliterator.forEachRemaining(r -> {
-            System.out.println(r.toString());
+            System.out.println(r.toString() + " " + r.getName());
         });
     }
 
@@ -118,7 +142,13 @@ public class RegionServiceTest {
             StringBuilder build = new StringBuilder();
             r.toStringBuilder(build, LanguageCode.nl.toLocale());
             System.out.println(
-                r.getClass().getSimpleName() + ":" + r.getCode()  + " : " + r.getName() + ":" + r.getName(LanguageCode.nl) + ":" + r.getIcon().map(URI::toString).orElse("none") + ": " + build);
+                r.getClass().getSimpleName() +
+                    ":" + r.getCode()  +
+                    " : " + r.getName() +
+                    ":" + r.getName(ISO_639_1_Code.nl) +
+                    ":" + r.getIcon().map(URI::toString).orElse("none") +
+                    ":" + r.getEmoji().orElse("<>") +
+                    ": " + build);
         });
 
     }

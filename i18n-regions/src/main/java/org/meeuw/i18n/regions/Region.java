@@ -4,13 +4,17 @@ import java.io.Serializable;
 import java.net.URI;
 import java.util.*;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.meeuw.i18n.languages.LanguageCode;
 import org.meeuw.i18n.regions.bind.jaxb.Code;
 
-import com.neovisionaries.i18n.LanguageCode;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
+;
 
 /**
  * The region interface represents a certain geographical region. E.g. a Country.
@@ -24,6 +28,7 @@ public interface Region extends Serializable {
     /**
      * The code for the region. For countries: <a href="https://en.wikipedia.org/wiki/ISO_3166">ISO 3166</a>.
      */
+    @JsonValue
     String getCode();
 
     /**
@@ -71,10 +76,21 @@ public interface Region extends Serializable {
     /**
      * Defaulting version of {@link #getName(Locale)}, the name of the region only considering the
      * language, with considering any country or other variants of the language.
+     * @deprecated
+     */
+    @Deprecated
+    default String getName(com.neovisionaries.i18n.@NonNull LanguageCode languageCode) {
+        return getName(languageCode.toLocale());
+    }
+
+       /**
+     * Defaulting version of {@link #getName(Locale)}, the name of the region only considering the
+     * language, with considering any country or other variants of the language.
      */
     default String getName(@NonNull LanguageCode languageCode) {
         return getName(languageCode.toLocale());
     }
+
 
     /**
      * Return the name of the region in the locale of the region itself {@link #toLocale()}
@@ -96,11 +112,32 @@ public interface Region extends Serializable {
     }
 
     /**
-     * To a region optionally an 'icon' may be associated. This is an URI, representing an URl to a picture of a flag or so. The URI may not be absolute, in which case it may e.g. refer to a webjars, and may have to be prefixed by the web application's context 'context' to be useable.
+     * To a region optionally an 'icon' may be associated. This is a URI, representing a URL to a picture of a flag or so. The URI may not be absolute, in which case it may e.g. refer to a webjars, and may have to be prefixed by the web application's context 'context' to be useable.
      */
 
     default Optional<URI> getIcon() {
         return Optional.empty();
+    }
+
+    int A = Character.codePointOf("Regional Indicator Symbol Letter A");
+
+    /**
+     * Countries can also be represented as unicode 'emojis'. In non-windows this will be shown as a little flag too.
+     * @since 2.2
+    */
+    default Optional<String> getEmoji() {
+        if (getCode().length() == 2) {
+            StringBuilder builder = new StringBuilder();
+            for (char c : getCode().toCharArray()) {
+                int target = A - 'A' + c;
+                char[] chars = Character.toChars(target);
+                builder.append(chars);
+            }
+            String string = builder.toString();
+            return Optional.of(string);
+        } else {
+            return Optional.empty();
+        }
     }
 
     /**
@@ -151,6 +188,16 @@ public interface Region extends Serializable {
         NATION*/
     }
 
+
+    @JsonCreator
+    static Region of(String code) {
+        if (code == null || code.isEmpty()) {
+            // be lenient about this too.
+            // we'd perhaps like to access ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, but in that case we propbable need custom deserializer?
+            return null;
+        }
+        return RegionService.getInstance().getByCode(code, true).orElseThrow();
+    }
 
 
 }

@@ -7,8 +7,8 @@ import java.util.logging.Logger;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-import javax.annotation.Priority;
-import javax.validation.constraints.Min;
+import jakarta.annotation.Priority;
+import jakarta.validation.constraints.Min;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;

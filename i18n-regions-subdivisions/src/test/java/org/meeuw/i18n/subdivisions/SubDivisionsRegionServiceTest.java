@@ -7,15 +7,14 @@ import org.meeuw.i18n.countries.CurrentCountry;
 import org.meeuw.i18n.regions.*;
 
 import com.neovisionaries.i18n.CountryCode;
-import com.neovisionaries.i18n.LanguageCode;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.meeuw.i18n.languages.ISO_639_1_Code.nl;
 
 /**
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-@SuppressWarnings("OptionalGetWithoutIsPresent")
 
 public class SubDivisionsRegionServiceTest {
 
@@ -45,7 +44,7 @@ public class SubDivisionsRegionServiceTest {
         Region eng = RegionService.getInstance().getByCode("GB-ENG").orElseThrow();
         assertThat(eng.getCode()).isEqualTo("GB-ENG");
         assertThat(eng.getName()).isEqualTo("England");
-        assertThat(eng.getName(LanguageCode.nl)).isEqualTo("Engeland");
+        assertThat(eng.getName(nl)).isEqualTo("Engeland");
 
         RegionService.getInstance().values().filter(r -> r.getCode().startsWith("GB-")).forEach(gb -> {
             System.out.println(gb + ":" + gb.getLocalName());
@@ -54,8 +53,8 @@ public class SubDivisionsRegionServiceTest {
         Region engOf = CountrySubdivision.of(CurrentCountry.of(CountryCode.GB), "ENG").orElseThrow();
         assertThat(engOf).isEqualTo(eng);
 
-        assertThat(Regions.toString(eng, LanguageCode.nl)).isEqualTo("Engeland (Verenigd Koninkrijk)");
-        assertThat(Regions.toStringWithCode(eng, LanguageCode.nl)).isEqualTo("GB-ENG:Engeland (Verenigd Koninkrijk)");
+        assertThat(Regions.toString(eng, nl)).isEqualTo("Engeland (Verenigd Koninkrijk)");
+        assertThat(Regions.toStringWithCode(eng, nl)).isEqualTo("GB-ENG:Engeland (Verenigd Koninkrijk)");
 
 
     }

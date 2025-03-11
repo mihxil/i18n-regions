@@ -6,8 +6,9 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 import org.meeuw.i18n.regions.*;
 
-import static com.neovisionaries.i18n.LanguageCode.en;
-import static com.neovisionaries.i18n.LanguageCode.nl;
+import static org.meeuw.i18n.languages.ISO_639_1_Code.en;
+import static org.meeuw.i18n.languages.ISO_639_1_Code.nl;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**

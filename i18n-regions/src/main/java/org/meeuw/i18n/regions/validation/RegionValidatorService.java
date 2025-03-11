@@ -6,7 +6,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import javax.validation.*;
+import jakarta.validation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.regions.RegionService;
@@ -51,7 +51,7 @@ public class RegionValidatorService {
     /**
      * Returns the validation info for the given property of the name as a {@link Predicate}, which can e.g. be used to {@link java.util.stream.Stream#filter(Predicate)} the results of {@link RegionService#values()}
      * @param clazz
-     * @param propertyName  The property which is annotation with javax.validation annotation's like {@link ValidRegion}.
+     * @param propertyName  The property which is annotation with jakarta.validation annotation's like {@link ValidRegion}.
      * @param groups
      * @return
      */
@@ -65,7 +65,7 @@ public class RegionValidatorService {
       /**
      * Returns the validation info for the given property of the name as a {@link Predicate}, which can e.g. be used to {@link java.util.stream.Stream#filter(Predicate)} the results of {@link RegionService#values()}
      * @param clazz
-     * @param propertyName  The property which is annotation with javax.validation annotation's like {@link ValidRegion}.
+     * @param propertyName  The property which is annotation with jakarta.validation annotation's like {@link ValidRegion}.
      * @param groups
      * @return
      */
@@ -86,7 +86,7 @@ public class RegionValidatorService {
     /**
      * Returns the validation info for the given property of the name as a {@link Predicate}, which can e.g. be used to {@link java.util.stream.Stream#filter(Predicate)} the results of {@link RegionService#values()}
      * @param clazz
-     * @param propertyName  The property which is annotation with javax.validation annotation's like {@link ValidRegion}.
+     * @param propertyName  The property which is annotation with jakarta.validation annotation's like {@link ValidRegion}.
      * @param groups
      * @return
      */

@@ -2,8 +2,8 @@ package org.meeuw.i18n.countries.validation;
 
 import java.lang.annotation.*;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 
 import org.meeuw.i18n.countries.Country;
 import org.meeuw.i18n.countries.validation.impl.CountryConstraintValidator;
@@ -15,15 +15,15 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 
 /**
- * A javax.validation annotation that can be used to restrict the values of a {@link Country} value.
- *
+ * A jakarta.validation annotation that can be used to restrict the values of a {@link Country} value.
+ * <p>
  * For example
  * <pre>
  *    {@literal @}ValidCountry(value = OFFICIAL | FORMER, includes = "ZZ")
  * </pre>
  *
- * So basicly you specify one or more predicates, and/or a number of explicitely included and excluded codes.
- *
+ * So basically you specify one or more predicates, and/or a number of explicitly included and excluded codes.
+ * <p>
  * When applied to instances of {@link Region}s that are not {@link Country} (or convertable to that), are considered valid. Use {@link org.meeuw.i18n.regions.validation.ValidRegion} to constraint that.
  *
  *

@@ -8,8 +8,9 @@
   <version>0.1-SNAPSHOT</version>
 
   <properties>
-    <meeuw.i18n.version>1.0-SNAPSHOT</meeuw.i18n.version>
-    <spring.version>6.0.0</spring.version>
+ 
+    <meeuw.i18n.version>2.2-SNAPSHOT</meeuw.i18n.version>
+    <spring.version>6.2.1</spring.version>
   </properties>
 
   <dependencies>
@@ -26,7 +27,7 @@
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
-      <version>3.9</version>
+      <version>3.17.0</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
@@ -40,12 +41,16 @@
       <version>1.7.25</version>
     </dependency>
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>4.0.1</version>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <version>6.0.0</version>
       <scope>provided</scope>
     </dependency>
-
+    <dependency>
+      <groupId>org.meeuw.i18n</groupId>
+      <artifactId>i18n-iso-639</artifactId>
+      <version>3.7</version>
+    </dependency>
   </dependencies>
   <build>
     <defaultGoal>install</defaultGoal>

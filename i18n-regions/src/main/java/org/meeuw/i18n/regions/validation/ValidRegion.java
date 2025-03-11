@@ -4,8 +4,8 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 
 import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.validation.impl.RegionConstraintValidator;
@@ -15,12 +15,12 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 
 /**
- * A javax.validation annotation that can be used to restrict the values of a {@link Region} values.
- *
+ * A {@code jakarta.validation} annotation that can be used to restrict the values of a {@link Region} values.
+ * <p>
  * It recognized several types
  * If it is a Region or convertible to a region then it will be valid if the type and classes are as specified.
- *
- * Locales are only validated if the 'country' part is filled, and then only are valid if the country is filled and recognized by the RegionsService and its type is COUNTRY.
+ * <p>
+ * Locales are only validated if the 'country' part is filled, and then only are valid if the country is filled and recognized by the RegionsService and its type is COUNTRY (or unspecified).
  *
  *
  * @author Michiel Meeuwissen

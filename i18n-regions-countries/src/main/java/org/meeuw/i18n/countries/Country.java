@@ -1,20 +1,18 @@
 package org.meeuw.i18n.countries;
 
-import java.io.*;
-import java.net.URL;
+import java.io.Serializable;
 import java.util.Optional;
-import java.util.Properties;
 import java.util.function.Predicate;
 
-import java.util.logging.Logger;
-
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode;
 import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.RegionService;
 import org.meeuw.i18n.regions.bind.jaxb.Code;
-import org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.neovisionaries.i18n.CountryCode;
 
 /**
@@ -77,6 +75,17 @@ public interface Country extends Region {
     Serializable getCountryCode();
 
 
+
+    @JsonCreator
+    static Country of(String code) {
+        if (code == null || code.isEmpty()) {
+            // be lenient about this too.
+            // we'd perhaps like to access ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, but in that case we propbable need custom deserializer?
+            return null;
+        }
+        return RegionService.getInstance()
+            .getByCode(code, true, Country.class).orElseThrow();
+    }
 
 
 }

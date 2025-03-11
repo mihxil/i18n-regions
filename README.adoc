@@ -44,6 +44,28 @@ It provides:
 
 all countries implement an interface link:i18n-regions-countries/src/main/java/org/meeuw/i18n/countries/Country.java[`org.meeuw.i18n.countries.Country`]
 
+==== Example code
+[source,java]
+----
+// get one country
+CurrentCountry netherlands = org.meeuw.i18n.regions.RegionService.getInstance().getByCode("NL", CurrentCountry.class).orElseThrow();
+com.neovisionaries.i18n.CountryCode code = netherlands.getCode();
+
+// link to flag image:
+Optional<URI> icon = netherlands.getIcon();
+
+String nameInLocalLanguage = netherlands.getLocalName();
+
+
+// stream all available countries:
+
+Stream<? extends Region> values = org.meeuw.i18n.regions.RegionService.getInstance().values(Region.Type.COUNTRY);
+
+
+----
+
+NOTE: It is possible that https://github.com/TakahikoKawasaki/nv-i18n becomes abandoned. In that case we might create a new enum for all codes.  May be it can be auto created using online resources. Or we use the list provided in java 9's `java.util.Locale`.
+
 === Subdivisions of countries
 
 These are provided in https://search.maven.org/search?q=g:org.meeuw.i18n%20AND%20a:i18n-regions-subdivisions&core=gav[`org.meeuw.i18n:i18n-regions-subdivisions`]
@@ -55,6 +77,15 @@ These are provided in https://search.maven.org/search?q=g:org.meeuw.i18n%20AND%2
 === Continents
 
 A list of codes for the continents is provided in https://search.maven.org/search?q=g:org.meeuw.i18n%20AND%20a:i18n-regions-continents&core=ga[`org.meeuw.i18n:i18n-regions-continents`]
+
+==== Example code
+[source,java]
+----
+// stream all available continents:
+
+Stream<? extends Continent> values = org.meeuw.i18n.regions.RegionService.getInstance().values(Continent.class);
+assertThat(values).hasSize(7);
+----
 
 === More
 
@@ -128,7 +159,7 @@ It can also be used on `java.util.Locale`, which contains a country component to
         @NotNull Locale> languages;
 ----
 
-(For completeness also link:i18n-regions/src/main/java/org/meeuw/i18n/regions/validation/Language.java[`@Language`] is provided).
+(For completeness also link:https://github.com/mihxil/i18n-iso-639/blob/main/src/main/java/org/meeuw/i18n/languages/validation/Language.java[i18n-regions/src/main/java/org/meeuw/i18n/regions/validation/Language.java][`@Language`] is used here from `i18n-iso639', to check the language parte).
 
 As a utility, there is `org.meeuw.i18n.regions.validation.RegionValidatorService` which can be used to filter a stream of regions  (e.g. `RegionService#values()`) based on the settings of these annotations.
 
@@ -189,3 +220,36 @@ Release notes can be found link:RELEASE-NOTES.adoc[here].
 
 == Testing and JPMS
 Find my findings link:TESTING-WITH-JPMS.adoc[here]
+
+
+== Versions
+
+
+|===
+|Version | |
+
+|1.x
+|javax, java 8 (though with module-info)
+| &le; 2024
+
+
+| 2.x
+| jakarta, java 11
+| &ge; 2024
+
+| 2.2
+| deprecating use of neovisionaries for languages, in favour of `org.meeuw.i18n:i18n-iso-639`, fixed issue with optional dependencies
+
+| january 2025
+
+| 2.3
+| deprecating use of neovisionaries for current countries. Just scrape them from wikipedia or so
+| TODO ?
+
+| 3.x
+| drop dependency on neovisionaries
+| TODO ?
+
+
+|===
+

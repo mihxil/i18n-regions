@@ -8,7 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # See https://stackoverflow.com/questions/70153962/nexus-staging-maven-plugin-maven-deploy-failed-an-api-incompatibility-was-enco
-      MAVEN_OPTS: -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED --add-opens=java.desktop/java.awt.font=ALL-UNNAMED"
+      MAVEN_ARGS: --no-transfer-progress
+      MAVEN_OPTS:  --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED --add-opens=java.desktop/java.awt.font=ALL-UNNAMED
     steps:
       - name: check branch name
         run: |
@@ -19,20 +20,18 @@ jobs:
               echo "halting release process since this is not a release branch. ${{ github.ref }} must be refs/heads/[0-9]+\.[0-9]+-SNAPSHOT"
               exit 1
             fi
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         if: ${{ env.valid_branch }} == 'true'
-      - uses: actions/setup-java@v2
+      - uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: 11
-      - name: Create settings.xml
-        uses: s4u/maven-settings-action@v2
-        with:
-          servers: '[{"id": "ossrh", "username": "mihxil", "password": "${{secrets.OSSRH_PASSWORD}}"}]'
-      - uses: crazy-max/ghaction-import-gpg@v3
-        with:
+          cache: 'maven'
+          server-id: ossrh
+          server-username: SONATYPE_USERNAME
+          server-password: SONATYPE_PASSWORD
           gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
-          passphrase: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
+          gpg-passphrase: GPG_SECRET_KEY_PASSPHRASE
       - name: Fix bom
         run: |
           sudo apt-get install libxml2-utils
@@ -44,6 +43,10 @@ jobs:
       - name: Build BOM with Maven
         run: (cd i18n-regions-bom ; mvn -B -Pdeploy clean deploy) ; echo BOM was built
         continue-on-error: true  # sometimes it was released already in a previous fail
+        env:
+          SONATYPE_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          SONATYPE_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          GPG_SECRET_KEY_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
       - name: Release
         run: |
           git config --global user.name 'github actions'
@@ -51,3 +54,7 @@ jobs:
           mvn --batch-mode  -Darguments=-DskipTests  -DpushChanges=false release:prepare
           git push --atomic -v --follow-tags
           mvn -P'deploy,!blackboxtesting' --batch-mode -Darguments=-DskipTests release:perform
+        env:
+          SONATYPE_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          SONATYPE_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          GPG_SECRET_KEY_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}

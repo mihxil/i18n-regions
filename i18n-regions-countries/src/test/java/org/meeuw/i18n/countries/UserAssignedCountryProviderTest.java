@@ -17,7 +17,7 @@ public class UserAssignedCountryProviderTest {
 
     /**
      * Tests whether all User assigned countries in {@link CountryCode} have a corresponding instance.
-     *
+     * <p>
      * The only exception is {@link CountryCode#UNDEFINED} (We suggest {@link UserAssignedCountry#ZZ}
      *
      * Also tests that all {@link UserAssignedCountry}s are working without causing exceptions.

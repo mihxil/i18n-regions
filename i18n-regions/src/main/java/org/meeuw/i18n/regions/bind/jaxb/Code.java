@@ -2,7 +2,7 @@ package org.meeuw.i18n.regions.bind.jaxb;
 
 import java.util.Optional;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.meeuw.i18n.regions.Region;
@@ -19,6 +19,10 @@ import org.meeuw.i18n.regions.RegionService;
 public class Code extends XmlAdapter<String, Region> {
     @Override
     public Region unmarshal(String v) {
+        if (v == null || v.isEmpty()) {
+            // be lenient about this.
+            return null;
+        }
         return RegionService.getInstance().getByCode(v, true)
             .orElseThrow(() -> new IllegalArgumentException("No such region " + v));
     }

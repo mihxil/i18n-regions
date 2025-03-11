@@ -1,6 +1,7 @@
 package org.meeuw.i18n.test.regions.validation.impl;
 
-import org.meeuw.i18n.regions.validation.Language;
+import org.meeuw.i18n.languages.validation.Language;
+import org.meeuw.i18n.regions.validation.ValidRegion;
 
 /**
  * @author Michiel Meeuwissen
@@ -10,9 +11,9 @@ public class WithLanguageFields {
     public String language;
 
     @Language(
-        forXml = false,
-        lenientCountry = true
+        forXml = false
     )
+    @ValidRegion(types = {})
     public String lenientCountry;
 
     @Language(

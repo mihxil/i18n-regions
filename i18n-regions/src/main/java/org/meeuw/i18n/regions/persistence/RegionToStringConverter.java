@@ -1,7 +1,7 @@
 package org.meeuw.i18n.regions.persistence;
 
-import javax.persistence.AttributeConverter;
-import javax.persistence.Converter;
+import jakarta.persistence.AttributeConverter;
+import jakarta.persistence.Converter;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.meeuw.i18n.regions.Region;
@@ -9,9 +9,9 @@ import org.meeuw.i18n.regions.RegionService;
 
 /**
  * How to persist.
- *
+ * <p>
  * Uses the iso code.
- *
+ * <p>
  * TODO, we might need to prefix other region than Countries, because their codes may not be unique.
  * @author Michiel Meeuwissen
  * @since 0.1
