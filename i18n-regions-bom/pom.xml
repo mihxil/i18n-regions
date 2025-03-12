@@ -73,6 +73,11 @@
         <version>${i18n-regions.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.meeuw.i18n</groupId>
+        <artifactId>i18n-regions-openlocationcode</artifactId>
+        <version>${i18n-regions.version}</version>
+      </dependency>
+      <dependency>
         <groupId>com.neovisionaries</groupId>
         <artifactId>nv-i18n</artifactId>
         <version>${nv-i18n.version}</version>
@@ -110,7 +115,7 @@
         <plugins>
           <plugin>
             <artifactId>maven-deploy-plugin</artifactId>
-            <version>3.1.11</version>
+            <version>3.1.4</version>
             <configuration>
               <skip>true</skip>
             </configuration>
@@ -118,7 +123,7 @@
           <plugin>
             <groupId>org.sonatype.plugins</groupId>
             <artifactId>nexus-staging-maven-plugin</artifactId>
-            <version>1.6.13</version>
+            <version>1.7.0</version>
             <extensions>true</extensions>
             <configuration>
               <serverId>ossrh</serverId>
@@ -128,7 +133,7 @@
           </plugin>
           <plugin>
             <artifactId>maven-gpg-plugin</artifactId>
-            <version>3.1.0</version>
+            <version>3.2.7</version>
             <executions>
               <execution>
                 <id>sign-artifacts</id>
