@@ -243,6 +243,12 @@ Find my findings link:TESTING-WITH-JPMS.adoc[here]
 | january 2025
 
 | 2.3
+| dropped @Language annotation, use `org.meeuw.i18n:i18n-iso-639` instead
+| march 2025
+
+
+
+| 2.4
 | deprecating use of neovisionaries for current countries. Just scrape them from wikipedia or so
 | TODO ?
 
