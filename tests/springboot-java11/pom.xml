@@ -10,7 +10,7 @@
   <description>Spring boot application demoing stuff a bit</description>
 
   <properties>
-    <meeuw.i18n.version>2.2-SNAPSHOT</meeuw.i18n.version>
+    <meeuw.i18n.version>2.3.0</meeuw.i18n.version>
     <java.version>11</java.version>
   </properties>
 
@@ -19,6 +19,17 @@
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>3.4.1</version>
   </parent>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.meeuw.i18n</groupId>
+        <artifactId>i18n-regions-bom</artifactId>
+        <type>pom</type>
+        <scope>import</scope>
+        <version>${meeuw.i18n.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
     <dependency>

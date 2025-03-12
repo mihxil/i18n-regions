@@ -14,22 +14,30 @@
     <meeuw.i18n.version>2.2-SNAPSHOT</meeuw.i18n.version>
     <main.class>org.meeuw.TestSimple</main.class>
   </properties>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.meeuw.i18n</groupId>
+        <artifactId>i18n-regions-bom</artifactId>
+        <type>pom</type>
+        <scope>import</scope>
+        <version>${meeuw.i18n.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
     <dependency>
       <groupId>org.meeuw.i18n</groupId>
       <artifactId>i18n-regions</artifactId>
-      <version>${meeuw.i18n.version}</version>
     </dependency>
     <dependency>
       <groupId>org.meeuw.i18n</groupId>
       <artifactId>i18n-regions-countries</artifactId>
-      <version>${meeuw.i18n.version}</version>
     </dependency>
     <dependency>
       <groupId>org.meeuw.i18n</groupId>
       <artifactId>i18n-regions-continents</artifactId>
-      <version>${meeuw.i18n.version}</version>
     </dependency>
     <!--
     <dependency>
