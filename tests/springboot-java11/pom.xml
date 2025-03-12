@@ -10,7 +10,7 @@
   <description>Spring boot application demoing stuff a bit</description>
 
   <properties>
-    <meeuw.i18n.version>2.2-SNAPSHOT</meeuw.i18n.version>
+    <meeuw.i18n.version>2.3.0</meeuw.i18n.version>
     <java.version>11</java.version>
   </properties>
 

@@ -19,7 +19,7 @@
 
   <properties>
     <java.version>8</java.version>
-    <meeuw.i18n.version>1.7.0</meeuw.i18n.version>
+    <meeuw.i18n.version>2.3.0</meeuw.i18n.version>
   </properties>
 
 
