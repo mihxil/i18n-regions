@@ -270,7 +270,7 @@
           </plugin>
           <plugin>
             <artifactId>maven-javadoc-plugin</artifactId>
-            <version>3.11.12</version>
+            <version>3.11.2</version>
             <configuration>
               <doclint>none</doclint>
               <additionalOptions>
