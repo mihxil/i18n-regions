@@ -39,6 +39,11 @@
       <groupId>org.meeuw.i18n</groupId>
       <artifactId>i18n-regions-continents</artifactId>
     </dependency>
+    <dependency>
+      <groupId>jakarta.annotation</groupId>
+      <artifactId>jakarta.annotation-api</artifactId>
+      <version>3.0.0</version>
+    </dependency>
     <!--
     <dependency>
       <groupId>org.apache.commons</groupId>
@@ -87,6 +92,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.14.0</version>
         <configuration>
           <source>8</source>
           <target>8</target>

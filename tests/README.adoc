@@ -1,3 +1,60 @@
 = Tests
 
-In this module we collect some intergration tests. Actually they are mainly examples on how to integrate i18n-regions in other projects.
+In this module we collect some integration tests. Actually, they are mainly examples on how to integrate i18n-regions in other projects.
+
+
+== simple
+Just a fat jar, listing all recognized countries.
+
+=== run with maven
+
+[source, bash]
+----
+michiel@mitulo:(main,10)~/github/mihxil/i18n-regions/tests/simple$ mvn -q | head
+🇦🇩	 AD:Andorra:Andorra
+class: CurrentCountry
+🇦🇪	 AE:United Arab Emirates:De Forenede Arabiske Emirater
+class: CurrentCountry
+🇦🇫	 AF:Afghanistan:Afghanistan
+class: CurrentCountry
+🇦🇬	 AG:Antigua and Barbuda:Antigua og Barbuda
+class: CurrentCountry
+🇦🇮	 AI:Anguilla:Anguilla
+class: CurrentCountry
+----
+
+=== command line
+[source, bash]
+----
+michiel@mitulo:(main,10)~/github/mihxil/i18n-regions/tests/simple$ mvn -q package
+michiel@mitulo:(main,10)~/github/mihxil/i18n-regions/tests/simple$ java -jar target/i18n-regions-tests-simple-0.1-SNAPSHOT.jar  | head
+🇦🇩	 AD:Andorra:Andorra
+class: CurrentCountry
+🇦🇪	 AE:United Arab Emirates:United Arab Emirates
+class: CurrentCountry
+🇦🇫	 AF:Afghanistan:Afghanistan
+class: CurrentCountry
+🇦🇬	 AG:Antigua and Barbuda:Antigua & Barbuda
+class: CurrentCountry
+🇦🇮	 AI:Anguilla:Anguilla
+class: CurrentCountry
+----
+
+=== docker
+[source, bash]
+----
+michiel@mitulo:(main,10)~/github/mihxil/i18n-regions/tests/simple$ docker compose build > /dev/null
+[+] Building 1/1
+ ✔ command  Built0.0s
+michiel@mitulo:(main,10)~/github/mihxil/i18n-regions/tests/simple$ docker compose run command | head
+ 🇦🇩	 AD:Andorra:Andorra
+class: CurrentCountry
+🇦🇪	 AE:United Arab Emirates:United Arab Emirates
+class: CurrentCountry
+🇦🇫	 AF:Afghanistan:Afghanistan
+class: CurrentCountry
+🇦🇬	 AG:Antigua and Barbuda:Antigua & Barbuda
+class: CurrentCountry
+🇦🇮	 AI:Anguilla:Anguilla
+
+----
