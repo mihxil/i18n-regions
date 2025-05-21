@@ -1,8 +1,6 @@
 package org.meeuw.i18n.regions.validation;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -17,8 +15,9 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 /**
  * A {@code jakarta.validation} annotation that can be used to restrict the values of a {@link Region} values.
  * <p>
- * It recognized several types
- * If it is a Region or convertible to a region then it will be valid if the type and classes are as specified.
+ * It recognized several {@link Class types} of objects.
+ * If an object is a {@link Region}, or convertible to a {@code Region}, then it will be valid if the {@link Region#getType() type}
+ * and {@link Class classes} are as specified (by {@link #types()} and {@link #classes()}.
  * <p>
  * Locales are only validated if the 'country' part is filled, and then only are valid if the country is filled and recognized by the RegionsService and its type is COUNTRY (or unspecified).
  *
@@ -65,13 +64,13 @@ public @interface ValidRegion {
     String[] includes() default {};
 
      /**
-      * A list of types. The default empty array will allow for any type, or at least leave that unspecified. When validation {@link java.util.Locale} it may default to {@link Region.Type#COUNTRY}.
+      * A list of types. The default empty array will allow for any type, or at least leave that unspecified. When validating {@link java.util.Locale} it may default to {@link Region.Type#COUNTRY}.
      */
     Region.Type[] types() default {};
 
     /**
      * A list of classes (extensions of {@link Region}) that are to be considered valid.
-     * Defaults to {{@link Region}.class} (all regions are valid)
+     * Defaults to {@link Region Region.class} (i.e. no regions are invalid because of their {@link Object#getClass() class})
      */
     Class<? extends Region>[] classes() default {Region.class};
 
