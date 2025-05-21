@@ -1,6 +1,7 @@
 package org.meeuw.i18n.regions;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.logging.Level;
@@ -22,21 +23,31 @@ public class RegionService {
 
     private static final Logger logger = Logger.getLogger(RegionService.class.getName());
 
-    private static final RegionService INSTANCE = new RegionService();
+    private static final Map<ClassLoader, RegionService> INSTANCES = new ConcurrentHashMap<>();
 
     private boolean inited = false;
     private List<RegionProvider<? extends Region>> providers;
+    private final ClassLoader classLoader;
 
-    private RegionService() {
-
+    private RegionService(ClassLoader classLoader) {
+        this.classLoader = classLoader;
     }
 
     /**
-     * The singleton of this class.
+     * The singleton of this class (for {@link ClassLoader} of {@link RegionService}  itself)
      */
     public static RegionService getInstance() {
-        INSTANCE.initIfNeeded();
-        return INSTANCE;
+        return getInstance(RegionService.class.getClassLoader());
+    }
+
+    /**
+     * @param classLoader The class loader to use when calling  {@link ServiceLoader#load(Class, ClassLoader)} to load the available {@link RegionProvider}s.
+     * @since 2.4
+     */
+    public static RegionService getInstance(ClassLoader classLoader) {
+        RegionService regionService = INSTANCES.computeIfAbsent(classLoader, RegionService::new);
+        regionService.initIfNeeded();
+        return regionService;
     }
 
 
@@ -48,7 +59,7 @@ public class RegionService {
       * @param checker An extra predicate to which the region must match
       * @param <T> The type of the requested Region type
       *
-     * @return an optional of region. Empty if not found.
+     * @return an optional of {@link Region}. Empty if not found.
      */
     @SuppressWarnings("unchecked")
     public <T extends Region> Optional<T> getByCode(@NonNull String code, boolean lenient, @NonNull Class<T> clazz, @NonNull Predicate<Region> checker) {
@@ -172,6 +183,7 @@ public class RegionService {
 
     /**
      */
+    @SuppressWarnings("unchecked")
     public <T extends RegionProvider<?>> Optional<T> getProvider(Class<T> clazz) {
         return (Optional<T>) providers.stream().filter(clazz::isInstance).findFirst();
     }
@@ -183,7 +195,7 @@ public class RegionService {
             boolean init = false;
             synchronized(this) {
                 if (! inited) {
-                    final ServiceLoader<RegionProvider> loader = ServiceLoader.load(RegionProvider.class);
+                    @SuppressWarnings("rawtypes") final ServiceLoader<RegionProvider> loader = ServiceLoader.load(RegionProvider.class, classLoader);
                     List<RegionProvider<?>> list = new ArrayList<>();
                     loader.iterator().forEachRemaining(list::add);
                     list.sort(priorityComparator());
@@ -193,9 +205,9 @@ public class RegionService {
                 }
             }
             if (init) {
-                // run in separate thread to avoid dead locks
+                // run in separate thread to avoid deadlocks
                 new Thread(() ->
-                    logger.log(Level.FINE, "RegionService has {0}", providers)
+                    logger.log(Level.FINE, "RegionService for class loader {0} has {1}", new Object[] {classLoader, providers})
                 ).start();
             }
         }
