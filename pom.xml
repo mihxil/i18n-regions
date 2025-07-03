@@ -12,6 +12,8 @@
 
   <modules>
     <module>i18n-regions</module>
+    <module>i18n-regions-bom</module>
+
     <module>i18n-regions-subdivisions</module>
     <module>i18n-regions-countries</module>
     <module>i18n-regions-continents</module>
@@ -207,6 +209,16 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.sonatype.central</groupId>
+        <artifactId>central-publishing-maven-plugin</artifactId>
+        <version>0.8.0</version>
+        <extensions>true</extensions>
+        <configuration>
+          <publishingServerId>central</publishingServerId>
+          <autoPublish>true</autoPublish>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 
@@ -230,17 +242,6 @@
             <version>3.1.1</version>
             <configuration>
               <skip>true</skip>
-            </configuration>
-          </plugin>
-          <plugin>
-            <groupId>org.sonatype.plugins</groupId>
-            <artifactId>nexus-staging-maven-plugin</artifactId>
-            <version>1.7.0</version>
-            <extensions>true</extensions>
-            <configuration>
-              <serverId>ossrh</serverId>
-              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-              <autoReleaseAfterClose>true</autoReleaseAfterClose>
             </configuration>
           </plugin>
           <plugin>
@@ -438,22 +439,12 @@
   </dependencies>
 
 
-  <distributionManagement>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-    <repository>
-      <id>ossrh-release</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>
-  </distributionManagement>
-
 
   <repositories>
     <repository>
-      <id>sonatype_snapshot</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <name>Central Portal Snapshots</name>
+      <id>central-portal-snapshots</id>
+      <url>https://central.sonatype.com/repository/maven-snapshots/</url>
       <releases>
         <enabled>false</enabled>
       </releases>
@@ -462,6 +453,5 @@
       </snapshots>
     </repository>
   </repositories>
-
 
 </project>

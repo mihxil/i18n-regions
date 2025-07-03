@@ -44,8 +44,8 @@ jobs:
         run: (cd i18n-regions-bom ; mvn -B -Pdeploy clean deploy) ; echo BOM was built
         continue-on-error: true  # sometimes it was released already in a previous fail
         env:
-          SONATYPE_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          SONATYPE_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
+          CENTRAL_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
           GPG_SECRET_KEY_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
       - name: Release
         run: |
@@ -55,6 +55,6 @@ jobs:
           git push --atomic -v --follow-tags
           mvn -P'deploy,!blackboxtesting' --batch-mode -Darguments=-DskipTests release:perform
         env:
-          SONATYPE_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          SONATYPE_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
+          CENTRAL_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
           GPG_SECRET_KEY_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
