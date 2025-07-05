@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.meeuw.i18n</groupId>
@@ -15,7 +15,7 @@
     <i18n-regions.version>2.5-SNAPSHOT</i18n-regions.version>
     <nv-i18n.version>1.29</nv-i18n.version>
     <i18n-subdivisions.version>0.3</i18n-subdivisions.version>
-    <i18n-formerly-assigned.version>0.8</i18n-formerly-assigned.version>
+    <i18n-formerly-assigned.version>0.9</i18n-formerly-assigned.version>
   </properties>
 
   <licenses>
