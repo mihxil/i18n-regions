@@ -14,14 +14,14 @@
   <properties>
     <i18n-regions.version>2.5-SNAPSHOT</i18n-regions.version>
     <nv-i18n.version>1.29</nv-i18n.version>
-    <i18n-subdivisions.version>0.3</i18n-subdivisions.version>
+    <i18n-subdivisions.version>0.4</i18n-subdivisions.version>
     <i18n-formerly-assigned.version>0.9</i18n-formerly-assigned.version>
   </properties>
 
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
       <distribution>repo</distribution>
       <comments>A business-friendly OSS license</comments>
     </license>
