@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.meeuw.i18n</groupId>
     <artifactId>i18n-regions-parent</artifactId>
-    <version>2.5.1</version>
+    <version>2.5.2-SNAPSHOT</version>
   </parent>
   <artifactId>i18n-regions-blackbox-testing</artifactId>
   <packaging>pom</packaging>
