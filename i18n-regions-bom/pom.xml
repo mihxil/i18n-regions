@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.meeuw.i18n</groupId>
-  <version>2.5.1</version>
+  <version>2.5.2-SNAPSHOT</version>
   <artifactId>i18n-regions-bom</artifactId>
   <packaging>pom</packaging>
   <name>i18n-regions-bom</name>
@@ -12,7 +12,7 @@
 
 
   <properties>
-    <i18n-regions.version>2.5.1</i18n-regions.version>
+    <i18n-regions.version>2.5.2-SNAPSHOT</i18n-regions.version>
     <nv-i18n.version>1.29</nv-i18n.version>
     <i18n-subdivisions.version>0.4</i18n-subdivisions.version>
     <i18n-formerly-assigned.version>0.9</i18n-formerly-assigned.version>
@@ -46,7 +46,7 @@
     <connection>scm:git:${project.scm.url}.git</connection>
     <developerConnection>scm:git:${project.scm.url}.git</developerConnection>
     <url>https://github.com/mihxil/i18n-regions</url>
-    <tag>2.5.1</tag>
+    <tag>2.5-SNAPSHOT</tag>
   </scm>
 
 
