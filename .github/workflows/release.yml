@@ -27,7 +27,7 @@ jobs:
           distribution: 'temurin'
           java-version: 11
           cache: 'maven'
-          server-id: ossrh
+          server-id: central
           server-username: SONATYPE_USERNAME
           server-password: SONATYPE_PASSWORD
           gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
