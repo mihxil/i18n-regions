@@ -33,7 +33,7 @@ jobs:
       - name: Fix bom
         run: |
           sudo apt-get update
-          sudo apt-get install libxml2-utils
+          sudo apt-get install --no-install-recommend libxml2-utils
           .github/fix-bom.sh -B
       - name: Commit changes in bom if necessary
         uses: stefanzweifel/git-auto-commit-action@v5
