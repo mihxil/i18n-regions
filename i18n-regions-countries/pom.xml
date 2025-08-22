@@ -9,6 +9,7 @@
   </parent>
 
   <artifactId>i18n-regions-countries</artifactId>
+  <name>i18n-regions-countries</name>
   <description>Provides countries as region objects. This includes all current countries, and also formerly existing modern countries, was well as some 'user defined' countries.</description>
 
   <properties>

@@ -9,6 +9,7 @@
   </parent>
 
   <artifactId>i18n-regions-openlocationcode</artifactId>
+  <name>i18n-regions-openlocationcode</name>
   <description>Provides open location code areas as region objects</description>
 
   <dependencies>

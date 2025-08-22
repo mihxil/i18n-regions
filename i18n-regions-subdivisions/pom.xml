@@ -9,6 +9,7 @@
   </parent>
 
   <artifactId>i18n-regions-subdivisions</artifactId>
+  <name>i18n-regions-subdivisions</name>
   <description>Provides subdivisions of countries as regions.</description>
 
   <dependencies>

@@ -9,6 +9,7 @@
   </parent>
 
   <artifactId>i18n-regions</artifactId>
+  <name>i18n-regions</name>
   <packaging>jar</packaging>
   <description>Provides the service loader for Regions, and some utilities to deal with regions generally</description>
 

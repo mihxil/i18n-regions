@@ -9,6 +9,8 @@
   </parent>
 
   <artifactId>i18n-regions-continents</artifactId>
+  <name>i18n-regions-continents</name>
+
   <description>Provides the continents as region objects</description>
 
   <dependencies>
