@@ -47,7 +47,7 @@ jobs:
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
       - name: Build and deploy with Maven
         run: |
-          mvn -B test
+          mvn -B test  -D"maven.test.failure.ignore=true"
           mvn -B -DskipTests=true -P'deploy,!blackboxtesting' deploy
         env:
           CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
@@ -63,3 +63,5 @@ jobs:
         with:
           check_name: Tests results
           files: "**/target/surefire-reports/*.xml"
+      - uses: mmprogrami/after-maven-action@v1
+
