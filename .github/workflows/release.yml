@@ -28,8 +28,8 @@ jobs:
           java-version: 11
           cache: 'maven'
           server-id: central
-          server-username: SONATYPE_USERNAME
-          server-password: SONATYPE_PASSWORD
+          server-username: CENTRAL_USERNAME
+          server-password: CENTRAL_PASSWORD
           gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
       - name: Fix bom
         run: |
