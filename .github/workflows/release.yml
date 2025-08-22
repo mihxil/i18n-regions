@@ -21,7 +21,7 @@ jobs:
               exit 1
             fi
       - uses: actions/checkout@v4
-        if: ${{ env.valid_branch }} == 'true'
+        if: ${{ env.valid_branch  == 'true' }}
       - uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
@@ -33,6 +33,7 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
       - name: Fix bom
         run: |
+          sudo apt-get update
           sudo apt-get install libxml2-utils
           .github/fix-bom.sh -B -R
       - name: Commit changes in bom if necessary
