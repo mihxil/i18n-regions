@@ -46,7 +46,7 @@
     <connection>scm:git:${project.scm.url}.git</connection>
     <developerConnection>scm:git:${project.scm.url}.git</developerConnection>
     <url>https://github.com/mihxil/i18n-regions</url>
-    <tag>2.5-SNAPSHOT</tag>
+    <tag>2.5.0</tag>
   </scm>
 
 
