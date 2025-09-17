@@ -46,8 +46,8 @@
   <properties>
     <junit.version>5.13.4</junit.version>
     <java.target.version>8</java.target.version>
-    <checker.version>3.49.5</checker.version>
-    <jackson.version>2.19.2</jackson.version>
+    <checker.version>3.50.0</checker.version>
+    <jackson.version>2.20.0</jackson.version>
     <jacoco.version>0.8.12</jacoco.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -365,7 +365,7 @@
       <dependency>
         <groupId>jakarta.xml.bind</groupId>
         <artifactId>jakarta.xml.bind-api</artifactId>
-        <version>4.0.2</version>
+        <version>4.0.4</version>
 
       </dependency>
       <dependency>

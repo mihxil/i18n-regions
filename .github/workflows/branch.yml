@@ -10,7 +10,7 @@ jobs:
     env:
       MAVEN_ARGS: --no-transfer-progress
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Release branch with Maven
         run: |
           git config --global user.name 'github actions'
