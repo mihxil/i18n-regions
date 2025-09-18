@@ -2,6 +2,7 @@ package org.meeuw.i18n.countries;
 
 import java.net.URI;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.assertj.core.api.Assertions;
@@ -130,11 +131,16 @@ public class RegionServiceTest {
         assertThat(spliterator.estimateSize()).isEqualTo(Long.MAX_VALUE);
         Spliterator<? extends Region> split = spliterator.trySplit();
         assertThat(split).isNull();
-        Set<String> seen = new HashSet<>();
+                Map<String, List<Region>> seen = new HashMap<>();
         spliterator.forEachRemaining(r -> {
             System.out.println(r.toString() + " " + r.getName());
-            assertThat(seen.add(r.getCode())).isTrue();
+            List<Region> list = seen.computeIfAbsent(r.getCode(), k -> new ArrayList<>());
+
+            list.add(r);
         });
+        List<List<Region>> duplicates = seen.values().stream().filter(l -> l.size() > 1).collect(Collectors.toList());
+
+        assertThat(duplicates).isEmpty();
     }
 
     @Test
