@@ -255,11 +255,6 @@ Find my findings link:TESTING-WITH-JPMS.adoc[here]
 | august 2025
 
 | 2.6
-| bugfixes
-| september 2025
-
-
-| 2.7
 | deprecating use of neovisionaries for current countries. Just scrape them from wikipedia or so
 | TODO ?
 
