@@ -44,8 +44,6 @@ public class CountryValidatorTest {
         @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.FORMER)
         public final Region region;
 
-
-
         public CountryAndRegions(Region r) {
             this.region = r;
         }
@@ -97,7 +95,7 @@ public class CountryValidatorTest {
         testAsStreamFilter(
             regionValidatorService.fromProperty(CountryAndRegions.class, "region"),
             CountryAndRegions::new,
-            31,
+            27,
             "TPTL", "GB-ENG");
 
 
@@ -143,7 +141,7 @@ public class CountryValidatorTest {
         testAsStreamFilter(
             regionValidatorService.fromProperty(CountryAndRegionsAsString.class, "region"),
             CountryAndRegionsAsString::new,
-            31,
+            27,
             "TPTL", "GB-ENG");
     }
 
@@ -226,7 +224,7 @@ public class CountryValidatorTest {
         testAsStreamFilter(
             regionValidatorService.fromProperty(ZZ.class, "region"),
             ZZ::new,
-            314
+            310
         );
     }
 
@@ -263,7 +261,7 @@ public class CountryValidatorTest {
         testAsStreamFilter(
             regionValidatorService.fromProperty(Former.class, "region"),
             Former::new,
-            284
+            280
             );
     }
 
@@ -316,7 +314,7 @@ public class CountryValidatorTest {
         testAsStreamFilter(
             regionValidatorService.fromProperty(CountryAndRegionsMetaAnnotated.class, "region"),
             CountryAndRegionsMetaAnnotated::new,
-            54
+            50
         );
     }
 
