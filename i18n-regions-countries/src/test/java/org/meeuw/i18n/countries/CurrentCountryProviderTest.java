@@ -81,4 +81,14 @@ public class CurrentCountryProviderTest {
         assertThat(nl.hashCode()).isEqualTo(2494);
     }
 
+    @Test
+    public void xi() {
+        assertThat(currentCountryProvider.getByCode("XI")).isEmpty();
+        assertThat(currentCountryProvider.values().filter(c -> c.getCode().equals("XI")).count()).isEqualTo(0);
+
+    }
+
+
+
+
 }
