@@ -130,8 +130,10 @@ public class RegionServiceTest {
         assertThat(spliterator.estimateSize()).isEqualTo(Long.MAX_VALUE);
         Spliterator<? extends Region> split = spliterator.trySplit();
         assertThat(split).isNull();
+        Set<String> seen = new HashSet<>();
         spliterator.forEachRemaining(r -> {
             System.out.println(r.toString() + " " + r.getName());
+            assertThat(seen.add(r.getCode())).isTrue();
         });
     }
 

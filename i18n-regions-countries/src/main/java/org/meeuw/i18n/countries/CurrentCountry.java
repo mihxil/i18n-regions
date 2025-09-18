@@ -179,7 +179,7 @@ public class CurrentCountry implements Country {
      */
     static String getCdnWebJars()  {
         URL url  = Region.class.getClassLoader()
-            .getResource("META-INF/maven/org.meeuw.i18n/i18n-regions-countries/maven.properties");
+            .getResource("/META-INF/maven/org.meeuw.i18n/i18n-regions-countries/maven.properties");
         Properties prop = new Properties();
         if (url != null) {
 
@@ -191,7 +191,8 @@ public class CurrentCountry implements Country {
         }
         String version = prop.getProperty("flag-icons.version");
         if (version == null) {
-            throw new IllegalStateException("No version found in  " + prop);
+            version = "7.5.0";
+
         }
         return "https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/" + version + "/flags/4x3/";
     }
