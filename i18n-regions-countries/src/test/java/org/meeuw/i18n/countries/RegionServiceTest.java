@@ -12,7 +12,6 @@ import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.UserAssignedRegion;
 
 import com.neovisionaries.i18n.CountryCode;
-import com.neovisionaries.i18n.LanguageCode;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.meeuw.i18n.regions.RegionService.getInstance;
@@ -131,14 +130,14 @@ public class RegionServiceTest {
         assertThat(spliterator.estimateSize()).isEqualTo(Long.MAX_VALUE);
         Spliterator<? extends Region> split = spliterator.trySplit();
         assertThat(split).isNull();
-                Map<String, List<Region>> seen = new HashMap<>();
+                Map<String, List<String>> seen = new HashMap<>();
         spliterator.forEachRemaining(r -> {
             System.out.println(r.toString() + " " + r.getName());
-            List<Region> list = seen.computeIfAbsent(r.getCode(), k -> new ArrayList<>());
+            List<String> list = seen.computeIfAbsent(r.getCode(), k -> new ArrayList<>());
 
-            list.add(r);
+            list.add(r.getCode() + ":" + r.getName() + " (" + r.getClass().getSimpleName() + ") ");
         });
-        List<List<Region>> duplicates = seen.values().stream().filter(l -> l.size() > 1).collect(Collectors.toList());
+        List<List<String>> duplicates = seen.values().stream().filter(l -> l.size() > 1).collect(Collectors.toList());
 
         assertThat(duplicates).isEmpty();
     }
@@ -148,7 +147,7 @@ public class RegionServiceTest {
         CurrentCountry.ALWAYS_USE_CDN_FOR_ICONS.set(true);
         getInstance().values().forEach(r -> {
             StringBuilder build = new StringBuilder();
-            r.toStringBuilder(build, LanguageCode.nl.toLocale());
+            r.toStringBuilder(build, new Locale("nl"));
             System.out.println(
                 r.getClass().getSimpleName() +
                     ":" + r.getCode()  +

@@ -50,15 +50,15 @@ public class UserAssignedCountryProviderTest {
     }
 
     /**
-     * Make sure that all 'USER_ASSIGNED' codes
+     * Make sure that all 'USER_ASSIGNED' codes are user assigned
      */
     @Test
     public void nv18n() {
-        Arrays.stream(CountryCode.values()).filter(c -> c.getAssignment() == CountryCode.Assignment.USER_ASSIGNED).forEach(c -> {
+        Arrays.stream(CountryCode.values())
+            .filter(c -> c.getAssignment() == CountryCode.Assignment.USER_ASSIGNED).forEach(c -> {
             if (c != CountryCode.UNDEFINED) {
                 assertThat(inst.getByCode(c.name())).withFailMessage("Not found " + c).isPresent();
             }
         });
-
     }
 }
