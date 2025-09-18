@@ -246,8 +246,20 @@ Find my findings link:TESTING-WITH-JPMS.adoc[here]
 | march 2025
 
 
-
 | 2.4
+|
+| may 2025
+
+| 2.5
+| mainly about release to new central.sonatype
+| august 2025
+
+| 2.6
+| bugfixes
+| september 2025
+
+
+| 2.7
 | deprecating use of neovisionaries for current countries. Just scrape them from wikipedia or so
 | TODO ?
 
