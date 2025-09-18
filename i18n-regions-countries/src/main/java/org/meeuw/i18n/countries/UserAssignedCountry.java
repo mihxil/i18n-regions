@@ -7,11 +7,11 @@ import com.neovisionaries.i18n.CountryCode;
 
 /**
  * Wraps all 'User defined' {@link CountryCode} (except {@link CountryCode#UNDEFINED} and assigns to each a {@link #getAssignedBy()}.
- *
+ * <p>
  * Adds a few others, too.
- *
+ * <p>
  * These are just the static constants in this class, which are automatically registered via {@link UserAssignedCountryProvider#register(UserAssignedCountry)}.
- *
+ * <p>
  * http://en.wikipedia.org/wiki/ISO_3166-2
  * <a href="https://docs.google.com/spreadsheet/ccc?key=0Ajm-SImXl8LzdGVkU3ZJRV9JS3ZIVDZNNTd6eTVLSGc&amp;usp=sharing#gid=0">this doc</a>
  * @author Michiel Meeuwissen
@@ -44,7 +44,7 @@ public class UserAssignedCountry extends UserAssignedRegion implements Country {
 
     private final CountryCode countryCode;
 
-    protected UserAssignedCountry(
+    public UserAssignedCountry(
         @NonNull String code,
         @NonNull String name,
         String assignedBy) {
