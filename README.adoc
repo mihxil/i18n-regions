@@ -63,7 +63,7 @@ Stream<? extends Region> values = org.meeuw.i18n.regions.RegionService.getInstan
 
 ----
 
-NOTE: It is possible that https://github.com/TakahikoKawasaki/nv-i18n becomes abandoned. In that case we might create a new enum for all codes.  May be it can be auto created using online resources. Or we use the list provided in java 9's `java.util.Locale`.
+NOTE: It is possible that https://github.com/TakahikoKawasaki/nv-i18n becomes abandoned. In that case we might create a new enum for all codes.  May be it can be auto created using online resources. Or we use the list provided in java 9's `java.util.Locale`. Or perhaps https://github.com/detrin/download-iso3166-list could help.
 
 === Subdivisions of countries
 
