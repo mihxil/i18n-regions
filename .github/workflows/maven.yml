@@ -57,6 +57,8 @@ jobs:
         with:
           files: report-aggregation/target/site/jacoco-aggregate/jacoco.xml
           verbose: true
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
