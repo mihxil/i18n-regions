@@ -26,15 +26,6 @@ public class Regions {
         return Comparator.comparing(o -> o.getName(locale));
     }
 
-    /**
-     * As {@link #sortByName(Locale)}, but with a {@link com.neovisionaries.i18n.LanguageCode } argument.
-     * @deprecated
-     * @see #sortByName(LanguageCode) 
-     */
-    @Deprecated
-    public static Comparator<Region> sortByName(com.neovisionaries.i18n.LanguageCode language) {
-        return sortByName(language.toLocale());
-    }
 
 
     /**
@@ -56,16 +47,6 @@ public class Regions {
         return builder.toString();
     }
 
-    /**
-     * As {@link #toString(Region, Locale)}, but with a {@link com.neovisionaries.i18n.LanguageCode} argument.
-     * @deprecated
-     */
-    @Deprecated
-    public static String toString(
-        @NonNull  Region region,
-        com.neovisionaries.i18n. @NonNull  LanguageCode language) {
-        return toString(region, language.toLocale());
-    }
 
     /**
      * As {@link #toString(Region, Locale)}, but with a {@link LanguageCode} argument.
@@ -92,22 +73,11 @@ public class Regions {
     }
 
 
+
+
     /**
      * As {@link #toStringWithCode(Region, Locale)} but with a {@link LanguageCode} argument.
-     * @deprecated
      */
-    @Deprecated
-    public static String toStringWithCode(
-        @NonNull Region region,
-        com.neovisionaries.i18n. @NonNull LanguageCode  language) {
-        return toStringWithCode(region, language.toLocale());
-    }
-
-       /**
-     * As {@link #toStringWithCode(Region, Locale)} but with a {@link LanguageCode} argument.
-     * @deprecated
-     */
-    @Deprecated
     public static String toStringWithCode(
         @NonNull Region region,
         @NonNull LanguageCode language) {

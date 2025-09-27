@@ -64,7 +64,7 @@ public class SubDivisionsRegionServiceTest {
         Optional<Region> byCode = RegionService.getInstance().getByCode("NL-DR");
         assertThat(byCode).isPresent();
         assertThat(byCode).containsInstanceOf(CountrySubdivisionWithCode.class);
-        assertThat(((CountrySubdivisionWithCode) byCode.get()).getCountryCodeSubdivision().getCode()).isEqualTo("DR");
+        assertThat(((CountrySubdivisionWithCode) byCode.get()).getCountryCodeSubdivision()()).isEqualTo("DR");
     }
 
     @Test

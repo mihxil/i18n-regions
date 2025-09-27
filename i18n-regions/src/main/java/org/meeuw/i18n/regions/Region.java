@@ -73,15 +73,7 @@ public interface Region extends Serializable {
         }
     }
 
-    /**
-     * Defaulting version of {@link #getName(Locale)}, the name of the region only considering the
-     * language, with considering any country or other variants of the language.
-     * @deprecated
-     */
-    @Deprecated
-    default String getName(com.neovisionaries.i18n.@NonNull LanguageCode languageCode) {
-        return getName(languageCode.toLocale());
-    }
+
 
        /**
      * Defaulting version of {@link #getName(Locale)}, the name of the region only considering the

@@ -15,15 +15,6 @@
 
   <dependencies>
 
-    <!-- this project seems to be abonded, we use it only for a list of country codes. Perhaps we shoudl simply drop it -->
-
-    <!-- DEPRECATED -->
-    <dependency>
-      <groupId>com.neovisionaries</groupId>
-      <artifactId>nv-i18n</artifactId>
-    </dependency>
-
-
     <!-- all optional -->
     <dependency>
       <groupId>jakarta.xml.bind</groupId>

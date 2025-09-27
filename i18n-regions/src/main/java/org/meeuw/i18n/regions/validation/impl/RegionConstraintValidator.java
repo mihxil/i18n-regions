@@ -13,7 +13,6 @@ import org.checkerframework.checker.optional.qual.MaybePresent;
 import org.meeuw.i18n.regions.*;
 import org.meeuw.i18n.regions.validation.ValidRegion;
 
-import com.neovisionaries.i18n.CountryCode;
 
 /**
  * @author Michiel Meeuwissen
@@ -70,9 +69,9 @@ public class RegionConstraintValidator implements ConstraintValidator<ValidRegio
             return ConvertResult.of((Region) o);
         } else if (o instanceof CharSequence) {
             return ConvertResult.of(RegionService.getInstance().getByCode(o.toString(), false));
-        } else if (o instanceof CountryCode) {
+        } else if (o instanceof Enum<?>) {
             // deprecated!
-            return ConvertResult.of(RegionService.getInstance().getByCode(((CountryCode) o).name(), false));
+            return ConvertResult.of(RegionService.getInstance().getByCode(((Enum) o).name(), false));
 
         } else if (o instanceof Locale){
 

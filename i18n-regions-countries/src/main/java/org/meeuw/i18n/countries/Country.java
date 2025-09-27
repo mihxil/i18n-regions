@@ -1,6 +1,7 @@
 package org.meeuw.i18n.countries;
 
 import java.io.Serializable;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -85,6 +86,16 @@ public interface Country extends Region {
         }
         return RegionService.getInstance()
             .getByCode(code, true, Country.class).orElseThrow();
+    }
+
+    /**
+     * Defaulting version of {@link #getName(Locale)}, the name of the region only considering the
+     * language, with considering any country or other variants of the language.
+     * @deprecated
+     */
+    @Deprecated
+    default String getName(com.neovisionaries.i18n.@NonNull LanguageCode languageCode) {
+        return getName(languageCode.toLocale());
     }
 
 

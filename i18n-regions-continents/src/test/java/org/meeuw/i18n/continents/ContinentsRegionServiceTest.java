@@ -1,14 +1,12 @@
 package org.meeuw.i18n.continents;
 
 import java.util.Locale;
-
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
+import org.meeuw.i18n.languages.ISO_639_1_Code;
 import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.RegionService;
-
-import com.neovisionaries.i18n.LanguageCode;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -53,7 +51,7 @@ public class ContinentsRegionServiceTest {
     @Test
     public void values() {
         RegionService.getInstance().values().forEach(r -> {
-            System.out.println(r.getClass().getSimpleName() + ":" + r.getCode()  + " : " + r.getName() + ":" + r.getName(LanguageCode.nl));
+            System.out.println(r.getClass().getSimpleName() + ":" + r.getCode()  + " : " + r.getName() + ":" + r.getName(ISO_639_1_Code.nl));
         });
 
     }

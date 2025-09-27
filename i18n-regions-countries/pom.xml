@@ -16,12 +16,18 @@
     <flag-icons.version>7.5.0</flag-icons.version>
   </properties>
 
-
-
   <dependencies>
     <dependency>
       <groupId>org.meeuw.i18n</groupId>
       <artifactId>i18n-regions</artifactId>
+    </dependency>
+
+    <!-- this project seems to be abandoned, we use it only for a list of country codes. Perhaps we should simply drop it -->
+
+    <!-- DEPRECATED -->
+    <dependency>
+      <groupId>com.neovisionaries</groupId>
+      <artifactId>nv-i18n</artifactId>
     </dependency>
     <dependency>
       <groupId>org.meeuw.i18n</groupId>
@@ -75,13 +81,18 @@
       <artifactId>jakarta.el</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
+     <dependency>
       <groupId>org.webjars.npm</groupId>
       <artifactId>flag-icons</artifactId>
       <version>${flag-icons.version}</version>
       <!-- if present, it will be used -->
       <!-- otherwise cdnjs.cloudflare.com will be used -->
-      <optional>true</optional>
+       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>webjars-locator-lite</artifactId>
+      <version>1.1.0</version>
     </dependency>
   </dependencies>
 
