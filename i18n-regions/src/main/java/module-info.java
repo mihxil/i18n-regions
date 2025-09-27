@@ -14,7 +14,6 @@ module org.meeuw.i18n.regions {
     requires static com.fasterxml.jackson.databind;
     requires static org.meeuw.i18n.languages;
 
-    requires transitive nv.i18n;
     requires java.logging;
 
     uses org.meeuw.i18n.regions.spi.RegionProvider;
