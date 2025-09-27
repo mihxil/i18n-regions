@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.regions.Region;
+import org.webjars.WebJarVersionLocator;
 
 import com.neovisionaries.i18n.CountryCode;
 
@@ -27,6 +28,8 @@ public class CurrentCountry implements Country {
 
     static final String WEBJARS;
     static final String CDNWEBJARS;
+
+    static final WebJarVersionLocator WEB_JAR_VERSION_LOCATOR = new WebJarVersionLocator();
 
 
     public static final boolean HAS_WEBJARS_JAR;
@@ -160,22 +163,17 @@ public class CurrentCountry implements Country {
      * Otherwise, returns the empty optional.
      */
     static Optional<String> getLocalWebJars() {
-        URL url  = Country.class.getClassLoader().getResource("META-INF/maven/org.webjars.npm/flag-icons/pom.properties");
-        if (url != null) {
-            Properties prop = new Properties();
-            try (InputStream input = url.openStream()) {
-                prop.load(input);
-                return Optional.of("/webjars/flag-icons/" + prop.getProperty("version") + "/flags/4x3/");
-            } catch (IOException e) {
-                Logger.getLogger(Country.class.getName()).warning(url + ":" + e.getMessage());
-            }
+
+        String version = WEB_JAR_VERSION_LOCATOR.version("flag-icons");
+        if (version == null) {
+            return Optional.empty();
         }
-        return Optional.empty();
+        return Optional.of("/webjars/flag-icons/" + version + "/flags/4x3/");
+
     }
 
     /**
-     * Returns the base link to the CDN webjars flag icons. The version of was determined at
-     * build time (and picked up from maven.properties.
+     * Returns the base link to the CDN webjars flag icons.
      */
     static String getCdnWebJars()  {
         URL url  = Region.class.getClassLoader()
