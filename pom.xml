@@ -44,11 +44,11 @@
   </developers>
 
   <properties>
-    <junit.version>5.13.4</junit.version>
+    <junit.version>6.0.0</junit.version>
     <java.target.version>8</java.target.version>
-    <checker.version>3.51.0</checker.version>
+    <checker.version>3.51.1</checker.version>
     <jackson.version>2.20.0</jackson.version>
-    <jacoco.version>0.8.12</jacoco.version>
+    <jacoco.version>0.8.13</jacoco.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
