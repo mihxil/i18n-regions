@@ -7,11 +7,10 @@ import java.util.stream.Stream;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.meeuw.i18n.countries.codes.CountryCode;
 import org.meeuw.i18n.languages.ISO_639_1_Code;
 import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.UserAssignedRegion;
-
-import com.neovisionaries.i18n.CountryCode;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.meeuw.i18n.regions.RegionService.getInstance;

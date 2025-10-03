@@ -1,6 +1,7 @@
 package org.meeuw.i18n.countries;
 
-import com.neovisionaries.i18n.CountryCode;
+
+import org.meeuw.i18n.countries.codes.CountryCode;
 
 /**
  * See https://en.wikipedia.org/wiki/List_of_international_vehicle_registration_codes

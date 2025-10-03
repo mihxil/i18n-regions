@@ -7,9 +7,8 @@ import java.net.UnknownHostException;
 import javax.net.ssl.HttpsURLConnection;
 
 import org.junit.jupiter.api.Test;
+import org.meeuw.i18n.countries.codes.CountryCode;
 import org.meeuw.i18n.regions.Region;
-
-import com.neovisionaries.i18n.CountryCode;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

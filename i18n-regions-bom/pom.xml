@@ -12,9 +12,9 @@
 
 
   <properties>
+    <!-- version of the rest of the modules, automatically updated by .github/fix-bom.sh -->
     <i18n-regions.version>2.6-SNAPSHOT</i18n-regions.version>
-    <nv-i18n.version>1.29</nv-i18n.version>
-    <i18n-subdivisions.version>0.4</i18n-subdivisions.version>
+    <i18n-subdivisions.version>0.6-SNAPSHOT</i18n-subdivisions.version>
     <i18n-formerly-assigned.version>0.9</i18n-formerly-assigned.version>
   </properties>
 
@@ -76,11 +76,6 @@
         <groupId>org.meeuw.i18n</groupId>
         <artifactId>i18n-regions-openlocationcode</artifactId>
         <version>${i18n-regions.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.neovisionaries</groupId>
-        <artifactId>nv-i18n</artifactId>
-        <version>${nv-i18n.version}</version>
       </dependency>
       <dependency>
         <groupId>org.meeuw.i18n</groupId>

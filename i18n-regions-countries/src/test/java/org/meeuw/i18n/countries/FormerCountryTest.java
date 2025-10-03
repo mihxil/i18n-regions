@@ -2,12 +2,10 @@ package org.meeuw.i18n.countries;
 
 import java.time.Year;
 import java.util.*;
-
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.jupiter.api.Test;
-
-import com.neovisionaries.i18n.LanguageCode;
+import org.meeuw.i18n.languages.ISO_639_1_Code;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -36,7 +34,7 @@ public class FormerCountryTest {
             System.out.println(
 
                 "" + builder + " (" + country + "," + country.toLocale() + ") " +
-                    country.getName(LanguageCode.nl) +
+                    country.getName(ISO_639_1_Code.nl) +
                     " < " + country.getFormerCodes() +
                     " " + country.getNumeric());
              // it wouldn't be former otherwise!

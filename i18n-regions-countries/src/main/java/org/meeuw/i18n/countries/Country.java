@@ -1,20 +1,20 @@
 package org.meeuw.i18n.countries;
 
 import java.io.Serializable;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Predicate;
 
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.i18n.countries.codes.CountryCode;
 import org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode;
 import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.RegionService;
 import org.meeuw.i18n.regions.bind.jaxb.Code;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.neovisionaries.i18n.CountryCode;
+
 
 /**
  * Represent a 'country', this can be a current (see {@link CurrentCountry} or former country (see {@link FormerCountry )}. It could also be some user defined country (see {@link UserAssignedCountry})
@@ -86,16 +86,6 @@ public interface Country extends Region {
         }
         return RegionService.getInstance()
             .getByCode(code, true, Country.class).orElseThrow();
-    }
-
-    /**
-     * Defaulting version of {@link #getName(Locale)}, the name of the region only considering the
-     * language, with considering any country or other variants of the language.
-     * @deprecated
-     */
-    @Deprecated
-    default String getName(com.neovisionaries.i18n.@NonNull LanguageCode languageCode) {
-        return getName(languageCode.toLocale());
     }
 
 

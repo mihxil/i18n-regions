@@ -83,8 +83,6 @@ public class UserAssignedCountrySubdivision implements CountrySubdivision {
         return country;
     }
 
-
-
     @Override
     public String toString() {
         return getCode();

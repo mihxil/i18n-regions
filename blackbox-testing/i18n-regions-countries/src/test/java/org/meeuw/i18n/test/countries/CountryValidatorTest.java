@@ -11,19 +11,18 @@ import jakarta.validation.constraints.NotNull;
 
 import org.junit.jupiter.api.Test;
 import org.meeuw.i18n.countries.*;
+import org.meeuw.i18n.countries.codes.CountryCode;
 import org.meeuw.i18n.countries.validation.ValidCountry;
 import org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode;
+import org.meeuw.i18n.languages.ISO_639_1_Code;
 import org.meeuw.i18n.regions.*;
 import org.meeuw.i18n.regions.validation.RegionValidatorService;
 import org.meeuw.i18n.regions.validation.ValidRegion;
 import org.meeuw.i18n.test.some.SomeRegion;
 
-import com.neovisionaries.i18n.CountryCode;
-import com.neovisionaries.i18n.LanguageCode;
-
-import static com.neovisionaries.i18n.CountryCode.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.meeuw.i18n.countries.codes.CountryCode.*;
 
 /**
  * @author Michiel Meeuwissen
@@ -403,7 +402,7 @@ public class CountryValidatorTest {
 
         List<Region> validValues = RegionService.getInstance().values()
             .filter(predicate)
-            .sorted(Regions.sortByName(LanguageCode.nl))
+            .sorted(Regions.sortByName(ISO_639_1_Code.nl))
             .collect(Collectors.toList());
         for(Region r : validValues) {
             assertThat(VALIDATOR.validate(instantiator.apply(r)))
@@ -414,7 +413,7 @@ public class CountryValidatorTest {
         }
         List<Region> invalidValues = RegionService.getInstance().values()
             .filter(predicate.negate())
-            .sorted(Regions.sortByName(LanguageCode.nl))
+            .sorted(Regions.sortByName(ISO_639_1_Code.nl))
             .collect(Collectors.toList());
 
         assertThat(invalidValues).hasSize(expectedInvalidCount);
@@ -423,7 +422,7 @@ public class CountryValidatorTest {
                 .withFailMessage(""+ r + " is valid, but expected to be invalid").isGreaterThan(0);
         }
         System.out.println(validValues.stream()
-            .map(r -> Regions.toStringWithCode(r, LanguageCode.nl))
+            .map(r -> Regions.toStringWithCode(r, ISO_639_1_Code.nl))
             .collect(Collectors.joining("\n")));
     }
 

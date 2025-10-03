@@ -8,10 +8,10 @@ import java.util.*;
 import java.util.logging.Logger;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.i18n.countries.codes.CountryCode;
 import org.meeuw.i18n.regions.Region;
 import org.webjars.WebJarVersionLocator;
 
-import com.neovisionaries.i18n.CountryCode;
 
 /**
  * Represents a country of which the code is one of the enum values of {@link CountryCode}.
@@ -40,6 +40,9 @@ public class CurrentCountry implements Country {
         HAS_WEBJARS_JAR =  getLocalWebJars().isPresent();
     }
 
+    /**
+
+     */
     public static CurrentCountry of(CountryCode code) {
         if (code == null) {
             return null;
@@ -47,6 +50,14 @@ public class CurrentCountry implements Country {
         return new CurrentCountry(code);
     }
 
+    public static CurrentCountry of(String code) {
+        if (code == null) {
+            return null;
+        }
+        return new CurrentCountry(CountryCode.getByCode(code));
+    }
+
+    @Deprecated
     public CurrentCountry(@NonNull CountryCode code) {
         this.code = code;
     }
@@ -115,6 +126,7 @@ public class CurrentCountry implements Country {
         }
     }
 
+    @Deprecated
     public CountryCode.Assignment getAssignment() {
         return code.getAssignment();
     }

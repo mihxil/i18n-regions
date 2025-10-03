@@ -1,9 +1,9 @@
 package org.meeuw.i18n.countries;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.i18n.countries.codes.CountryCode;
 import org.meeuw.i18n.regions.UserAssignedRegion;
 
-import com.neovisionaries.i18n.CountryCode;
 
 /**
  * Wraps all 'User defined' {@link CountryCode} (except {@link CountryCode#UNDEFINED} and assigns to each a {@link #getAssignedBy()}.

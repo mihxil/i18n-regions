@@ -7,9 +7,8 @@ import java.util.stream.StreamSupport;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.countries.CurrentCountry;
+import org.meeuw.i18n.countries.codes.CountryCode;
 import org.meeuw.i18n.regions.spi.RegionProvider;
-
-import com.neovisionaries.i18n.CountryCode;
 
 import static org.meeuw.i18n.subdivisions.UserAssignedCountrySubdivision.ofCountry;
 

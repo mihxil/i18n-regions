@@ -6,10 +6,11 @@ import java.util.stream.Collectors;
 
 import jakarta.annotation.Priority;
 
-import com.neovisionaries.i18n.CountryCode;
+import org.meeuw.i18n.countries.codes.CountryCode;
+
 
 /**
- *  Provides all countries backed by {@link com.neovisionaries.i18n.CountryCode} but without an official code.
+ *  Provides all countries backed by {@link CountryCode} but without an official code.
  * <p>
  *  Normally the country does not exist, or does not exist anymore.
  * @author Michiel Meeuwissen

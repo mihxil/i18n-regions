@@ -5,7 +5,8 @@ import java.util.HashSet;
 
 import jakarta.annotation.Priority;
 
-import com.neovisionaries.i18n.CountryCode;
+import org.meeuw.i18n.countries.codes.CountryCode;
+
 
 /**
  * Provides all currently countries that are officially assigned

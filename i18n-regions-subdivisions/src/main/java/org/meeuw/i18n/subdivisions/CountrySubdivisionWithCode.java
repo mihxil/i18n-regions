@@ -1,13 +1,11 @@
 package org.meeuw.i18n.subdivisions;
 
-import org.meeuw.i18n.subdivision.CountryCodeSubdivision;
-
-import java.util.Locale;
 import java.util.Objects;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.countries.Country;
 import org.meeuw.i18n.countries.CurrentCountry;
+import org.meeuw.i18n.subdivisions.codes.CountrySubdivisionCode;
 
 /**
  * A subdivision of a country. Backend by {@link CountryCodeSubdivision}.
@@ -17,20 +15,15 @@ import org.meeuw.i18n.countries.CurrentCountry;
 public class CountrySubdivisionWithCode implements CountrySubdivision {
     private static final long serialVersionUID = 0L;
 
-    private final CountryCodeSubdivision code;
+    private final CountrySubdivisionCode code;
 
-    public CountrySubdivisionWithCode(@NonNull CountryCodeSubdivision code) {
+    public CountrySubdivisionWithCode(@NonNull CountrySubdivisionCode code) {
         this.code = code;
     }
 
     @Override
     public String getCode() {
-        return code.getCountryCode().getAlpha2() + "-" + code.getCode();
-    }
-
-    @Override
-    public Locale toLocale() {
-        return code.getCountryCode().toLocale();
+        return code.getCode();
     }
 
     @Override
@@ -45,7 +38,7 @@ public class CountrySubdivisionWithCode implements CountrySubdivision {
         return code.getName();
     }
 
-    public CountryCodeSubdivision getCountryCodeSubdivision() {
+    public CountrySubdivisionCode getCountrySubdivisionCode() {
         return code;
     }
 

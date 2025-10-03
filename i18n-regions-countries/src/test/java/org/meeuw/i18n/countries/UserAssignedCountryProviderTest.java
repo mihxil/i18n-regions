@@ -5,9 +5,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
-
-import com.neovisionaries.i18n.CountryCode;
-import com.neovisionaries.i18n.LanguageCode;
+import org.meeuw.i18n.countries.codes.CountryCode;
+import org.meeuw.i18n.languages.ISO_639_1_Code;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -33,7 +32,7 @@ public class UserAssignedCountryProviderTest {
             System.out.println("" + country + " " +
                 ((Country) country).getCountryCode() + " " +
                 country.getName() + " " +
-                country.getName(LanguageCode.nl) + " " +
+                country.getName(ISO_639_1_Code.nl) + " " +
                 country.getAlpha2() + " " +
                 country.getAlpha3() + " " +
                 country.getNumeric()

@@ -9,8 +9,8 @@ import org.meeuw.i18n.countries.Country;
 import org.meeuw.i18n.countries.validation.impl.CountryConstraintValidator;
 import org.meeuw.i18n.regions.RegionService;
 import org.meeuw.i18n.regions.validation.impl.RegionConstraintValidator;
-import org.meeuw.i18n.subdivision.CountrySubdivision;
-import org.meeuw.i18n.subdivisions.CountrySubdivisionProvider;
+import org.meeuw.i18n.subdivisions.*;
+import org.meeuw.i18n.subdivisions.codes.CountrySubdivisionCode;
 import org.meeuw.i18n.subdivisions.validation.ValidCountrySubdivision;
 
 /**
@@ -92,8 +92,8 @@ public class CountrySubdivisionConstraintValidator implements ConstraintValidato
     protected Optional<CountrySubdivision> convert(Object o) {
         if (o instanceof CountrySubdivision) {
             return Optional.of((CountrySubdivision) o);
-        } else if (o instanceof CountrySubdivision) {
-            return Optional.of(new CountrySubdivisionWithCode((CountryCodeSubdivision) o));
+        } else if (o instanceof CountrySubdivisionCode) {
+            return Optional.of(new CountrySubdivisionWithCode((CountrySubdivisionCode) o));
         } else if (o instanceof CharSequence) {
             return RegionService.getInstance().getByCode(o .toString(), false, CountrySubdivision.class);
         } else {

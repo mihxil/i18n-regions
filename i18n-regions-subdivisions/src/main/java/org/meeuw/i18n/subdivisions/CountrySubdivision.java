@@ -6,12 +6,13 @@ import java.util.Optional;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.countries.Country;
 import org.meeuw.i18n.countries.CurrentCountry;
+import org.meeuw.i18n.countries.codes.CountryCode;
 import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.RegionService;
-import org.meeuw.i18n.subdivision.CountryCodeSubdivision;
-import org.meeuw.i18n.subdivision.SubdivisionFactory;
+import org.meeuw.i18n.subdivisions.codes.CountrySubdivisionCode;
+import org.meeuw.i18n.subdivisions.codes.SubdivisionFactory;
 
-import com.neovisionaries.i18n.CountryCode;
+
 
 /**
  * @author Michiel Meeuwissen
@@ -23,10 +24,10 @@ public interface CountrySubdivision extends Region {
         @NonNull Country country,
         @NonNull String code) {
         if (country instanceof CurrentCountry) {
-            CountryCodeSubdivision subdivision = SubdivisionFactory.getSubdivision(
-                ((CurrentCountry) country).getCountryCode(),
+            CountrySubdivisionCode subdivision = SubdivisionFactory.getSubdivision(
+                country.getCode(),
                 code
-            );
+            ).orElse(null);
             if (subdivision != null) {
                 return Optional.of(new CountrySubdivisionWithCode(subdivision));
             }
@@ -41,6 +42,11 @@ public interface CountrySubdivision extends Region {
     }
 
     Country getCountry();
+
+    @Override
+    default Locale toLocale() {
+        return getCountry().toLocale();
+    }
 
     default String getCountryCode() {
         return getCountry().getCode();
