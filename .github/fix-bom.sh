@@ -40,7 +40,7 @@ if ! ${batch}; then
 fi
 echo $BOM_VERSION / $VERSION
 
-# found now fill that in the bom's pom.xml
+# found, now fill that in the bom's pom.xml
 xmllint --shell i18n-regions-bom/pom.xml << EOF > /dev/null
 setns x=$NS
 cd /x:project/x:version
