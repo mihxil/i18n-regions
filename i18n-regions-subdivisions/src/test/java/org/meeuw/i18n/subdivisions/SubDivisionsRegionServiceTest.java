@@ -4,9 +4,8 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.meeuw.i18n.countries.CurrentCountry;
+import org.meeuw.i18n.countries.codes.CountryCode;
 import org.meeuw.i18n.regions.*;
-
-import com.neovisionaries.i18n.CountryCode;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.meeuw.i18n.languages.ISO_639_1_Code.nl;
@@ -64,14 +63,14 @@ public class SubDivisionsRegionServiceTest {
         Optional<Region> byCode = RegionService.getInstance().getByCode("NL-DR");
         assertThat(byCode).isPresent();
         assertThat(byCode).containsInstanceOf(CountrySubdivisionWithCode.class);
-        assertThat(((CountrySubdivisionWithCode) byCode.get()).getCountryCodeSubdivision()()).isEqualTo("DR");
+        assertThat(((CountrySubdivisionWithCode) byCode.get()).getCountrySubdivisionCode().name()).isEqualTo("DR");
     }
 
     @Test
     public void getLocale() {
         Optional<Region> byCode = RegionService.getInstance().getByCode("NL-DR");
         assertThat(byCode).containsInstanceOf(CountrySubdivisionWithCode.class);
-        assertThat(((CountrySubdivisionWithCode) byCode.get()).toLocale().getCountry()).isEqualTo("NL");
+        assertThat(byCode.get().toLocale().getCountry()).isEqualTo("NL");
     }
 
 
