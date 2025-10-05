@@ -10,11 +10,11 @@ import jakarta.validation.*;
 
 import org.junit.jupiter.api.Test;
 import org.meeuw.i18n.countries.validation.ValidCountry;
+import org.meeuw.i18n.languages.ISO_639_1_Code;
 import org.meeuw.i18n.regions.*;
 import org.meeuw.i18n.regions.validation.RegionValidatorService;
 import org.meeuw.i18n.subdivisions.validation.ValidCountrySubdivision;
 
-import com.neovisionaries.i18n.LanguageCode;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -91,7 +91,7 @@ public class CountrySubdivisionConstraintValidatorTest {
 
         List<Region> validValues = RegionService.getInstance().values()
             .filter(predicate)
-            .sorted(Regions.sortByName(LanguageCode.nl))
+            .sorted(Regions.sortByName(ISO_639_1_Code.nl))
             .collect(Collectors.toList());
 
         for(Region r : validValues) {
@@ -103,13 +103,13 @@ public class CountrySubdivisionConstraintValidatorTest {
         }
         List<Region> invalidValues = RegionService.getInstance().values()
             .filter(predicate.negate())
-            .sorted(Regions.sortByName(LanguageCode.nl))
+            .sorted(Regions.sortByName(ISO_639_1_Code.nl))
             .collect(Collectors.toList());
         for(Region r : invalidValues) {
             assertThat(VALIDATOR.validate(instantiator.apply(r)).size()).withFailMessage(""+ r + " is valid, but expected to be invalid").isGreaterThan(0);
         }
         System.out.println(validValues.stream()
-            .map(r -> Regions.toStringWithCode(r, LanguageCode.nl))
+            .map(r -> Regions.toStringWithCode(r, ISO_639_1_Code.nl))
             .collect(Collectors.joining("\n")));
     }
 
