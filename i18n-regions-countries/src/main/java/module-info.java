@@ -20,7 +20,7 @@ module org.meeuw.i18n.countries {
     requires transitive org.meeuw.i18n.formerlyassigned;
 
     requires java.logging;
-    requires webjars.locator.lite;
+    requires org.webjars.locator_lite;
 
     uses RegionProvider;
 
