@@ -49,7 +49,8 @@ public class CurrentCountryProviderTest {
             CurrentCountry.ALWAYS_USE_CDN_FOR_ICONS.set(false);
             URI icon = nl.getIcon().orElse(null);
             assertThat(icon).isNotNull();
-            assertThat(getClass().getClassLoader().getResourceAsStream("/META-INF/resources" + icon)).withFailMessage("No resource /META-INFO/resources" + icon ).isNotNull();
+            String resource = "META-INF/resources" + icon;
+            assertThat(getClass().getClassLoader().getResourceAsStream(resource)).withFailMessage("No resource " + resource).isNotNull();
         }
         try {
 
