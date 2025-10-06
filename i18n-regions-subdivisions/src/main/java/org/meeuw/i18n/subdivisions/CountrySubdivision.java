@@ -38,8 +38,14 @@ public interface CountrySubdivision extends Region {
     static Optional<? extends CountrySubdivision>  of(
         @NonNull CountryCode country,
         @NonNull String code) {
-
-        return of(country, code);
+        CountrySubdivisionCode enumValue = SubdivisionFactory.getSubdivision(
+            country.getAlpha2(),
+            code
+        ).orElse(null);
+        if (enumValue == null) {
+            return Optional.empty();
+        }
+        return Optional.of(new CountrySubdivisionWithCode(enumValue));
     }
 
     Country getCountry();
