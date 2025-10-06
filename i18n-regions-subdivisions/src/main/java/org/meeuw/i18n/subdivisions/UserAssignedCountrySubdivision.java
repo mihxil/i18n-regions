@@ -65,7 +65,12 @@ public class UserAssignedCountrySubdivision implements CountrySubdivision {
 
     @Override
     public String getCode() {
-        return country.getCode() + "-" + code;
+        return getCountryCode() + "-" + code;
+    }
+
+    @Override
+    public String getCountryCode() {
+        return country.getCode();
     }
 
     @Override

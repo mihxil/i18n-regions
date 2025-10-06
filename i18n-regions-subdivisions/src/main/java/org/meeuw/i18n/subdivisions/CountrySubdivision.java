@@ -49,9 +49,7 @@ public interface CountrySubdivision extends Region {
         return getCountry().toLocale();
     }
 
-    default String getCountryCode() {
-        return getCountry().getCode();
-    }
+    String getCountryCode();
 
     @Override
     default String getBundle() {
