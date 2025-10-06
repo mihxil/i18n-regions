@@ -45,9 +45,14 @@ public class CountrySubdivisionWithCode implements CountrySubdivision {
     }
 
     @Override
+    public String getCountryCode() {
+        return code.getCountryCode();
+    }
+
+    @Override
     public Country getCountry() {
         if (this.country == null) {
-            this.country = RegionService.getInstance().getByCode(code.getCountryCode(), true, Country.class).orElseThrow(() -> new IllegalArgumentException("Country of " + code.getCode() + " not found"));
+            this.country = RegionService.getInstance().getByCode(getCountryCode(), true, Country.class).orElseThrow(() -> new IllegalArgumentException("Country of " + code.getCode() + " not found"));
         }
         return country;
     }
