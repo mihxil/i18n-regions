@@ -259,8 +259,8 @@ Find my findings link:TESTING-WITH-JPMS.adoc[here]
 | TODO ?
 
 | 3.x
-| drop dependency on neovisionaries
-| TODO ?
+| drop dependency on neovisionaries. This gives a few backwards compatibility issues
+| oktober 2025
 
 
 |===
