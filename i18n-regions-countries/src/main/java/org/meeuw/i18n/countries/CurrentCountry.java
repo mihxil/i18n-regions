@@ -54,7 +54,7 @@ public class CurrentCountry implements Country {
         if (code == null) {
             return null;
         }
-        return new CurrentCountry(CountryCode.getByCode(code));
+        return of(CountryCode.getByCode(code));
     }
 
     @Deprecated

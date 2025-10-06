@@ -38,7 +38,8 @@ public interface CountrySubdivision extends Region {
     static Optional<? extends CountrySubdivision>  of(
         @NonNull CountryCode country,
         @NonNull String code) {
-        return of(CurrentCountry.of(country), code);
+
+        return of(country, code);
     }
 
     Country getCountry();

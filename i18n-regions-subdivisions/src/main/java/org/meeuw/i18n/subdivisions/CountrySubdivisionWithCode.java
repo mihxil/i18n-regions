@@ -4,11 +4,11 @@ import java.util.Objects;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.countries.Country;
-import org.meeuw.i18n.countries.CurrentCountry;
+import org.meeuw.i18n.regions.RegionService;
 import org.meeuw.i18n.subdivisions.codes.CountrySubdivisionCode;
 
 /**
- * A subdivision of a country. Backend by {@link CountryCodeSubdivision}.
+ * A subdivision of a country. Backend by {@link CountrySubdivisionCode}.
  * @author Michiel Meeuwissen
  * @since 0.1
  */
@@ -16,9 +16,11 @@ public class CountrySubdivisionWithCode implements CountrySubdivision {
     private static final long serialVersionUID = 0L;
 
     private final CountrySubdivisionCode code;
+    private Country country;
 
     public CountrySubdivisionWithCode(@NonNull CountrySubdivisionCode code) {
         this.code = code;
+
     }
 
     @Override
@@ -44,7 +46,10 @@ public class CountrySubdivisionWithCode implements CountrySubdivision {
 
     @Override
     public Country getCountry() {
-        return CurrentCountry.of(code.getCountryCode());
+        if (this.country == null) {
+            this.country = RegionService.getInstance().getByCode(code.getCountryCode(), true, Country.class).orElseThrow(() -> new IllegalArgumentException("Country of " + code.getCode() + " not found"));
+        }
+        return country;
     }
 
     @Override

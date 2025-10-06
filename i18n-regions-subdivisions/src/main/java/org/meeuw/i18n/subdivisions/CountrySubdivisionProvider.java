@@ -1,15 +1,12 @@
 package org.meeuw.i18n.subdivisions;
 
-import java.util.*;
-import java.util.function.Consumer;
+import java.util.Optional;
 import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.meeuw.i18n.countries.Country;
 import org.meeuw.i18n.countries.CurrentCountry;
-import org.meeuw.i18n.countries.codes.CountryCode;
 import org.meeuw.i18n.regions.RegionService;
 import org.meeuw.i18n.regions.spi.RegionProvider;
 import org.meeuw.i18n.subdivisions.codes.CountrySubdivisionCode;
@@ -49,39 +46,9 @@ public class CountrySubdivisionProvider implements RegionProvider<CountrySubdivi
 
     @Override
     public Stream<CountrySubdivisionWithCode> values() {
-        Spliterator<CountrySubdivisionCode> spliterator = new Spliterator<CountrySubdivisionCode>() {
-            private int countryCode = 0;
-            private Spliterator<CountrySubdivisionCode> spliterator;
+        return SubdivisionFactory.stream()
+            .map(CountrySubdivisionWithCode::new);
 
-            @Override
-            public boolean tryAdvance(Consumer<? super CountrySubdivisionCode> action) {
-                while (spliterator == null || !spliterator.tryAdvance(action)) {
-                    if (countryCode >= CountryCode.values().length) {
-                        return false;
-                    }
-                    List<CountrySubdivisionCode> subdivisions = SubdivisionFactory.getSubdivisions(CountryCode.values()[countryCode++].name());
-
-                    spliterator = subdivisions == null ? Spliterators.emptySpliterator() : subdivisions.spliterator();
-                }
-                return true;
-            }
-
-            @Override
-            public Spliterator<CountrySubdivisionCode> trySplit() {
-                return null;
-            }
-
-            @Override
-            public long estimateSize() {
-                return Long.MAX_VALUE;
-            }
-
-            @Override
-            public int characteristics() {
-                return IMMUTABLE | NONNULL;
-            }
-        };
-        return StreamSupport.stream(spliterator, false).map(CountrySubdivisionWithCode::new);
     }
 
     @Override
