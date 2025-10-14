@@ -117,6 +117,7 @@ public enum CountryCode
      * @since 1.14
      * @deprecated
      */
+    @Deprecated
     UNDEFINED("Undefined", null, -1, Assignment.USER_ASSIGNED)
     {
         @Override
