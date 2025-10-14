@@ -51,6 +51,7 @@ jobs:
         run: |
           git config --global user.name 'github actions'
           git config --global user.email 'github@meeuw.org'
+          git pull
           mvn --batch-mode  -Darguments=-DskipTests  -DpushChanges=false release:prepare
           git push --atomic -v --follow-tags
           mvn -P'deploy,!blackboxtesting' --batch-mode -Darguments=-DskipTests release:perform
