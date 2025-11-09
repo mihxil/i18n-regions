@@ -37,7 +37,7 @@ If you only need countries, you can take a dependency on https://search.maven.or
 
 It provides:
 
-- For current countries there are link:i18n-regions-countries/src/main/java/org/meeuw/i18n/countries/CurrentCountry.java[`org.meeuw.i18n.countries.CurrentCountry`]s. Backed by `com.neovisionaries.i18n.CountryCode`
+- For current countries there are link:i18n-regions-countries/src/main/java/org/meeuw/i18n/countries/CurrentCountry.java[`org.meeuw.i18n.countries.CurrentCountry`]s. Backed by  `org.meeuw.i18n.countries.codes.CountryCode` (used to be `com.neovisionaries.i18n.CountryCode`)
 - For former countries there is link:i18n-regions-countries/src/main/java/org/meeuw/i18n/countries/FormerCountry.java[`org.meeuw.i18n.countries.FormerCountry`], which is backed by `org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode` (from https://github.com/mihxil/i18n-formerly-assigned[i18n-formerly-assigned])
 - Some common user assigned countries are hard coded in link:i18n-regions-countries/src/main/java/org/meeuw/i18n/countries/UserAssignedCountry.java[`org.meeuw.i18.countries.UserAssignedCountry`]
 
@@ -63,7 +63,7 @@ Stream<? extends Region> values = org.meeuw.i18n.regions.RegionService.getInstan
 
 ----
 
-NOTE: It is possible that https://github.com/TakahikoKawasaki/nv-i18n becomes abandoned. In that case we might create a new enum for all codes.  May be it can be auto created using online resources. Or we use the list provided in java 9's `java.util.Locale`. Or perhaps https://github.com/detrin/download-iso3166-list could help.
+NOTE: I considered https://github.com/TakahikoKawasaki/nv-i18n abandoned. For now just the CountryCode enum was copied (to a different package), and the dependency was dropped.  May be it can also be auto created using online resources. Or we use the list provided in java 9's `java.util.Locale`. Or perhaps https://github.com/detrin/download-iso3166-list could help.
 
 === Subdivisions of countries
 
