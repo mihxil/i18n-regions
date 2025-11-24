@@ -8,8 +8,8 @@
   <version>0.1-SNAPSHOT</version>
 
   <properties>
-    <meeuw.i18n.version>2.3.1</meeuw.i18n.version>
-    <spring.version>6.2.8</spring.version>
+    <meeuw.i18n.version>3.0.0</meeuw.i18n.version>
+    <spring.version>7.0.1</spring.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -34,11 +34,6 @@
       <version>${spring.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
-      <version>3.18.0</version>
-    </dependency>
-    <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
       <version>${spring.version}</version>
@@ -47,7 +42,7 @@
       <!-- region service uses java.util.logging. This makes it log to logback as springboot does -->
       <groupId>org.slf4j</groupId>
       <artifactId>jul-to-slf4j</artifactId>
-      <version>1.7.25</version>
+      <version>2.0.17</version>
     </dependency>
     <dependency>
       <groupId>jakarta.servlet</groupId>
@@ -58,7 +53,17 @@
     <dependency>
       <groupId>org.meeuw.i18n</groupId>
       <artifactId>i18n-iso-639</artifactId>
-      <version>3.10</version>
+      <version>3.11</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.20.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.meeuw.util</groupId>
+      <artifactId>mihxil-functional</artifactId>
+      <version>1.15</version>
     </dependency>
   </dependencies>
   <build>
@@ -67,7 +72,7 @@
      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
+        <version>3.14.1</version>
         <executions>
           <execution>
             <id>default-compile</id>

@@ -1,0 +1,11 @@
+
+
+export JAVA_TOOL_OPTIONS="-javaagent:/data/opentelemetry-javaagent.jar" \
+  OTEL_TRACES_EXPORTER=otlp \
+  OTEL_METRICS_EXPORTER=otlp \
+  OTEL_LOGS_EXPORTER=otlp \
+  OTEL_METRIC_EXPORT_INTERVAL=15000
+
+export OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4317
+export OTEL_JAVAAGENT_DEBUG=true
+export OTEL_EXPORTER_OTLP_PROTOCOL=grpc

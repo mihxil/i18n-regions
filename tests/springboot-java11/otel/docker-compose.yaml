@@ -1,0 +1,34 @@
+# docker-compose.yml
+services:
+  otelcol:
+    image: otel/opentelemetry-collector-contrib:latest
+    depends_on:
+      - prometheus
+    command: [ "--config=/etc/otelcol-contrib/config.yaml" ]
+    volumes:
+      - ./otel-col.yaml:/etc/otelcol-contrib/config.yaml
+    ports:
+      - 4318:4318
+      - 4317:4317
+      - 8889:8819
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "6831:6831/udp" # UDP port for Jaeger agent
+      - "16686:16686" # Web UI
+      - "14268:14268" # HTTP port for spans
+
+
+  #telemetrygen:
+  #  image: ghcr.io/open-telemetry/opentelemetry-collector-contrib/telemetrygen:v0.137.0
+  #  command: ["traces", "--otlp-endpoint", "http://localhost:4318", "--rate", "10", "--duration", "1h"]
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - prom_data:/prometheus
+      - ./prometheus.yaml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+volumes:
+  prom_data:
+

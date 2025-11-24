@@ -1,13 +1,13 @@
 package org.meeuw.springutils;
 
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
 import jakarta.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.ClassUtils;
+import org.meeuw.functional.ThrowingConsumer;
 import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.RegionService;
 import org.meeuw.i18n.regions.spi.RegionProvider;
@@ -65,7 +65,7 @@ public class RegionsController {
     public void type(
         @PathVariable("type") String type,
         @RequestHeader(HttpHeaders.ACCEPT_LANGUAGE) Locale language,
-        HttpServletResponse response) throws Exception {
+        HttpServletResponse response) throws ClassNotFoundException, IOException {
         html(response, writer -> {
             Class < ? extends Region> t = (Class<Region>) Class.forName(type);
             RegionService.getInstance().values(t).forEach(r -> {
@@ -75,7 +75,6 @@ public class RegionsController {
     }
 
     protected void li(PrintWriter writer, Region r, Locale languageCode) {
-
         writer.println("<li>");
         writer.println("<a href='/" + r.getCode() + "'>" + r.getCode() + ":" + r.getName() + ":" + r.getName(languageCode) + "</a>");
         writer.println("</li>");
@@ -89,25 +88,22 @@ public class RegionsController {
         writer.println("</li>");
     }
 
-    protected void html(HttpServletResponse response, ThrowingConsumer<PrintWriter> writerConsumer) throws Exception {
+    protected void html(HttpServletResponse response, ThrowingConsumer<PrintWriter, ClassNotFoundException> writerConsumer) throws IOException, ClassNotFoundException {
         response.setHeader(HttpHeaders.CONTENT_TYPE, "text/html;charset=UTF-8");
         PrintWriter writer = new PrintWriter(new OutputStreamWriter(response.getOutputStream(), StandardCharsets.UTF_8));
         writer.println("<html><body>");
-        writerConsumer.accept(writer);
+        writerConsumer.acceptThrows(writer);
         writer.println("</body></html>");
         writer.close();
     }
 
-    protected void ul(PrintWriter writer, Runnable writerConsumer) throws Exception {
+    protected void ul(PrintWriter writer, Runnable writerConsumer)  {
         writer.println("<ul>");
         writerConsumer.run();
         writer.println("</ul>");
     }
 
-    @FunctionalInterface
-    public interface ThrowingConsumer<T> {
-        void accept(T t) throws Exception;
-    }
+
 
 
 }
