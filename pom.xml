@@ -44,8 +44,8 @@
   </developers>
 
   <properties>
+    <java.version>11</java.version>
     <junit.version>6.0.2</junit.version>
-    <java.target.version>8</java.target.version>
     <checker.version>3.53.0</checker.version>
     <jackson.version>2.20.1</jackson.version>
     <jacoco.version>0.8.14</jacoco.version>
@@ -107,8 +107,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.14.1</version>
         <configuration>
-          <source>11</source>
-          <target>11</target>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
  <!--
           <annotationProcessors>
             <annotationProcessor>org.checkerframework.checker.nullness.NullnessChecker</annotationProcessor>
