@@ -61,6 +61,7 @@ public class RegionsController {
         });
     }
 
+    @SuppressWarnings("unchecked")
     @RequestMapping("/type/{type}")
     public void type(
         @PathVariable("type") String type,

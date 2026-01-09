@@ -33,13 +33,6 @@
       <artifactId>jakarta.validation-api</artifactId>
       <optional>true</optional>
     </dependency>
-
-    <dependency>
-      <groupId>org.meeuw.i18n</groupId>
-      <artifactId>i18n-iso-639</artifactId>
-      <optional>true</optional>
-    </dependency>
-
     <dependency>
       <groupId>org.hibernate.validator</groupId>
       <artifactId>hibernate-validator</artifactId>

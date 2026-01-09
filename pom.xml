@@ -44,10 +44,10 @@
   </developers>
 
   <properties>
-    <java.version>11</java.version>
+    <java.version>17</java.version>
     <junit.version>6.0.2</junit.version>
     <checker.version>3.53.0</checker.version>
-    <jackson.version>2.20.1</jackson.version>
+    <jackson.version>3.0.2</jackson.version>
     <jacoco.version>0.8.14</jacoco.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -107,8 +107,7 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.14.1</version>
         <configuration>
-          <source>${java.version}</source>
-          <target>${java.version}</target>
+          <release>${java.version}</release>
  <!--
           <annotationProcessors>
             <annotationProcessor>org.checkerframework.checker.nullness.NullnessChecker</annotationProcessor>
@@ -329,7 +328,7 @@
         <scope>import</scope>
       </dependency>
       <dependency>
-        <groupId>com.fasterxml.jackson</groupId>
+        <groupId>tools.jackson</groupId>
         <artifactId>jackson-bom</artifactId>
         <version>${jackson.version}</version>
         <type>pom</type>
@@ -339,7 +338,7 @@
       <dependency>
         <groupId>org.meeuw.i18n</groupId>
         <artifactId>i18n-iso-639</artifactId>
-        <version>4.1</version>
+        <version>4.2-SNAPSHOT</version>
       </dependency>
 
       <dependency>

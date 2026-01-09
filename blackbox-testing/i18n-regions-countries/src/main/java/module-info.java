@@ -9,8 +9,8 @@ open module org.meeuw.i18n.test.countries {
     requires org.meeuw.i18n.languages;
 
     requires jakarta.validation;
-    requires com.fasterxml.jackson.core;
-    requires com.fasterxml.jackson.databind;
+    requires tools.jackson.core;
+    requires tools.jackson.databind;
 
     uses RegionProvider;
 

@@ -263,6 +263,10 @@ Find my findings link:TESTING-WITH-JPMS.adoc[here]
   - `com.neovisionaries.i18n.CountryCode` from nv-i18n was the most important reason to use this library. It is now replaced by `org.meeuw.i18n.countries.codes.CountryCode`. This is for now just a copy. In the future it might be generated from an online resource.
 | oktober 2025
 
+| 3.1
+| java 17, jackson 3
+| january 2026
+
 
 |===
 

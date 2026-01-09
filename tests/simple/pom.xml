@@ -11,7 +11,7 @@
   <description>Just a main class with no extra dependencies whatsoever</description>
 
   <properties>
-    <meeuw.i18n.version>2.3.1</meeuw.i18n.version>
+    <meeuw.i18n.version>3.1-SNAPSHOT</meeuw.i18n.version>
     <main.class>org.meeuw.TestSimple</main.class>
   </properties>
   <dependencyManagement>
@@ -102,10 +102,11 @@
     </plugins>
   </build>
 
-   <repositories>
+  <repositories>
     <repository>
-      <id>sonatype_snapshot</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <name>Central Portal Snapshots</name>
+      <id>central-portal-snapshots</id>
+      <url>https://central.sonatype.com/repository/maven-snapshots/</url>
       <releases>
         <enabled>false</enabled>
       </releases>

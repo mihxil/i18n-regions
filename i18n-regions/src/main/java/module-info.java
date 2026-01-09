@@ -11,10 +11,11 @@ module org.meeuw.i18n.regions {
     requires static org.checkerframework.checker.qual;
     requires static jakarta.persistence;
     requires static jakarta.annotation;
-    requires static com.fasterxml.jackson.databind;
+    requires static com.fasterxml.jackson.annotation;
     requires static org.meeuw.i18n.languages;
 
     requires java.logging;
+
 
     uses org.meeuw.i18n.regions.spi.RegionProvider;
     uses java.util.spi.LocaleNameProvider;

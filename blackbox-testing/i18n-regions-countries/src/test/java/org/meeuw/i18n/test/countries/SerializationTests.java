@@ -1,11 +1,11 @@
 package org.meeuw.i18n.test.countries;
 
+import tools.jackson.databind.json.JsonMapper;
+
 import org.junit.jupiter.api.Test;
 import org.meeuw.i18n.countries.Country;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class SerializationTests {
 
@@ -18,10 +18,10 @@ public class SerializationTests {
     }
 
     @Test
-    public void json() throws JsonProcessingException {
+    public void json()  {
         A a = new A();
         a.country = Country.getByCode("NL").orElseThrow();
-        ObjectMapper mapper = new ObjectMapper();
+        JsonMapper mapper = new JsonMapper();
         System.out.println(mapper.writeValueAsString(a));
 
         A rounded = mapper.readValue("{\"country\":\"NL\"}", A.class);
