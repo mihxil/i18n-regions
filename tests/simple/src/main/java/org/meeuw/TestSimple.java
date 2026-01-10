@@ -1,7 +1,6 @@
 package org.meeuw;
 
 import java.lang.annotation.Annotation;
-import java.util.Locale;
 
 import org.meeuw.i18n.languages.LanguageCode;
 import org.meeuw.i18n.regions.RegionService;
@@ -15,7 +14,7 @@ public class TestSimple {
 
     public static void main(String[] argv) {
         String arg1 = argv.length == 0 ? null : argv[0];
-        LanguageCode locale = arg1 == null ? LanguageCode.languageCode(Locale.getDefault().getLanguage()) : LanguageCode.languageCode(arg1);
+        LanguageCode locale = arg1 == null ? LanguageCode.getDefault() : LanguageCode.get(arg1, true).orElseThrow(() -> new IllegalArgumentException("No such language   " + arg1) );
         RegionService.getInstance().values().forEach(v -> {
             v.getEmoji().ifPresent(e -> {
                 System.out.print(e + "\t");
