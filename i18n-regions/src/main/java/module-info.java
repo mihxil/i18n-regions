@@ -12,7 +12,6 @@ module org.meeuw.i18n.regions {
     requires static jakarta.persistence;
     requires static jakarta.annotation;
     requires static com.fasterxml.jackson.annotation;
-    requires static org.meeuw.i18n.languages;
 
     requires java.logging;
 

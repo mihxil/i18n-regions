@@ -3,12 +3,12 @@ package org.meeuw.i18n.regions;
 import java.io.Serializable;
 import java.net.URI;
 import java.util.*;
+import java.util.function.Supplier;
 
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.meeuw.i18n.languages.LanguageCode;
 import org.meeuw.i18n.regions.bind.jaxb.Code;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -79,8 +79,8 @@ public interface Region extends Serializable {
      * Defaulting version of {@link #getName(Locale)}, the name of the region only considering the
      * language, with considering any country or other variants of the language.
      */
-    default String getName(@NonNull LanguageCode languageCode) {
-        return getName(languageCode.toLocale());
+    default String getName(@NonNull Supplier<Locale> languageCode) {
+        return getName(languageCode.get());
     }
 
 

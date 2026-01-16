@@ -31,10 +31,7 @@
       <artifactId>jakarta.persistence-api</artifactId>
       <optional>true</optional>
     </dependency>
-    <dependency>
-      <groupId>org.meeuw.i18n</groupId>
-      <artifactId>i18n-iso-639</artifactId>
-    </dependency>
+
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-annotations</artifactId>

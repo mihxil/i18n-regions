@@ -29,7 +29,7 @@ public class UserAssignedCountryProviderTest {
             .collect(Collectors.toSet());
         collect.remove(CountryCode.UNDEFINED);
         inst.values().forEach(country -> {
-            System.out.println("" + country + " " +
+            System.out.println(country + " " +
                 ((Country) country).getCountryCode() + " " +
                 country.getName() + " " +
                 country.getName(ISO_639_1_Code.nl) + " " +

@@ -6,7 +6,6 @@ import org.meeuw.i18n.test.some.SomeRegionProvider;
  */
 open module org.meeuw.i18n.test.countries {
     requires transitive org.meeuw.i18n.countries;
-    requires org.meeuw.i18n.languages;
 
     requires jakarta.validation;
     requires tools.jackson.core;
