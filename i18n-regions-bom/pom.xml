@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.meeuw.i18n</groupId>
-  <version>3.1.0-SNAPSHOT</version>
+  <version>3.1.0</version>
   <artifactId>i18n-regions-bom</artifactId>
   <packaging>pom</packaging>
   <name>i18n-regions-bom</name>
@@ -13,7 +13,7 @@
 
   <properties>
     <!-- version of the rest of the modules, automatically updated by .github/fix-bom.sh -->
-    <i18n-regions.version>3.1.0-SNAPSHOT</i18n-regions.version>
+    <i18n-regions.version>3.1.0</i18n-regions.version>
     <i18n-subdivisions.version>0.6</i18n-subdivisions.version>
     <i18n-formerly-assigned.version>0.9</i18n-formerly-assigned.version>
   </properties>
