@@ -14,7 +14,6 @@ module org.meeuw.i18n.countries {
     requires static jakarta.annotation;
 
     requires static com.fasterxml.jackson.annotation;
-    requires static org.meeuw.i18n.languages;
 
     requires transitive org.meeuw.i18n.regions;
     requires transitive org.meeuw.i18n.formerlyassigned;

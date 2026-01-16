@@ -51,7 +51,7 @@
     <dependency>
       <groupId>org.meeuw.i18n</groupId>
       <artifactId>i18n-iso-639</artifactId>
-      <optional>true</optional>
+      <scope>test</scope>
     </dependency>
 
     <dependency>
