@@ -25,8 +25,13 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * So basically you specify one or more predicates, and/or a number of explicitly included and excluded codes.
  * <p>
  * When applied to instances of {@link Region}s that are not {@link Country} (or convertable to that), are considered valid. Use {@link org.meeuw.i18n.regions.validation.ValidRegion} to constraint that.
- *
- *
+ * <p>
+ * This annotation can also be applied to collections (though it is nicer to then put it on the element type), in which case all elements of the collection are validated.
+ * <p>
+ * It can also be applied to {@link CharSequence's}, in which case the {@link org.meeuw.i18n.regions.RegionService} is consulted.
+ * <p>
+ * Also {@link java.util.Locale}'s are supported, in which case the country part is validated. The language part is ignored. The language part can be validated
+ * using {@code org.meeuw.i18n.languages.validation.ValidLanguage} (from {@code org.meeuw.i18n:i18n-iso-639})
  * @author Michiel Meeuwissen
  * @since 0.1
  */
