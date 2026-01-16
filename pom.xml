@@ -47,9 +47,11 @@
     <java.version>17</java.version>
     <junit.version>6.0.2</junit.version>
     <checker.version>3.53.0</checker.version>
-    <jackson.version>3.0.2</jackson.version>
+    <jackson.version>3.0.3</jackson.version>
     <jacoco.version>0.8.14</jacoco.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <EXTRA_TEST_OPTS>--add-reads org.meeuw.i18n.subdivisions=org.meeuw.i18n.languages</EXTRA_TEST_OPTS>
+
   </properties>
 
   <scm>
@@ -142,6 +144,9 @@
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.5.4</version>
+        <configuration>
+          <argLine>${EXTRA_TEST_OPTS}</argLine>
+        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-deploy-plugin</artifactId>

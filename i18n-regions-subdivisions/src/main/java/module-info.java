@@ -9,7 +9,6 @@ module org.meeuw.i18n.subdivisions {
     exports org.meeuw.i18n.subdivisions.validation;
     exports org.meeuw.i18n.subdivisions.validation.impl; // to hibernate validation
 
-
     requires transitive org.meeuw.i18n.regions;
 
     requires static org.checkerframework.checker.qual;

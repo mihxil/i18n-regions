@@ -403,7 +403,7 @@ public class CountryValidatorTest {
         List<Region> validValues = RegionService.getInstance().values()
             .filter(predicate)
             .sorted(Regions.sortByName(nl))
-            .collect(Collectors.toList());
+            .toList();
         for(Region r : validValues) {
             assertThat(VALIDATOR.validate(instantiator.apply(r)))
                 .withFailMessage(r + " was supposed to be valid, but is invalid").hasSize(0);
