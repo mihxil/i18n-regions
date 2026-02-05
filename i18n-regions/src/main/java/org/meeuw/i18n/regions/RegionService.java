@@ -215,6 +215,7 @@ public class RegionService {
     }
 
 
+    private static boolean loggedAboutPriority = false;
     private static <T> Comparator<T> priorityComparator() {
         return  (o1, o2) -> {
             try {
@@ -224,7 +225,8 @@ public class RegionService {
                 final int v2 = p2 != null ? p2.value() : 100;
                 return v1 - v2;
             } catch (NoClassDefFoundError ncdfe) {
-                logger.log(Level.INFO, "{0}:{1} region services {2} {3} are unordered", new Object[]{ncdfe.getClass(), ncdfe.getMessage(), o1, o2});
+                logger.log(loggedAboutPriority ? Level.FINE : Level.INFO, "{0}:{1} region services {2} {3} are unordered", new Object[]{ncdfe.getClass(), ncdfe.getMessage(), o1, o2});
+                loggedAboutPriority = true;
                 String sn1 = o1 == null ? null : o1.getClass().getSimpleName();
                 String sn2 = o2 == null ? null : o2.getClass().getSimpleName();
                 return Objects.compare(sn1, sn2, Comparator.naturalOrder());
