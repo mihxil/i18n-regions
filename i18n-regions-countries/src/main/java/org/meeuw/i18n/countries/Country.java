@@ -27,9 +27,9 @@ public interface Country extends Region {
     /**
      * A usefull predicate, e.g. to filter streams of {@link RegionService#values()}
      *
-     * Checks wether the region if a {@link CurrentCountry} which is {@link CountryCode.Assignment#OFFICIALLY_ASSIGNED}.
+     * Checks wether the region if a {@link CurrentCountry} which is {@link Assignment#OFFICIALLY_ASSIGNED}.
      */
-    Predicate<Region> IS_OFFICIAL = (c) -> c instanceof CurrentCountry && ((CurrentCountry) c).getAssignment() == CountryCode.Assignment.OFFICIALLY_ASSIGNED;
+    Predicate<Region> IS_OFFICIAL = (c) -> c instanceof CurrentCountry && ((CurrentCountry) c).getAssignment() == Assignment.OFFICIALLY_ASSIGNED;
     /**
      * A usefull predicate, e.g. to filter streams of {@link RegionService#values()}
      *

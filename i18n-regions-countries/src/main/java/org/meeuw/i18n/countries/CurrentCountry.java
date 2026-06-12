@@ -1,7 +1,6 @@
 package org.meeuw.i18n.countries;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URI;
 import java.net.URL;
 import java.util.*;
@@ -20,6 +19,7 @@ import org.webjars.WebJarVersionLocator;
  * @since 0.1
  */
 public class CurrentCountry implements Country {
+    @Serial
     private static final long serialVersionUID = 0L;
 
     private final CountryCode code;
@@ -85,7 +85,6 @@ public class CurrentCountry implements Country {
         return code.toLocale();
     }
 
-
     /**
      * For {@link CurrentCountry} also {@code code.toLocale().getDisplayCountry(locale)} is used.
      */
@@ -94,7 +93,7 @@ public class CurrentCountry implements Country {
         try {
             return ResourceBundle.getBundle(getBundle(), locale).getString(this.getCode());
         } catch (MissingResourceException mse){
-            if (code.getAssignment() == CountryCode.Assignment.OFFICIALLY_ASSIGNED) {
+            if (code.getAssignment() == Assignment.OFFICIALLY_ASSIGNED) {
                 return code.toLocale().getDisplayCountry(locale);
             } else {
                 return code.getName();
@@ -117,17 +116,15 @@ public class CurrentCountry implements Country {
         return code.toString();
     }
 
-
     @Override
     public void toStringBuilder(@NonNull StringBuilder builder, @NonNull Locale locale) {
         Country.super.toStringBuilder(builder, locale);
-        if (code.getAssignment() != CountryCode.Assignment.OFFICIALLY_ASSIGNED) {
+        if (code.getAssignment() != Assignment.OFFICIALLY_ASSIGNED) {
             builder.append(" (").append(code.getAssignment()).append(")");
         }
     }
 
-    @Deprecated
-    public CountryCode.Assignment getAssignment() {
+    public Assignment getAssignment() {
         return code.getAssignment();
     }
 
@@ -143,7 +140,7 @@ public class CurrentCountry implements Country {
      */
     @Override
     public Optional<URI> getIcon() {
-        if (getAssignment() == CountryCode.Assignment.OFFICIALLY_ASSIGNED) {
+        if (getAssignment() == Assignment.OFFICIALLY_ASSIGNED) {
             if (ALWAYS_USE_CDN_FOR_ICONS.get()) {
                 return Optional.of(URI.create(CDNWEBJARS + getCode().toLowerCase() + ".svg"));
             } else {

@@ -5,8 +5,6 @@ import java.util.HashSet;
 
 import jakarta.annotation.Priority;
 
-import org.meeuw.i18n.countries.codes.CountryCode;
-
 
 /**
  * Provides all currently countries that are officially assigned
@@ -17,7 +15,7 @@ import org.meeuw.i18n.countries.codes.CountryCode;
 @Priority(1)
 public class CurrentCountryProvider extends AbstractCurrentCountryProvider {
     public CurrentCountryProvider() {
-        super(new HashSet<>(Collections.singletonList(CountryCode.Assignment.OFFICIALLY_ASSIGNED)));
+        super(new HashSet<>(Collections.singletonList(Assignment.OFFICIALLY_ASSIGNED)));
     }
 
 

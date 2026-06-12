@@ -19,7 +19,7 @@ package org.meeuw.i18n.countries.codes;
 import java.util.*;
 import java.util.regex.Pattern;
 
-
+import org.meeuw.i18n.countries.Assignment;
 
 
 /**
@@ -2189,66 +2189,6 @@ public enum CountryCode
     ;
 
 
-    /**
-     * Code assignment state in <a href="http://en.wikipedia.org/wiki/ISO_3166-1"
-     * >ISO 3166-1</a>.
-     *
-     * @see <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Decoding_table"
-     *       >Decoding table of ISO 3166-1 alpha-2 codes</a>
-     */
-    public enum Assignment
-    {
-        /**
-         * <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements"
-         * >Officially assigned</a>.
-         *
-         * Assigned to a country, territory, or area of geographical interest.
-         */
-        OFFICIALLY_ASSIGNED,
-
-        /**
-         * <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#User-assigned_code_elements"
-         * >User assigned</a>.
-         *
-         * Free for assignment at the disposal of users.
-         */
-        USER_ASSIGNED,
-
-        /**
-         * <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Exceptional_reservations"
-         * >Exceptionally reserved</a>.
-         *
-         * Reserved on request for restricted use.
-         */
-        EXCEPTIONALLY_RESERVED,
-
-        /**
-         * <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Transitional_reservations"
-         * >Transitionally reserved</a>.
-         *
-         * Deleted from ISO 3166-1 but reserved transitionally.
-         */
-        TRANSITIONALLY_RESERVED,
-
-        /**
-         * <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Indeterminate_reservations"
-         * >Indeterminately reserved</a>.
-         *
-         * Used in coding systems associated with ISO 3166-1.
-         */
-        INDETERMINATELY_RESERVED,
-
-        /**
-         * <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Codes_currently_agreed_not_to_use"
-         * >Not used</a>.
-         *
-         * Not used in ISO 3166-1 in deference to international property
-         * organization names.
-         */
-        NOT_USED
-    }
-
-
     private static final Map<String, CountryCode> alpha3Map = new HashMap<String, CountryCode>();
     private static final Map<String, CountryCode> alpha4Map = new HashMap<String, CountryCode>();
     private static final Map<Integer, CountryCode> numericMap = new HashMap<Integer, CountryCode>();
@@ -2265,7 +2205,7 @@ public enum CountryCode
 
             if (cc.getNumeric() != -1)
             {
-                numericMap.put(Integer.valueOf(cc.getNumeric()), cc);
+                numericMap.put(cc.getNumeric(), cc);
             }
         }
 
@@ -2282,22 +2222,22 @@ public enum CountryCode
         alpha4Map.put("ZRCD", ZR);
 
         // BU and MM have the same numeric code 104. MM should be used.
-        numericMap.put(Integer.valueOf(104), MM);
+        numericMap.put(104, MM);
 
         // CD and ZR have the same numeric code 180. CD should be used.
-        numericMap.put(Integer.valueOf(180), CD);
+        numericMap.put(180, CD);
 
         // FI and SF have the same numeric code 246. FI should be used.
-        numericMap.put(Integer.valueOf(246), FI);
+        numericMap.put(246, FI);
 
         // GB and UK have the same numeric code 826. GB should be used.
-        numericMap.put(Integer.valueOf(826), GB);
+        numericMap.put(826, GB);
 
         // TL and TP have the same numeric code 626. TL should be used.
-        numericMap.put(Integer.valueOf(626), TL);
+        numericMap.put(626, TL);
 
         // County code 280 is also used for DE by the German banking industry.
-        numericMap.put(Integer.valueOf(280), DE);
+        numericMap.put(280, DE);
     }
 
 

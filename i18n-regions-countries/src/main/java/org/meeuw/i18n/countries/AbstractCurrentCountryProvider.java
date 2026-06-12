@@ -14,9 +14,9 @@ import org.meeuw.i18n.regions.spi.RegionProvider;
  */
 public abstract class AbstractCurrentCountryProvider implements RegionProvider<CurrentCountry> {
 
-    private final Set<CountryCode.Assignment> assignments;
+    private final Set<Assignment> assignments;
 
-    protected AbstractCurrentCountryProvider(Set<CountryCode.Assignment> assignments) {
+    protected AbstractCurrentCountryProvider(Set<Assignment> assignments) {
         this.assignments = assignments;
     }
 

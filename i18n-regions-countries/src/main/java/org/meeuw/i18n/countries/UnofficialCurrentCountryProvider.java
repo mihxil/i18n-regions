@@ -19,10 +19,10 @@ import org.meeuw.i18n.countries.codes.CountryCode;
 @Priority(50)
 public class UnofficialCurrentCountryProvider extends AbstractCurrentCountryProvider {
 
-    private static final Set<CountryCode.Assignment> excludes = Set.of(CountryCode.Assignment.OFFICIALLY_ASSIGNED, CountryCode.Assignment.USER_ASSIGNED);
+    private static final Set<Assignment> excludes = Set.of(Assignment.OFFICIALLY_ASSIGNED, Assignment.USER_ASSIGNED);
     public UnofficialCurrentCountryProvider() {
         super(
-            Arrays.stream(CountryCode.Assignment.values())
+            Arrays.stream(Assignment.values())
                 .filter(a -> ! excludes.contains(a))
                 .collect(Collectors.toSet())
         );

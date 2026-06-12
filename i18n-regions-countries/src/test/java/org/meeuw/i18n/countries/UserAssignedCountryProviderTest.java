@@ -25,7 +25,7 @@ public class UserAssignedCountryProviderTest {
     public void valuesAndRegister() {
         inst.register(new UserAssignedCountry("PNK", "Pinkeltjesland", "Dick Laan"));
         Set<CountryCode> collect = Arrays.stream(CountryCode.values())
-            .filter(a -> a.getAssignment() == CountryCode.Assignment.USER_ASSIGNED)
+            .filter(a -> a.getAssignment() == Assignment.USER_ASSIGNED)
             .collect(Collectors.toSet());
         collect.remove(CountryCode.UNDEFINED);
         inst.values().forEach(country -> {
@@ -54,7 +54,7 @@ public class UserAssignedCountryProviderTest {
     @Test
     public void nv18n() {
         Arrays.stream(CountryCode.values())
-            .filter(c -> c.getAssignment() == CountryCode.Assignment.USER_ASSIGNED).forEach(c -> {
+            .filter(c -> c.getAssignment() == Assignment.USER_ASSIGNED).forEach(c -> {
             if (c != CountryCode.UNDEFINED) {
                 assertThat(inst.getByCode(c.name())).withFailMessage("Not found " + c).isPresent();
             }
