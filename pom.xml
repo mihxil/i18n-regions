@@ -45,9 +45,9 @@
 
   <properties>
     <java.version>17</java.version>
-    <junit.version>6.0.3</junit.version>
-    <checker.version>4.0.0</checker.version>
-    <jackson.version>3.1.2</jackson.version>
+    <junit.version>6.1.2</junit.version>
+    <checker.version>4.2.1</checker.version>
+    <jackson.version>3.2.1</jackson.version>
     <jacoco.version>0.8.14</jacoco.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <EXTRA_TEST_OPTS>--add-reads org.meeuw.i18n.subdivisions=org.meeuw.i18n.languages</EXTRA_TEST_OPTS>
@@ -386,7 +386,7 @@
       <dependency>
         <groupId>org.glassfish.jaxb</groupId>
         <artifactId>jaxb-runtime</artifactId>
-        <version>4.0.7</version>
+        <version>4.0.9</version>
         <scope>test</scope>
       </dependency>
 
