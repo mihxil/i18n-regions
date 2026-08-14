@@ -45,8 +45,8 @@
 
   <properties>
     <java.version>17</java.version>
-    <junit.version>6.1.2</junit.version>
-    <checker.version>4.2.1</checker.version>
+    <junit.version>6.1.3</junit.version>
+    <checker.version>4.2.2</checker.version>
     <jackson.version>3.2.1</jackson.version>
     <jacoco.version>0.8.14</jacoco.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
