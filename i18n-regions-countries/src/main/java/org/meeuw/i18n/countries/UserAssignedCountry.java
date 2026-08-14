@@ -6,7 +6,7 @@ import org.meeuw.i18n.regions.UserAssignedRegion;
 
 
 /**
- * Wraps all 'User defined' {@link CountryCode} (except {@link CountryCode#UNDEFINED} and assigns to each a {@link #getAssignedBy()}.
+ * Wraps all 'User defined' {@link CountryCode} (except {@link CountryCode#UNDEFINED}) and assigns to each a {@link #getAssignedBy()}.
  * <p>
  * Adds a few others, too.
  * <p>
