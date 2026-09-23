@@ -8,7 +8,7 @@ module org.meeuw.i18n.countries {
     exports org.meeuw.i18n.countries.validation;
     exports org.meeuw.i18n.countries.validation.impl; // to hibernate validation
 
-    requires static org.checkerframework.checker.qual;
+    requires static org.jspecify;
     requires static jakarta.xml.bind;
     requires static jakarta.validation;
     requires static jakarta.annotation;

@@ -3,7 +3,7 @@ package org.meeuw.i18n.subdivisions;
 import java.util.Locale;
 import java.util.Optional;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jspecify.annotations.NonNull;
 import org.meeuw.i18n.countries.Country;
 import org.meeuw.i18n.countries.CurrentCountry;
 import org.meeuw.i18n.countries.codes.CountryCode;

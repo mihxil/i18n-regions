@@ -1,6 +1,6 @@
 package org.meeuw.i18n.regions;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jspecify.annotations.NonNull;
 
 /**
  * User assigned regions have a method {@link #getAssignedBy()}

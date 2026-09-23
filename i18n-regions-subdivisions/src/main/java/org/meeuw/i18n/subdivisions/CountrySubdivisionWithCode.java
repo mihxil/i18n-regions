@@ -2,7 +2,7 @@ package org.meeuw.i18n.subdivisions;
 
 import java.util.Objects;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jspecify.annotations.NonNull;
 import org.meeuw.i18n.countries.Country;
 import org.meeuw.i18n.regions.RegionService;
 import org.meeuw.i18n.subdivisions.codes.CountrySubdivisionCode;

@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.Locale;
 import java.util.function.Supplier;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jspecify.annotations.NonNull;
 
 /**
  * Utilities related to {@link Region}s.

@@ -7,9 +7,8 @@ import java.util.stream.Stream;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
-import org.checkerframework.checker.optional.qual.MaybePresent;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import org.meeuw.i18n.regions.*;
 import org.meeuw.i18n.regions.validation.ValidRegion;
 
@@ -114,7 +113,7 @@ public class RegionConstraintValidator implements ConstraintValidator<ValidRegio
     }
 
 
-    public static @MaybePresent Optional<Boolean> defaultIsValid(@Nullable Region region, ValidationInfo validationInfo) {
+    public static Optional<Boolean> defaultIsValid(@Nullable Region region, ValidationInfo validationInfo) {
         if (region == null) {
             return Optional.of(true);
         }

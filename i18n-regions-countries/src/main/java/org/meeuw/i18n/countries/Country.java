@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jspecify.annotations.NonNull;
 import org.meeuw.i18n.countries.codes.CountryCode;
 import org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode;
 import org.meeuw.i18n.regions.Region;

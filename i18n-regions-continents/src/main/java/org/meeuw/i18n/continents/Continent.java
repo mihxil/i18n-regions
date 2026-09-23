@@ -2,7 +2,7 @@ package org.meeuw.i18n.continents;
 
 import java.util.Locale;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jspecify.annotations.NonNull;
 import org.meeuw.i18n.regions.Region;
 
 /**

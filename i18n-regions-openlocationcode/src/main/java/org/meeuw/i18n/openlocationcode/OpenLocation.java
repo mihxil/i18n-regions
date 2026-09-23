@@ -3,7 +3,7 @@ package org.meeuw.i18n.openlocationcode;
 import java.net.URI;
 import java.util.Locale;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.meeuw.i18n.regions.Region;
 
 import com.google.openlocationcode.OpenLocationCode;

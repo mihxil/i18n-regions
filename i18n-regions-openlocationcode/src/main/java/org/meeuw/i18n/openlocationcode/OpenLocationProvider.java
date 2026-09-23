@@ -10,8 +10,8 @@ import java.util.stream.StreamSupport;
 import jakarta.annotation.Priority;
 import jakarta.validation.constraints.Min;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import org.meeuw.i18n.regions.spi.RegionProvider;
 
 import com.google.openlocationcode.OpenLocationCode;

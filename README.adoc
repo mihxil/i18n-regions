@@ -267,6 +267,9 @@ Find my findings link:TESTING-WITH-JPMS.adoc[here]
 | java 17, jackson 3
 | january 2026
 
+| 3.3
+| Moved away from checkerframework, which was only very lightly used (basically just @Nullable/@NonNull). We now do jspecify, following the example of other projects like guava.
+|
 
 |===
 

@@ -5,7 +5,7 @@ import java.util.function.Consumer;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jspecify.annotations.NonNull;
 import org.meeuw.i18n.countries.CurrentCountry;
 import org.meeuw.i18n.countries.codes.CountryCode;
 import org.meeuw.i18n.regions.spi.RegionProvider;

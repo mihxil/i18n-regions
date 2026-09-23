@@ -8,7 +8,7 @@ module org.meeuw.i18n.regions {
 
     requires static jakarta.validation;
     requires static jakarta.xml.bind;
-    requires static org.checkerframework.checker.qual;
+    requires static org.jspecify;
     requires static jakarta.persistence;
     requires static jakarta.annotation;
     requires static com.fasterxml.jackson.annotation;

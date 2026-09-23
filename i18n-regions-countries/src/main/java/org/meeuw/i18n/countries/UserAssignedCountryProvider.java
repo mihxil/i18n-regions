@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jspecify.annotations.NonNull;
 import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.UserAssignedRegion;
 import org.meeuw.i18n.regions.spi.RegionProvider;

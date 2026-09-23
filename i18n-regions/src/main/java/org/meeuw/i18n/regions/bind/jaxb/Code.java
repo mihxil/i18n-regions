@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.RegionService;
 

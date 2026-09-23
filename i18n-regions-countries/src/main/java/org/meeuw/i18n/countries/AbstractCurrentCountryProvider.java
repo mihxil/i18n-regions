@@ -3,7 +3,7 @@ package org.meeuw.i18n.countries;
 import java.util.*;
 import java.util.stream.Stream;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jspecify.annotations.NonNull;
 import org.meeuw.i18n.countries.codes.CountryCode;
 import org.meeuw.i18n.regions.spi.RegionProvider;
 

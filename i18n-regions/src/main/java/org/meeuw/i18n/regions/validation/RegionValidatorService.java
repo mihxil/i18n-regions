@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 import jakarta.validation.*;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jspecify.annotations.NonNull;
 import org.meeuw.i18n.regions.RegionService;
 
 /**

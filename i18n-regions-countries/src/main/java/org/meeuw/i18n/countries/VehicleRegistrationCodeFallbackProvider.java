@@ -5,7 +5,7 @@ import java.util.stream.Stream;
 
 import jakarta.annotation.Priority;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jspecify.annotations.NonNull;
 import org.meeuw.i18n.regions.spi.RegionProvider;
 
 /**

@@ -7,8 +7,8 @@ import java.util.function.Supplier;
 
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import org.meeuw.i18n.regions.bind.jaxb.Code;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
