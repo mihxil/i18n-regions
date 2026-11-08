@@ -16,7 +16,7 @@
     <i18n-regions.version>3.3-SNAPSHOT</i18n-regions.version>
 
     <i18n-subdivisions.version>0.7</i18n-subdivisions.version>
-    <i18n-formerly-assigned.version>0.9</i18n-formerly-assigned.version>
+    <i18n-formerly-assigned.version>0.10</i18n-formerly-assigned.version>
   </properties>
 
   <licenses>
