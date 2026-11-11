@@ -23,18 +23,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      MAVEN_ARGS: --no-transfer-progress
+      MAVEN_ARGS: --no-transfer-progress --color always
     steps:
       - uses: actions/checkout@v7
       - name: Set up JDK 17
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@v6
         with:
           java-version: 17
           distribution: 'temurin'
           cache: 'maven'
           server-id: central
-          server-username: CENTRAL_USERNAME
-          server-password: CENTRAL_PASSWORD
+          server-username-env-var: CENTRAL_USERNAME
+          server-password-env-var: CENTRAL_PASSWORD
           gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
       - name: Fix bom
         # runs in a small alpine image with xmllint, to avoid a (sometimes slow) apt-get install. It has no bash, hence sh.
@@ -51,7 +51,7 @@ jobs:
         env:
           CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
           CENTRAL_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
       - name: Build and deploy with Maven
         run: |
           mvn -B test  -D"maven.test.failure.ignore=true" -DskipTests=${skipTests}
@@ -59,7 +59,7 @@ jobs:
         env:
           CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
           CENTRAL_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
       - uses: codecov/codecov-action@v7
         with:
           files: report-aggregation/target/site/jacoco-aggregate/jacoco.xml

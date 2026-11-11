@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     env:
-      MAVEN_ARGS: --no-transfer-progress
+      MAVEN_ARGS: --no-transfer-progress --color always
     steps:
       - uses: actions/checkout@v7
       - name: Release branch with Maven
