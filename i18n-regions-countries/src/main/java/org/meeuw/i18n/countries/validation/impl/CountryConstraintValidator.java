@@ -2,6 +2,7 @@ package org.meeuw.i18n.countries.validation.impl;
 
 import java.util.Locale;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
@@ -12,6 +13,7 @@ import org.meeuw.i18n.countries.validation.ValidCountry;
 import org.meeuw.i18n.formerlyassigned.FormerlyAssignedCountryCode;
 import org.meeuw.i18n.regions.RegionService;
 import org.meeuw.i18n.regions.validation.impl.RegionConstraintValidator;
+import org.meeuw.i18n.regions.validation.impl.ValidationMessages;
 
 
 /**
@@ -31,7 +33,16 @@ public class CountryConstraintValidator implements ConstraintValidator<ValidCoun
 
     @Override
     public boolean isValid(Object region, ConstraintValidatorContext constraintValidatorContext) {
-        return isValid(region);
+        boolean valid = isValid(region);
+        if (!valid) {
+            ValidationMessages.resolveDefaultMessage(region, constraintValidatorContext, CountryConstraintValidator::bundle);
+        }
+        return valid;
+    }
+
+    private static ResourceBundle bundle(Locale locale) {
+        // must be called from this module, ResourceBundle#getBundle is caller sensitive
+        return ResourceBundle.getBundle("org.meeuw.i18n.countries.validation.ValidationMessages", locale);
     }
 
     private boolean isValid(Object region) {

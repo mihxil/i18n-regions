@@ -28,8 +28,18 @@ public class RegionConstraintValidator implements ConstraintValidator<ValidRegio
 
     @Override
     public boolean isValid(@Nullable Object region, ConstraintValidatorContext constraintValidatorContext) {
-        return isValidRegion(region);
+        boolean valid = isValidRegion(region);
+        if (!valid) {
+            ValidationMessages.resolveDefaultMessage(region, constraintValidatorContext, RegionConstraintValidator::bundle);
+        }
+        return valid;
     }
+
+    private static ResourceBundle bundle(Locale locale) {
+        return ResourceBundle.getBundle(BUNDLE, locale);
+    }
+
+    static final String BUNDLE = "org.meeuw.i18n.regions.validation.ValidationMessages";
 
     protected boolean isValidRegion(@Nullable Object region) {
         if (region == null) {

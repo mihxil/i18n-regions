@@ -32,12 +32,14 @@ import static org.meeuw.i18n.languages.ISO_639_1_Code.nl;
 @Isolated
 public class CountryValidatorTest {
 
+    static {
+        // before creating the validator, since the validation provider takes the default locale on creation.
+        // The messages are asserted in english
+        Locale.setDefault(Locale.ENGLISH);
+    }
+
     private static final RegionValidatorService regionValidatorService = RegionValidatorService.getInstance();
     private static final Validator VALIDATOR = regionValidatorService.getValidator();
-
-    static {
-        Locale.setDefault(new Locale("nl"));
-    }
 
 
     public static class CountryAndRegions {
@@ -100,6 +102,22 @@ public class CountryValidatorTest {
             "TPTL", "GB-ENG");
 
 
+    }
+
+    @Test
+    public void messageInDefaultLocale() {
+        Locale defaultLocale = Locale.getDefault();
+        try {
+            Locale.setDefault(new Locale("nl"));
+            assertThat(VALIDATOR.validate(new CountryAndRegions(Country.of(CS))))
+                .extracting(ConstraintViolation::getMessage)
+                .containsExactly("CS is geen geldig land");
+            assertThat(VALIDATOR.validate(new CountryAndRegionsWithList(new SomeRegion("bla"))))
+                .extracting(ConstraintViolation::getMessage)
+                .containsExactly("bla is geen geldig gebied");
+        } finally {
+            Locale.setDefault(defaultLocale);
+        }
     }
 
     public static class CountryAndRegionsAsString {

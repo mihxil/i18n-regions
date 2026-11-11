@@ -171,6 +171,12 @@ As a utility, there is `org.meeuw.i18n.regions.validation.RegionValidatorService
 
 ----
 
+=== Messages
+
+The default messages of the constraint violations (e.g. `CS is not a valid country`) are resolved by the constraint validators themselves, using the resource bundles `org.meeuw.i18n.regions.validation.ValidationMessages` and `org.meeuw.i18n.countries.validation.ValidationMessages`, in the default locale (`Locale.getDefault()`) at the moment of validation. Currently there are English and Dutch versions.
+
+This is because a validation provider running as a named module (like hibernate-validator ≥ 9 on the module path) cannot find `ContributorValidationMessages` bundles in other modules. A consequence is that these messages cannot be overridden via your own `ValidationMessages.properties`. Use the `message` attribute of the annotation for that.
+
 == Optional dependencies
 
 Several dependencies are marked `optional` in the pom.xml. E.g. the annotations used to arrange XML bindings and validation are not present (anymore) in java 11. If they are not present, this will not make it impossible to use the classes, you just cannot use JAXB, JPA, validation or whatever the missing dependency is related to. It's only about annotations so that doesn't cause (by the JSR-175 specification) problems.
@@ -269,6 +275,8 @@ Find my findings link:TESTING-WITH-JPMS.adoc[here]
 
 | 3.3
 | Moved away from checkerframework, which was only very lightly used (basically just @Nullable/@NonNull). We now do jspecify, following the example of other projects like guava.
+
+  Validation messages are resolved by the validators themselves (see <<Messages>>), so they also work with hibernate-validator 9 on the module path. The `ContributorValidationMessages` bundles were removed.
 |
 
 |===
