@@ -51,7 +51,7 @@ save
 EOF
 
 # show what happens
-git diff  i18n-regions-bom/pom.xml
+command -v git > /dev/null && git diff  i18n-regions-bom/pom.xml
 
 # update version of bom in dependency managment itself
 xmllint --shell pom.xml << EOF > /dev/null
@@ -60,7 +60,9 @@ cd /x:project/x:dependencyManagement/x:dependencies/x:dependency[x:artifactId = 
 set ${BOM_VERSION}
 save
 EOF
-git diff  pom.xml
+command -v git > /dev/null && git diff  pom.xml
 
 
 
+
+exit 0
