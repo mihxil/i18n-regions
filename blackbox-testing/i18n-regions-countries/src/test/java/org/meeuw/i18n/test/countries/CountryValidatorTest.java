@@ -10,6 +10,7 @@ import jakarta.validation.*;
 import jakarta.validation.constraints.NotNull;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Isolated;
 import org.meeuw.i18n.countries.*;
 import org.meeuw.i18n.countries.codes.CountryCode;
 import org.meeuw.i18n.countries.validation.ValidCountry;
@@ -28,6 +29,7 @@ import static org.meeuw.i18n.languages.ISO_639_1_Code.nl;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
+@Isolated
 public class CountryValidatorTest {
 
     private static final RegionValidatorService regionValidatorService = RegionValidatorService.getInstance();
