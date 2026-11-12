@@ -9,11 +9,11 @@ import org.junit.jupiter.api.Test;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-public class VehicleRegistrationCodeTest {
+class VehicleRegistrationCodeTest {
 
 
     @Test
-    public void values() {
+    void values() {
         List<String > differences = new ArrayList<>();
         for (VehicleRegistrationCode code : VehicleRegistrationCode.values()) {
 

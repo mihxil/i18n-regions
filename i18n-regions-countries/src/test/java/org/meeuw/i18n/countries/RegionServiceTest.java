@@ -19,10 +19,10 @@ import static org.meeuw.i18n.regions.RegionService.getInstance;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-public class RegionServiceTest {
+class RegionServiceTest {
 
     @Test
-    public void getCurrentByCode() {
+    void getCurrentByCode() {
         CurrentCountry netherlands = org.meeuw.i18n.regions.RegionService.getInstance().getByCode("NL", CurrentCountry.class).orElseThrow();
         CountryCode countryCode = netherlands.getCountryCode();
         Optional<URI> icon = netherlands.getIcon();
@@ -41,12 +41,12 @@ public class RegionServiceTest {
     }
 
     @Test
-    public void getCurrentByCodeAsCountry() {
+    void getCurrentByCodeAsCountry() {
         Optional<CurrentCountry> nl = getInstance().getByCode("NL", CurrentCountry.class);
         assertThat(nl.get().getAlpha3()).isEqualTo("NLD");
     }
     @Test
-    public void getFormerByCode() {
+    void getFormerByCode() {
         Region cshh = getInstance().getByCode("CSHH").orElse(null);
         assertThat(cshh).isNotNull();
         assertThat(cshh).isInstanceOf(FormerCountry.class);
@@ -56,7 +56,7 @@ public class RegionServiceTest {
 
     }
     @Test
-    public void getFormerByCodeAsCountry() {
+    void getFormerByCodeAsCountry() {
         Optional<Country> cshh = getInstance().getByCode("CSHH", Country.class);
         assertThat(cshh.get().getCode()).isEqualTo("CSHH");
         assertThat(((FormerCountry) cshh.get()).getFormerCodes().get(0)).isEqualTo("CS");
@@ -64,7 +64,7 @@ public class RegionServiceTest {
 
 
     @Test
-    public void getCountryZZ() {
+    void getCountryZZ() {
 
         Region undefined = getInstance().getByCode("ZZ").orElse(null);
         assertThat(undefined).isNotNull();
@@ -77,7 +77,7 @@ public class RegionServiceTest {
 
 
     @Test
-    public void getFormerCountryCS() {
+    void getFormerCountryCS() {
 
         FormerCountry cshh = getInstance().getByCode("CS", FormerCountry.class).orElse(null);
         assertThat(cshh).isNotNull();
@@ -89,13 +89,13 @@ public class RegionServiceTest {
     }
 
     @Test
-    public void byVehicleRegistration() {
+    void byVehicleRegistration() {
         Country country = Country.getByCode("WAN").orElse(null);
         assertThat(country).isEqualTo(new CurrentCountry(CountryCode.NG));
     }
 
     @Test
-    public void getEastTimor() {
+    void getEastTimor() {
         Region tptl = getInstance().getByCode("TPTL").orElse(null);
         assertThat(tptl).isNotNull();
         assertThat(tptl).isInstanceOf(FormerCountry.class);
@@ -105,7 +105,7 @@ public class RegionServiceTest {
     }
 
     @Test
-    public void getSaintHelena() {
+    void getSaintHelena() {
         Region sh = getInstance().getByCode("sh").orElse(null);
         assertThat(sh).isNotNull();
         assertThat(sh).isInstanceOf(CurrentCountry.class);
@@ -113,7 +113,7 @@ public class RegionServiceTest {
 
 
     @Test
-    public void eastGermany() {
+    void eastGermany() {
         FormerCountry ddr = (FormerCountry) Country.getByCode("DDDE").orElse(null);
         assertThat(ddr).isNotNull();
         System.out.println("" + ddr.getValidity());
@@ -122,7 +122,7 @@ public class RegionServiceTest {
 
 
     @Test
-    public void stream() {
+    void stream() {
         Stream<? extends Region> values = getInstance().values(Region.Type.COUNTRY);
 
         Spliterator<? extends Region> spliterator = values.spliterator();
@@ -142,7 +142,7 @@ public class RegionServiceTest {
     }
 
     @Test
-    public void values() {
+    void values() {
         CurrentCountry.ALWAYS_USE_CDN_FOR_ICONS.set(true);
         getInstance().values().forEach(r -> {
             StringBuilder build = new StringBuilder();

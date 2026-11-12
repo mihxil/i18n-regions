@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 0.1
  */
 
-public class RegionToStringConverterTest {
+class RegionToStringConverterTest {
 
     // The existing values in POMS.
     private static final String[] examples = {
@@ -97,7 +97,7 @@ public class RegionToStringConverterTest {
         "ZZ"
     };
 
-    public static String[] persistedCountryValues() {
+    static String[] persistedCountryValues() {
         return examples;
     }
 
@@ -107,7 +107,7 @@ public class RegionToStringConverterTest {
 
     @ParameterizedTest
     @MethodSource("persistedCountryValues")
-    public void convertToEntityAttribute(String code) {
+    void convertToEntityAttribute(String code) {
         Region region = impl.convertToEntityAttribute(code);
         assertThat(region).isNotNull();
         System.out.println(region + " " + region.getName(new Locale("nl")));
@@ -120,7 +120,7 @@ public class RegionToStringConverterTest {
     }
 
     @Test
-    public void convertNull() {
+    void convertNull() {
         assertThat(impl.convertToDatabaseColumn(null)).isNull();
         assertThat(impl.convertToEntityAttribute(null)).isNull();
     }

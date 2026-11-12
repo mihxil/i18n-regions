@@ -15,10 +15,10 @@ import static org.meeuw.i18n.languages.ISO_639_1_Code.nl;
  * @since 0.1
  */
 
-public class SubDivisionsRegionServiceTest {
+class SubDivisionsRegionServiceTest {
 
     @Test
-    public void getCountrySubDivisionUtrecht() {
+    void getCountrySubDivisionUtrecht() {
 
         Region utrecht = RegionService.getInstance().getByCode("NL-UT").orElse(null);
         assertThat(utrecht).isNotNull();
@@ -28,7 +28,7 @@ public class SubDivisionsRegionServiceTest {
     }
 
     @Test
-    public void getCountrySubDivisionGreatBritain() {
+    void getCountrySubDivisionGreatBritain() {
 
         Region gbn = RegionService.getInstance().getByCode("GB-GBN").orElse(null);
         assertThat(gbn).isNotNull();
@@ -39,7 +39,7 @@ public class SubDivisionsRegionServiceTest {
 
 
     @Test
-    public void subdivisionsOfGB(){
+    void subdivisionsOfGB(){
         Region eng = RegionService.getInstance().getByCode("GB-ENG").orElseThrow();
         assertThat(eng.getCode()).isEqualTo("GB-ENG");
         assertThat(eng.getName()).isEqualTo("England");
@@ -59,7 +59,7 @@ public class SubDivisionsRegionServiceTest {
     }
 
     @Test
-    public void getCode() {
+    void getCode() {
         Optional<Region> byCode = RegionService.getInstance().getByCode("NL-DR");
         assertThat(byCode).isPresent();
         assertThat(byCode).containsInstanceOf(CountrySubdivisionWithCode.class);
@@ -67,7 +67,7 @@ public class SubDivisionsRegionServiceTest {
     }
 
     @Test
-    public void getLocale() {
+    void getLocale() {
         Optional<Region> byCode = RegionService.getInstance().getByCode("NL-DR");
         assertThat(byCode).containsInstanceOf(CountrySubdivisionWithCode.class);
         assertThat(byCode.get().toLocale().getCountry()).isEqualTo("NL");

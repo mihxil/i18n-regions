@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * @author Michiel Meeuwissen
  */
-public class CountrySubdivisionConstraintValidatorTest {
+class CountrySubdivisionConstraintValidatorTest {
 
     private static final ValidatorFactory FACTORY = Validation.buildDefaultValidatorFactory();
     private static final Validator VALIDATOR = FACTORY.getValidator();
@@ -44,7 +44,7 @@ public class CountrySubdivisionConstraintValidatorTest {
     }
 
     @Test
-    public void includeValidCountries() {
+    void includeValidCountries() {
         assertThat(RegionValidatorService.getInstance().fromProperty(Netherlands.class, "region").test("NL-DR")).isTrue();
         testAsStreamFilter(
             RegionValidatorService.getInstance().fromProperty(Netherlands.class, "region"),
@@ -53,7 +53,7 @@ public class CountrySubdivisionConstraintValidatorTest {
     }
 
     @Test
-    public void includeValidCountriess() {
+    void includeValidCountriess() {
         testAsStreamFilter(
             RegionValidatorService.getInstance().fromProperty(Netherlandss.class, "region"),
             Netherlandss::new, "NL-DR"
@@ -61,12 +61,12 @@ public class CountrySubdivisionConstraintValidatorTest {
     }
 
     @Test
-    public void nullIsValid() {
+    void nullIsValid() {
         assertThat(VALIDATOR.validate(new Netherlands(null))).hasSize(0);
     }
 
     @Test
-    public void convert() {
+    void convert() {
         class A {
             @ValidCountrySubdivision(country = @ValidCountry(codes = "NL"))
             public final String region;

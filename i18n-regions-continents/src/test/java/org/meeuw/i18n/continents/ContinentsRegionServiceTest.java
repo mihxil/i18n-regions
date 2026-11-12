@@ -13,10 +13,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-public class ContinentsRegionServiceTest {
+class ContinentsRegionServiceTest {
 
      @Test
-     public void getContinent() {
+     void getContinent() {
          Region af = RegionService.getInstance().getByCode("CONTINENT-AF", Continent.class).orElse(null);
          assertThat(af).isNotNull();
          assertThat(af).isInstanceOf(Continent.class);
@@ -37,7 +37,7 @@ public class ContinentsRegionServiceTest {
 
     @SuppressWarnings({"ConstantConditions", "EqualsWithItself"})
     @Test
-    public void equalsAndHashCode() {
+    void equalsAndHashCode() {
         Region af = RegionService.getInstance().getByCode("CONTINENT-AF", Continent.class).orElse(null);
         Region eu = RegionService.getInstance().getByCode("CONTINENT-EU", Continent.class).orElse(null);
 
@@ -48,7 +48,7 @@ public class ContinentsRegionServiceTest {
         assertThat(af.hashCode()).isEqualTo(af.hashCode());
     }
     @Test
-    public void values() {
+    void values() {
         RegionService.getInstance().values().forEach(r -> {
             System.out.println(r.getClass().getSimpleName() + ":" + r.getCode()  + " : " + r.getName() + ":" + r.getName(new Locale("nl")));
         });
@@ -56,7 +56,7 @@ public class ContinentsRegionServiceTest {
     }
 
     @Test
-    public void valuesAsType() {
+    void valuesAsType() {
         Stream<? extends Continent> values = org.meeuw.i18n.regions.RegionService.getInstance().values(Continent.class);
         assertThat(values).hasSize(7);
     }

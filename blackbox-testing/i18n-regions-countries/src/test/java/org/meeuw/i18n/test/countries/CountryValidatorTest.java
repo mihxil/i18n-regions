@@ -30,7 +30,7 @@ import static org.meeuw.i18n.languages.ISO_639_1_Code.nl;
  * @since 0.1
  */
 @Isolated
-public class CountryValidatorTest {
+class CountryValidatorTest {
 
     static {
         // before creating the validator, since the validation provider takes the default locale on creation.
@@ -65,7 +65,7 @@ public class CountryValidatorTest {
 
 
     @Test
-    public void combineValidRegionAndValidCountry() {
+    void combineValidRegionAndValidCountry() {
 
         {
             // CS is not an official country any more:
@@ -105,7 +105,7 @@ public class CountryValidatorTest {
     }
 
     @Test
-    public void messageInDefaultLocale() {
+    void messageInDefaultLocale() {
         Locale defaultLocale = Locale.getDefault();
         try {
             Locale.setDefault(new Locale("nl"));
@@ -135,7 +135,7 @@ public class CountryValidatorTest {
 
 
     @Test
-    public void combineValidRegionAndValidCountryString() {
+    void combineValidRegionAndValidCountryString() {
         {
             // CS is not an official country any more:
             assertThat(VALIDATOR.validate(new CountryAndRegionsAsString(Country.of(CS)))).hasSize(1);
@@ -178,7 +178,7 @@ public class CountryValidatorTest {
    }
 
     @Test
-    public void isValidWithList() {
+    void isValidWithList() {
 
         Set<ConstraintViolation<CountryAndRegionsWithList>> violations= VALIDATOR.validate(new CountryAndRegionsWithList(
             Country.of(NL),
@@ -206,7 +206,7 @@ public class CountryValidatorTest {
         }
     }
     @Test
-    public void isValidWithList2() {
+    void isValidWithList2() {
 
         assertThat(VALIDATOR.validate(new CountryAndRegionsWithList2(
             Country.of(NL),
@@ -219,7 +219,7 @@ public class CountryValidatorTest {
     }
 
     @Test
-    public void onlyIncludes() {
+    void onlyIncludes() {
         class ZZ {
             public final List<Country> region;
 
@@ -251,7 +251,7 @@ public class CountryValidatorTest {
 
 
     @Test
-    public void testClasses() {
+    void testClasses() {
         class Former {
             @ValidRegion(classes = {FormerCountry.class})
             @NotNull
@@ -296,7 +296,7 @@ public class CountryValidatorTest {
 
     }
     @Test
-    public void convert() {
+    void convert() {
         assertThat(VALIDATOR.validate(new CountryAndRegionsAsObject(UserAssignedCountry.ZZ))).hasSize(1);
         assertThat(VALIDATOR.validate(CountryCode.NL)).hasSize(0);
         assertThat(VALIDATOR.validate(FormerlyAssignedCountryCode.CSXX)).hasSize(0);
@@ -327,7 +327,7 @@ public class CountryValidatorTest {
     }
 
     @Test
-    public void meta() {
+    void meta() {
         assertThat(VALIDATOR.validate(new CountryAndRegionsAsObject(UserAssignedCountry.ZZ))).hasSize(1);
 
         testAsStreamFilter(
@@ -339,7 +339,7 @@ public class CountryValidatorTest {
 
 
     @Test
-    public void userAssignedInclude() {
+    void userAssignedInclude() {
         class A {
             @ValidRegion(includeAssigners = {UserAssignedCountry.ASSIGNER_EU}, classes = {UserAssignedCountry.class})
             public Region country;
@@ -356,7 +356,7 @@ public class CountryValidatorTest {
     }
 
     @Test
-    public void userAssignedExclude() {
+    void userAssignedExclude() {
         class A {
             @ValidRegion(excludeAssigners = {UserAssignedCountry.ASSIGNER_WIPO}, classes = {UserAssignedCountry.class})
             public Region country;
@@ -374,7 +374,7 @@ public class CountryValidatorTest {
     }
 
     @Test
-    public void codes() {
+    void codes() {
         class A {
             @ValidCountry(codes = {"NL", "BE"}, classes = {CurrentCountry.class})
             public CountryCode country1;
@@ -394,7 +394,7 @@ public class CountryValidatorTest {
 
 
     @Test
-    public void locales() {
+    void locales() {
         class A {
             @ValidRegion(codes = {"NL", "BE"}, classes = {CurrentCountry.class})
             public Locale locale1;

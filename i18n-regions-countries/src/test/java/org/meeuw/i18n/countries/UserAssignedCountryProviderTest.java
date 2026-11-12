@@ -10,7 +10,7 @@ import org.meeuw.i18n.languages.ISO_639_1_Code;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class UserAssignedCountryProviderTest {
+class UserAssignedCountryProviderTest {
     final UserAssignedCountryProvider inst = new UserAssignedCountryProvider();
 
 
@@ -22,7 +22,7 @@ public class UserAssignedCountryProviderTest {
      * Also tests that all {@link UserAssignedCountry}s are working without causing exceptions.
      */
     @Test
-    public void valuesAndRegister() {
+    void valuesAndRegister() {
         inst.register(new UserAssignedCountry("PNK", "Pinkeltjesland", "Dick Laan"));
         Set<CountryCode> collect = Arrays.stream(CountryCode.values())
             .filter(a -> a.getAssignment() == Assignment.USER_ASSIGNED)
@@ -52,7 +52,7 @@ public class UserAssignedCountryProviderTest {
      * Make sure that all 'USER_ASSIGNED' codes are user assigned
      */
     @Test
-    public void nv18n() {
+    void nv18n() {
         Arrays.stream(CountryCode.values())
             .filter(c -> c.getAssignment() == Assignment.USER_ASSIGNED).forEach(c -> {
             if (c != CountryCode.UNDEFINED) {

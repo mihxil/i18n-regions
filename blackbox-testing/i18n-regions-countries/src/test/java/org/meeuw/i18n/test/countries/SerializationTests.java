@@ -7,7 +7,7 @@ import org.meeuw.i18n.countries.Country;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class SerializationTests {
+class SerializationTests {
 
 
     public static class A {
@@ -18,7 +18,7 @@ public class SerializationTests {
     }
 
     @Test
-    public void json()  {
+    void json()  {
         A a = new A();
         a.country = Country.getByCode("NL").orElseThrow();
         JsonMapper mapper = new JsonMapper();

@@ -17,25 +17,25 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 0.2
  */
-public class CurrentCountryProviderTest {
+class CurrentCountryProviderTest {
 
     private final CurrentCountryProvider currentCountryProvider = new CurrentCountryProvider();
 
     @Test
-    public void canProvide() {
+    void canProvide() {
         assertThat(currentCountryProvider.canProvide(CurrentCountry.class)).isTrue();
         assertThat(currentCountryProvider.canProvide(FormerCountry.class)).isFalse();
         assertThat(currentCountryProvider.canProvide(Region.class)).isTrue();
     }
 
     @Test
-    public void emoji() {
+    void emoji() {
         CurrentCountry af = currentCountryProvider.getByCode("AF").orElseThrow();
         assertThat(af.getEmoji()).contains("\uD83C\uDDE6\uD83C\uDDEB");
     }
 
     @Test
-    public void properties() throws IOException {
+    void properties() throws IOException {
         CurrentCountry nl = currentCountryProvider.getByCode("NL", true).orElseThrow();
 
         assertThat(nl.getCode()).isEqualTo(CountryCode.NL.getAlpha2());
@@ -68,7 +68,7 @@ public class CurrentCountryProviderTest {
 
     @SuppressWarnings({"ConstantConditions", "EqualsWithItself"})
     @Test
-    public void equalsAndHashCode() {
+    void equalsAndHashCode() {
         Region nl = currentCountryProvider.getByCode("NL").orElseThrow();
         Region be = currentCountryProvider.getByCodeOrNull("BE");
 
@@ -82,7 +82,7 @@ public class CurrentCountryProviderTest {
     }
 
     @Test
-    public void xi() {
+    void xi() {
         assertThat(currentCountryProvider.getByCode("XI")).isEmpty();
         assertThat(currentCountryProvider.values().filter(c -> c.getCode().equals("XI")).count()).isEqualTo(0);
 

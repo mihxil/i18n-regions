@@ -17,7 +17,7 @@ import static org.meeuw.i18n.regions.RegionService.getInstance;
 /**
  * @author Michiel Meeuwissen
  */
-public class RegionConstraintValidatorTest {
+class RegionConstraintValidatorTest {
     private static final RegionValidatorService regionValidatorService = RegionValidatorService.getInstance();
     private static final Validator VALIDATOR = regionValidatorService.getValidator();
 
@@ -27,7 +27,7 @@ public class RegionConstraintValidatorTest {
 
 
     @Test
-    public void validateLocale() {
+    void validateLocale() {
 
         class A {
             @ValidRegion
@@ -86,7 +86,7 @@ public class RegionConstraintValidatorTest {
     }
 
     @Test
-    public void validateObject() {
+    void validateObject() {
 
         class A {
             @ValidRegion(types = Region.Type.COUNTRY)

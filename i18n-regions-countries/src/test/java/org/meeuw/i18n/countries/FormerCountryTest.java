@@ -14,11 +14,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 0.1
  */
-public class FormerCountryTest {
+class FormerCountryTest {
     final FormerCountryProvider impl = new FormerCountryProvider();
 
     @Test
-    public void getValidity() {
+    void getValidity() {
         Set<FormerCountry> all = new HashSet<>();
         AtomicInteger count = new AtomicInteger(0);
         impl.values().forEach((country) -> {
@@ -44,7 +44,7 @@ public class FormerCountryTest {
     }
 
     @Test
-    public void test() {
+    void test() {
 
     }
 

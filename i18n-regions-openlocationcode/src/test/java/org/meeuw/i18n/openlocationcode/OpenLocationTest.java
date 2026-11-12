@@ -15,22 +15,22 @@ class OpenLocationTest {
     final OpenLocation debilt = RegionService.getInstance().getProvider(OpenLocationProvider.class).get().getByCoordinates(52.129490, 5.205140);
 
     @Test
-    public void testToString() {
+    void testToString() {
         assertThat(debilt.toString()).isEqualTo("9F4746H4+Q3");
     }
 
     @Test
-    public void getPlusUrl() {
+    void getPlusUrl() {
         assertThat(debilt.getPlusURL()).isEqualTo(URI.create("https://plus.codes/9F4746H4+Q3"));
     }
 
     @Test
-    public void getOpenLocationCode() {
+    void getOpenLocationCode() {
         assertThat(debilt.getOpenLocationCode().getCode()).isEqualTo("9F4746H4+Q3");
     }
 
     @Test
-    public void regionMethods() {
+    void regionMethods() {
         assertThat(debilt.toLocale()).isNull();
         assertThat(debilt.getType()).isEqualTo(Region.Type.UNDEFINED);
         assertThat(debilt.getName()).isEqualTo("9F4746H4+Q3");
