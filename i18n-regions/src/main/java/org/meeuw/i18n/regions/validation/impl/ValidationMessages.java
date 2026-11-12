@@ -17,6 +17,9 @@ import org.jspecify.annotations.Nullable;
  * module (like hibernate-validator 9) cannot see resource bundles in other named modules. So a constraint validator resolves the template itself,
  * via a resource bundle in its own module, and gives the provider the resulting message template.
  * <p>
+ * Before that, the 'user' bundle {@code ValidationMessages} (in the root of the class path or of a module) is consulted, so applications can
+ * still override the messages, or add other languages, like they are used to with Jakarta Validation. This is done per key.
+ * <p>
  * Expression language is normally not evaluated in templates created by constraint validators, so {@code ${validatedValue}} is replaced
  * here too (escaped, so it is not interpreted by the message interpolator).
  *
@@ -56,18 +59,41 @@ public class ValidationMessages {
         if (key.contains("{") || key.contains("}")) {
             return;
         }
+        Locale locale = Locale.getDefault();
+        Optional<String> resolved = lookup(userBundle(locale), key)
+            .or(() -> lookup(bundle.apply(locale), key));
+        resolved.ifPresent(m -> {
+            context.disableDefaultConstraintViolation();
+            String message = m.replace(VALIDATED_VALUE, escape(String.valueOf(value)));
+            context.buildConstraintViolationWithTemplate(message)
+                .addConstraintViolation();
+        });
+    }
+
+    /**
+     * The 'user' resource bundle {@value #USER_BUNDLE}, as defined by the Jakarta Validation specification. This allows applications to override
+     * messages (or to add other languages) by providing {@code ValidationMessages_<locale>.properties} in the root of their class path or module.
+     */
+    private static @Nullable ResourceBundle userBundle(Locale locale) {
         try {
-            ResourceBundle resourceBundle = bundle.apply(Locale.getDefault());
-            if (resourceBundle.containsKey(key)) {
-                context.disableDefaultConstraintViolation();
-                String message = resourceBundle.getString(key)
-                    .replace(VALIDATED_VALUE, escape(String.valueOf(value)));
-                context.buildConstraintViolationWithTemplate(message)
-                    .addConstraintViolation();
+            return ResourceBundle.getBundle(USER_BUNDLE, locale);
+        } catch (MissingResourceException mre) {
+            logger.log(Level.FINER, mre.getMessage());
+            return null;
+        }
+    }
+
+    static final String USER_BUNDLE = "ValidationMessages";
+
+    private static Optional<String> lookup(@Nullable ResourceBundle resourceBundle, String key) {
+        try {
+            if (resourceBundle != null && resourceBundle.containsKey(key)) {
+                return Optional.of(resourceBundle.getString(key));
             }
         } catch (MissingResourceException mre) {
             logger.log(Level.FINE, mre.getMessage());
         }
+        return Optional.empty();
     }
 
     /**
