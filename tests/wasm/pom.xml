@@ -11,7 +11,7 @@
     <java.version>11</java.version>
     <teavm.version>0.11.0</teavm.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <meeuw.i18n.version>2.2-SNAPSHOT</meeuw.i18n.version>
+    <meeuw.i18n.version>3.3.1</meeuw.i18n.version>
   </properties>
 
   <dependencies>
