@@ -104,17 +104,24 @@ class CountryValidatorTest {
 
     }
 
+    /**
+     * The messages are in the locale of the message interpolator. For hibernate validator that is (by default) the default locale at the moment
+     * the validator factory is created. See also {@link ValidationMessageLocaleTest}.
+     */
     @Test
     void messageInDefaultLocale() {
         Locale defaultLocale = Locale.getDefault();
         try {
             Locale.setDefault(new Locale("nl"));
-            assertThat(VALIDATOR.validate(new CountryAndRegions(Country.of(CS))))
-                .extracting(ConstraintViolation::getMessage)
-                .containsExactly("CS is geen geldig land");
-            assertThat(VALIDATOR.validate(new CountryAndRegionsWithList(new SomeRegion("bla"))))
-                .extracting(ConstraintViolation::getMessage)
-                .containsExactly("bla is geen geldig gebied");
+            try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
+                Validator validator = factory.getValidator();
+                assertThat(validator.validate(new CountryAndRegions(Country.of(CS))))
+                    .extracting(ConstraintViolation::getMessage)
+                    .containsExactly("CS is geen geldig land");
+                assertThat(validator.validate(new CountryAndRegionsWithList(new SomeRegion("bla"))))
+                    .extracting(ConstraintViolation::getMessage)
+                    .containsExactly("bla is geen geldig gebied");
+            }
         } finally {
             Locale.setDefault(defaultLocale);
         }

@@ -42,14 +42,16 @@
       <artifactId>jakarta.annotation-api</artifactId>
       <optional>true</optional>
     </dependency>
+    <dependency>
+      <!-- to resolve validation messages in the locale of the message interpolator -->
+      <groupId>org.hibernate.validator</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <scope>compile</scope>
+      <optional>true</optional>
+    </dependency>
 
 
     <!-- test dependencies -->
-    <dependency>
-      <groupId>org.hibernate.validator</groupId>
-      <artifactId>hibernate-validator</artifactId>
-      <scope>test</scope>
-    </dependency>
     <dependency>
       <groupId>jakarta.el</groupId>
       <artifactId>jakarta.el-api</artifactId>

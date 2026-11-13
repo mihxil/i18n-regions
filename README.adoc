@@ -173,9 +173,13 @@ As a utility, there is `org.meeuw.i18n.regions.validation.RegionValidatorService
 
 === Messages
 
-The default messages of the constraint violations (e.g. `CS is not a valid country`) are resolved by the constraint validators themselves, using the resource bundles `org.meeuw.i18n.regions.validation.ValidationMessages` and `org.meeuw.i18n.countries.validation.ValidationMessages`, in the default locale (`Locale.getDefault()`) at the moment of validation. Currently there are English and Dutch versions.
+The default messages of the constraint violations (e.g. `CS is not a valid country`) are provided by the resource bundles `org.meeuw.i18n.regions.validation.ValidationMessages` and `org.meeuw.i18n.countries.validation.ValidationMessages`. Currently there are English and Dutch versions. They can be overridden (and other languages can be added) per key, via your own `ValidationMessages_<locale>.properties`, like usual with Jakarta Validation.
 
-This is because a validation provider running as a named module (like hibernate-validator ≥ 9 on the module path) cannot find `ContributorValidationMessages` bundles in other modules. A consequence is that these messages cannot be overridden via your own `ValidationMessages.properties`. Use the `message` attribute of the annotation for that.
+These bundles are not resolved by the validation provider, but via the constraint validators. This is because a validation provider running as a named module (like hibernate-validator ≥ 9 on the module path) cannot find `ContributorValidationMessages` bundles in other modules.
+
+The messages are in the locale of the message interpolator (which e.g. in spring may be the locale of the current request). With hibernate validator (and an expression language implementation) this works, because the message is only resolved by the interpolator itself. With other validation providers, the messages are resolved in the default locale (`Locale.getDefault()`) at the moment of validation.
+
+Because of this, the message template of the constraint violations (`ConstraintViolation#getMessageTemplate`) is not the key of the message (like `{org.meeuw.i18n.validation.country.message}`).
 
 == Optional dependencies
 
@@ -277,6 +281,10 @@ Find my findings link:TESTING-WITH-JPMS.adoc[here]
 | Moved away from checkerframework, which was only very lightly used (basically just @Nullable/@NonNull). We now do jspecify, following the example of other projects like guava.
 
   Validation messages are resolved by the validators themselves (see <<Messages>>), so they also work with hibernate-validator 9 on the module path. The `ContributorValidationMessages` bundles were removed.
+|
+
+| 3.4
+| Validation messages are in the locale of the message interpolator (with hibernate validator), and not always in `Locale.getDefault()`.
 |
 
 |===

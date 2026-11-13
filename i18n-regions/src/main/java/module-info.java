@@ -7,6 +7,7 @@ module org.meeuw.i18n.regions {
 
 
     requires static jakarta.validation;
+    requires static org.hibernate.validator;
     requires static jakarta.xml.bind;
     requires static org.jspecify;
     requires static jakarta.persistence;
